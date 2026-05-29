@@ -58,7 +58,7 @@
   .sub-lead{font-size:15.5px;color:var(--soft);margin-top:18px;max-width:640px;line-height:1.95}
 
   /* buttons */
-  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.02em;padding:16px 28px;border-radius:3px;transition:.25s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:1px solid transparent}
+  .btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.04em;padding:17px 34px;border-radius:3px;transition:.25s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:1px solid transparent}
   .btn-ink{background:var(--ink);color:#fff}
   .btn-ink:hover{background:#000}
   .btn-ink .arw{color:var(--accent);transition:.25s}
@@ -75,19 +75,19 @@
   .hdr-in{position:relative;display:flex;align-items:center;justify-content:space-between;height:70px}
   .logo{display:flex;flex-direction:column;line-height:1}
   .logo .mk{font-weight:900;font-size:20px;letter-spacing:.16em;color:var(--ink)}
-  .logo .sb{font-size:9.5px;letter-spacing:.12em;color:var(--soft);margin-top:5px}
+  .logo .sb{font-size:10.5px;letter-spacing:.08em;color:var(--ink2);margin-top:5px}
   .nav{display:flex;align-items:center;gap:28px}
   .nav a{font-size:13.5px;font-weight:500;color:var(--ink2);letter-spacing:.03em;position:relative;transition:.2s}
   .nav a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:.3s}
   .nav a:not(.nav-cta):hover::after{width:100%}
-  .nav-cta{padding:9px 18px;background:var(--ink);color:#fff;border-radius:3px;font-size:13px;font-weight:700;transition:.25s}
-  .nav-cta:hover{background:#000}
+  .nav-cta{padding:9px 18px;background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:3px;font-size:13px;font-weight:500;transition:.25s}
+  .nav-cta:hover{background:var(--ink);color:#fff}
   .burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px}
   .burger span{width:25px;height:1.5px;background:var(--ink);transition:.3s}
 
   /* hero */
-  .hero{padding-top:118px;padding-bottom:clamp(56px,7vw,90px)}
-  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(34px,5.5vw,76px);align-items:center}
+  .hero{padding-top:118px;padding-bottom:clamp(40px,5vw,64px)}
+  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(34px,5vw,72px);align-items:center}
   .hero-eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--accent-d);text-transform:uppercase;margin-bottom:26px}
   .hero h1{font-family:var(--mincho);font-weight:600;font-size:clamp(32px,5.6vw,58px);line-height:1.4;letter-spacing:.03em;color:var(--ink);margin-bottom:26px}
   .hero h1 .em{color:var(--accent-d)}
@@ -95,17 +95,19 @@
   .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
   .hero-fine{font-size:13px;color:var(--soft);margin-top:16px;line-height:1.8}
   .hero-chips{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
-  .chip{font-size:12.5px;font-weight:500;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:8px 15px}
+  .chip{font-size:13px;font-weight:500;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:9px 16px}
   .chip b{color:var(--accent-d);font-weight:700;margin-right:5px}
   /* hero board (実写を見比べて整える) */
-  .hero-board{position:relative;padding-bottom:18px;padding-right:14px}
-  .hb-main{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:4px;box-shadow:0 26px 60px -30px rgba(28,26,23,.45)}
+  .hero-board{position:relative}
+  .hb-main{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:4px;box-shadow:0 24px 56px -32px rgba(28,26,23,.4)}
   .hb-main img{width:100%;height:100%;object-fit:cover}
   .hb-sub{position:absolute;right:-6px;bottom:-6px;width:46%;aspect-ratio:1/1;overflow:hidden;border-radius:4px;border:5px solid var(--paper);box-shadow:0 16px 34px -16px rgba(28,26,23,.5)}
   .hb-sub img{width:100%;height:100%;object-fit:cover}
-  .hb-tag{position:absolute;left:-10px;top:18px;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;padding:7px 13px;border-radius:3px}
+  .hb-tag{position:absolute;left:-10px;top:16px;z-index:2;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;padding:7px 13px;border-radius:3px}
+  .hb-cap{font-size:11px;color:var(--soft2);margin-top:10px;letter-spacing:.04em;text-align:right}
 
   /* loss */
+  #loss{padding-top:clamp(52px,7vw,100px)}
   .loss-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;margin-top:42px}
   .loss-item{display:flex;gap:15px;padding:21px 0;border-bottom:1px solid var(--line);align-items:baseline}
   .loss-item .no{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none}
@@ -317,12 +319,12 @@
         <span class="chip"><b>03</b>実績・事例の整理</span>
       </div>
     </div>
-    <div class="hero-board reveal">
-      <span class="hb-tag">実物を、伝わる形に</span>
-      <!-- 後で実写に差し替え（Pexels無料・商用可・仮）。表示は要スクショ確認 -->
-      <figure class="hb-main"><img src="https://images.pexels.com/photos/33683554/pexels-photo-33683554.jpeg?auto=compress&cs=tinysrgb&w=900" alt="実物の魅力が伝わる写真の見せ方の例（仮）" width="900" height="1125"></figure>
-      <figure class="hb-sub"><img src="https://images.pexels.com/photos/4577646/pexels-photo-4577646.jpeg?auto=compress&cs=tinysrgb&w=600" alt="料理写真の見せ方の例（仮）" width="600" height="600"></figure>
-    </div>
+    <figure class="hero-board reveal">
+      <span class="hb-tag">施工・料理・商品・店舗 — 見せ方を整える</span>
+      <!-- 後で「実際の編集風景／制作物（ランの実写）」に差し替え。Pexels無料・商用可・仮。表示は要スクショ確認 -->
+      <div class="hb-main"><img src="https://images.pexels.com/photos/7181184/pexels-photo-7181184.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="WebサイトをPCで整えている編集作業のイメージ（仮）" width="1100" height="825"></div>
+      <figcaption class="hb-cap">※写真はイメージ（実際の編集風景・制作物に差し替え予定）</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -330,7 +332,7 @@
 <section class="sec bg-sand" id="loss">
   <div class="wrap">
     <span class="eyebrow">Concern</span>
-    <h2 class="title"><span class="l">いい仕事なのに、</span>Webで損していませんか。</h2>
+    <h2 class="title"><span class="l">いい仕事なのに、</span>Webでは伝わりきっていないかもしれません。</h2>
     <div class="loss-grid">
       <div class="loss-item"><span class="no">01</span><p>写真が小さく、実物の魅力が伝わっていない</p></div>
       <div class="loss-item"><span class="no">02</span><p>スマホで問い合わせ・予約がしづらい</p></div>
