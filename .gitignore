@@ -1,0 +1,6 @@
+# 公開リポジトリ(lanhp / Cloudflare Pages)に出すのは index.html（と images/）だけ。
+# 戦略資料(.md)・ローカル設定は社外秘なので公開しない。
+*.md
+.claude/
+.DS_Store
+Thumbs.db
