@@ -4,34 +4,36 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ミセル｜いい仕事は、見せ方で伝わる。 — 中小事業のHP・見せ方改善</title>
-<meta name="description" content="写真・実績・現場感が大事な中小事業のためのHP/LP改善。実物の魅力が伝わる写真配置とスマホ問い合わせ導線で、ホームページを「相談されるページ」に整えます。まずは1ページだけの改善案から。">
+<meta name="description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のホームページを「相談されるページ」に整える編集室、ミセル。まずは1ページだけ、無料で見せ方を整理します。">
 <meta property="og:title" content="ミセル｜いい仕事は、見せ方で伝わる。">
-<meta property="og:description" content="実物の魅力が伝わる写真配置とスマホ導線で、中小事業のHPを「相談されるページ」に整えます。">
+<meta property="og:description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のHPを「相談されるページ」に整えます。">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#1c1a17">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <!--
-  ============== 差し替えメモ（実写で順次差し替え） ==============
-  - ヒーロー画像 .hero-photo img   : 実際の良い「見せ方」写真へ
-  - Before/After                   : 実例（現状→整えた後）へ
-  - 代表写真 .about-photo          : ランの写真へ
-  - 連絡先 megabranbran@gmail.com / フォームはFormSubmit（初回有効化要）
-  - 参考デモ                       : ss-suteki.com（自社制作）
-  ============================================================
+  ============ 画像メモ（すべて後で実写に差し替え前提）============
+  仮画像は Pexels（無料・商用可・帰属不要ライセンス）の固定URL。
+  ランダムpicsumは使用しない。被写体は検索で確認済みだが、表示は要スクショ確認。
+  - hero 大: cafe interior  https://www.pexels.com/photo/33683554/
+  - hero 小: 料理(木トレイ)  https://www.pexels.com/photo/4577646/
+  - Before/After after画像: 料理(俯瞰) https://www.pexels.com/photo/8312083/
+  - SS参考デモ: 建物外観     https://www.pexels.com/photo/16741356/
+  → ラン提供の実写（施工・料理・商品・店舗・手元・編集机）に差し替える。
+  ==============================================================
 -->
 <style>
   :root{
-    --paper:#f6f3ee;
-    --paper-2:#efe9df;
-    --paper-3:#eae3d7;
-    --ink:#1c1a17;
-    --ink-2:#322e29;
-    --soft:#6f6a62;
-    --soft-2:#928c82;
-    --line:#e4ded3;
-    --accent:#b15c3c;
+    --paper:#f6f3ee;       /* 地 */
+    --sand:#ece3d5;        /* 沈めた暖色（旧・黒背景の置換） */
+    --sand-d:#e4d9c7;
+    --ink:#1c1a17;         /* 墨（見出し・締め） */
+    --ink2:#2f2a24;        /* 本文 */
+    --soft:#6c655b;        /* 補助 */
+    --soft2:#9a9286;       /* ラベル等 */
+    --line:#dcd3c4;        /* 罫線（少し見える） */
+    --accent:#b15c3c;      /* 差し色テラコッタ */
     --accent-d:#974b2f;
     --white:#fff;
     --mincho:"Shippori Mincho",serif;
@@ -40,229 +42,225 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{font-family:var(--gothic);color:var(--ink);background:var(--paper);line-height:1.9;-webkit-font-smoothing:antialiased;font-size:16px;overflow-x:hidden}
+  body{font-family:var(--gothic);color:var(--ink2);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased;font-size:16px;overflow-x:hidden}
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  .sec{padding:clamp(72px,11vw,150px) 0}
+  .sec{padding:clamp(64px,9.5vw,128px) 0}
+  .bg-sand{background:var(--sand)}
 
   /* labels & headings */
-  .eyebrow{font-family:var(--gothic);font-size:12px;font-weight:500;letter-spacing:.22em;color:var(--accent-d);text-transform:uppercase;display:inline-block;margin-bottom:22px}
-  .eyebrow::before{content:"";display:inline-block;width:26px;height:1px;background:var(--accent);vertical-align:middle;margin-right:12px}
-  h2.title{font-family:var(--mincho);font-weight:500;font-size:clamp(25px,3.8vw,39px);line-height:1.5;letter-spacing:.02em;color:var(--ink)}
+  .eyebrow{font-family:var(--gothic);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--accent-d);text-transform:uppercase;display:inline-block;margin-bottom:20px}
+  .eyebrow::before{content:"";display:inline-block;width:24px;height:1px;background:var(--accent);vertical-align:middle;margin-right:11px}
+  h2.title{font-family:var(--gothic);font-weight:900;font-size:clamp(23px,3.3vw,34px);line-height:1.5;letter-spacing:.01em;color:var(--ink)}
   h2.title .l{display:block}
-  .sub-lead{font-size:16px;color:var(--soft);margin-top:20px;max-width:620px;line-height:1.95}
+  .mincho{font-family:var(--mincho);font-weight:500}
+  .sub-lead{font-size:15.5px;color:var(--soft);margin-top:18px;max-width:640px;line-height:1.95}
 
   /* buttons */
-  .btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:500;font-size:15.5px;letter-spacing:.03em;padding:16px 32px;border-radius:2px;transition:.3s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:1px solid transparent}
-  .btn-solid{background:var(--accent);color:#fff}
-  .btn-solid:hover{background:var(--accent-d)}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.02em;padding:16px 28px;border-radius:3px;transition:.25s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:1px solid transparent}
+  .btn-ink{background:var(--ink);color:#fff}
+  .btn-ink:hover{background:#000}
+  .btn-ink .arw{color:var(--accent);transition:.25s}
+  .btn-ink:hover .arw{transform:translateX(4px)}
   .btn-line{background:transparent;color:var(--ink);border-color:var(--ink)}
-  .btn-line:hover{background:var(--ink);color:var(--paper)}
-  .btn .arw{transition:.3s}
-  .btn:hover .arw{transform:translateX(4px)}
-  .textlink{font-size:15px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:3px;transition:.25s}
+  .btn-line:hover{background:var(--ink);color:#fff}
+  .textlink{font-size:14.5px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:3px;transition:.2s}
   .textlink:hover{color:var(--accent-d)}
 
   /* header */
-  header{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:.4s;padding:0}
-  header::before{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:.4s;border-bottom:1px solid transparent}
-  header.scrolled::before{opacity:.96;border-bottom:1px solid var(--line)}
-  .hdr-in{position:relative;display:flex;align-items:center;justify-content:space-between;height:72px}
+  header{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:.35s}
+  header::before{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:.35s;border-bottom:1px solid transparent}
+  header.scrolled::before{opacity:.97;border-bottom:1px solid var(--line)}
+  .hdr-in{position:relative;display:flex;align-items:center;justify-content:space-between;height:70px}
   .logo{display:flex;flex-direction:column;line-height:1}
-  .logo .mk{font-family:var(--mincho);font-weight:600;font-size:21px;letter-spacing:.18em;color:var(--ink)}
-  .logo .sb{font-size:9.5px;letter-spacing:.14em;color:var(--soft-2);margin-top:5px}
-  .nav{display:flex;align-items:center;gap:30px}
-  .nav a{font-size:13.5px;font-weight:500;color:var(--ink-2);letter-spacing:.04em;position:relative;transition:.25s}
+  .logo .mk{font-weight:900;font-size:20px;letter-spacing:.16em;color:var(--ink)}
+  .logo .sb{font-size:9.5px;letter-spacing:.12em;color:var(--soft);margin-top:5px}
+  .nav{display:flex;align-items:center;gap:28px}
+  .nav a{font-size:13.5px;font-weight:500;color:var(--ink2);letter-spacing:.03em;position:relative;transition:.2s}
   .nav a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:.3s}
   .nav a:not(.nav-cta):hover::after{width:100%}
-  .nav-cta{padding:9px 20px;border:1px solid var(--ink);border-radius:2px;font-size:13px;transition:.3s}
-  .nav-cta:hover{background:var(--ink);color:var(--paper)}
+  .nav-cta{padding:9px 18px;background:var(--ink);color:#fff;border-radius:3px;font-size:13px;font-weight:700;transition:.25s}
+  .nav-cta:hover{background:#000}
   .burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px}
-  .burger span{width:26px;height:1.5px;background:var(--ink);transition:.3s}
+  .burger span{width:25px;height:1.5px;background:var(--ink);transition:.3s}
 
   /* hero */
-  .hero{padding-top:120px;padding-bottom:clamp(60px,8vw,96px);background:var(--paper)}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,84px);align-items:center}
-  .hero-eyebrow{font-family:var(--gothic);font-size:12px;font-weight:500;letter-spacing:.24em;color:var(--accent-d);text-transform:uppercase;margin-bottom:30px}
-  .hero h1{font-family:var(--mincho);font-weight:500;font-size:clamp(33px,6vw,62px);line-height:1.42;letter-spacing:.03em;color:var(--ink);margin-bottom:30px}
+  .hero{padding-top:118px;padding-bottom:clamp(56px,7vw,90px)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(34px,5.5vw,76px);align-items:center}
+  .hero-eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--accent-d);text-transform:uppercase;margin-bottom:26px}
+  .hero h1{font-family:var(--mincho);font-weight:600;font-size:clamp(32px,5.6vw,58px);line-height:1.4;letter-spacing:.03em;color:var(--ink);margin-bottom:26px}
   .hero h1 .em{color:var(--accent-d)}
-  .hero-p{font-size:16.5px;color:var(--ink-2);line-height:2.05;max-width:480px;margin-bottom:40px}
-  .hero-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-  .hero-photo{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;box-shadow:0 30px 70px -30px rgba(28,26,23,.45)}
-  .hero-photo img{width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.92) brightness(.99)}
-  .hero-photo figcaption{position:absolute;left:0;bottom:0;width:100%;padding:18px 20px;font-size:11.5px;letter-spacing:.08em;color:#fff;background:linear-gradient(0deg,rgba(28,26,23,.6),transparent)}
-  .hero-mini{margin-top:32px;display:flex;gap:26px;flex-wrap:wrap}
-  .hero-mini span{font-size:13px;color:var(--soft);position:relative;padding-left:16px}
-  .hero-mini span::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  .hero-p{font-size:16px;color:var(--ink2);line-height:2;max-width:470px;margin-bottom:30px}
+  .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .hero-fine{font-size:13px;color:var(--soft);margin-top:16px;line-height:1.8}
+  .hero-chips{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
+  .chip{font-size:12.5px;font-weight:500;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:8px 15px}
+  .chip b{color:var(--accent-d);font-weight:700;margin-right:5px}
+  /* hero board (実写を見比べて整える) */
+  .hero-board{position:relative;padding-bottom:18px;padding-right:14px}
+  .hb-main{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:4px;box-shadow:0 26px 60px -30px rgba(28,26,23,.45)}
+  .hb-main img{width:100%;height:100%;object-fit:cover}
+  .hb-sub{position:absolute;right:-6px;bottom:-6px;width:46%;aspect-ratio:1/1;overflow:hidden;border-radius:4px;border:5px solid var(--paper);box-shadow:0 16px 34px -16px rgba(28,26,23,.5)}
+  .hb-sub img{width:100%;height:100%;object-fit:cover}
+  .hb-tag{position:absolute;left:-10px;top:18px;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;padding:7px 13px;border-radius:3px}
 
-  /* loss section */
-  .loss{background:var(--paper-2)}
-  .loss-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;margin-top:46px}
-  .loss-item{display:flex;gap:16px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
-  .loss-item .no{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none;letter-spacing:.05em}
-  .loss-item p{font-size:15.5px;color:var(--ink-2);line-height:1.8}
+  /* loss */
+  .loss-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;margin-top:42px}
+  .loss-item{display:flex;gap:15px;padding:21px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .loss-item .no{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none}
+  .loss-item p{font-size:15.5px;color:var(--ink2);line-height:1.8}
 
-  /* do section */
-  .do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,56px);margin-top:60px}
-  .do-item .dn{font-family:var(--mincho);font-size:15px;color:var(--accent-d);letter-spacing:.1em;padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--line);display:block}
-  .do-item h3{font-family:var(--mincho);font-weight:500;font-size:20px;line-height:1.6;margin-bottom:14px}
+  /* do */
+  .do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3.5vw,50px);margin-top:54px}
+  .do-item .dn{font-size:13px;font-weight:700;color:var(--accent-d);letter-spacing:.08em;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line);display:block}
+  .do-item h3{font-weight:700;font-size:19px;line-height:1.55;margin-bottom:13px;color:var(--ink)}
   .do-item p{font-size:14.5px;color:var(--soft);line-height:1.95}
 
-  /* before/after */
-  .ba{background:var(--ink);color:var(--paper)}
-  .ba .eyebrow{color:#d99c80}
-  .ba h2.title{color:var(--paper)}
-  .ba .sub-lead{color:#b3ada3}
-  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,48px);margin-top:56px;align-items:stretch}
-  .ba-col .ba-tag{font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px;display:block}
-  .ba-col.before .ba-tag{color:var(--soft-2)}
-  .ba-col.after .ba-tag{color:#e0a285}
-  .screen{background:#262320;border:1px solid #393530;border-radius:8px;padding:18px;height:340px;display:flex;flex-direction:column;gap:10px;overflow:hidden;position:relative}
-  .screen.after{background:#2a2724;border-color:#4a443c}
-  .sc-bar{height:9px;border-radius:5px;background:#403b35}
+  /* before/after (light, warm) */
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,44px);margin-top:50px;align-items:start}
+  .ba-col .ba-tag{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;display:block}
+  .ba-col.before .ba-tag{color:var(--soft2)}
+  .ba-col.after .ba-tag{color:var(--accent-d)}
+  .screen{background:var(--white);border:1px solid var(--line);border-radius:9px;padding:18px;height:330px;display:flex;flex-direction:column;gap:10px;overflow:hidden;box-shadow:0 16px 40px -26px rgba(28,26,23,.35)}
+  .sc-bar{height:9px;border-radius:5px;background:#e7e0d3}
   .sc-bar.w70{width:70%}.sc-bar.w50{width:50%}.sc-bar.w90{width:90%}.sc-bar.w40{width:40%}.sc-bar.w60{width:60%}
-  .sc-img{flex:none;border-radius:6px;overflow:hidden}
-  .before .sc-imgsmall{height:54px;width:40%;background:#3a352f;border-radius:5px}
-  .after .sc-img{height:140px}
-  .after .sc-img img{width:100%;height:100%;object-fit:cover;filter:contrast(1.03) saturate(.95)}
-  .after .sc-head{font-family:var(--mincho);color:#f3ede3;font-size:15px;line-height:1.5;margin-top:2px}
+  .before .sc-imgsmall{height:52px;width:38%;background:#e7e0d3;border-radius:5px}
   .sc-spacer{flex:1}
-  .before .sc-cta{align-self:flex-start;font-size:10px;color:#6c655c;border:1px solid #4a443c;border-radius:3px;padding:6px 10px}
-  .after .sc-cta{align-self:stretch;text-align:center;font-size:12px;color:#fff;background:var(--accent);border-radius:4px;padding:11px;font-weight:500}
-  .ba-note{font-size:13.5px;line-height:1.8;margin-top:18px;color:#b3ada3}
-  .ba-col.after .ba-note{color:#e7cdbf}
+  .before .sc-cta{align-self:flex-start;font-size:10px;color:#b3aa9a;border:1px solid #e0d8c9;border-radius:3px;padding:6px 10px}
+  .after .sc-img{height:150px;border-radius:6px;overflow:hidden;flex:none}
+  .after .sc-img img{width:100%;height:100%;object-fit:cover}
+  .after .sc-head{font-weight:700;color:var(--ink);font-size:15px;line-height:1.5;margin-top:2px}
+  .after .sc-cta{align-self:stretch;text-align:center;font-size:12px;color:#fff;background:var(--accent);border-radius:5px;padding:11px;font-weight:700}
+  .ba-note{font-size:13.5px;line-height:1.8;margin-top:16px;color:var(--soft)}
 
   /* industries */
-  .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:54px;background:var(--line);border:1px solid var(--line)}
-  .ind{background:var(--paper);padding:34px 24px;transition:.35s;min-height:128px;display:flex;flex-direction:column;justify-content:center}
+  .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:48px;background:var(--line);border:1px solid var(--line)}
+  .ind{background:var(--paper);padding:30px 22px;transition:.3s;min-height:118px;display:flex;flex-direction:column;justify-content:center}
   .ind:hover{background:var(--white)}
-  .ind .jp{font-family:var(--mincho);font-size:17px;font-weight:500;letter-spacing:.04em;margin-bottom:7px}
-  .ind .en{font-size:10.5px;letter-spacing:.18em;color:var(--soft-2);text-transform:uppercase}
+  .ind .jp{font-weight:700;font-size:16.5px;letter-spacing:.03em;margin-bottom:6px;color:var(--ink)}
+  .ind .en{font-size:10px;letter-spacing:.16em;color:var(--soft2);text-transform:uppercase}
 
   /* demo */
-  .demo-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,64px);align-items:center;margin-top:50px}
-  .demo-photo{position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:3px;box-shadow:0 26px 60px -34px rgba(28,26,23,.5)}
+  .demo-card{display:block;margin-top:46px}
+  .demo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,4.5vw,58px);align-items:center}
+  .demo-photo{position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:4px;box-shadow:0 24px 56px -32px rgba(28,26,23,.5)}
   .demo-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.3,1)}
   .demo-card:hover .demo-photo img{transform:scale(1.04)}
-  .demo-meta .tag{font-size:11.5px;letter-spacing:.18em;color:var(--accent-d);text-transform:uppercase;margin-bottom:18px;display:block}
-  .demo-meta h3{font-family:var(--mincho);font-weight:500;font-size:clamp(20px,2.6vw,27px);line-height:1.55;margin-bottom:18px}
-  .demo-meta p{font-size:15px;color:var(--soft);line-height:1.95;margin-bottom:26px}
+  .demo-photo .pin{position:absolute;left:14px;top:14px;background:rgba(28,26,23,.82);color:#fff;font-size:11px;letter-spacing:.06em;padding:6px 12px;border-radius:3px}
+  .demo-meta .tag{font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--accent-d);text-transform:uppercase;margin-bottom:16px;display:block}
+  .demo-meta h3{font-weight:700;font-size:clamp(19px,2.4vw,25px);line-height:1.55;margin-bottom:16px;color:var(--ink)}
+  .demo-meta p{font-size:14.5px;color:var(--soft);line-height:1.95;margin-bottom:22px}
 
   /* pricing */
-  .pricing{background:var(--paper-2)}
-  .price-list{margin-top:52px;border-top:1px solid var(--line)}
-  .price-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:24px;padding:26px 8px;border-bottom:1px solid var(--line);align-items:center}
-  .price-row .pname{font-family:var(--mincho);font-size:18px;font-weight:500}
-  .price-row .pname small{display:block;font-family:var(--gothic);font-size:12.5px;color:var(--soft);margin-top:6px;letter-spacing:.02em}
-  .price-row .pcol{font-size:14px}
-  .price-row .pcol .lab{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft-2);margin-bottom:5px}
-  .price-row .first{color:var(--accent-d);font-weight:700;font-size:17px;font-family:var(--mincho)}
-  .price-row .normal{color:var(--soft);font-size:15px}
-  .price-foot{margin-top:24px;font-size:13px;color:var(--soft);line-height:1.85}
+  .price-list{margin-top:46px;border-top:1px solid var(--line)}
+  .price-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:22px;padding:24px 6px;border-bottom:1px solid var(--line);align-items:center}
+  .price-row .pname{font-weight:700;font-size:17px;color:var(--ink)}
+  .price-row .pname small{display:block;font-weight:400;font-size:12.5px;color:var(--soft);margin-top:5px}
+  .price-row .pcol .lab{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft2);margin-bottom:4px}
+  .price-row .first{color:var(--accent-d);font-weight:900;font-size:17px}
+  .price-row .normal{color:var(--soft);font-size:14.5px}
+  .price-foot{margin-top:22px;font-size:13px;color:var(--soft);line-height:1.9}
 
   /* flow */
-  .flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:56px;counter-reset:fl}
-  .flow{position:relative;padding-top:38px}
-  .flow::before{counter-increment:fl;content:"0" counter(fl);position:absolute;top:0;left:0;font-family:var(--mincho);font-size:13px;color:var(--accent-d);letter-spacing:.1em}
-  .flow::after{content:"";position:absolute;top:6px;left:34px;right:-7px;height:1px;background:var(--line)}
+  .flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:50px;counter-reset:fl}
+  .flow{position:relative;padding-top:34px}
+  .flow::before{counter-increment:fl;content:"0" counter(fl);position:absolute;top:0;left:0;font-weight:900;font-size:14px;color:var(--accent-d);letter-spacing:.05em}
+  .flow::after{content:"";position:absolute;top:7px;left:32px;right:-7px;height:1px;background:var(--line)}
   .flow:last-child::after{display:none}
-  .flow h4{font-family:var(--mincho);font-weight:500;font-size:16px;margin-bottom:8px}
+  .flow h4{font-weight:700;font-size:15.5px;margin-bottom:7px;color:var(--ink)}
   .flow p{font-size:13px;color:var(--soft);line-height:1.8}
 
   /* faq */
-  .faq{max-width:780px;margin:48px auto 0}
+  .faq{max-width:780px;margin:44px auto 0}
   .qa{border-bottom:1px solid var(--line)}
-  .qa summary{list-style:none;cursor:pointer;padding:24px 2px;font-family:var(--mincho);font-weight:500;font-size:17px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+  .qa summary{list-style:none;cursor:pointer;padding:22px 2px;font-weight:700;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;gap:16px;align-items:center}
   .qa summary::-webkit-details-marker{display:none}
-  .qa summary::after{content:"";width:11px;height:11px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(45deg);transition:.3s;flex:none;margin-top:-4px}
+  .qa summary::after{content:"";width:10px;height:10px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(45deg);transition:.3s;flex:none;margin-top:-4px}
   .qa[open] summary::after{transform:rotate(-135deg);margin-top:2px}
-  .qa .a{padding:0 2px 24px;color:var(--soft);font-size:14.5px;line-height:1.95}
+  .qa .a{padding:0 2px 22px;color:var(--soft);font-size:14.5px;line-height:1.95}
 
-  /* about */
-  .about{background:var(--ink);color:var(--paper)}
-  .about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,5vw,72px);align-items:center}
-  .about-photo{aspect-ratio:4/5;border-radius:3px;overflow:hidden;background:#262320;display:flex;align-items:flex-end;justify-content:center;position:relative}
-  .about-photo .ph-tag{font-family:var(--mincho);font-size:13px;color:#8a8278;padding:20px;text-align:center;line-height:1.7}
-  .about .eyebrow{color:#d99c80}
-  .about h2.title{color:var(--paper);margin-bottom:24px}
-  .about p{font-size:15.5px;color:#c4bdb2;line-height:2.05;margin-bottom:18px}
-  .about .sign{font-family:var(--mincho);font-size:17px;color:var(--paper);margin-top:8px;letter-spacing:.06em}
-  .about .sign small{font-family:var(--gothic);font-size:12px;color:#8a8278;letter-spacing:.1em;margin-left:10px}
+  /* about (warm, was black) */
+  .about-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(30px,5vw,68px);align-items:center}
+  .about-photo{aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:var(--sand-d);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
+  .about-photo .ph-tag{font-size:12.5px;color:var(--soft);padding:18px;text-align:center;line-height:1.7}
+  .about h2.title{margin-bottom:22px}
+  .about p{font-size:15.5px;color:var(--ink2);line-height:2.05;margin-bottom:16px}
+  .about .sign{font-family:var(--mincho);font-weight:600;font-size:17px;color:var(--ink);margin-top:8px;letter-spacing:.05em}
+  .about .sign small{font-family:var(--gothic);font-weight:400;font-size:12px;color:var(--soft);letter-spacing:.08em;margin-left:10px}
 
   /* final cta */
-  .final{background:var(--paper);text-align:center}
-  .final h2{font-family:var(--mincho);font-weight:500;font-size:clamp(24px,4vw,40px);line-height:1.55;letter-spacing:.03em;margin-bottom:18px}
-  .final p{font-size:15.5px;color:var(--soft);margin-bottom:40px;line-height:1.9}
+  .final{text-align:center}
+  .final h2{font-family:var(--mincho);font-weight:600;font-size:clamp(24px,3.8vw,38px);line-height:1.55;letter-spacing:.03em;margin-bottom:16px;color:var(--ink)}
+  .final p{font-size:15px;color:var(--soft);margin-bottom:36px;line-height:1.9}
 
   /* contact */
-  .contact{background:var(--paper-2)}
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px)}
-  .contact-info h2.title{margin-bottom:22px}
-  .contact-info p{font-size:15px;color:var(--soft);line-height:2;margin-bottom:24px}
-  .contact-info .mailrow{font-size:14px;color:var(--ink-2)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,68px)}
+  .contact-info h2.title{margin-bottom:20px}
+  .contact-info p{font-size:14.5px;color:var(--soft);line-height:2;margin-bottom:22px}
+  .contact-info .mailrow{font-size:14px;color:var(--ink2)}
   .contact-info .mailrow a{border-bottom:1px solid var(--accent);padding-bottom:2px}
-  .form .row{margin-bottom:18px}
-  .form label{display:block;font-size:12.5px;font-weight:500;letter-spacing:.06em;margin-bottom:8px;color:var(--ink-2)}
-  .form label .opt{color:var(--soft-2);font-weight:400;font-size:11.5px}
-  .form input,.form textarea{width:100%;border:1px solid var(--line);background:var(--white);border-radius:2px;padding:14px 16px;font-size:15px;font-family:inherit;color:var(--ink);transition:.25s}
+  .form .row{margin-bottom:17px}
+  .form label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;color:var(--ink2)}
+  .form label .opt{color:var(--soft2);font-weight:400;font-size:11.5px}
+  .form input,.form textarea{width:100%;border:1px solid var(--line);background:var(--white);border-radius:3px;padding:14px 15px;font-size:15px;font-family:inherit;color:var(--ink);transition:.2s}
   .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent)}
-  .form textarea{min-height:104px;resize:vertical}
-  .form .btn-solid{width:100%;margin-top:4px;justify-content:center}
+  .form textarea{min-height:100px;resize:vertical}
+  .form .btn-ink{width:100%;margin-top:4px;justify-content:center}
 
-  /* footer */
-  footer{background:var(--ink);color:#8a8278;padding:54px 0 40px;border-top:1px solid #2c2823}
+  /* footer (dark ok) */
+  footer{background:var(--ink);color:#9a9286;padding:52px 0 38px}
   .foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
-  .foot-in .mk{font-family:var(--mincho);font-weight:600;font-size:20px;letter-spacing:.18em;color:var(--paper)}
-  .foot-in .fnote{font-size:12.5px;line-height:1.9;max-width:520px;margin-top:14px}
-  .foot-copy{font-size:11px;letter-spacing:.06em;margin-top:30px;color:#6a635a}
+  .foot-in .mk{font-weight:900;font-size:19px;letter-spacing:.16em;color:var(--paper)}
+  .foot-in .fnote{font-size:12.5px;line-height:1.9;max-width:520px;margin-top:13px}
+  .foot-copy{font-size:11px;letter-spacing:.05em;margin-top:28px;color:#6a635a}
 
   /* mobile sticky cta */
-  .mcta{display:none;position:fixed;left:0;bottom:0;width:100%;z-index:1100;padding:10px 12px;gap:10px;background:rgba(246,243,238,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
-  .mcta a{flex:1;text-align:center;padding:14px 6px;border-radius:2px;font-size:14px;font-weight:500;letter-spacing:.02em}
+  .mcta{display:none;position:fixed;left:0;bottom:0;width:100%;z-index:1100;padding:10px 12px;gap:10px;background:rgba(246,243,238,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
+  .mcta a{flex:1;text-align:center;padding:14px 6px;border-radius:3px;font-size:14px;font-weight:700;letter-spacing:.02em}
   .mcta .m1{border:1px solid var(--ink);color:var(--ink)}
-  .mcta .m2{background:var(--accent);color:#fff}
+  .mcta .m2{background:var(--ink);color:#fff}
 
   /* reveal */
-  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1)}
+  .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1)}
   .js .reveal.in{opacity:1;transform:none}
 
   /* drawer */
   .drawer{position:fixed;inset:0;z-index:1200;pointer-events:none;opacity:0;transition:.3s}
   .drawer.open{opacity:1;pointer-events:auto}
   .drawer .ov{position:absolute;inset:0;background:rgba(28,26,23,.45)}
-  .drawer .panel{position:absolute;top:0;right:0;height:100%;width:80%;max-width:330px;background:var(--paper);padding:30px 30px;display:flex;flex-direction:column;gap:4px;transform:translateX(100%);transition:.35s cubic-bezier(.2,.7,.3,1)}
+  .drawer .panel{position:absolute;top:0;right:0;height:100%;width:80%;max-width:320px;background:var(--paper);padding:28px;display:flex;flex-direction:column;gap:4px;transform:translateX(100%);transition:.32s cubic-bezier(.2,.7,.3,1)}
   .drawer.open .panel{transform:none}
-  .drawer .panel a{padding:16px 2px;border-bottom:1px solid var(--line);font-size:15.5px;font-weight:500}
-  .drawer .x{align-self:flex-end;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink);margin-bottom:10px;line-height:1}
+  .drawer .panel a{padding:15px 2px;border-bottom:1px solid var(--line);font-size:15.5px;font-weight:500;color:var(--ink)}
+  .drawer .x{align-self:flex-end;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink);margin-bottom:8px;line-height:1}
 
   @media(max-width:980px){
-    .nav{display:none}
-    .burger{display:flex}
-    .hero-grid{grid-template-columns:1fr;gap:40px}
-    .hero-photo{aspect-ratio:5/4;order:2}
-    .do-grid{grid-template-columns:1fr;gap:34px}
-    .demo-grid{grid-template-columns:1fr;gap:30px}
-    .about-grid{grid-template-columns:1fr;gap:34px}
-    .about-photo{max-width:360px}
-    .contact-grid{grid-template-columns:1fr;gap:36px}
+    .nav{display:none}.burger{display:flex}
+    .hero-grid{grid-template-columns:1fr;gap:38px}
+    .hero-board{order:2;max-width:440px;margin:0 auto}
+    .do-grid{grid-template-columns:1fr;gap:30px}
+    .demo-grid{grid-template-columns:1fr;gap:26px}
+    .about-grid{grid-template-columns:1fr;gap:30px}.about-photo{max-width:340px}
+    .contact-grid{grid-template-columns:1fr;gap:32px}
     .ind-grid{grid-template-columns:repeat(2,1fr)}
-    .flow-grid{grid-template-columns:1fr 1fr;gap:30px 16px}
-    .flow::after{display:none}
+    .flow-grid{grid-template-columns:1fr 1fr;gap:28px 16px}.flow::after{display:none}
   }
   @media(max-width:600px){
-    body{padding-bottom:66px}
+    body{padding-bottom:64px}
     .loss-grid{grid-template-columns:1fr;gap:0}
-    .ba-grid{grid-template-columns:1fr;gap:28px}
-    .price-row{grid-template-columns:1fr 1fr;gap:14px 16px}
+    .ba-grid{grid-template-columns:1fr;gap:26px}
+    .price-row{grid-template-columns:1fr 1fr;gap:12px 16px}
     .price-row .pname{grid-column:1/-1;margin-bottom:2px}
     .mcta{display:flex}
-    .hero{padding-top:104px}
+    .hero{padding-top:100px}
+    .hero h1{font-size:30px;letter-spacing:.005em;line-height:1.45}
+    .hero-actions{width:100%}
+    .hero-actions .btn-ink{width:100%;justify-content:center;white-space:nowrap;font-size:14.5px;padding:15px 18px}
   }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .js .reveal{opacity:1;transform:none;transition:none}
-    *{animation:none!important}
+    *{animation:none!important;transition:none!important}
   }
 </style>
 </head>
@@ -278,10 +276,10 @@
     <nav class="nav">
       <a href="#loss">お悩み</a>
       <a href="#do">整えること</a>
-      <a href="#demo">事例</a>
+      <a href="#ba">事例</a>
       <a href="#pricing">料金</a>
       <a href="#flow">進め方</a>
-      <a href="#contact" class="nav-cta">まずは相談する</a>
+      <a href="#contact" class="nav-cta">相談する</a>
     </nav>
     <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
   </div>
@@ -293,11 +291,11 @@
     <button class="x" id="drawerX" aria-label="閉じる">×</button>
     <a href="#loss" data-close>お悩み</a>
     <a href="#do" data-close>整えること</a>
-    <a href="#demo" data-close>事例</a>
+    <a href="#ba" data-close>Before / After</a>
     <a href="#pricing" data-close>料金</a>
     <a href="#flow" data-close>進め方</a>
     <a href="#faq" data-close>よくある質問</a>
-    <a href="#contact" data-close style="color:var(--accent-d)">まずは相談する →</a>
+    <a href="#contact" data-close style="color:var(--accent-d)">1ページ改善案を相談する →</a>
   </div>
 </div>
 
@@ -307,26 +305,29 @@
     <div class="hero-copy">
       <div class="hero-eyebrow">MISERU — 見せ方を整える編集室</div>
       <h1>いい仕事は、<br><span class="em">見せ方</span>で伝わる。</h1>
-      <p class="hero-p">施工・料理・施術・作品。<br>実物の魅力が伝わる写真配置とスマホ導線で、<br>中小事業のホームページを「相談されるページ」に整えます。</p>
+      <p class="hero-p">写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。<br>中小事業のホームページを、“相談されるページ”に整えます。</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-solid">1ページ改善案を相談する <span class="arw">→</span></a>
-        <a href="#do" class="textlink">できることを見る</a>
+        <a href="#contact" class="btn btn-ink">1ページ改善案を相談する <span class="arw">→</span></a>
+        <a href="#do" class="textlink">整えることを見る</a>
       </div>
-      <div class="hero-mini">
-        <span>写真・実物の見せ方</span>
-        <span>スマホ問い合わせ導線</span>
-        <span>実績・信頼の設計</span>
+      <p class="hero-fine">まずは1ページだけ、無料で見せ方を整理します。<br>初回価格は、最初の数社の実績づくり用です。</p>
+      <div class="hero-chips">
+        <span class="chip"><b>01</b>写真の見せ方</span>
+        <span class="chip"><b>02</b>スマホ問い合わせ導線</span>
+        <span class="chip"><b>03</b>実績・事例の整理</span>
       </div>
     </div>
-    <figure class="hero-photo reveal">
-      <img src="https://picsum.photos/seed/miseru-atelier/1000/1250" alt="実物の魅力が伝わる見せ方のイメージ" width="1000" height="1250">
-      <figcaption>※写真はイメージです（実際の制作事例に差し替え予定）</figcaption>
-    </figure>
+    <div class="hero-board reveal">
+      <span class="hb-tag">実物を、伝わる形に</span>
+      <!-- 後で実写に差し替え（Pexels無料・商用可・仮）。表示は要スクショ確認 -->
+      <figure class="hb-main"><img src="https://images.pexels.com/photos/33683554/pexels-photo-33683554.jpeg?auto=compress&cs=tinysrgb&w=900" alt="実物の魅力が伝わる写真の見せ方の例（仮）" width="900" height="1125"></figure>
+      <figure class="hb-sub"><img src="https://images.pexels.com/photos/4577646/pexels-photo-4577646.jpeg?auto=compress&cs=tinysrgb&w=600" alt="料理写真の見せ方の例（仮）" width="600" height="600"></figure>
+    </div>
   </div>
 </section>
 
 <!-- LOSS -->
-<section class="sec loss" id="loss">
+<section class="sec bg-sand" id="loss">
   <div class="wrap">
     <span class="eyebrow">Concern</span>
     <h2 class="title"><span class="l">いい仕事なのに、</span>Webで損していませんか。</h2>
@@ -345,34 +346,34 @@
 <section class="sec" id="do">
   <div class="wrap">
     <span class="eyebrow">What we do</span>
-    <h2 class="title">実物の魅力が伝わるように、見せ方を整えます。</h2>
-    <p class="sub-lead">大きく作り直さなくても大丈夫です。いまあるサイトやSNSを活かして、効くところから少しずつ。</p>
+    <h2 class="title">写真・文章・導線を、伝わる形に整えます。</h2>
+    <p class="sub-lead">いきなり大きく作り直す必要はありません。いまあるサイトやSNSを活かして、効くところから少しずつ。</p>
     <div class="do-grid">
       <div class="do-item reveal">
-        <span class="dn">01</span>
+        <span class="dn">01 ／ PHOTO</span>
         <h3>写真の見せ方</h3>
-        <p>選び方・トリミング・並べ方・Before/Afterの対比。撮り直さなくても、見せ方を整えるだけで実物の良さはぐっと伝わります。必要なら一眼での撮影もご相談いただけます。</p>
+        <p>選び方・トリミング・並べ方・Before/Afterの対比。撮り直さなくても、置き方を変えるだけで実物の良さは伝わります。必要なら一眼での撮影もご相談いただけます。</p>
       </div>
       <div class="do-item reveal">
-        <span class="dn">02</span>
+        <span class="dn">02 ／ CONTACT</span>
         <h3>スマホ問い合わせ導線</h3>
         <p>電話・LINE・予約・フォームを、親指の届く位置へ。来てくれた方を取りこぼさず、相談・予約まで自然につなげます。</p>
       </div>
       <div class="do-item reveal">
-        <span class="dn">03</span>
+        <span class="dn">03 ／ LAYOUT</span>
         <h3>レイアウトとことば</h3>
-        <p>ファーストビュー、実績ページ、文章の整理まで。「何屋で、何が強みか」がひと目で伝わり、ちゃんとした事業者に見える構成に整えます。</p>
+        <p>ファーストビュー、実績ページ、文章の整理まで。「何屋で、何が強みか」がひと目で伝わる構成に整えます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BEFORE / AFTER -->
-<section class="sec ba" id="ba">
+<!-- BEFORE / AFTER (前半・暖色背景) -->
+<section class="sec bg-sand" id="ba">
   <div class="wrap">
     <span class="eyebrow">Before / After</span>
     <h2 class="title">少し整えるだけで、伝わり方は変わります。</h2>
-    <p class="sub-lead">作り直すのではなく、写真・導線・見出しを整える。それだけで「相談されるページ」に近づきます。</p>
+    <p class="sub-lead">作り直すのではなく、写真の置き方・導線・見出しを整える。それだけで「相談されるページ」に近づきます。</p>
     <div class="ba-grid">
       <div class="ba-col before reveal">
         <span class="ba-tag">Before — 今ありがちな状態</span>
@@ -387,12 +388,13 @@
           <div class="sc-spacer"></div>
           <div class="sc-cta">お問い合わせはこちら</div>
         </div>
-        <p class="ba-note">写真が小さく情報が詰まっていて、問い合わせ先も探しにくい。良さが伝わる前に離脱されてしまう。</p>
+        <p class="ba-note">写真が小さく情報が詰まっていて、問い合わせ先も探しにくい。良さが伝わる前に離れてしまう。</p>
       </div>
       <div class="ba-col after reveal">
         <span class="ba-tag">After — 見せ方を整えた状態</span>
         <div class="screen after">
-          <div class="sc-img"><img src="https://picsum.photos/seed/miseru-after/640/360" alt="整えた後のイメージ" loading="lazy"></div>
+          <!-- 後で実写に差し替え（Pexels無料・商用可・仮） -->
+          <div class="sc-img"><img src="https://images.pexels.com/photos/8312083/pexels-photo-8312083.jpeg?auto=compress&cs=tinysrgb&w=700" alt="実物が主役のファーストビュー例（仮）" loading="lazy" width="700" height="467"></div>
           <div class="sc-head">実物が主役の<br>ファーストビュー</div>
           <div class="sc-bar w60"></div>
           <div class="sc-spacer"></div>
@@ -423,21 +425,23 @@
   </div>
 </section>
 
-<!-- DEMO -->
-<section class="sec demo" id="demo">
+<!-- DEMO (SS 控えめ) -->
+<section class="sec bg-sand" id="demo">
   <div class="wrap">
-    <span class="eyebrow">Works</span>
-    <h2 class="title">制作・改善の一例。</h2>
+    <span class="eyebrow">Sample</span>
+    <h2 class="title">「整えると、こう変わる」の参考例。</h2>
     <a class="demo-card" href="https://ss-suteki.com" target="_blank" rel="noopener">
       <div class="demo-grid">
         <figure class="demo-photo reveal">
-          <img src="https://picsum.photos/seed/miseru-ss/1200/820" alt="建設会社サイトの制作例" loading="lazy">
+          <span class="pin">制作・改善の参考デモ</span>
+          <!-- 後で実写/実スクショに差し替え（Pexels無料・商用可・仮） -->
+          <img src="https://images.pexels.com/photos/16741356/pexels-photo-16741356.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="施工会社サイトの見せ方を整えた参考例（仮）" loading="lazy" width="1000" height="687">
         </figure>
         <div class="demo-meta">
-          <span class="tag">制作デモ ・ 建設（自社制作）</span>
-          <h3>現場仕事が「信頼できる会社」に見える設計</h3>
-          <p>事業内容・施工事例・会社の信頼性・スマホ問い合わせ導線を整理した制作例です。実物の写真と実績が主役になる構成にしています。</p>
-          <span class="textlink">実際のサイトを見る（ss-suteki.com）→</span>
+          <span class="tag">参考デモ</span>
+          <h3>施工会社の見せ方を整えた参考例</h3>
+          <p>写真・実績・会社の信頼性・スマホ問い合わせ導線を整理した参考デモです。同じ考え方を、飲食・美容・工房・店舗など、実物で選ばれるどの仕事にも応用できます。</p>
+          <span class="textlink">参考デモを見る →</span>
         </div>
       </div>
     </a>
@@ -445,7 +449,7 @@
 </section>
 
 <!-- PRICING -->
-<section class="sec pricing" id="pricing">
+<section class="sec" id="pricing">
   <div class="wrap">
     <span class="eyebrow">Price</span>
     <h2 class="title">料金の目安。</h2>
@@ -472,7 +476,7 @@
         <div class="pcol"><span class="lab">通常</span><span class="normal">¥19,800/月</span></div>
       </div>
     </div>
-    <p class="price-foot">「初回価格」は、最初の数社さまに実績づくりとしてご案内しているものです（ご感想や、改善前後を参考事例として見せていただくことが条件）。金額は内容により前後しますので、まずは無料の1ページ改善案でご判断ください。</p>
+    <p class="price-foot">まずは1ページだけ、無料で見せ方を整理します。「初回価格」は、最初の数社さまに実績づくりとしてご案内しているものです（ご感想や、改善前後を参考事例として見せていただくのが条件）。金額は内容により前後しますので、無料の1ページ改善案でご判断ください。</p>
   </div>
 </section>
 
@@ -493,48 +497,48 @@
 </section>
 
 <!-- FAQ -->
-<section class="sec faq-sec" id="faq">
+<section class="sec bg-sand" id="faq">
   <div class="wrap">
-    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:14px">FAQ</span>
+    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:12px">FAQ</span>
     <h2 class="title" style="text-align:center">よくあるご質問。</h2>
     <div class="faq">
       <details class="qa"><summary>HPが古くても大丈夫ですか？</summary><div class="a">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</div></details>
-      <details class="qa"><summary>写真がうまく撮れていません。</summary><div class="a">お持ちの写真の選び方・並べ方・トリミングで改善できることが多いです。必要であれば一眼での撮影もご相談いただけます。</div></details>
+      <details class="qa"><summary>写真がうまく撮れていません。</summary><div class="a">お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。</div></details>
       <details class="qa"><summary>スマホだけ改善することもできますか？</summary><div class="a">できます。スマホでの見やすさ・問い合わせ導線だけを整えるご依頼も多いです。</div></details>
       <details class="qa"><summary>LINEやフォームの導線も作れますか？</summary><div class="a">はい。LINE相談・予約・問い合わせフォームへの導線づくりも対応しています。</div></details>
       <details class="qa"><summary>遠方でも依頼できますか？</summary><div class="a">HP・LPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</div></details>
-      <details class="qa"><summary>小さなお店・個人事業でも相談できますか？</summary><div class="a">もちろんです。むしろ「実力はあるのにWebで損している」小規模な事業者さまのお手伝いを得意としています。</div></details>
+      <details class="qa"><summary>小さなお店・個人事業でも相談できますか？</summary><div class="a">もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのお手伝いを得意としています。</div></details>
     </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="sec about" id="about">
+<section class="sec" id="about">
   <div class="wrap about-grid">
     <div class="about-photo reveal">
-      <span class="ph-tag">代表の写真<br>（差し替え予定）</span>
+      <span class="ph-tag">代表の写真<br>（後で差し替え）</span>
     </div>
     <div>
       <span class="eyebrow">Who</span>
-      <h2 class="title">ひとりで、一つひとつの商いに向き合います。</h2>
+      <h2 class="title mincho" style="font-weight:600">ひとりで、一つひとつの商いに向き合います。</h2>
       <p>大きな制作会社ではありません。だからこそ、写真の選び方からスマホの導線、ことばの一つひとつまで、あなたの「いい仕事」が伝わるように手を動かします。</p>
-      <p>建設会社のサイト制作など、現場仕事のWebに取り組んできました。一眼レフでの撮影もでき、実物の魅力を引き出す「見せ方」を、編集者のように整えるのが役割です。</p>
+      <p>建設会社のサイト制作など、現場仕事のWebに取り組んできました。一眼での撮影もでき、実物の魅力を引き出す“見せ方”を、編集者のように整えるのが役割です。</p>
       <div class="sign">ラン<small>MISERU ／ 実物が伝わるWeb改善</small></div>
     </div>
   </div>
 </section>
 
 <!-- FINAL CTA -->
-<section class="sec final">
+<section class="sec bg-sand final">
   <div class="wrap">
     <h2>まずは、1ページだけ<br>見せ方を整えてみませんか。</h2>
-    <p>費用はかかりません。見るだけで大丈夫です。不要な営業はしません。</p>
-    <a href="#contact" class="btn btn-solid">1ページ改善案を相談する <span class="arw">→</span></a>
+    <p>無料でお見せします。見るだけで大丈夫です。不要な営業はしません。</p>
+    <a href="#contact" class="btn btn-ink">1ページ改善案を相談する <span class="arw">→</span></a>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="sec contact" id="contact">
+<section class="sec" id="contact">
   <div class="wrap contact-grid">
     <div class="contact-info">
       <span class="eyebrow">Contact</span>
@@ -562,7 +566,7 @@
         <label>ひとこと <span class="opt">（任意）</span></label>
         <textarea name="message" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
       </div>
-      <button type="submit" class="btn btn-solid">1ページ改善案を相談する（無料）</button>
+      <button type="submit" class="btn btn-ink">1ページ改善案を相談する（無料）<span class="arw">→</span></button>
     </form>
   </div>
 </section>
@@ -574,7 +578,7 @@
       <p class="fnote">実物が伝わるWeb改善。写真・実績・現場感が大事な中小事業のために、スマホの問い合わせ導線、写真の見せ方、実績の信頼設計を、小さく始められる形で整えます。</p>
     </div>
     <div style="text-align:right">
-      <a href="#contact" class="textlink">まずは相談する →</a>
+      <a href="#contact" class="textlink" style="color:#e0c2b2;border-color:var(--accent)">1ページ改善案を相談する →</a>
     </div>
   </div>
   <div class="wrap foot-copy">© ミセル（MISERU）／ ラン</div>
@@ -582,26 +586,22 @@
 
 <div class="mcta">
   <a href="mailto:megabranbran@gmail.com" class="m1">メールで相談</a>
-  <a href="#contact" class="m2">1ページ改善案（無料）</a>
+  <a href="#contact" class="m2">1ページ改善案</a>
 </div>
 
 <script>
   var header=document.getElementById('header');
   window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>12);},{passive:true});
-
   var drawer=document.getElementById('drawer');
   document.getElementById('burger').addEventListener('click',function(){drawer.classList.add('open');});
   document.getElementById('drawerX').addEventListener('click',function(){drawer.classList.remove('open');});
   drawer.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',function(){drawer.classList.remove('open');});});
-
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
     },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  }else{
-    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});
-  }
+  }else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});}
 </script>
 </body>
 </html>
