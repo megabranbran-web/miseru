@@ -119,21 +119,53 @@
   .do-item p{font-size:14.5px;color:var(--soft);line-height:1.95}
 
   /* before/after (light, warm) */
-  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,44px);margin-top:50px;align-items:start}
-  .ba-col .ba-tag{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;display:block}
-  .ba-col.before .ba-tag{color:var(--soft2)}
-  .ba-col.after .ba-tag{color:var(--accent-d)}
-  .screen{background:var(--white);border:1px solid var(--line);border-radius:9px;padding:18px;height:330px;display:flex;flex-direction:column;gap:10px;overflow:hidden;box-shadow:0 16px 40px -26px rgba(28,26,23,.35)}
-  .sc-bar{height:9px;border-radius:5px;background:#e7e0d3}
-  .sc-bar.w70{width:70%}.sc-bar.w50{width:50%}.sc-bar.w90{width:90%}.sc-bar.w40{width:40%}.sc-bar.w60{width:60%}
-  .before .sc-imgsmall{height:52px;width:38%;background:#e7e0d3;border-radius:5px}
-  .sc-spacer{flex:1}
-  .before .sc-cta{align-self:flex-start;font-size:10px;color:#b3aa9a;border:1px solid #e0d8c9;border-radius:3px;padding:6px 10px}
-  .after .sc-img{height:210px;border-radius:6px;overflow:hidden;flex:none}
-  .after .sc-img img{width:100%;height:100%;object-fit:cover;object-position:62% 42%}
-  .after .sc-head{font-weight:700;color:var(--ink);font-size:15px;line-height:1.5;margin-top:2px}
-  .after .sc-cta{align-self:stretch;text-align:center;font-size:12px;color:#fff;background:var(--accent);border-radius:5px;padding:11px;font-weight:700}
-  .ba-note{font-size:13.5px;line-height:1.8;margin-top:16px;color:var(--soft)}
+  /* before/after — 証明セクション（ブラウザ枠つきモック） */
+  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3.5vw,38px);margin-top:46px;align-items:stretch}
+  .ba-col{display:flex;flex-direction:column}
+  .ba-tag{font-size:13px;font-weight:800;letter-spacing:.06em;margin-bottom:13px;display:flex;align-items:center;gap:9px}
+  .ba-tag::before{content:"";width:10px;height:10px;border-radius:2px;flex:none}
+  .ba-tag em{font-style:normal;font-weight:500;font-size:12px;color:var(--soft);letter-spacing:.02em}
+  .ba-col.before .ba-tag{color:var(--ink2)} .ba-col.before .ba-tag::before{background:var(--soft2)}
+  .ba-col.after .ba-tag{color:var(--accent-d)} .ba-col.after .ba-tag::before{background:var(--accent)}
+  .screen{border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;height:394px;box-shadow:0 22px 48px -22px rgba(28,26,23,.42)}
+  .screen .bar0{height:26px;flex:none;display:flex;align-items:center;gap:5px;padding:0 11px;border-bottom:1px solid var(--line)}
+  .screen .bar0 i{width:7px;height:7px;border-radius:50%;background:#d8cfc0}
+  .screen .bar0 .url{margin-left:8px;height:8px;width:52%;border-radius:4px;background:#ece4d6}
+  .screen .body{flex:1;padding:15px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
+  .screen .hd{display:flex;justify-content:space-between;align-items:center}
+  .screen .hd .nv{display:flex;gap:6px}
+  /* BEFORE = 弱いHP */
+  .screen.before{background:#efeae1}
+  .before .hd .lg{width:60px;height:11px;background:#cabfad;border-radius:3px}
+  .before .hd .nv span{width:22px;height:6px;background:#dcd3c3;border-radius:3px}
+  .before .row{display:flex;gap:10px;margin-top:2px}
+  .before .ph{width:74px;height:54px;background:#d6ccba;border-radius:4px;flex:none}
+  .before .tx{flex:1;display:flex;flex-direction:column;gap:5px;padding-top:2px}
+  .before .tx .h{height:9px;width:66%;background:#c4b9a6;border-radius:3px}
+  .before .l{height:6px;background:#dcd3c3;border-radius:3px}
+  .before .para{display:flex;flex-direction:column;gap:5px;margin-top:1px}
+  .before .thumbs{display:flex;gap:5px;align-items:flex-end;margin-top:auto}
+  .before .thumbs span{width:30px;height:24px;background:#d6ccba;border-radius:3px}
+  .before .thumbs span:nth-child(2){height:29px} .before .thumbs span:nth-child(4){width:23px;height:21px}
+  .before .ghost{align-self:flex-start;margin-top:8px;font-size:9.5px;color:#a99f8c;border:1px solid #d8cfbf;border-radius:3px;padding:5px 9px}
+  /* AFTER = 整えたHP */
+  .screen.after{background:var(--white)}
+  .after .hd .lg{width:56px;height:11px;background:var(--ink);border-radius:3px}
+  .after .hd .nv span{width:20px;height:6px;background:var(--line);border-radius:3px}
+  .after .shot{height:185px;border-radius:6px;overflow:hidden;flex:none;margin-top:2px}
+  .after .shot img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+  .after .h{height:12px;width:62%;background:var(--ink);border-radius:3px;margin-top:3px}
+  .after .sub{height:6px;width:42%;background:var(--line);border-radius:3px}
+  .after .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:2px}
+  .after .thumbs span{height:32px;background:var(--sand-d);border-radius:4px}
+  .after .cta{margin-top:auto;text-align:center;font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:11px}
+  /* notes & 整えた3点 */
+  .ba-note{font-size:13px;line-height:1.75;margin-top:13px;color:var(--soft)}
+  .ba-col.before .ba-note b{color:var(--ink2);font-weight:700}
+  .ba-points{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,22px);margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+  .ba-points .bp{display:flex;gap:11px;align-items:flex-start}
+  .ba-points .bp .n{font-family:var(--mincho);font-size:17px;color:var(--accent-d);line-height:1.15;flex:none}
+  .ba-points .bp p{font-size:14px;font-weight:500;color:var(--ink2);line-height:1.5}
 
   /* industries */
   .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:48px;background:var(--line);border:1px solid var(--line)}
@@ -236,10 +268,7 @@
   .drawer .x{align-self:flex-end;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink);margin-bottom:8px;line-height:1}
 
   /* --- 追加：Before/After主役を大きく＋①②③ --- */
-  .screen.after{height:auto;min-height:344px}
-  .ba-points{list-style:none;margin-top:15px;display:flex;flex-direction:column;gap:9px}
-  .ba-points li{font-size:13.5px;color:var(--ink2);line-height:1.7}
-  .ba-points li b{color:var(--accent-d);font-weight:700;margin-right:8px}
+  /* （Before/After のCSSは上部 .ba-grid 群に統合済み） */
   /* --- 追加：見せ方サンプル帯 --- */
   .samples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,22px);margin-top:48px}
   .sample{margin:0}
@@ -281,6 +310,7 @@
     .returns-grid{grid-template-columns:1fr}
     .loss-grid{grid-template-columns:1fr;gap:0}
     .ba-grid{grid-template-columns:1fr;gap:26px}
+    .ba-points{grid-template-columns:1fr;gap:13px;margin-top:26px}
     .price-row{grid-template-columns:1fr 1fr;gap:12px 16px}
     .price-row .pname{grid-column:1/-1;margin-bottom:2px}
     .mcta{display:flex}
@@ -412,36 +442,43 @@
     <p class="sub-lead">作り直すのではなく、写真の置き方・導線・見出しを整える。それだけで「相談されるページ」に近づきます。</p>
     <div class="ba-grid">
       <div class="ba-col before reveal">
-        <span class="ba-tag">Before — 今ありがちな状態</span>
+        <span class="ba-tag">Before <em>／ 今ありがちな状態</em></span>
         <div class="screen before">
-          <div class="sc-bar w90"></div>
-          <div class="sc-bar w70"></div>
-          <div class="sc-imgsmall"></div>
-          <div class="sc-bar w90"></div>
-          <div class="sc-bar w60"></div>
-          <div class="sc-bar w90"></div>
-          <div class="sc-bar w50"></div>
-          <div class="sc-spacer"></div>
-          <div class="sc-cta">お問い合わせはこちら</div>
+          <div class="bar0"><i></i><i></i><i></i><span class="url"></span></div>
+          <div class="body">
+            <div class="hd"><span class="lg"></span><span class="nv"><span></span><span></span><span></span></span></div>
+            <div class="row">
+              <div class="ph"></div>
+              <div class="tx"><span class="h"></span><span class="l" style="width:92%"></span><span class="l" style="width:78%"></span></div>
+            </div>
+            <div class="para"><span class="l" style="width:97%"></span><span class="l" style="width:90%"></span><span class="l" style="width:96%"></span><span class="l" style="width:84%"></span><span class="l" style="width:93%"></span><span class="l" style="width:88%"></span><span class="l" style="width:95%"></span></div>
+            <div class="para"><span class="l" style="width:92%"></span><span class="l" style="width:97%"></span><span class="l" style="width:85%"></span><span class="l" style="width:94%"></span><span class="l" style="width:80%"></span><span class="l" style="width:90%"></span></div>
+            <div class="thumbs"><span></span><span></span><span></span><span></span></div>
+            <div class="ghost">お問い合わせ</div>
+          </div>
         </div>
-        <p class="ba-note">写真が小さく情報が詰まっていて、問い合わせ先も探しにくい。良さが伝わる前に離れてしまう。</p>
+        <p class="ba-note"><b>写真が小さく、文章が長い。</b>何を頼める会社か分かりにくく、問い合わせボタンも下に埋もれている。</p>
       </div>
       <div class="ba-col after reveal">
-        <span class="ba-tag">After — 見せ方を整えた状態</span>
+        <span class="ba-tag">After <em>／ 見せ方を整えた状態</em></span>
         <div class="screen after">
-          <div class="sc-img"><img src="img/after-main.jpg" alt="実物の写真を主役にしたファーストビュー例（ラン撮影の見せ方サンプル）" loading="lazy" width="1600" height="757"></div>
-          <div class="sc-head">実物が主役の<br>ファーストビュー</div>
-          <div class="sc-bar w60"></div>
-          <div class="sc-spacer"></div>
-          <div class="sc-cta">LINE / 電話で相談する</div>
+          <div class="bar0"><i></i><i></i><i></i><span class="url"></span></div>
+          <div class="body">
+            <div class="hd"><span class="lg"></span><span class="nv"><span></span><span></span></span></div>
+            <div class="shot"><img src="img/after-main.jpg" alt="実物の写真を主役にしたファーストビュー例（ラン撮影の見せ方サンプル）" loading="lazy" width="1600" height="757"></div>
+            <span class="h"></span>
+            <span class="sub"></span>
+            <div class="thumbs"><span></span><span></span><span></span></div>
+            <div class="cta">LINE / 電話で相談する</div>
+          </div>
         </div>
-        <p class="ba-note">写真が主役になり、強みがすぐ伝わる。相談ボタンが常に手元にあり、問い合わせまで迷わない。</p>
-        <ul class="ba-points">
-          <li><b>①</b>写真を主役にして、実物の良さを最初に伝える</li>
-          <li><b>②</b>「何屋で、何が強みか」がひと目で分かる</li>
-          <li><b>③</b>相談ボタンを常に手元に置き、迷わせない</li>
-        </ul>
+        <p class="ba-note">写真が主役になり、強みがひと目で伝わる。整理された事例と、はっきりした相談ボタンで、問い合わせまで迷わない。</p>
       </div>
+    </div>
+    <div class="ba-points">
+      <div class="bp"><span class="n">01</span><p>写真を大きく見せる</p></div>
+      <div class="bp"><span class="n">02</span><p>何を頼めるか分かる</p></div>
+      <div class="bp"><span class="n">03</span><p>相談まで迷わない導線</p></div>
     </div>
   </div>
 </section>
