@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MISERU｜1ページ改善案 サンプル</title>
+<meta name="description" content="MISERUの「1ページ改善案」で、相談するとどんなものが返ってくるか。架空の事業者を題材にしたサンプルです。">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f3ee;--paper2:#f0eadf;--sand:#e8ddcb;--sand-d:#e4d9c7;--ink:#1a1814;--ink2:#2f2a24;
+    --soft:#6c655b;--soft2:#9a9286;--line:#dad0bf;--accent:#b15c3c;--accent-d:#974b2f;--white:#fff;
+    --mincho:"Shippori Mincho",serif;--gothic:"Zen Kaku Gothic New",sans-serif;--maxw:880px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--gothic);color:var(--ink2);background:var(--paper);line-height:1.9;font-size:16px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .mk{font-weight:900;font-size:19px;letter-spacing:.16em;color:var(--ink)}
+  .back{font-size:13px;color:var(--soft);border-bottom:1px solid var(--accent);padding-bottom:2px}
+  .note{background:var(--sand);border:1px solid var(--line);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--ink2);line-height:1.7;margin:22px 0}
+  .note b{color:var(--accent-d)}
+  .lead{padding:28px 0 6px}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--accent-d);text-transform:uppercase;margin-bottom:14px}
+  h1{font-family:var(--mincho);font-weight:600;font-size:clamp(24px,4vw,33px);line-height:1.5;color:var(--ink);margin-bottom:16px}
+  .target{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:6px 0 8px}
+  .target .t{font-weight:700;color:var(--ink);font-size:15px;margin-bottom:8px}
+  .target p{font-size:14.5px;color:var(--soft);line-height:1.85}
+  .target .fic{font-size:12px;color:var(--accent-d);margin-top:10px}
+  section.s{padding:30px 0;border-top:1px solid var(--line)}
+  .sn{display:flex;align-items:baseline;gap:13px;margin-bottom:16px}
+  .sn .n{font-family:var(--mincho);font-size:22px;color:var(--accent-d);line-height:1}
+  .sn h2{font-weight:700;font-size:19px;color:var(--ink);line-height:1.5}
+  ul.pts{list-style:none;display:flex;flex-direction:column;gap:12px}
+  ul.pts li{display:flex;gap:11px;font-size:14.5px;color:var(--ink2);line-height:1.8}
+  ul.pts li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none;margin-top:11px}
+  ul.pts li b{font-weight:700;color:var(--ink)}
+  .hint{font-size:13.5px;color:var(--soft);background:var(--sand);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:12px 16px;margin-top:16px;line-height:1.8}
+  .hint b{color:var(--ink2)}
+  /* before/after */
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  .col .tag{font-size:12px;font-weight:800;letter-spacing:.05em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .col .tag::before{content:"";width:9px;height:9px;border-radius:2px}
+  .col.b .tag{color:var(--ink2)} .col.b .tag::before{background:var(--soft2)}
+  .col.a .tag{color:var(--accent-d)} .col.a .tag::before{background:var(--accent)}
+  .scr{border:1px solid var(--line);border-radius:8px;overflow:hidden;height:250px;display:flex;flex-direction:column;box-shadow:0 16px 36px -24px rgba(28,26,23,.4)}
+  .scr .top{height:21px;display:flex;align-items:center;gap:4px;padding:0 9px;border-bottom:1px solid var(--line)}
+  .scr .top i{width:6px;height:6px;border-radius:50%;background:#d8cfc0}
+  .scr .bd{flex:1;padding:12px;display:flex;flex-direction:column;gap:6px;overflow:hidden}
+  .scr.b{background:#efeae1}
+  .b .ph{width:54px;height:38px;background:#d6ccba;border-radius:3px}
+  .b .l{height:5px;background:#dcd3c3;border-radius:3px}
+  .b .btn{align-self:flex-start;margin-top:auto;font-size:8.5px;color:#a99f8c;border:1px solid #d8cfbf;border-radius:3px;padding:4px 7px}
+  .scr.a{background:var(--white)}
+  .a .big{height:92px;background:var(--sand);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;color:#a08f76}
+  .a .h{height:9px;width:58%;background:var(--ink);border-radius:3px;margin-top:2px}
+  .a .l{height:5px;background:var(--line);border-radius:3px}
+  .a .row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:1px}
+  .a .row span{height:22px;background:var(--sand-d);border-radius:3px}
+  .a .cta{margin-top:auto;text-align:center;font-size:10px;color:#fff;background:var(--accent);border-radius:5px;padding:8px;font-weight:700}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px;border-top:1px solid var(--line);padding-top:18px}
+  .three .it{display:flex;gap:9px}
+  .three .it .nn{font-family:var(--mincho);font-size:15px;color:var(--accent-d)}
+  .three .it p{font-size:13px;color:var(--ink2);line-height:1.5}
+  .device{display:flex;gap:18px;margin-top:18px;flex-wrap:wrap}
+  .device .d{flex:1;min-width:220px;background:var(--white);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+  .device .d h4{font-size:13px;color:var(--accent-d);font-weight:700;margin-bottom:6px}
+  .device .d p{font-size:13.5px;color:var(--soft);line-height:1.75}
+  .range{margin-top:16px;border-top:1px solid var(--line)}
+  .range .r{display:grid;grid-template-columns:1fr auto;gap:16px;padding:15px 4px;border-bottom:1px solid var(--line);align-items:start}
+  .range .r .rn{font-weight:700;color:var(--ink);font-size:14.5px}
+  .range .r .rn small{display:block;font-weight:400;color:var(--soft);font-size:12.5px;margin-top:4px}
+  .range .r .rp{color:var(--accent-d);font-weight:900;font-size:14px;white-space:nowrap;padding-top:2px}
+  .range-foot{font-size:12.5px;color:var(--soft);margin-top:14px;line-height:1.8}
+  .close{background:var(--sand);border-radius:12px;padding:26px 24px;margin:30px 0;text-align:center}
+  .close h3{font-family:var(--mincho);font-weight:600;font-size:20px;color:var(--ink);margin-bottom:12px;line-height:1.5}
+  .close p{font-size:14px;color:var(--soft);line-height:1.85;margin-bottom:18px}
+  .btn-ink{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;font-weight:700;font-size:14.5px;padding:14px 28px;border-radius:3px;transition:background .25s}
+  .btn-ink:hover{background:#000}
+  .btn-ink .arw{color:var(--accent);transition:transform .25s}
+  .btn-ink:hover .arw{transform:translateX(3px)}
+  footer{border-top:1px solid var(--line);padding:24px 0 40px;font-size:12px;color:var(--soft);line-height:1.8}
+  footer .mk2{font-weight:900;letter-spacing:.14em;color:var(--ink2)}
+  @media(max-width:640px){.ba{grid-template-columns:1fr;gap:22px}.three{grid-template-columns:1fr;gap:12px}}
+</style>
+</head>
+<body>
+<header><div class="wrap hd"><span class="mk">MISERU</span><a class="back" href="index.html">← MISERUのページへ戻る</a></div></header>
+
+<div class="wrap">
+  <div class="note">
+    <b>このページは、MISERUのサービス内容を説明するためのサンプルです。実在するクライアント事例ではありません。</b><br>
+    題材の事業者・写真・文章はすべて架空です。「相談すると、こんな改善案が返ってきます」というイメージをお伝えするためのものです。
+  </div>
+
+  <div class="lead">
+    <div class="eyebrow">MISERU — 1ページ改善案</div>
+    <h1>いまのページを、<br>「作品が先に伝わるページ」へ。</h1>
+  </div>
+
+  <div class="target">
+    <div class="t">今回の題材（架空）</div>
+    <p>一点ものの家具と木の器をつくる、小さな木工房。Instagramは続けているが、ホームページは数年前のまま。トップに会社概要と小さな写真が並び、「何を頼める工房なのか（オーダー家具・修理・木の器・教室）」がひと目では分かりにくい——という設定です。</p>
+    <p class="fic">※架空の事業者です。特定の実在店舗・会社とは関係ありません。</p>
+  </div>
+
+  <section class="s">
+    <div class="sn"><span class="n">01</span><h2>いまのページの「見え方」で、もったいない点</h2></div>
+    <ul class="pts">
+      <li><div><b>作品写真が小さく</b>、木目や手しごとの質感が伝わりきっていません。一番の魅力が控えめに置かれています。</div></li>
+      <li><div><b>「何を頼める工房か」が分かりにくく</b>（オーダー・修理・器・教室）、来た人が迷いやすい状態です。</div></li>
+      <li><div>スマホで見たとき、<b>問い合わせ先が下に埋もれて</b>いて、相談まで少し遠く感じます。</div></li>
+      <li><div>文章が会社概要に寄っていて、<b>作り手の人柄やものづくりへの思い</b>が伝わりにくくなっています。</div></li>
+    </ul>
+    <div class="hint"><b>考え方：</b>悪いページ、ではありません。いい仕事をされている分、<b>見せ方を少し整えるだけで、伝わる量がぐっと増える</b>状態です。</div>
+  </section>
+
+  <section class="s">
+    <div class="sn"><span class="n">02</span><h2>写真の見せ方を整える</h2></div>
+    <ul class="pts">
+      <li><div><b>最初の一枚</b>を、いちばん「この工房らしい」作品写真に。完成品の魅力を先に届けます。</div></li>
+      <li><div><b>並べる順番</b>は「作品 → 工程（手元）→ 工房の空気」。実物の良さ → 作り手、の流れに。</div></li>
+      <li><div><b>トリミング</b>で余計な背景を整理し、木の質感が主役になるよう少し寄せます。</div></li>
+      <li><div><b>明るさ・余白</b>は、自然光のやわらかさを活かし、白い余白で作品を呼吸させます。</div></li>
+    </ul>
+  </section>
+
+  <section class="s">
+    <div class="sn"><span class="n">03</span><h2>見出し・文章を整える</h2></div>
+    <ul class="pts">
+      <li><div><b>見出し</b>：「○○工房です」より、<b>「暮らしに長く寄り添う、一点ものの木の家具」</b>のように“何を頼めるか＋らしさ”を一言で。</div></li>
+      <li><div><b>サブコピー</b>：オーダーの流れや対応の範囲（修理・別注も可など）を、短く添えます。</div></li>
+      <li><div><b>業種に合う言葉</b>：「製品」より「作品」「一点もの」「手しごと」など、温度のある言葉に。</div></li>
+      <li><div><b>トーン</b>：「こうすべき」ではなく<b>「こう見せると、良さが伝わりやすくなります」</b>という、押し付けない言い回しに。</div></li>
+    </ul>
+  </section>
+
+  <section class="s">
+    <div class="sn"><span class="n">04</span><h2>スマホ導線・問い合わせ導線を整える</h2></div>
+    <ul class="pts">
+      <li><div><b>CTA</b>：「お問い合わせ」より、<b>「オーダーの相談をする」「在庫・納期を見る」</b>など、何ができるか分かる言葉に。</div></li>
+      <li><div><b>問い合わせ</b>：メール・フォーム・Instagram DM を、迷わない位置にまとめます。</div></li>
+      <li><div><b>スマホ固定CTA</b>：画面の下に「相談する」を常に置き、親指の届く位置に。</div></li>
+      <li><div><b>フォームまで</b>：作品を見た“いい気持ち”のまま、自然に相談へ進める並びにします。</div></li>
+    </ul>
+  </section>
+
+  <section class="s">
+    <div class="sn"><span class="n">05</span><h2>整える前 → 整えた後（イメージ）</h2></div>
+    <div class="ba">
+      <div class="col b">
+        <span class="tag">Before ／ 今ありがちな状態</span>
+        <div class="scr b"><div class="top"><i></i><i></i><i></i></div>
+          <div class="bd">
+            <div style="display:flex;gap:8px"><div class="ph"></div><div style="flex:1;display:flex;flex-direction:column;gap:4px;padding-top:2px"><div class="l" style="width:70%"></div><div class="l" style="width:88%"></div><div class="l" style="width:80%"></div></div></div>
+            <div class="l" style="width:96%"></div><div class="l" style="width:90%"></div><div class="l" style="width:94%"></div><div class="l" style="width:85%"></div>
+            <div class="btn">お問い合わせ</div>
+          </div>
+        </div>
+      </div>
+      <div class="col a">
+        <span class="tag">After ／ 見せ方を整えた状態</span>
+        <div class="scr a"><div class="top"><i></i><i></i><i></i></div>
+          <div class="bd">
+            <div class="big">作品写真（大きく主役に）</div>
+            <div class="h"></div><div class="l" style="width:46%"></div>
+            <div class="row"><span></span><span></span><span></span></div>
+            <div class="cta">オーダーの相談をする</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="three">
+      <div class="it"><span class="nn">01</span><p>作品写真を大きく主役に</p></div>
+      <div class="it"><span class="nn">02</span><p>何を頼める工房か、ひと目で</p></div>
+      <div class="it"><span class="nn">03</span><p>相談まで迷わない導線に</p></div>
+    </div>
+    <div class="device">
+      <div class="d"><h4>PCでは</h4><p>左に大きな作品写真、右に「頼めること（オーダー・修理・器）」。スクロールで工程・工房の空気へ。</p></div>
+      <div class="d"><h4>スマホでは</h4><p>作品写真 → 頼めること → 相談ボタン。画面の下に「相談する」を固定して、いつでも相談できる形に。</p></div>
+    </div>
+  </section>
+
+  <section class="s">
+    <div class="sn"><span class="n">06</span><h2>必要なときの、整える範囲の目安</h2></div>
+    <div class="range">
+      <div class="r"><div class="rn">1ページだけ整える<small>トップの写真の見せ方・見出し・相談導線。まずはここから。</small></div><div class="rp">まず無料</div></div>
+      <div class="r"><div class="rn">スマホ導線だけ整える<small>固定CTA・問い合わせ・Instagram DMへの導線。</small></div><div class="rp">小さく</div></div>
+      <div class="r"><div class="rn">ページ全体を整える<small>作品ギャラリー・オーダーの流れ・工房紹介・信頼の見せ方。</small></div><div class="rp">必要なら</div></div>
+      <div class="r"><div class="rn">続けて整える<small>新作や納品例の追加、写真の差し替え。</small></div><div class="rp">任意</div></div>
+    </div>
+    <p class="range-foot">※金額は内容によって変わります。まずは無料の「1ページ改善案」で、必要かどうかをご判断いただけます。見るだけでも大丈夫です。</p>
+  </section>
+
+  <div class="close">
+    <h3>まずは1ページだけ、<br>見せ方を整えてみませんか。</h3>
+    <p>サイトかInstagramのURLを送っていただくだけで、こんな改善案を無料でお返しします。<br>続けるかどうかは、見てから決めていただけます。不要な営業はしません。</p>
+    <a href="index.html#contact" class="btn-ink">まず1ページ、見てもらう <span class="arw">→</span></a>
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <span class="mk2">MISERU</span>｜実物が伝わるWeb改善 ／ 見せ方を整える編集室<br>
+  このページは、MISERUのサービス内容を説明するためのサンプルです。実在するクライアント事例ではありません。題材・写真・文章はすべて架空です。
+</div></footer>
+</body>
+</html>

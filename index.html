@@ -25,7 +25,7 @@
 <style>
   :root{
     --paper:#f6f3ee;       /* 地 */
-    --sand:#ece3d5;        /* 沈めた暖色（旧・黒背景の置換） */
+    --sand:#e8ddcb;        /* 沈めた暖色（濃淡を強めて締める） */
     --sand-d:#e4d9c7;
     --ink:#1c1a17;         /* 墨（見出し・締め） */
     --ink2:#2f2a24;        /* 本文 */
@@ -324,10 +324,22 @@
   .smp-meta h3{font-weight:700;font-size:clamp(18px,2.4vw,24px);color:var(--ink);line-height:1.5;margin-bottom:14px}
   .smp-meta p{font-size:14.5px;color:var(--soft);line-height:1.95;margin-bottom:20px}
   .smp-meta .smp-annot{font-size:11.5px;color:var(--soft2);margin-top:14px}
+  .smp-cta{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
   /* 料金：まず無料を主役化 */
   .price-row.feature{background:rgba(177,92,60,.05);border-radius:8px;margin:0 -12px;padding-left:18px;padding-right:18px}
   .price-row.feature .pname{color:var(--accent-d)}
   .price-row.feature .first{font-size:19px}
+  /* 追加モーション（控えめ・既存revealと同じtransition方式・reduced-motionで無効化） */
+  .js .stagger > *{opacity:0;transform:translateY(10px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
+  .js .stagger.in > *{opacity:1;transform:none}
+  .js .stagger.in > *:nth-child(1){transition-delay:.05s}
+  .js .stagger.in > *:nth-child(2){transition-delay:.13s}
+  .js .stagger.in > *:nth-child(3){transition-delay:.21s}
+  .js .stagger.in > *:nth-child(4){transition-delay:.29s}
+  .js .ba-col.after.reveal{transition-delay:.15s}
+  .sample{overflow:hidden;border-radius:5px;box-shadow:0 16px 40px -28px rgba(28,26,23,.45)}
+  .sample img{transition:transform .9s cubic-bezier(.2,.7,.3,1)}
+  .sample:hover img{transform:scale(1.04)}
 
   @media(max-width:980px){
     .returns-grid{grid-template-columns:repeat(2,1fr)}
@@ -359,7 +371,8 @@
   }
   @media(prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
-    .js .reveal{opacity:1;transform:none;transition:none}
+    .js .reveal,.js .stagger>*{opacity:1;transform:none;transition:none}
+    .sample:hover img{transform:none}
     *{animation:none!important;transition:none!important}
   }
 </style>
@@ -416,7 +429,7 @@
     <aside class="hero-offer reveal" id="hero-offer">
       <span class="ho-label">無料の1ページ改善案</span>
       <div class="ho-title">ご相談で、無料でお返しするもの</div>
-      <ul>
+      <ul class="stagger">
         <li><span class="n">01</span>今のページで「伝わりにくい箇所」の指摘</li>
         <li><span class="n">02</span>写真・文章・導線の改善ポイント</li>
         <li><span class="n">03</span>改善後の「こう見せる」簡単なラフ</li>
@@ -432,7 +445,7 @@
   <div class="wrap">
     <span class="eyebrow">Which</span>
     <h2 class="title">大きく作る前に、まず見せ方を確認できます。</h2>
-    <p class="sub-lead">大きく作り直すか、自分で作るか、その手前で見せ方だけ整えるか。向き不向きで、正直に並べました。</p>
+    <p class="sub-lead">大手に頼むのが合う方も、自分で作るのが合う方もいます。MISERUはその手前で、今の見え方だけ小さく整えたい方向けです。向き不向きで、正直に並べました。</p>
     <div class="cmp3">
       <div class="cmp3-col reveal">
         <div class="cmp3-h">大手・制作会社</div><div class="cmp3-role">一から、しっかり作る</div>
@@ -549,7 +562,7 @@
         <p class="ba-note">写真が主役になり、強みがひと目で伝わる。整理された事例と、はっきりした相談ボタンで、問い合わせまで迷わない。</p>
       </div>
     </div>
-    <div class="ba-points">
+    <div class="ba-points stagger">
       <div class="bp"><span class="n">01</span><p>写真を大きく見せる</p></div>
       <div class="bp"><span class="n">02</span><p>何を頼めるか分かる</p></div>
       <div class="bp"><span class="n">03</span><p>相談まで迷わない導線</p></div>
@@ -629,8 +642,11 @@
       <div class="smp-meta reveal">
         <h3>相談すると、“こういう現物”が届きます。</h3>
         <p>無料でも中身が分かるよう、今のページの直し所を1枚にまとめてお返しします。続けるかどうかは、見てから決めていただけます。不要な営業はしません。</p>
-        <a href="#contact" class="btn btn-ink">まず1ページ、見てもらう <span class="arw">→</span></a>
-        <p class="smp-annot">※お返しする改善案のイメージです。実在するクライアント事例ではありません。</p>
+        <div class="smp-cta">
+          <a href="sample.html" class="btn btn-ink">実物の見本を見る <span class="arw">→</span></a>
+          <a href="#contact" class="textlink">そのまま相談する</a>
+        </div>
+        <p class="smp-annot">※お返しする改善案のイメージ・見本です。実在するクライアント事例ではありません。</p>
       </div>
     </div>
   </div>
@@ -691,8 +707,12 @@
     <h2 class="title" style="text-align:center">よくあるご質問。</h2>
     <div class="faq">
       <details class="qa"><summary>相談すると、しつこく営業されませんか？</summary><div class="a">しません。まずは1ページ分の改善案を無料でお返しするだけです。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。</div></details>
+      <details class="qa"><summary>本当に無料ですか？</summary><div class="a">はい。最初の1ページ改善案は無料です。今のページで伝わりにくい点と、写真・文章・導線の直し方を1枚にまとめてお返しします。費用が発生する作業は、必ず範囲と金額をお見せして、ご承諾いただいてからです。</div></details>
+      <details class="qa"><summary>なぜ無料で改善案を出しているんですか？</summary><div class="a">料金やお見積もりだけ先に見せられても、判断しづらいと思うからです。先に“どんな見せ方になるか”を具体的にお返しした方が、続けるか・自分でやるか・今のままでいいかを落ち着いて選んでいただけます。MISERUを知っていただく入り口として、まず中身でご判断いただきたいからです。</div></details>
       <details class="qa"><summary>制作会社に頼まなくて大丈夫ですか？</summary><div class="a">大きく作り直すなら、専門の制作会社がしっかりしています。MISERUは“その手前”で、今のページの見せ方だけを整える役割です。まず無料の1ページ改善案で、整えるだけで十分かをご判断いただけます。</div></details>
+      <details class="qa"><summary>AIで作ったHPとの違いは何ですか？</summary><div class="a">AIツールは、安く早く“ページの形”を作るのが得意です。MISERUは、すでにある実物（写真・実績・現場）を、どう見せれば伝わるかを人が考えて整えます。作る前の「今の見え方を確かめたい」「実物の良さが伝わっていない」段階に向いています。</div></details>
       <details class="qa"><summary>いきなり作り直しになりませんか？</summary><div class="a">なりません。今のサイトを活かして、写真・文章・スマホ導線を整えるところから始めます。作り直しが必要な場合も、範囲と費用の目安を先にお見せしてから判断いただけます。</div></details>
+      <details class="qa"><summary>まだ作り直すか決めていなくても大丈夫ですか？</summary><div class="a">大丈夫です。むしろ決める前の方が向いています。無料の1ページ改善案で「整えるだけで十分か」「作り直した方がよいか」の判断材料をお返しします。急いで決めていただく必要はありません。</div></details>
       <details class="qa"><summary>相談すると、具体的に何が返ってきますか？</summary><div class="a">今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「1ページ改善案で返すもの」をご覧ください）。</div></details>
       <details class="qa"><summary>HPが古くても大丈夫ですか？</summary><div class="a">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</div></details>
       <details class="qa"><summary>写真がうまく撮れていません。</summary><div class="a">お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。</div></details>
@@ -792,8 +812,8 @@
     var io=new IntersectionObserver(function(entries){
       entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
     },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  }else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in');});}
+    document.querySelectorAll('.reveal,.stagger').forEach(function(el){io.observe(el);});
+  }else{document.querySelectorAll('.reveal,.stagger').forEach(function(el){el.classList.add('in');});}
 </script>
 </body>
 </html>
