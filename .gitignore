@@ -11,6 +11,14 @@ Thumbs.db
 _candidates/
 # A/B/C 比較モック（本番別ファイル）
 miseru-layout-mock.html
+miseru-fv-layout-motion-mock.html
+miseru-final-fv-conversion-mock.html
+# MISERU 説明用サンプルHTML（1ページ改善案の見本など・本番外・誤公開防止）
+MISERU_*.html
+# GPTクロスレビュー：APIキー・ツール・出力（公開しない／本番に出さない）
+.env
+/tools/
+gpt_review.md
 # 未コミット差分の保存(.patch)（採用/破棄/比較用）
 *.patch
 # バックアップ・旧版（index.html.bak-YYYYMMDD 等）

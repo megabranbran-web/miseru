@@ -285,13 +285,30 @@
   /* --- 追加：業種カードのHOW --- */
   .ind .ind-how{font-size:12px;color:var(--soft);line-height:1.6;margin-top:9px;font-weight:400}
   /* --- FV 案C オファーカード --- */
-  .hero-offer{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:30px;box-shadow:0 24px 56px -34px rgba(28,26,23,.4)}
-  .hero-offer .ho-title{font-family:var(--mincho);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:18px}
+  .hero-offer{position:relative;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:32px 30px 24px;box-shadow:0 28px 60px -38px rgba(28,26,23,.45)}
+  .hero-offer::before{content:"";position:absolute;left:30px;right:30px;top:0;height:2px;background:var(--accent);border-radius:0 0 2px 2px}
+  .hero-offer .ho-label{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--accent-d);text-transform:uppercase}
+  .hero-offer .ho-title{font-family:var(--mincho);font-weight:600;font-size:19px;color:var(--ink);margin:10px 0 18px}
   .hero-offer ul{list-style:none}
-  .hero-offer li{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.7;color:var(--ink2)}
+  .hero-offer li{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.7;color:var(--ink2)}
   .hero-offer li:last-child{border-bottom:none}
   .hero-offer li .n{font-family:var(--mincho);color:var(--accent-d);font-weight:600;flex:none}
-  .hero-offer .ho-free{margin-top:14px;font-size:12.5px;color:var(--soft);line-height:1.7}
+  .hero-offer .ho-free{text-align:right;margin-top:13px;font-size:12px;color:var(--soft);line-height:1.7;letter-spacing:.03em}
+  /* FVブランド補助行 */
+  .hero-brand{font-family:var(--mincho);font-size:14px;color:var(--soft);margin:12px 0 14px;letter-spacing:.04em}
+  /* 3者比較（cmp3-で namespacing・既存と非衝突） */
+  .cmp3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);margin-top:44px}
+  .cmp3-col{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px 20px;display:flex;flex-direction:column}
+  .cmp3-col.me{border:1px solid var(--accent);box-shadow:0 22px 48px -30px rgba(177,92,60,.4)}
+  .cmp3-h{font-weight:900;font-size:15.5px;color:var(--ink);letter-spacing:.01em}
+  .cmp3-col.me .cmp3-h{color:var(--accent-d)}
+  .cmp3-role{font-size:12px;color:var(--soft2);margin:5px 0 14px;min-height:34px}
+  .cmp3-row{padding:10px 0;border-top:1px solid var(--line)}
+  .cmp3-k{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--soft2);text-transform:uppercase;margin-bottom:3px}
+  .cmp3-v{font-size:13.5px;color:var(--ink2);line-height:1.55}
+  .cmp3-col.me .cmp3-v{color:var(--ink)}
+  .cmp3-note{font-size:12.5px;color:var(--soft);margin-top:18px;line-height:1.8}
+  .js .cmp3-col.me.reveal{transition-delay:.18s}
 
   @media(max-width:980px){
     .returns-grid{grid-template-columns:repeat(2,1fr)}
@@ -303,6 +320,7 @@
     .about-grid{grid-template-columns:1fr;gap:30px}.about-photo{max-width:340px}
     .contact-grid{grid-template-columns:1fr;gap:32px}
     .ind-grid{grid-template-columns:repeat(2,1fr)}
+    .cmp3{grid-template-columns:1fr;gap:14px}
     .flow-grid{grid-template-columns:1fr 1fr;gap:28px 16px}.flow::after{display:none}
   }
   @media(max-width:600px){
@@ -366,20 +384,17 @@
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <div class="hero-eyebrow">MISERU — 見せ方を整える編集室</div>
-      <h1>いい仕事は、<br><span class="em">見せ方</span>で伝わる。</h1>
-      <p class="hero-p">写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。<br>中小事業のホームページを、“相談されるページ”に整えます。</p>
+      <p class="hero-brand">いい仕事は、見せ方で伝わる。</p>
+      <h1>作り直す前に、<br><span class="em">見せ方</span>だけ整える。</h1>
+      <p class="hero-p">写真・文章・スマホ導線を見直して、まず1ページの改善案を無料でお返しします。</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn btn-ink">1ページ改善案を相談する <span class="arw">→</span></a>
-        <a href="#do" class="textlink">整えることを見る</a>
+        <a href="#contact" class="btn btn-ink">まず1ページ、見てもらう <span class="arw">→</span></a>
+        <a href="#hero-offer" class="textlink">返ってくる内容を見る</a>
       </div>
-      <p class="hero-fine">まずは1ページだけ、無料で見せ方を整理します。<br>初回価格は、最初の数社の実績づくり用です。</p>
-      <div class="hero-chips">
-        <span class="chip"><b>01</b>写真の見せ方</span>
-        <span class="chip"><b>02</b>スマホ問い合わせ導線</span>
-        <span class="chip"><b>03</b>実績・事例の整理</span>
-      </div>
+      <p class="hero-fine">見るだけでも大丈夫です。不要な営業はしません。</p>
     </div>
-    <aside class="hero-offer reveal">
+    <aside class="hero-offer reveal" id="hero-offer">
+      <span class="ho-label">無料の1ページ改善案</span>
       <div class="ho-title">ご相談で、無料でお返しするもの</div>
       <ul>
         <li><span class="n">01</span>今のページで「伝わりにくい箇所」の指摘</li>
@@ -389,6 +404,45 @@
       </ul>
       <p class="ho-free">見るだけでも大丈夫です。不要な営業はしません。</p>
     </aside>
+  </div>
+</section>
+
+<!-- 3者比較 -->
+<section class="sec" id="compare">
+  <div class="wrap">
+    <span class="eyebrow">Which</span>
+    <h2 class="title">大きく作る前に、まず見せ方を確認できます。</h2>
+    <p class="sub-lead">大きく作り直すか、自分で作るか、その手前で見せ方だけ整えるか。向き不向きで、正直に並べました。</p>
+    <div class="cmp3">
+      <div class="cmp3-col reveal">
+        <div class="cmp3-h">大手・制作会社</div><div class="cmp3-role">一から、しっかり作る</div>
+        <div class="cmp3-row"><span class="cmp3-k">向いている人</span><span class="cmp3-v">大きく刷新したい／予算がある</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">始め方</span><span class="cmp3-v">見積もり・打ち合わせから</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">作り直し</span><span class="cmp3-v">基本まるごと</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">写真・文章・導線</span><span class="cmp3-v">制作の一部として</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">小さく試せる</span><span class="cmp3-v">まとまった単位から</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">相談のしやすさ</span><span class="cmp3-v">担当が付く（規模大）</span></div>
+      </div>
+      <div class="cmp3-col reveal">
+        <div class="cmp3-h">AI / DIYホームページ作成</div><div class="cmp3-role">自分で、安く作る</div>
+        <div class="cmp3-row"><span class="cmp3-k">向いている人</span><span class="cmp3-v">とにかく安く自分で</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">始め方</span><span class="cmp3-v">ツール契約・自分で作業</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">作り直し</span><span class="cmp3-v">自分で作り直す</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">写真・文章・導線</span><span class="cmp3-v">自分で用意する</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">小さく試せる</span><span class="cmp3-v">はい（自分の手で）</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">相談のしやすさ</span><span class="cmp3-v">基本セルフ</span></div>
+      </div>
+      <div class="cmp3-col me reveal">
+        <div class="cmp3-h">MISERU</div><div class="cmp3-role">作り直さず、見せ方を整える</div>
+        <div class="cmp3-row"><span class="cmp3-k">向いている人</span><span class="cmp3-v">大手ほどじゃないが、今の見え方は整えたい</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">始め方</span><span class="cmp3-v">まず1ページ、無料の改善案から</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">作り直し</span><span class="cmp3-v">しない（活かして整える）</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">写真・文章・導線</span><span class="cmp3-v">そこを“編集”するのが本業</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">小さく試せる</span><span class="cmp3-v">1ページから・まず無料</span></div>
+        <div class="cmp3-row"><span class="cmp3-k">相談のしやすさ</span><span class="cmp3-v">一人の編集者が実物を見る</span></div>
+      </div>
+    </div>
+    <p class="cmp3-note">どれも“アリ”です。大きく作り直すなら制作会社、自分で安くならDIY。その手前で見せ方だけ整えたいなら、MISERU。</p>
   </div>
 </section>
 
