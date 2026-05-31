@@ -13,14 +13,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
 <!--
-  ============ 画像メモ（すべて後で実写に差し替え前提）============
-  仮画像は Pexels（無料・商用可・帰属不要ライセンス）の固定URL。
-  ランダムpicsumは使用しない。被写体は検索で確認済みだが、表示は要スクショ確認。
-  - hero 大: cafe interior  https://www.pexels.com/photo/33683554/
-  - hero 小: 料理(木トレイ)  https://www.pexels.com/photo/4577646/
-  - Before/After after画像: 料理(俯瞰) https://www.pexels.com/photo/8312083/
-  - SS参考デモ: 建物外観     https://www.pexels.com/photo/16741356/
-  → ラン提供の実写（施工・料理・商品・店舗・手元・編集机）に差し替える。
+  ============ 画像メモ ============
+  ・実写（ラン撮影＝「見せ方サンプル」。制作実績ではない）：
+    - Before/After After主役: img/after-main.jpg（牛カツサンド）
+    - 見せ方サンプル帯: img/sample-food.jpg / img/sample-pet.jpg / img/sample-car.jpg
+  ・仮画像（Pexels 無料・商用可・帰属不要・後で差し替え予定）：
+    - hero 右: 案C「返るものカード」(.hero-offer)＝画像なし。※旧スクラップ画像30101198は撤去済み
+    - 参考デモ枠（SS）: 撤去済み（旧Pexels 16741356。ユーザー要望でいったん非表示）
   ==============================================================
 -->
 <style>
@@ -130,8 +129,8 @@
   .before .sc-imgsmall{height:52px;width:38%;background:#e7e0d3;border-radius:5px}
   .sc-spacer{flex:1}
   .before .sc-cta{align-self:flex-start;font-size:10px;color:#b3aa9a;border:1px solid #e0d8c9;border-radius:3px;padding:6px 10px}
-  .after .sc-img{height:150px;border-radius:6px;overflow:hidden;flex:none}
-  .after .sc-img img{width:100%;height:100%;object-fit:cover}
+  .after .sc-img{height:210px;border-radius:6px;overflow:hidden;flex:none}
+  .after .sc-img img{width:100%;height:100%;object-fit:cover;object-position:62% 42%}
   .after .sc-head{font-weight:700;color:var(--ink);font-size:15px;line-height:1.5;margin-top:2px}
   .after .sc-cta{align-self:stretch;text-align:center;font-size:12px;color:#fff;background:var(--accent);border-radius:5px;padding:11px;font-weight:700}
   .ba-note{font-size:13.5px;line-height:1.8;margin-top:16px;color:var(--soft)}
@@ -236,7 +235,37 @@
   .drawer .panel a{padding:15px 2px;border-bottom:1px solid var(--line);font-size:15.5px;font-weight:500;color:var(--ink)}
   .drawer .x{align-self:flex-end;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink);margin-bottom:8px;line-height:1}
 
+  /* --- 追加：Before/After主役を大きく＋①②③ --- */
+  .screen.after{height:auto;min-height:344px}
+  .ba-points{list-style:none;margin-top:15px;display:flex;flex-direction:column;gap:9px}
+  .ba-points li{font-size:13.5px;color:var(--ink2);line-height:1.7}
+  .ba-points li b{color:var(--accent-d);font-weight:700;margin-right:8px}
+  /* --- 追加：見せ方サンプル帯 --- */
+  .samples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,22px);margin-top:48px}
+  .sample{margin:0}
+  .sample img{aspect-ratio:1/1;width:100%;height:auto;object-fit:cover;display:block;border-radius:5px;box-shadow:0 16px 40px -28px rgba(28,26,23,.45)}
+  .sample figcaption{font-size:13px;color:var(--soft);margin-top:12px;line-height:1.6}
+  .sample figcaption b{color:var(--ink);font-weight:700;margin-right:6px}
+  .samples-note{font-size:12.5px;color:var(--soft2);margin-top:24px;letter-spacing:.02em}
+  /* --- 追加：1ページ改善案で返すもの --- */
+  .returns-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px);margin-top:46px}
+  .ret{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 20px}
+  .ret .rn{font-family:var(--mincho);font-size:15px;color:var(--accent-d);display:block;margin-bottom:12px}
+  .ret h4{font-weight:700;font-size:15px;line-height:1.5;color:var(--ink);margin-bottom:8px}
+  .ret p{font-size:13px;color:var(--soft);line-height:1.8}
+  /* --- 追加：業種カードのHOW --- */
+  .ind .ind-how{font-size:12px;color:var(--soft);line-height:1.6;margin-top:9px;font-weight:400}
+  /* --- FV 案C オファーカード --- */
+  .hero-offer{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:30px;box-shadow:0 24px 56px -34px rgba(28,26,23,.4)}
+  .hero-offer .ho-title{font-family:var(--mincho);font-weight:600;font-size:18px;color:var(--ink);margin-bottom:18px}
+  .hero-offer ul{list-style:none}
+  .hero-offer li{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px dashed var(--line);font-size:14px;line-height:1.7;color:var(--ink2)}
+  .hero-offer li:last-child{border-bottom:none}
+  .hero-offer li .n{font-family:var(--mincho);color:var(--accent-d);font-weight:600;flex:none}
+  .hero-offer .ho-free{margin-top:14px;font-size:12.5px;color:var(--soft);line-height:1.7}
+
   @media(max-width:980px){
+    .returns-grid{grid-template-columns:repeat(2,1fr)}
     .nav{display:none}.burger{display:flex}
     .hero-grid{grid-template-columns:1fr;gap:38px}
     .hero-board{order:2;max-width:440px;margin:0 auto}
@@ -249,6 +278,7 @@
   }
   @media(max-width:600px){
     body{padding-bottom:64px}
+    .returns-grid{grid-template-columns:1fr}
     .loss-grid{grid-template-columns:1fr;gap:0}
     .ba-grid{grid-template-columns:1fr;gap:26px}
     .price-row{grid-template-columns:1fr 1fr;gap:12px 16px}
@@ -319,12 +349,16 @@
         <span class="chip"><b>03</b>実績・事例の整理</span>
       </div>
     </div>
-    <figure class="hero-board reveal">
-      <span class="hb-tag">施工・料理・商品・店舗 — 見せ方を整える</span>
-      <!-- TODO: ラン提供の実写（編集机に施工/料理/商品/店舗の写真プリントを並べて選んでいる手元・PC画面）に差し替え。現状は仮画像（Pexels無料・商用可・帰属不要）。表示は要スクショ確認 -->
-      <div class="hb-main"><img src="https://images.pexels.com/photos/30101198/pexels-photo-30101198.jpeg?auto=compress&cs=tinysrgb&w=1100" alt="写真を選びながら見せ方を整えている編集机のイメージ（仮）" width="1100" height="825"></div>
-      <figcaption class="hb-cap">※写真はイメージ（実際の編集風景・制作物に差し替え予定）</figcaption>
-    </figure>
+    <aside class="hero-offer reveal">
+      <div class="ho-title">ご相談で、無料でお返しするもの</div>
+      <ul>
+        <li><span class="n">01</span>今のページで「伝わりにくい箇所」の指摘</li>
+        <li><span class="n">02</span>写真・文章・導線の改善ポイント</li>
+        <li><span class="n">03</span>改善後の「こう見せる」簡単なラフ</li>
+        <li><span class="n">04</span>必要な場合の、制作・改善の範囲と目安</li>
+      </ul>
+      <p class="ho-free">見るだけでも大丈夫です。不要な営業はしません。</p>
+    </aside>
   </div>
 </section>
 
@@ -395,16 +429,35 @@
       <div class="ba-col after reveal">
         <span class="ba-tag">After — 見せ方を整えた状態</span>
         <div class="screen after">
-          <!-- 後で実写に差し替え（Pexels無料・商用可・仮） -->
-          <div class="sc-img"><img src="https://images.pexels.com/photos/8312083/pexels-photo-8312083.jpeg?auto=compress&cs=tinysrgb&w=700" alt="実物が主役のファーストビュー例（仮）" loading="lazy" width="700" height="467"></div>
+          <div class="sc-img"><img src="img/after-main.jpg" alt="実物の写真を主役にしたファーストビュー例（ラン撮影の見せ方サンプル）" loading="lazy" width="1600" height="757"></div>
           <div class="sc-head">実物が主役の<br>ファーストビュー</div>
           <div class="sc-bar w60"></div>
           <div class="sc-spacer"></div>
           <div class="sc-cta">LINE / 電話で相談する</div>
         </div>
         <p class="ba-note">写真が主役になり、強みがすぐ伝わる。相談ボタンが常に手元にあり、問い合わせまで迷わない。</p>
+        <ul class="ba-points">
+          <li><b>①</b>写真を主役にして、実物の良さを最初に伝える</li>
+          <li><b>②</b>「何屋で、何が強みか」がひと目で分かる</li>
+          <li><b>③</b>相談ボタンを常に手元に置き、迷わせない</li>
+        </ul>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 見せ方サンプル帯（ラン撮影＝見せ方サンプル／制作実績ではない） -->
+<section class="sec" id="samples">
+  <div class="wrap">
+    <span class="eyebrow">Gallery</span>
+    <h2 class="title">実物を、魅力が伝わる一枚に。</h2>
+    <p class="sub-lead">ランが撮影・編集した「見せ方サンプル」です。料理・ペット・車など、実物の良さをそのまま伝える見せ方を、一枚で確かめてください。</p>
+    <div class="samples-grid">
+      <figure class="sample reveal"><img src="img/sample-food.jpg" alt="飲食の見せ方サンプル（ラン撮影）" loading="lazy" width="820" height="820"><figcaption><b>飲食</b>料理の質感とシズル感</figcaption></figure>
+      <figure class="sample reveal"><img src="img/sample-pet.jpg" alt="ペットの見せ方サンプル（ラン撮影）" loading="lazy" width="820" height="820"><figcaption><b>ペット</b>表情と空気感</figcaption></figure>
+      <figure class="sample reveal"><img src="img/sample-car.jpg" alt="車の見せ方サンプル（ラン撮影）" loading="lazy" width="820" height="820"><figcaption><b>車・バイク</b>質感と世界観</figcaption></figure>
+    </div>
+    <p class="samples-note">※写真はラン撮影の見せ方サンプルです（制作実績ではありません）。</p>
   </div>
 </section>
 
@@ -415,38 +468,33 @@
     <h2 class="title">“実物で選ばれる仕事”に向いています。</h2>
     <p class="sub-lead">写真・実績・現場感・人柄が、そのまま信頼や売上につながる事業者に。</p>
     <div class="ind-grid">
-      <div class="ind reveal"><span class="jp">建設・リフォーム</span><span class="en">Construction</span></div>
-      <div class="ind reveal"><span class="jp">外構・造園</span><span class="en">Exterior / Garden</span></div>
-      <div class="ind reveal"><span class="jp">飲食店</span><span class="en">Restaurant</span></div>
-      <div class="ind reveal"><span class="jp">美容・整体・サロン</span><span class="en">Beauty / Salon</span></div>
-      <div class="ind reveal"><span class="jp">車・バイク</span><span class="en">Car / Bike</span></div>
-      <div class="ind reveal"><span class="jp">宿・民泊</span><span class="en">Stay</span></div>
-      <div class="ind reveal"><span class="jp">工房・職人</span><span class="en">Craft</span></div>
-      <div class="ind reveal"><span class="jp">ペット・サービス業</span><span class="en">Pet / Service</span></div>
+      <div class="ind reveal"><span class="jp">建設・リフォーム</span><span class="en">Construction</span><p class="ind-how">施工写真を、信頼につながる事例ページへ。</p></div>
+      <div class="ind reveal"><span class="jp">外構・造園</span><span class="en">Exterior / Garden</span><p class="ind-how">施工前後を、依頼したくなる実績に。</p></div>
+      <div class="ind reveal"><span class="jp">飲食店</span><span class="en">Restaurant</span><p class="ind-how">料理写真と予約導線を、迷わず伝わる形へ。</p></div>
+      <div class="ind reveal"><span class="jp">美容・整体・サロン</span><span class="en">Beauty / Salon</span><p class="ind-how">雰囲気・メニュー・予約まで、スマホで見やすく。</p></div>
+      <div class="ind reveal"><span class="jp">車・バイク</span><span class="en">Car / Bike</span><p class="ind-how">在庫・カスタムを、問い合わせにつながる見せ方へ。</p></div>
+      <div class="ind reveal"><span class="jp">宿・民泊</span><span class="en">Stay</span><p class="ind-how">空間と体験を、予約まで迷わない導線で。</p></div>
+      <div class="ind reveal"><span class="jp">工房・職人</span><span class="en">Craft</span><p class="ind-how">作品や工程を、選ばれる理由として整理。</p></div>
+      <div class="ind reveal"><span class="jp">ペット・サービス業</span><span class="en">Pet / Service</span><p class="ind-how">安心感と料金を、相談しやすい形に。</p></div>
     </div>
   </div>
 </section>
 
-<!-- DEMO (SS 控えめ) -->
-<section class="sec bg-sand" id="demo">
+<!-- DEMO（SS参考デモ）はユーザー要望でいったん撤去。CSS .demo-* は未使用で残置（無害）。
+     復元する場合は git(87026bb)/MISERU_index_未コミット差分_保存用.patch から、または非SSのデモ（例：1ページ改善案の見本）を用意してから。 -->
+
+<!-- RETURNS（1ページ改善案で返すもの／相談の不安を消す） -->
+<section class="sec bg-sand" id="returns">
   <div class="wrap">
-    <span class="eyebrow">Sample</span>
-    <h2 class="title">「整えると、こう変わる」の参考例。</h2>
-    <a class="demo-card" href="https://ss-suteki.com" target="_blank" rel="noopener">
-      <div class="demo-grid">
-        <figure class="demo-photo reveal">
-          <span class="pin">制作・改善の参考デモ</span>
-          <!-- 後で実写/実スクショに差し替え（Pexels無料・商用可・仮） -->
-          <img src="https://images.pexels.com/photos/16741356/pexels-photo-16741356.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="施工会社サイトの見せ方を整えた参考例（仮）" loading="lazy" width="1000" height="687">
-        </figure>
-        <div class="demo-meta">
-          <span class="tag">参考デモ</span>
-          <h3>施工会社の見せ方を整えた参考例</h3>
-          <p>写真・実績・会社の信頼性・スマホ問い合わせ導線を整理した参考デモです。同じ考え方を、飲食・美容・工房・店舗など、実物で選ばれるどの仕事にも応用できます。</p>
-          <span class="textlink">参考デモを見る →</span>
-        </div>
-      </div>
-    </a>
+    <span class="eyebrow">Free</span>
+    <h2 class="title">まずは1ページだけ、見せ方を整理します。</h2>
+    <p class="sub-lead">ご相談いただくと、こんな具体的なものを無料でお返しします。申し込んだ後に何が起きるかも、最初にはっきりさせます。</p>
+    <div class="returns-grid">
+      <div class="ret reveal"><span class="rn">01</span><h4>伝わりにくい箇所の指摘</h4><p>今のページで「もったいない」点を、具体的にお伝えします。</p></div>
+      <div class="ret reveal"><span class="rn">02</span><h4>写真・文章・導線の改善案</h4><p>どこをどう変えると伝わるか、要点で整理します。</p></div>
+      <div class="ret reveal"><span class="rn">03</span><h4>「こう見せる」イメージ</h4><p>改善後の見せ方を、簡単なラフでお見せします。</p></div>
+      <div class="ret reveal"><span class="rn">04</span><h4>必要な範囲と費用の目安</h4><p>制作・改善が必要な場合だけ、範囲と目安を。押し売りはしません。</p></div>
+    </div>
   </div>
 </section>
 
@@ -504,6 +552,8 @@
     <span class="eyebrow" style="display:block;text-align:center;margin-bottom:12px">FAQ</span>
     <h2 class="title" style="text-align:center">よくあるご質問。</h2>
     <div class="faq">
+      <details class="qa"><summary>相談すると、しつこく営業されませんか？</summary><div class="a">しません。まずは1ページ分の改善案を無料でお返しするだけです。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。</div></details>
+      <details class="qa"><summary>相談すると、具体的に何が返ってきますか？</summary><div class="a">今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「1ページ改善案で返すもの」をご覧ください）。</div></details>
       <details class="qa"><summary>HPが古くても大丈夫ですか？</summary><div class="a">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</div></details>
       <details class="qa"><summary>写真がうまく撮れていません。</summary><div class="a">お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。</div></details>
       <details class="qa"><summary>スマホだけ改善することもできますか？</summary><div class="a">できます。スマホでの見やすさ・問い合わせ導線だけを整えるご依頼も多いです。</div></details>

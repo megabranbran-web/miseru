@@ -1,6 +1,22 @@
-# 公開リポジトリ(lanhp / Cloudflare Pages)に出すのは index.html（と images/）だけ。
-# 戦略資料(.md)・ローカル設定は社外秘なので公開しない。
+# 公開リポジトリ(miseru / Cloudflare Pages)に出すのは index.html と img/（本番画像）だけ。
+# 戦略資料(.md)・ローカル設定・作業ファイルは社外秘なので公開しない。
 *.md
 .claude/
 .DS_Store
 Thumbs.db
+
+# --- 作業ファイル：公開しない＆「git add .」事故防止（2026-05-30 追加）---
+# ※.gitignore は行末インラインコメント不可。コメントは必ず別行に書く。
+# 写真候補ビューア＋候補画像（社外秘・本番外）
+_candidates/
+# A/B/C 比較モック（本番別ファイル）
+miseru-layout-mock.html
+# 未コミット差分の保存(.patch)（採用/破棄/比較用）
+*.patch
+# バックアップ・旧版（index.html.bak-YYYYMMDD 等）
+*.bak
+*.bak-*
+*_backup*
+*_old*
+# 注1：*.md は上で除外済み → MISERU_*.md もこれに含まれる（重複追加しない）。
+# 注2：img/（本番画像）は「あえて」追跡対象。ignoreせず、実装時に明示 add する。
