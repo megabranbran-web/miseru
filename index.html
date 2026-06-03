@@ -440,6 +440,96 @@
     .fh-teaser-row a{border-left:0;border-top:1px solid var(--line)}
     .fh-teaser-row a:first-child{border-top:0}
   }
+
+  /* ============================================================
+     FV ダークv2（fh-d2- 名前空間）— FV+teaser+bridge 3点セット
+     ============================================================ */
+  /* fh-d2 専用変数（本番 :root を汚染しない・スコープ局所） */
+  .fh-d2, .fh-d2-teaser, .fh-d2-bridge, .btn-cream{
+    --cream:#f1ece3;
+    --accent-l:#cf7b56;
+    --ink2:#2a2521;
+  }
+  .btn-cream{background:var(--cream);color:var(--ink)}
+  .btn-cream:hover{background:#fff;box-shadow:0 16px 34px -16px rgba(0,0,0,.5)}
+  .btn-cream .arw{color:var(--accent-d);transition:.25s}
+  .btn-cream:hover .arw{transform:translateX(4px)}
+
+  .fh-d2{position:relative;min-height:100vh;display:flex;align-items:center;background:var(--ink);overflow:hidden;color:var(--cream)}
+  .fh-d2::before{content:"";position:absolute;inset:0;z-index:0;background-image:
+    linear-gradient(90deg, rgba(241,236,227,.045) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(241,236,227,.045) 1px, transparent 1px);
+    background-size: 92px 92px;}
+  .fh-d2::after{content:"";position:absolute;inset:0;z-index:0;background:
+    radial-gradient(ellipse 60% 50% at 78% 30%, rgba(207,123,86,.08), transparent 60%);}
+  .fh-d2-bottom-fade{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:2;pointer-events:none;
+    background:linear-gradient(180deg, rgba(22,19,16,0) 0%, rgba(22,19,16,.85) 70%, var(--ink) 100%)}
+  .fh-d2-inner{position:relative;z-index:3;max-width:1180px;margin:0 auto;padding:130px 28px 130px;width:100%;
+    display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,5vw,80px);align-items:center}
+
+  .fh-d2-rule{width:40px;height:2px;background:var(--accent);transform-origin:left;animation:fh-d2-grow .8s cubic-bezier(.2,.7,.3,1) .2s both}
+  .fh-d2-brand{font-family:var(--mincho);font-weight:600;font-size:clamp(15px,1.7vw,20px);color:var(--cream);margin-top:22px;letter-spacing:.04em}
+  .fh-d2-h1{font-family:var(--gothic);font-weight:900;color:var(--cream);font-size:clamp(38px,6.2vw,80px);line-height:1.12;letter-spacing:-.02em;margin-top:14px}
+  .fh-d2-h1 .em{color:var(--accent-l)}
+  .fh-d2-target{font-size:13.5px;color:rgba(241,236,227,.7);margin-top:24px;letter-spacing:.02em;line-height:1.8}
+  .fh-d2-target b{font-weight:700;color:rgba(241,236,227,.92)}
+  .fh-d2-sub{font-size:clamp(14.5px,1.4vw,17px);color:rgba(241,236,227,.82);margin-top:18px;max-width:32em;line-height:1.95}
+  .fh-d2-acts{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:32px}
+  .fh-d2-fine{font-size:12.5px;color:rgba(241,236,227,.6);margin-top:18px;letter-spacing:.02em}
+  .fh-d2 .textlink{color:var(--cream);border-bottom-color:var(--accent-l)}
+  .fh-d2 .textlink:hover{color:#fff}
+
+  /* 右紙面カード */
+  .fh-d2-paper{position:relative;background:var(--cream);color:var(--ink);border:1px solid rgba(241,236,227,.22);box-shadow:0 40px 80px -38px rgba(0,0,0,.6);padding:30px 30px 26px;border-radius:4px}
+  .fh-d2-paper::before{content:"";position:absolute;inset:14px;border:1px solid rgba(151,75,47,.18);pointer-events:none}
+  .fh-d2-paper-tag{display:inline-block;font-size:10.5px;letter-spacing:.14em;color:#fff;background:var(--accent);font-weight:700;text-transform:uppercase;padding:5px 11px;border-radius:99px}
+  .fh-d2-paper-h{font-family:var(--gothic);font-weight:900;font-size:clamp(17px,1.7vw,20px);line-height:1.45;margin:14px 0 14px;color:var(--ink)}
+  .fh-d2-paper-list{list-style:none;display:grid;gap:9px;margin:0 0 14px;padding:0}
+  .fh-d2-paper-list li{display:grid;grid-template-columns:34px 1fr;gap:10px;font-size:13.5px;color:var(--ink2);line-height:1.6;align-items:start}
+  .fh-d2-paper-list .n{display:inline-block;font-family:var(--gothic);font-weight:900;font-size:13px;color:var(--accent);letter-spacing:.04em;padding-top:1px}
+  .fh-d2-paper-ann{margin-top:14px;font-size:12.5px;color:var(--soft);line-height:1.78;padding-top:14px;border-top:1px dashed var(--line)}
+  .fh-d2-paper-ann b{font-weight:700;color:var(--ink)}
+  .fh-d2-paper-stamp{position:absolute;right:18px;bottom:14px;font-family:var(--mincho);font-size:10.5px;color:var(--accent-d);letter-spacing:.14em}
+
+  /* 予告バー（ダーク細帯） */
+  .fh-d2-teaser{background:#0f0d0a;border-top:1px solid rgba(241,236,227,.10)}
+  .fh-d2-teaser-row{display:grid;grid-template-columns:repeat(3,1fr);max-width:1320px;margin:0 auto}
+  .fh-d2-teaser a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px clamp(20px,3vw,40px);
+    font-size:13.5px;font-weight:500;color:rgba(241,236,227,.85);border-left:1px solid rgba(241,236,227,.10);transition:.25s}
+  .fh-d2-teaser a:first-child{border-left:0}
+  .fh-d2-teaser a .fh-d2-ta{color:var(--accent-l);transition:transform .25s}
+  .fh-d2-teaser a:hover{background:rgba(241,236,227,.04)}
+  .fh-d2-teaser a:hover .fh-d2-ta{transform:translateX(4px)}
+
+  /* ブリッジ：ダーク→サンドの4段グラデ */
+  .fh-d2-bridge{height:46px;background:linear-gradient(180deg, #0f0d0a 0%, #1a160f 30%, #3d3527 65%, var(--paper) 100%)}
+
+  /* アニメーション（fh-d2 配下にスコープ・既存 .a と衝突回避） */
+  @keyframes fh-d2-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes fh-d2-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .fh-d2 .a{animation:fh-d2-up .9s cubic-bezier(.2,.7,.3,1) both}
+  .fh-d2 .a1{animation-delay:.30s}.fh-d2 .a2{animation-delay:.42s}.fh-d2 .a3{animation-delay:.54s}
+  .fh-d2 .a4{animation-delay:.66s}.fh-d2 .a5{animation-delay:.78s}.fh-d2 .a6{animation-delay:.90s}.fh-d2 .a7{animation-delay:1.05s}
+
+  /* SP */
+  @media(max-width:880px){
+    .fh-d2-inner{grid-template-columns:1fr;padding:118px 22px 110px;gap:34px}
+    .fh-d2-teaser-row{grid-template-columns:1fr}
+    .fh-d2-teaser a{border-left:0;border-top:1px solid rgba(241,236,227,.10)}
+    .fh-d2-teaser a:first-child{border-top:0}
+  }
+  @media(max-width:520px){
+    .fh-d2-h1{font-size:38px;line-height:1.14}
+    .fh-d2-target{font-size:13px}
+    .fh-d2-acts{flex-direction:column;align-items:flex-start}
+    .fh-d2-acts .btn{width:100%;justify-content:center}
+    .fh-d2-paper-ann{font-size:13px;line-height:1.8}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .fh-d2 .a{animation:none!important;opacity:1!important;transform:none!important}
+    .fh-d2-rule{animation:none!important;transform:none!important}
+  }
+  }
   @media(max-width:380px){ .fh-h1{font-size:30px} }
 
   @media(prefers-reduced-motion:reduce){
@@ -485,48 +575,45 @@
   </div>
 </div>
 
-<!-- HERO（候補C採用：洗練スプリット。旧hero CSS(.hero/.hero-*/.ho-*)は未使用化＝後で掃除可） -->
-<section class="fh-hero" id="top">
-  <div class="wrap fh-grid">
-    <div class="fh-left">
-      <div class="fh-rule fh-anim"></div>
-      <div class="fh-eyebrow fh-anim a-eb">MISERU — 見せ方を整える編集室</div>
-      <h1 class="fh-h1 fh-anim a-h1">作り直す前に、<br>見せ方だけ整える。</h1>
-      <p class="fh-brand fh-anim a-br">いい仕事は、見せ方で伝わる。</p>
-      <p class="fh-lead fh-anim a-ld">写真・文章・スマホ導線を見直して、まず1ページの改善案を無料でお返しします。作り直さず、今のページを活かして。</p>
-      <div class="fh-actions fh-anim a-ac">
+<!-- HERO（FV ダークv2：fh-d2- 名前空間。FV+teaser+bridge 3点セット不可分） -->
+<section class="fh-d2" id="top">
+  <div class="fh-d2-inner">
+    <div>
+      <div class="fh-d2-rule"></div>
+      <div class="fh-d2-brand a a1">いい仕事は、見せ方で伝わる。</div>
+      <h1 class="fh-d2-h1 a a2">作り直す前に、<br><span class="em">見せ方</span>だけ整える。</h1>
+      <p class="fh-d2-target a a3"><b>中小事業者・店舗・職人のための編集室です。</b><br>大手に頼むほどじゃない、でも今のままはもったいない。そんな段階向けです。</p>
+      <p class="fh-d2-sub a a4">写真・文章・スマホ導線を見直して、実物の良さが伝わる形へ。まず1ページ分の見せ方を、無料で整理してお返しします。</p>
+      <div class="fh-d2-acts a a5">
         <!-- TODO: LINE URL確定後、主CTAをLINEにするか #contact と併設。現状は汎用文言＋#contactフォーム。 -->
-        <a href="#contact" class="fh-btn">1ページ改善案を相談する <span class="fh-arw">→</span></a>
-        <a href="#sample" class="fh-tlink">返ってくる内容を見る</a>
+        <a href="#contact" class="btn btn-cream">1ページ改善案を相談する <span class="arw">→</span></a>
+        <a href="#returns" class="textlink">返ってくる内容を見る</a>
       </div>
-      <p class="fh-calm fh-anim a-cl">見るだけでも大丈夫です。不要な営業はしません。</p>
+      <p class="fh-d2-fine a a6">見るだけでも大丈夫です。不要な営業はしません。</p>
     </div>
-    <div class="fh-right">
-      <div class="fh-card fh-anim a-cd" id="hero-offer">
-        <span class="fh-ribbon">無料の1ページ改善案</span>
-        <h2 class="fh-cardttl">ご相談で、無料でお返しするもの</h2>
-        <ol class="fh-list">
-          <li><span class="fh-n">01</span><span class="fh-t">今のページで「伝わりにくい箇所」の指摘</span></li>
-          <li><span class="fh-n">02</span><span class="fh-t">写真・文章・導線の改善ポイント</span></li>
-          <li><span class="fh-n">03</span><span class="fh-t">改善後の「こう見せる」簡単なラフ</span></li>
-          <li><span class="fh-n">04</span><span class="fh-t">必要な場合の、制作・改善の範囲と目安</span></li>
-        </ol>
-      </div>
-      <div class="fh-thumbs-wrap fh-anim a-th">
-        <div class="fh-thumbs-lbl">見せ方サンプル</div>
-        <figure class="fh-thumb"><img src="img/sample-food.jpg" alt="実物の魅力が伝わる見せ方サンプル（ラン撮影）" width="820" height="547"></figure>
-        <p class="fh-annot">※写真は見せ方サンプルです。実績ではありません。</p>
-      </div>
-    </div>
+    <aside class="fh-d2-paper a a7" aria-label="無料の1ページ改善案の中身">
+      <span class="fh-d2-paper-tag">無料の1ページ改善案</span>
+      <h2 class="fh-d2-paper-h">ご相談で、無料でお返しするもの</h2>
+      <ol class="fh-d2-paper-list">
+        <li><span class="n">01</span><span>今のページで「伝わりにくい箇所」の指摘</span></li>
+        <li><span class="n">02</span><span>写真・文章・導線の改善ポイント</span></li>
+        <li><span class="n">03</span><span>改善後の「こう見せる」簡単なラフ</span></li>
+        <li><span class="n">04</span><span>必要な場合の、制作・改善の範囲と目安</span></li>
+      </ol>
+      <p class="fh-d2-paper-ann"><b>写真撮影は無料の改善案に含まれません。</b>足りない写真がある場合も、何を用意すると伝わりやすいかを整理します。撮影が必要な場合は、内容に応じて別途お見積もりします。</p>
+      <span class="fh-d2-paper-stamp">MISERU 編集室</span>
+    </aside>
   </div>
+  <div class="fh-d2-bottom-fade" aria-hidden="true"></div>
 </section>
-<nav class="fh-teaser">
-  <div class="wrap fh-teaser-row">
-    <a href="#compare">大手・AI・MISERUの違いを見る <span class="fh-ta">→</span></a>
-    <a href="#sample">1ページ改善案で返るものを見る <span class="fh-ta">→</span></a>
-    <a href="#ba">Before / After を見る <span class="fh-ta">→</span></a>
+<nav class="fh-d2-teaser" aria-label="ページ内ガイド">
+  <div class="fh-d2-teaser-row">
+    <a href="#compare">大手・AI・MISERUの比較 <span class="fh-d2-ta">→</span></a>
+    <a href="#returns">1ページ改善案で返るもの <span class="fh-d2-ta">→</span></a>
+    <a href="#ba">Before / After を見る <span class="fh-d2-ta">→</span></a>
   </div>
 </nav>
+<div class="fh-d2-bridge" aria-hidden="true"></div>
 
 <!-- 3者比較 -->
 <section class="sec" id="compare">
