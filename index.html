@@ -245,6 +245,17 @@
   .contact-info p{font-size:14.5px;color:var(--soft);line-height:2;margin-bottom:22px}
   .contact-info .mailrow{font-size:14px;color:var(--ink2)}
   .contact-info .mailrow a{border-bottom:1px solid var(--accent);padding-bottom:2px}
+  /* LINE カード（主導線・公式LINEへ）*/
+  .line-card{background:#fffdfa;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:22px 24px;margin:24px 0 22px;box-shadow:0 18px 36px -28px rgba(28,26,23,.35)}
+  .line-card .line-card-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.16em;color:#fff;background:var(--accent);padding:4px 11px;border-radius:99px;text-transform:uppercase}
+  .line-card h3{font-family:var(--gothic);font-weight:900;font-size:17px;color:var(--ink);line-height:1.55;margin:12px 0 8px}
+  .line-card p{font-size:13.5px;color:var(--soft);line-height:1.95;margin-bottom:14px}
+  .line-card .line-card-btn{padding:13px 22px;font-size:14px}
+  .line-card .line-card-note{font-size:11.5px;color:var(--soft2);margin-top:12px;margin-bottom:0;line-height:1.7}
+  /* footer 内ナビゲーション */
+  .foot-links{margin-top:16px;display:flex;flex-wrap:wrap;gap:14px 20px;font-size:12.5px}
+  .foot-links a{color:rgba(241,236,227,.78);border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .25s,color .2s}
+  .foot-links a:hover{border-color:var(--accent);color:var(--paper)}
   .form .row{margin-bottom:17px}
   .form label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;color:var(--ink2)}
   .form label .opt{color:var(--soft2);font-weight:400;font-size:11.5px}
@@ -609,6 +620,7 @@
       <a href="#loss">お悩み</a>
       <a href="#do">整えること</a>
       <a href="#ba">事例</a>
+      <a href="sample.html">実物見本</a>
       <a href="#pricing">料金</a>
       <a href="#flow">進め方</a>
       <a href="#contact" class="nav-cta">相談する</a>
@@ -624,6 +636,7 @@
     <a href="#loss" data-close>お悩み</a>
     <a href="#do" data-close>整えること</a>
     <a href="#ba" data-close>Before / After</a>
+    <a href="sample.html" data-close>実物見本ページ</a>
     <a href="#pricing" data-close>料金</a>
     <a href="#flow" data-close>進め方</a>
     <a href="#faq" data-close>よくある質問</a>
@@ -1017,8 +1030,20 @@
       <span class="eyebrow">Contact</span>
       <h2 class="title">ご相談・お問い合わせ。</h2>
       <p>サイトやInstagramのURLを教えていただければ、気になった点と「こう整えると良くなる」案を1ページ分お送りします。費用も、しつこい営業もありません。</p>
+
+      <!-- LINE カード（主導線として強化）-->
+      <aside class="line-card" aria-label="公式LINEで相談">
+        <span class="line-card-tag">LINE</span>
+        <h3>LINEで気軽に相談できます</h3>
+        <p>サイトURLやスクショを送っていただければ、1ページ改善案の対象を確認します。フォームが面倒な方は、LINEからどうぞ。</p>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-ink line-card-btn">
+          公式LINEで相談する <span class="arw">→</span>
+        </a>
+        <p class="line-card-note">※ 別タブで LINE が開きます。友だち追加後、トーク画面でメッセージを送ってください。</p>
+      </aside>
+
       <div class="mailrow">直接のご連絡：<a href="mailto:megabranbran@gmail.com">megabranbran@gmail.com</a></div>
-      <div class="mailrow">LINEで相談：<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEに友だち追加</a></div>
+      <div class="mailrow"><a href="sample.html">実物見本ページを見る →</a></div>
     </div>
     <form class="form" action="https://formsubmit.co/megabranbran@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="ミセル：1ページ改善案のご相談">
@@ -1051,6 +1076,13 @@
     <div>
       <div class="mk">MISERU</div>
       <p class="fnote">実物が伝わるWeb改善。写真・実績・現場感が大事な中小事業のために、スマホの問い合わせ導線、写真の見せ方、実績の信頼設計を、小さく始められる形で整えます。</p>
+      <nav class="foot-links" aria-label="フッターナビ">
+        <a href="sample.html">実物見本ページ</a>
+        <a href="#pricing">料金</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#contact">お問い合わせ</a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINE</a>
+      </nav>
     </div>
     <div style="text-align:right">
       <a href="#contact" class="textlink" style="color:#e0c2b2;border-color:var(--accent)">1ページ改善案を相談する →</a>
