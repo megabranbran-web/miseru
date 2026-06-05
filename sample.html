@@ -1,546 +1,214 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>実際に、こう見せ方を整えます。｜MISERU 実物見本</title>
-<meta name="description" content="MISERUの無料相談でお返しする「1ページ改善案」の実物見本。架空の中小店舗を題材に、実際に作ったサンプルHPと、その横に「なぜこう整えたか」の解説を並べて見せます。">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<meta property="og:title" content="実際に、こう見せ方を整えます。｜MISERU 実物見本">
-<meta property="og:description" content="MISERUがどんな見せ方を作れるか、架空サンプルHPとその解説でお見せします。実在事例ではありません。">
+<title>実物見本は、業種別サンプルへ｜MISERU</title>
+<meta name="description" content="以前の1ページ改善案見本は、業種別の完成HPサンプル（ペット・飲食・車）に移動しました。気になる業種を選んでサンプルをご覧いただけます。">
+<link rel="canonical" href="https://miseru-web.pages.dev/samples.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://miseru-web.pages.dev/sample.html">
+<meta property="og:title" content="実物見本は、業種別サンプルへ｜MISERU">
+<meta property="og:description" content="業種別の完成HPサンプル（ペット・飲食・車）をご覧いただけます。すべて架空サンプルです。">
 <meta property="og:image" content="https://miseru-web.pages.dev/img/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:locale" content="ja_JP">
 <meta name="theme-color" content="#1c1a17">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="samples-shared.css">
 <style>
-  :root{
-    --paper:#f6f3ee;
-    --sand:#e8ddcb;
-    --sand-d:#e4d9c7;
-    --ink:#1c1a17;
-    --ink2:#2f2a24;
-    --soft:#6c655b;
-    --soft2:#9a9286;
-    --line:#dcd3c4;
-    --accent:#b15c3c;
-    --accent-d:#974b2f;
-    --mincho:"Shippori Mincho",serif;
-    --gothic:"Zen Kaku Gothic New",sans-serif;
-    --maxw:1180px;
+  /* 旧リンク救済ページ用の追加CSS（最小限） */
+  .legacy-note{
+    background:rgba(177,92,60,.08);
+    border-left:3px solid var(--accent);
+    padding:14px 18px;
+    margin-top:22px;
+    font-size:13px;
+    line-height:1.85;
+    color:var(--ink2);
+    border-radius:0 4px 4px 0;
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--gothic);color:var(--ink2);background:var(--paper);line-height:1.9;-webkit-font-smoothing:antialiased;font-size:16px;overflow-x:hidden}
-  a{color:inherit;text-decoration:none}
-  img{display:block;max-width:100%}
-  ol,ul{list-style:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-
-  /* ===== global header ===== */
-  header.site{position:sticky;top:0;z-index:50;background:rgba(246,243,238,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-  header.site .in{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1320px;margin:0 auto}
-  .logo{display:flex;flex-direction:column;line-height:1.1;color:var(--ink)}
-  .logo .mk{font-weight:900;font-size:19px;letter-spacing:.16em}
-  .logo .sb{font-size:10.5px;letter-spacing:.08em;color:var(--soft);margin-top:4px}
-  .back{font-size:13px;color:var(--soft);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .2s}
-  .back:hover{color:var(--accent-d)}
-
-  /* ===== HERO ===== */
-  .hero{padding:60px 0 36px;text-align:center;border-bottom:1px solid var(--line)}
-  .eyebrow{font-family:var(--gothic);font-size:11.5px;font-weight:700;letter-spacing:.2em;color:var(--accent-d);text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;justify-content:center}
-  .eyebrow::before{content:"";width:24px;height:1.5px;background:var(--accent)}
-  .hero h1{font-family:var(--mincho);font-weight:600;font-size:clamp(26px,4vw,42px);color:var(--ink);line-height:1.5;margin-top:18px;letter-spacing:.005em}
-  .hero h1 .em{color:var(--accent-d)}
-  .hero p.lead{font-size:14.5px;color:var(--soft);margin:18px auto 0;line-height:1.95;max-width:38em}
-  .hero .disclaimer{margin:22px auto 0;max-width:38em;background:#fffdfa;border:1px dashed var(--line);border-radius:6px;padding:14px 18px;font-size:12.5px;color:var(--soft);line-height:1.85;text-align:left}
-  .hero .disclaimer b{color:var(--ink);font-weight:700}
-  .hero .acts{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:26px}
-
-  /* ===== ボタン ===== */
-  .btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:700;font-size:14.5px;letter-spacing:.04em;padding:15px 28px;border-radius:3px;transition:.25s cubic-bezier(.2,.7,.3,1);border:1px solid transparent;line-height:1.4}
-  .btn .arw{color:var(--accent);transition:transform .25s}
-  .btn:hover .arw{transform:translateX(3px)}
-  .btn-ink{background:var(--ink);color:#fff}
-  .btn-ink:hover{background:#000}
-  .textlink{font-size:13.5px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:3px;transition:color .2s;align-self:center}
-  .textlink:hover{color:var(--accent-d)}
-
-  /* ===== Demo Section（左HP + 右解説）===== */
-  .demo-sec{padding:60px 0 70px;background:var(--sand-d)}
-  .demo-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,4vw,52px);align-items:start}
-
-  /* === Mini HP（実際に作ったサンプルサイトの体裁）=== */
-  .minihp{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 30px 60px -36px rgba(28,26,23,.4)}
-  /* "ブラウザフレーム" 風 */
-  .minihp-frame{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);background:#fbf8f1}
-  .minihp-frame .dot{width:9px;height:9px;border-radius:50%;background:#dad0bf}
-  .minihp-frame .url{flex:1;background:#fff;border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-size:11.5px;color:var(--soft2);font-family:var(--gothic);text-align:center;margin-left:6px}
-  .minihp-tag{margin-left:auto;font-size:10px;color:var(--accent-d);letter-spacing:.1em;font-weight:700;text-transform:uppercase}
-
-  /* Mini HP 本文ベース */
-  .mh{font-family:var(--gothic);color:#252220;background:#fff}
-  .mh-wrap{padding:0}
-
-  /* Mini HP ヘッダー（架空店舗のサイト体裁）*/
-  .mh-header{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid #ece4d6}
-  .mh-header .mh-logo{font-family:var(--mincho);font-weight:600;font-size:16px;color:#1f1a14;letter-spacing:.04em}
-  .mh-header .mh-logo small{display:block;font-family:var(--gothic);font-size:9.5px;color:#9a9286;font-weight:400;margin-top:2px;letter-spacing:.06em}
-  .mh-header .mh-nav{display:flex;gap:16px;font-size:12px;color:#5a5048}
-  .mh-header .mh-nav a{color:inherit}
-
-  /* Mini HP FV */
-  .mh-fv{position:relative;padding:30px 22px 26px}
-  .mh-fv-photo{aspect-ratio:16/10;background:linear-gradient(135deg,#caa784 0%,#956a45 45%,#5c3e26 100%);border-radius:6px;position:relative;overflow:hidden;display:flex;align-items:end;padding:18px;box-shadow:inset 0 -40px 60px rgba(0,0,0,.25)}
-  .mh-fv-photo::before{
-    content:"";position:absolute;inset:0;
-    background:
-      radial-gradient(circle at 30% 40%,rgba(255,220,180,.45),transparent 35%),
-      radial-gradient(circle at 70% 60%,rgba(255,200,140,.35),transparent 40%),
-      radial-gradient(circle at 50% 80%,rgba(0,0,0,.3),transparent 50%);
+  .legacy-note b{color:var(--ink);font-weight:700}
+  .return-band{
+    background:var(--night);
+    color:#fff;
+    padding:60px 0;
+    text-align:center;
+    margin-top:0;
   }
-  .mh-fv-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.5))}
-  .mh-fv-photo .mh-photo-cap{position:relative;z-index:2;color:#fff;font-family:var(--mincho);font-size:13px;letter-spacing:.05em;text-shadow:0 1px 4px rgba(0,0,0,.6)}
-  .mh-fv-photo .mh-photo-cap small{display:block;font-family:var(--gothic);font-size:9.5px;color:rgba(255,255,255,.85);font-weight:400;margin-top:3px;letter-spacing:.04em}
-  .mh-fv h1{font-family:var(--mincho);font-weight:600;font-size:22px;color:#1f1a14;line-height:1.55;margin-top:18px;letter-spacing:.01em}
-  .mh-fv h1 .acc{color:#974b2f}
-  .mh-fv .mh-sub{font-size:12.5px;color:#6c655b;line-height:1.85;margin-top:10px}
-  .mh-fv .mh-acts{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
-  .mh-fv .mh-cta{background:#974b2f;color:#fff;font-weight:700;font-size:12.5px;padding:11px 18px;border-radius:3px;display:inline-flex;align-items:center;gap:8px;letter-spacing:.04em}
-  .mh-fv .mh-cta .a{color:#f1ece3}
-  .mh-fv .mh-link{font-size:12px;color:#1f1a14;border-bottom:1px solid #b15c3c;padding-bottom:2px;font-weight:500}
-
-  /* Mini HP「うちの自慢」3列 */
-  .mh-menu{padding:24px 22px;background:#fbf8f1;border-top:1px solid #ece4d6}
-  .mh-menu .mh-eyebrow{font-size:10.5px;color:#974b2f;font-weight:700;letter-spacing:.16em}
-  .mh-menu h2{font-family:var(--mincho);font-weight:600;font-size:17px;color:#1f1a14;margin:6px 0 16px;line-height:1.55}
-  .mh-menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .mh-item{background:#fff;border:1px solid #ece4d6;border-radius:5px;overflow:hidden}
-  .mh-item-photo{aspect-ratio:4/5;position:relative;overflow:hidden}
-  .mh-item-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35))}
-  .mh-item-photo.a{background:linear-gradient(135deg,#d4a574 0%,#8b5a3c 80%)}
-  .mh-item-photo.b{background:linear-gradient(135deg,#c9a085 0%,#7d5840 75%)}
-  .mh-item-photo.c{background:linear-gradient(135deg,#deb88c 0%,#9d6e48 80%)}
-  .mh-item-body{padding:11px 12px 13px}
-  .mh-item-body h4{font-family:var(--mincho);font-weight:600;font-size:13px;color:#1f1a14;margin-bottom:4px;line-height:1.45}
-  .mh-item-body p{font-size:11px;color:#6c655b;line-height:1.65}
-  .mh-item-body .mh-price{font-family:var(--mincho);font-size:13px;color:#974b2f;font-weight:600;margin-top:6px;display:block;letter-spacing:.04em}
-
-  /* Mini HP 情報＋導線 */
-  .mh-info{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:18px;border-top:1px solid #ece4d6}
-  .mh-info-block h4{font-size:10.5px;color:#974b2f;font-weight:700;letter-spacing:.14em;margin-bottom:6px}
-  .mh-info-block p{font-size:12px;color:#1f1a14;line-height:1.7}
-  .mh-info-block p small{display:block;font-size:10.5px;color:#9a9286;margin-top:3px;line-height:1.6}
-
-  /* Mini HP 下部 CTA */
-  .mh-final{background:#1c1a17;color:#fff;padding:22px;text-align:center}
-  .mh-final h3{font-family:var(--mincho);font-weight:600;font-size:15px;line-height:1.55;color:#fff}
-  .mh-final p{font-size:11.5px;color:rgba(255,255,255,.75);margin-top:6px;line-height:1.75}
-  .mh-final .mh-final-cta{display:inline-block;background:#b15c3c;color:#fff;font-weight:700;font-size:12.5px;padding:11px 24px;border-radius:3px;margin-top:12px;letter-spacing:.04em}
-
-  /* Mini HP ステータスバー（ページ下）*/
-  .mh-bottom{background:#1c1a17;color:rgba(255,255,255,.55);padding:9px 14px;font-size:9.5px;text-align:center;border-top:1px solid rgba(255,255,255,.08);letter-spacing:.05em}
-
-  /* === 解説パネル（sticky）=== */
-  .explain{position:sticky;top:88px;align-self:start}
-  .explain-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:24px 26px;box-shadow:0 20px 50px -30px rgba(28,26,23,.3)}
-  .explain-card h2{font-family:var(--mincho);font-weight:600;font-size:20px;color:var(--ink);line-height:1.55;margin-bottom:6px}
-  .explain-card .ex-lead{font-size:13px;color:var(--soft);line-height:1.85;margin-bottom:20px;padding-bottom:18px;border-bottom:1px dashed var(--line)}
-  .ex-block{padding:14px 0;border-top:1px solid var(--line)}
-  .ex-block:first-of-type{border-top:0;padding-top:0}
-  .ex-block-h{display:flex;align-items:baseline;gap:11px;margin-bottom:6px}
-  .ex-block-h .n{font-family:var(--mincho);font-size:17px;color:var(--accent-d);font-weight:600;line-height:1;letter-spacing:.04em}
-  .ex-block-h h3{font-family:var(--gothic);font-weight:900;font-size:13.5px;color:var(--ink);line-height:1.55}
-  .ex-block p{font-size:12.5px;color:var(--soft);line-height:1.85;padding-left:28px}
-  .ex-card-foot{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--soft2);line-height:1.75}
-  .ex-card-foot b{color:var(--ink);font-weight:700}
-
-  /* ===== Before / After ===== */
-  .ba-sec{padding:60px 0 60px;background:var(--paper)}
-  .ba-head{text-align:center;margin-bottom:32px}
-  .ba-head h2{font-family:var(--mincho);font-weight:600;font-size:clamp(22px,3vw,30px);color:var(--ink);line-height:1.55;margin-top:14px}
-  .ba-head p{font-size:14px;color:var(--soft);margin:14px auto 0;line-height:1.95;max-width:36em}
-  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,32px);align-items:stretch}
-  .ba-col h3{font-size:12.5px;font-weight:800;letter-spacing:.06em;margin-bottom:12px;display:flex;align-items:center;gap:9px}
-  .ba-col h3::before{content:"";width:10px;height:10px;border-radius:2px}
-  .ba-col.before h3{color:var(--ink2)}
-  .ba-col.before h3::before{background:var(--soft2)}
-  .ba-col.after h3{color:var(--accent-d)}
-  .ba-col.after h3::before{background:var(--accent)}
-  .ba-screen{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -28px rgba(28,26,23,.35)}
-  .ba-screen.wire svg{display:block;width:100%;height:auto}
-  /* After は Mini HP の縮小版を入れる */
-  .ba-screen.after-mini{padding:0}
-  .ba-screen.after-mini .mini-stub{aspect-ratio:3/4;background:#fff;display:flex;flex-direction:column;font-family:var(--gothic)}
-  .ba-screen.after-mini .stub-h{background:#fbf8f1;display:flex;justify-content:space-between;align-items:center;padding:7px 11px;border-bottom:1px solid #ece4d6}
-  .ba-screen.after-mini .stub-h .l{font-family:var(--mincho);font-size:9.5px;color:#1f1a14;font-weight:600;letter-spacing:.04em}
-  .ba-screen.after-mini .stub-h .cta{background:#974b2f;color:#fff;font-size:7px;font-weight:700;padding:3px 6px;border-radius:2px}
-  .ba-screen.after-mini .stub-photo{aspect-ratio:16/9;background:linear-gradient(135deg,#caa784,#5c3e26);position:relative}
-  .ba-screen.after-mini .stub-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.4))}
-  .ba-screen.after-mini .stub-h1{padding:10px 11px 4px;font-family:var(--mincho);font-size:11px;color:#1f1a14;line-height:1.45;font-weight:600}
-  .ba-screen.after-mini .stub-body{padding:0 11px 8px;font-size:7px;color:#6c655b;line-height:1.7}
-  .ba-screen.after-mini .stub-grid{padding:6px 11px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
-  .ba-screen.after-mini .stub-grid .it{aspect-ratio:4/5;border-radius:2px}
-  .ba-screen.after-mini .stub-grid .it.a{background:linear-gradient(135deg,#d4a574,#8b5a3c)}
-  .ba-screen.after-mini .stub-grid .it.b{background:linear-gradient(135deg,#c9a085,#7d5840)}
-  .ba-screen.after-mini .stub-grid .it.c{background:linear-gradient(135deg,#deb88c,#9d6e48)}
-  .ba-screen.after-mini .stub-final{margin-top:auto;background:#1c1a17;padding:8px 11px;text-align:center}
-  .ba-screen.after-mini .stub-final .cta2{background:#b15c3c;color:#fff;font-size:8px;font-weight:700;padding:4px 10px;border-radius:2px;display:inline-block;letter-spacing:.04em}
-
-  .ba-note{font-size:12.5px;color:var(--soft);margin-top:14px;line-height:1.85}
-  .ba-foot{font-size:11.5px;color:var(--soft2);margin-top:14px;line-height:1.75;text-align:center}
-
-  /* ===== What You Get ===== */
-  .wyg-sec{padding:60px 0 60px;background:var(--sand)}
-  .wyg-head{text-align:center;margin-bottom:36px}
-  .wyg-head h2{font-family:var(--mincho);font-weight:600;font-size:clamp(22px,3vw,30px);color:var(--ink);line-height:1.55;margin-top:14px}
-  .wyg-head p{font-size:14px;color:var(--soft);margin:14px auto 0;line-height:1.95;max-width:36em}
-  .wyg-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:1100px;margin:0 auto}
-  .wyg-it{background:#fffdfa;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:20px 18px}
-  .wyg-it .n{font-family:var(--mincho);font-size:15px;color:var(--accent-d);font-weight:600;letter-spacing:.04em;line-height:1}
-  .wyg-it h4{font-family:var(--gothic);font-weight:900;font-size:13.5px;color:var(--ink);line-height:1.55;margin:10px 0 6px}
-  .wyg-it p{font-size:12px;color:var(--soft);line-height:1.85}
-  .wyg-note{margin-top:26px;background:#fffdfa;border:1px dashed var(--line);border-radius:6px;padding:14px 18px;font-size:12.5px;color:var(--ink2);line-height:1.85;max-width:880px;margin-left:auto;margin-right:auto}
-  .wyg-note b{color:var(--accent-d);font-weight:700}
-
-  /* ===== Close CTA ===== */
-  .close-cta{background:var(--ink);color:#fff;text-align:center;padding:64px 0}
-  .close-cta h2{font-family:var(--mincho);font-weight:600;font-size:clamp(22px,3vw,32px);line-height:1.55;color:#fff;letter-spacing:.005em}
-  .close-cta p{color:rgba(255,255,255,.78);margin:14px auto 0;font-size:14.5px;line-height:1.95;max-width:32em}
-  .close-cta .acts{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:28px}
-  .close-cta .btn-cream{background:#f1ece3;color:var(--ink)}
-  .close-cta .btn-cream:hover{background:#fff}
-  .close-cta .btn-cream .arw{color:var(--accent-d)}
-  .close-cta .textlink{color:#fff;border-color:#cf7b56}
-  .close-cta .textlink:hover{color:#cf7b56}
-  .close-cta .fine{font-size:12px;color:rgba(255,255,255,.55);margin-top:16px}
-
-  /* ===== footer ===== */
-  footer{background:#100e0b;color:rgba(241,236,227,.6);padding:38px 0 32px;font-size:12.5px}
-  footer .wrap-f{max-width:1180px;margin:0 auto;padding:0 28px}
-  footer .mk{font-weight:900;letter-spacing:.14em;color:#f1ece3;font-size:15px}
-  footer .sb{font-size:10.5px;letter-spacing:.08em;color:rgba(241,236,227,.5);margin-top:4px;font-weight:400}
-  footer p{margin-top:12px;line-height:1.85;max-width:60em}
-  footer .links{margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;font-size:12.5px}
-  footer .links a{color:rgba(241,236,227,.7);border-bottom:1px solid transparent;transition:border-color .25s}
-  footer .links a:hover{border-color:var(--accent)}
-
-  /* ===== responsive ===== */
-  @media(max-width:980px){
-    .demo-grid{grid-template-columns:1fr;gap:36px}
-    .explain{position:static}
-    .wyg-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .return-band h2{
+    font-family:var(--font-mincho);
+    font-weight:600;
+    font-size:clamp(22px,2.8vw,28px);
+    line-height:1.6;
+    margin-bottom:14px;
   }
-  @media(max-width:780px){
-    .hero{padding:48px 0 30px}
-    .demo-sec{padding:40px 0 50px}
-    .ba-sec{padding:44px 0 44px}
-    .ba-grid{grid-template-columns:1fr;gap:26px}
-    .wyg-sec{padding:44px 0 44px}
-    .close-cta{padding:50px 0}
-    .mh-fv{padding:22px 18px 22px}
-    .mh-fv h1{font-size:19px}
-    .mh-menu{padding:20px 18px}
-    .mh-menu-grid{grid-template-columns:1fr 1fr;gap:9px}
-    .mh-item-body h4{font-size:12px}
-    .mh-info{padding:18px;grid-template-columns:1fr;gap:14px}
-    .mh-final{padding:20px 18px}
-    .explain-card{padding:22px 20px}
-    .ba-screen.wire svg{max-height:380px;width:auto;margin:0 auto;display:block}
-    .acts{gap:12px}
+  .return-band p{
+    color:rgba(255,255,255,.75);
+    font-size:14px;
+    line-height:1.95;
+    max-width:34em;
+    margin:0 auto 26px;
   }
-  @media(max-width:520px){
-    .wyg-grid{grid-template-columns:1fr}
-    .mh-menu-grid{grid-template-columns:1fr 1fr}
-    .minihp-frame .url{font-size:10.5px}
-    .minihp-tag{display:none}
+  .return-band .acts{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
   }
-  @media(prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .return-band .btn{min-width:200px}
+  .disclaimer-band{
+    background:#fffdfa;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:30px 0;
+    font-size:12.5px;
+    line-height:1.95;
+    color:var(--muted);
   }
+  .disclaimer-band .disc-inner{
+    background:#fff;
+    border:1px dashed var(--line);
+    border-radius:6px;
+    padding:18px 22px;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .disclaimer-band b{color:var(--ink);font-weight:700}
 </style>
 </head>
 <body>
-
-<header class="site">
+<header class="sample-nav">
   <div class="in">
-    <a class="logo" href="index.html" aria-label="MISERU トップへ">
-      <span class="mk">MISERU</span>
-      <span class="sb">見せ方を整える編集室</span>
+    <a href="index.html" class="brand" aria-label="MISERU トップへ">
+      <b>MISERU</b>
+      <span>ミセル｜見せ方を整える編集室</span>
     </a>
-    <a class="back" href="index.html">← MISERU のトップへ戻る</a>
+    <nav class="nav-links" aria-label="サンプルナビ">
+      <a href="samples.html">業種別サンプル</a>
+      <a href="index.html#contact" class="nav-cta">相談する</a>
+    </nav>
   </div>
 </header>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Sample / 実物見本</span>
-    <h1>実際に、<span class="em">こう見せ方を整えます。</span></h1>
-    <p class="lead">下に並ぶのは、MISERU が描いた「サンプルサイト」と、その横の「なぜこう整えたか」の解説です。<br>読むレポートではなく、実際に作る紙面そのものを見ていただくための見本です。</p>
-    <div class="disclaimer">
-      <b>これは実在クライアントの事例ではありません。</b>架空の街のベーカリー「のあベーカリー」を題材に、MISERU が描いた "無料の1ページ改善案" の見本です。<br>
-      <b>無料の1ページ改善案に、実際の写真撮影は含まれません。</b>撮影が必要な場合は別途お見積もりです。
-    </div>
-    <div class="acts">
-      <a href="index.html#contact" class="btn btn-ink">この見本のように見てもらう <span class="arw">→</span></a>
-      <a href="index.html#pricing" class="textlink">料金の目安を見る</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== DEMO（左：サンプルHP / 右：解説）===== -->
-<section class="demo-sec" id="demo">
-  <div class="wrap">
-    <div class="demo-grid">
-
-      <!-- === Mini HP（架空ベーカリー）=== -->
-      <article class="minihp" aria-label="架空サンプルHP：のあベーカリー">
-        <div class="minihp-frame" aria-hidden="true">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-          <span class="url">noah-bakery.example / 架空サンプル</span>
-          <span class="minihp-tag">SAMPLE</span>
+<main>
+  <section class="gateway-hero">
+    <div class="wrap">
+      <div>
+        <p class="gateway-kicker">Sample Gallery</p>
+        <h1>実物見本は、<br><span>業種別サンプル</span>へ<br>移動しました。</h1>
+        <p class="lead">
+          以前の1ページ改善案見本ではなく、今は実写を使った3つの完成HPサンプルをご用意しています。
+          気になる業種を選んでご覧ください。
+        </p>
+        <div class="gateway-actions">
+          <a href="samples.html" class="btn btn-cream">業種別サンプル一覧を見る →</a>
+          <a href="index.html#contact" class="btn btn-line-soft">1ページ改善案を相談する</a>
         </div>
-
-        <div class="mh">
-          <!-- ヘッダー -->
-          <header class="mh-header">
-            <div class="mh-logo">のあベーカリー<small>朝のパン、夕方の焼き菓子</small></div>
-            <nav class="mh-nav" aria-hidden="true">
-              <a>メニュー</a><a>店舗</a><a>予約</a>
-            </nav>
-          </header>
-
-          <!-- FV -->
-          <section class="mh-fv">
-            <div class="mh-fv-photo" aria-label="主役写真エリア（架空）">
-              <span class="mh-photo-cap">主役写真<small>※ 実写差替えイメージ（料理・店舗）</small></span>
-            </div>
-            <h1>朝に焼きあがる、<span class="acc">街の小さなパン屋</span>です。</h1>
-            <p class="mh-sub">毎朝 7 時から、店内で焼いています。<br>テイクアウトのご予約は LINE か電話で受付中。</p>
-            <div class="mh-acts">
-              <span class="mh-cta">テイクアウトを予約する <span class="a">→</span></span>
-              <a class="mh-link">本日のパン一覧</a>
-            </div>
-          </section>
-
-          <!-- うちの自慢 -->
-          <section class="mh-menu">
-            <span class="mh-eyebrow">Today's Bread</span>
-            <h2>今日の自慢、3 つ。</h2>
-            <div class="mh-menu-grid">
-              <div class="mh-item">
-                <div class="mh-item-photo a"></div>
-                <div class="mh-item-body"><h4>クロワッサン</h4><p>三日寝かせた生地で、層が立ちます。</p><span class="mh-price">¥320</span></div>
-              </div>
-              <div class="mh-item">
-                <div class="mh-item-photo b"></div>
-                <div class="mh-item-body"><h4>白い食パン</h4><p>翌朝もしっとりするように整えた山形。</p><span class="mh-price">¥480 / 1斤</span></div>
-              </div>
-              <div class="mh-item">
-                <div class="mh-item-photo c"></div>
-                <div class="mh-item-body"><h4>季節のフルーツタルト</h4><p>近所の果物屋さんに合わせて、月替り。</p><span class="mh-price">¥520</span></div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 情報 -->
-          <section class="mh-info">
-            <div class="mh-info-block">
-              <h4>営業時間</h4>
-              <p>7:00 - 18:00（火曜定休）<small>※ 売り切れ次第閉店します</small></p>
-            </div>
-            <div class="mh-info-block">
-              <h4>場所</h4>
-              <p>○○県○○市○○町 1-2-3<small>○○駅から徒歩 5 分</small></p>
-            </div>
-          </section>
-
-          <!-- 最終 CTA -->
-          <section class="mh-final">
-            <h3>朝の予約、夕方の取り置き。<br>気になるパンは、お声がけください。</h3>
-            <p>当日の在庫は LINE で確認できます。</p>
-            <span class="mh-final-cta">公式 LINE で予約・確認</span>
-          </section>
-
-          <div class="mh-bottom">© のあベーカリー（架空・MISERU 制作見本）</div>
+        <p class="gateway-note">
+          ※ これは実在クライアントの制作事例ではありません。掲載写真は見せ方サンプルです。
+        </p>
+        <div class="legacy-note">
+          <b>このページは旧リンク救済用です。</b>以前 <code>/sample</code> でアクセスされた方向けに、業種別の完成HPサンプル入口を表示しています。
         </div>
-      </article>
-
-      <!-- === 解説パネル（sticky）=== -->
-      <aside class="explain" aria-label="MISERU の見立て解説">
-        <div class="explain-card">
-          <h2>なぜ、こう整えたか。</h2>
-          <p class="ex-lead">左のサンプルサイトで、MISERU が "見立て" として何を整えたかを、5 つの観点でお見せします。</p>
-
-          <div class="ex-block">
-            <div class="ex-block-h"><span class="n">01</span><h3>何屋かを、先に伝える</h3></div>
-            <p>FV のキャッチに「朝に焼きあがる、街の小さなパン屋」と業種を明示。「私たちについて」のような抽象語を避けます。</p>
-          </div>
-
-          <div class="ex-block">
-            <div class="ex-block-h"><span class="n">02</span><h3>写真を、主役にする</h3></div>
-            <p>主役写真は 16:9 の大きさ、メニュー写真は 4:5 で比率を統一。文字情報より先に「何を扱うか」が視覚で伝わります。</p>
-          </div>
-
-          <div class="ex-block">
-            <div class="ex-block-h"><span class="n">03</span><h3>スマホ導線を、迷わせない</h3></div>
-            <p>「予約する」ボタンを画面上部・メニュー直下・最下部の 3 箇所に。気になった瞬間に押せる位置に置きます。</p>
-          </div>
-
-          <div class="ex-block">
-            <div class="ex-block-h"><span class="n">04</span><h3>料金と相談導線を、見える位置に</h3></div>
-            <p>看板メニュー 3 品の下に価格を必ず併記。価格をぼかさないことで、相談・予約のハードルが下がります。</p>
-          </div>
-
-          <div class="ex-block">
-            <div class="ex-block-h"><span class="n">05</span><h3>必要な写真を、整理する</h3></div>
-            <p>FV の主役写真 1 枚、看板メニュー寄り写真 3 枚、店舗外観 1 枚。「今ある写真で足りるか／追加が必要か」までを編集者が確認します。</p>
-          </div>
-
-          <p class="ex-card-foot">
-            <b>大事なこと：</b>これらの "整え方" は MISERU が編集者として整理する範囲です。<b>無料の1ページ改善案に、実際の写真撮影は含まれません。</b>撮影が必要な場合は別途お見積もりです。
-          </p>
-        </div>
-      </aside>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== Before / After ===== -->
-<section class="ba-sec" id="ba">
-  <div class="wrap">
-    <div class="ba-head">
-      <span class="eyebrow">Before / After</span>
-      <h2>「ありがちな状態」と「整えた状態」を、並べて。</h2>
-      <p>左は、写真が小さく文字が多く、相談ボタンが下に埋もれた "今ありがちな状態"。<br>右は、上で見ていただいた「のあベーカリー」のサンプルを縮小したもの。同じ情報量でも、伝わり方が変わります。</p>
-    </div>
-    <div class="ba-grid">
-      <!-- Before：抽象ワイヤー -->
-      <div class="ba-col before">
-        <h3>Before ／ 今ありがちな状態</h3>
-        <div class="ba-screen wire" aria-label="改善前のページ構造ラフ">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-hidden="true">
-            <rect width="300" height="400" fill="#fbf8f1"/>
-            <rect x="0" y="0" width="300" height="34" fill="#efeae1"/>
-            <rect x="14" y="13" width="56" height="8" rx="2" fill="#bdb19a"/>
-            <rect x="14" y="50" width="78" height="58" rx="3" fill="#d6ccba"/>
-            <g fill="#dad0bf">
-              <rect x="100" y="56" width="180" height="6" rx="2"/>
-              <rect x="100" y="70" width="160" height="6" rx="2"/>
-              <rect x="100" y="84" width="170" height="6" rx="2"/>
-              <rect x="100" y="98" width="140" height="6" rx="2"/>
-            </g>
-            <g fill="#dad0bf">
-              <rect x="14" y="124" width="270" height="6" rx="2"/>
-              <rect x="14" y="138" width="260" height="6" rx="2"/>
-              <rect x="14" y="152" width="268" height="6" rx="2"/>
-              <rect x="14" y="166" width="240" height="6" rx="2"/>
-              <rect x="14" y="180" width="270" height="6" rx="2"/>
-              <rect x="14" y="194" width="250" height="6" rx="2"/>
-              <rect x="14" y="208" width="265" height="6" rx="2"/>
-              <rect x="14" y="222" width="245" height="6" rx="2"/>
-              <rect x="14" y="236" width="270" height="6" rx="2"/>
-              <rect x="14" y="250" width="252" height="6" rx="2"/>
-              <rect x="14" y="264" width="260" height="6" rx="2"/>
-              <rect x="14" y="278" width="240" height="6" rx="2"/>
-              <rect x="14" y="292" width="270" height="6" rx="2"/>
-              <rect x="14" y="306" width="255" height="6" rx="2"/>
-            </g>
-            <rect x="108" y="360" width="84" height="22" rx="3" fill="none" stroke="#a99f8c"/>
-            <text x="150" y="375" text-anchor="middle" font-size="9" fill="#a99f8c" font-family="sans-serif">お問い合わせ</text>
-          </svg>
-        </div>
-        <p class="ba-note">写真が小さく、文章が長い。看板メニューがどれか分からず、相談ボタンも下に埋もれている状態。</p>
-      </div>
-
-      <!-- After：Mini HP の縮小スタブ -->
-      <div class="ba-col after">
-        <h3>After ／ 上のサンプルを縮小</h3>
-        <div class="ba-screen after-mini" aria-label="改善後（上のサンプルHP）の縮小版">
-          <div class="mini-stub">
-            <div class="stub-h">
-              <span class="l">のあベーカリー</span>
-              <span class="cta">予約する</span>
-            </div>
-            <div class="stub-photo"></div>
-            <div class="stub-h1">朝に焼きあがる、街の小さなパン屋です。</div>
-            <div class="stub-body">毎朝 7 時から、店内で焼いています。</div>
-            <div class="stub-grid">
-              <div class="it a"></div>
-              <div class="it b"></div>
-              <div class="it c"></div>
-            </div>
-            <div class="stub-final">
-              <span class="cta2">公式 LINE で予約 →</span>
-            </div>
-          </div>
-        </div>
-        <p class="ba-note">主役写真が最初に来て、看板メニュー 3 品が比率統一で並び、予約ボタンが上下に明示されている状態。</p>
       </div>
     </div>
-    <p class="ba-foot">※ Before は構造説明用のワイヤー、After は上の架空サンプルの縮小です。どちらも実在事例ではありません。</p>
-  </div>
-</section>
+  </section>
 
-<!-- ===== What You Get ===== -->
-<section class="wyg-sec" id="wyg">
+  <section class="sec" id="samples">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">3 Samples</span>
+          <h2 class="mincho">業種別の、<br>完成HPサンプル。</h2>
+        </div>
+        <p class="lead">
+          実際に開けて、スクロールして、見え方を確認できます。気になる業種をお選びください。
+        </p>
+      </div>
+
+      <div class="sample-card-grid">
+        <a class="sample-card" href="sample-pet.html">
+          <figure>
+            <img src="img/sample-pet.jpg" alt="ペット業向け完成HPサンプル">
+            <span class="tag">Pet</span>
+          </figure>
+          <div class="body">
+            <h3 class="mincho">ペットサービス</h3>
+            <p>小型犬専門のお預かり、お散歩、料金、LINE予約まで揃った完成サンプル。</p>
+            <div class="meta"><span>架空サンプル</span><span>サンプルを見る →</span></div>
+          </div>
+        </a>
+
+        <a class="sample-card" href="sample-food.html">
+          <figure>
+            <img src="img/sample-food.jpg" alt="飲食店の完成HPサンプル">
+            <span class="tag">Food</span>
+          </figure>
+          <div class="body">
+            <h3 class="mincho">飲食店</h3>
+            <p>カウンター7席のおまかせコース。お品書き・店主・営業情報まで揃った完成サンプル。</p>
+            <div class="meta"><span>架空サンプル</span><span>サンプルを見る →</span></div>
+          </div>
+        </a>
+
+        <a class="sample-card" href="sample-car.html">
+          <figure>
+            <img src="img/sample-car.jpg" alt="車・バイク系サービスの完成HPサンプル">
+            <span class="tag">Car</span>
+          </figure>
+          <div class="body">
+            <h3 class="mincho">車・バイク系サービス</h3>
+            <p>強い写真の世界観でまとめた、車関連業種向けの完成サンプル。</p>
+            <div class="meta"><span>架空サンプル</span><span>サンプルを見る →</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="disclaimer-band">
+    <div class="wrap">
+      <div class="disc-inner">
+        <b>※ 実績誤認防止のため明記します。</b><br>
+        ・3つのサンプル（ペット・飲食・車）は、すべて<b>架空サンプル</b>です。実在クライアント・実在店舗・実在の販売車両ではありません。<br>
+        ・掲載写真は<b>見せ方サンプル</b>であり、制作実績ではありません。<br>
+        ・<b>無料の1ページ改善案に、実際の写真撮影は含まれません。</b>撮影が必要な場合は、内容に応じて別途お見積もりです。
+      </div>
+    </div>
+  </section>
+
+  <section class="return-band">
+    <div class="wrap">
+      <h2>気になる業種があれば、<br>まずは相談を。</h2>
+      <p>無料の1ページ改善案で、今ある写真と文章を1ページ分整理してお返しします。続けるかどうかは、ご覧になってから決めていただけます。</p>
+      <div class="acts">
+        <a href="index.html#contact" class="btn btn-cream">1ページ改善案を相談する</a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-line-soft">MISERU公式LINEで相談</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="mock-footer">
   <div class="wrap">
-    <div class="wyg-head">
-      <span class="eyebrow">What You Get</span>
-      <h2>無料相談で、お返しするもの。</h2>
-      <p>上のサンプルと同じ手順で、あなたのページを 5 つの観点から見立てて、1 枚にまとめてお返しします。</p>
+    <div>
+      <b>MISERU</b>
+      <p>見せ方を整える編集室。中小事業のHP・LPを、写真・文章・スマホ導線から整えます。</p>
     </div>
-    <div class="wyg-grid">
-      <div class="wyg-it"><span class="n">01</span><h4>現状の課題</h4><p>今のページで伝わりにくい所を、写真・文章・導線の観点で。</p></div>
-      <div class="wyg-it"><span class="n">02</span><h4>改善方向</h4><p>どこをどう変えると伝わるかを、3 つの方向に絞って。</p></div>
-      <div class="wyg-it"><span class="n">03</span><h4>こう見せるラフ</h4><p>整えた後の見え方を、画面ラフでイメージ。</p></div>
-      <div class="wyg-it"><span class="n">04</span><h4>必要な写真</h4><p>今ある素材で足りるか、追加で何があるとよいかを整理。</p></div>
-      <div class="wyg-it"><span class="n">05</span><h4>制作範囲の目安</h4><p>必要な場合だけ。押し売りはしません。</p></div>
-    </div>
-    <div class="wyg-note">
-      <b>※ 撮影について：</b>無料の1ページ改善案に、実際の写真撮影は含まれません。まずは今ある写真で足りるか、追加でどんな写真があると伝わりやすいかを編集者が整理します。撮影が必要な場合は、内容・場所・点数に応じて別途お見積もりします。料金の目安は <a href="index.html#pricing" style="color:var(--accent-d);border-bottom:1px solid var(--accent);padding-bottom:1px">こちら</a>。
-    </div>
-  </div>
-</section>
-
-<!-- ===== Close CTA ===== -->
-<section class="close-cta">
-  <div class="wrap">
-    <h2>あなたのページも、<br>同じ手順で見てもらえます。</h2>
-    <p>サイト URL を送っていただければ、1 ページ分の見立てを無料でお返しします。<br>見るだけでも大丈夫です。不要な営業はしません。</p>
-    <div class="acts">
-      <a href="index.html#contact" class="btn btn-cream">この見本のように見てもらう <span class="arw">→</span></a>
-      <a href="index.html#pricing" class="textlink">料金の目安を見る</a>
-    </div>
-    <p class="fine">続けるかどうかは、見てから決めていただけます。</p>
-  </div>
-</section>
-
-<!-- ===== Footer ===== -->
-<footer>
-  <div class="wrap-f">
-    <a href="index.html" aria-label="MISERU トップへ">
-      <span class="mk">MISERU</span>
-      <div class="sb">見せ方を整える編集室</div>
-    </a>
-    <p>実物の魅力が伝わる Web 改善。中小事業者・店舗・職人のために、写真・文章・スマホ導線を整えます。<br>このページは「1ページ改善案」の実物見本です。架空の中小店舗を題材にしており、実在クライアント事例ではありません。</p>
-    <div class="links">
-      <a href="index.html">トップに戻る</a>
-      <a href="index.html#sample">短い見本サマリー</a>
-      <a href="index.html#pricing">料金</a>
-      <a href="index.html#faq">よくあるご質問</a>
-      <a href="index.html#contact">お問い合わせ</a>
-    </div>
+    <nav aria-label="フッター">
+      <a href="index.html">MISERU公式トップ</a>
+      <a href="samples.html">業種別サンプル</a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">MISERU公式LINE</a>
+    </nav>
   </div>
 </footer>
 
+<div class="fixed-cta" aria-label="スマホ固定CTA">
+  <a class="primary" href="index.html#contact">1ページ改善案</a>
+  <a class="line" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEで相談</a>
+</div>
 </body>
 </html>
