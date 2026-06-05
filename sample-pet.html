@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>ハニービス｜小型犬専門のお預かり（架空サンプル）｜MISERU</title>
+<meta name="description" content="小型犬専門のお預かり「ハニービス」（架空サンプル）。MISERUが描いた実物見本HPです。実在のお店ではありません。">
+<link rel="canonical" href="https://miseru-web.pages.dev/sample-pet.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://miseru-web.pages.dev/sample-pet.html">
+<meta property="og:title" content="ハニービス（架空サンプル）｜MISERU 見せ方サンプル">
+<meta property="og:description" content="小型犬専門のお預かりHPの架空サンプル。MISERU制作の見本です。">
+<meta property="og:image" content="https://miseru-web.pages.dev/img/sample-pet.jpg">
+<meta property="og:locale" content="ja_JP">
+<meta name="theme-color" content="#c97a55">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf6ee;
+    --bg-2:#f5ead9;
+    --paper:#fffdf8;
+    --ink:#3a2c20;
+    --ink2:#5a4a3a;
+    --soft:#8d7860;
+    --line:#e8d9c2;
+    --accent:#c97a55;
+    --accent-d:#a85f3c;
+    --accent-l:#f0d8c4;
+    --maru:'Zen Maru Gothic',sans-serif;
+    --quick:'Quicksand',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--maru);color:var(--ink);background:var(--bg);line-height:1.85;overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:16px;font-weight:500}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ol,ul{list-style:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  .anim{animation:fadeUp .9s cubic-bezier(.2,.7,.3,1) both}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(251,246,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(232,217,194,.5)}
+  header .in{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;max-width:1320px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:12px;line-height:1}
+  .brand-mark{width:42px;height:42px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--quick);font-weight:700;font-size:14px;letter-spacing:.04em}
+  .brand-name{font-family:var(--maru);font-weight:900;font-size:18px;color:var(--ink);letter-spacing:.02em}
+  .brand-name small{display:block;font-family:var(--quick);font-weight:500;font-size:10px;color:var(--soft);margin-top:3px;letter-spacing:.12em;text-transform:uppercase}
+  header nav{display:flex;gap:22px;align-items:center;font-size:13.5px;font-weight:700}
+  header nav a:not(.head-cta){color:var(--ink2)}
+  header nav a:not(.head-cta):hover{color:var(--accent-d)}
+  .head-cta{background:var(--accent);color:#fff;padding:9px 16px;border-radius:99px;font-size:12.5px;font-weight:700;letter-spacing:.04em}
+  .head-cta:hover{background:var(--accent-d)}
+  @media(max-width:760px){header nav a:not(.head-cta){display:none}}
+
+  /* FV */
+  .fv{padding:64px 0 60px;position:relative;overflow:hidden}
+  .fv::before{content:"";position:absolute;left:-60px;top:120px;width:240px;height:240px;background:radial-gradient(circle,var(--accent-l) 0%,transparent 70%);opacity:.7;pointer-events:none;z-index:0}
+  .fv::after{content:"";position:absolute;right:-80px;bottom:0;width:280px;height:280px;background:radial-gradient(circle,#f5d2cc 0%,transparent 70%);opacity:.6;pointer-events:none;z-index:0}
+  .fv .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center;position:relative;z-index:1}
+  .fv .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:99px;font-size:11.5px;font-weight:700;color:var(--accent-d);letter-spacing:.06em;box-shadow:0 4px 14px -8px rgba(58,44,32,.2)}
+  .fv .badge::before{content:"●";color:var(--accent);font-size:9px}
+  .fv h1{font-family:var(--maru);font-weight:900;font-size:clamp(32px,5vw,52px);line-height:1.35;color:var(--ink);margin-top:18px;letter-spacing:.005em}
+  .fv h1 .accent{color:var(--accent-d);position:relative;display:inline-block}
+  .fv h1 .accent::after{content:"";position:absolute;left:0;right:0;bottom:.05em;height:.18em;background:var(--accent-l);z-index:-1;border-radius:99px}
+  .fv .sub{font-size:15.5px;color:var(--ink2);margin-top:22px;line-height:2.1;font-weight:500}
+  .fv .checks{display:flex;flex-wrap:wrap;gap:9px;margin-top:24px}
+  .fv .checks span{font-size:12.5px;color:var(--ink2);background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:99px;font-weight:700}
+  .fv .checks span::before{content:"✓ ";color:var(--accent-d);font-weight:900}
+  .fv .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
+  .btn-primary{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;font-weight:900;font-size:14.5px;padding:16px 26px;border-radius:99px;box-shadow:0 12px 24px -10px rgba(201,122,85,.55);transition:all .25s cubic-bezier(.2,.7,.3,1)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(201,122,85,.7)}
+  .btn-primary .arw{font-size:16px}
+  .btn-line{background:#06c755;color:#fff;display:inline-flex;align-items:center;gap:9px;font-weight:900;font-size:14.5px;padding:16px 26px;border-radius:99px;box-shadow:0 12px 24px -10px rgba(6,199,85,.5);transition:all .25s cubic-bezier(.2,.7,.3,1)}
+  .btn-line:hover{transform:translateY(-2px);box-shadow:0 16px 32px -10px rgba(6,199,85,.65)}
+  .fv-fine{font-size:12.5px;color:var(--soft);margin-top:14px;font-weight:500}
+
+  /* FV 写真 */
+  .fv-photo{position:relative}
+  .fv-photo .main-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:32px;box-shadow:0 40px 80px -30px rgba(58,44,32,.35);animation:float 5s ease-in-out infinite}
+  @media(prefers-reduced-motion:reduce){.fv-photo .main-img{animation:none}}
+  .fv-photo .sticker{position:absolute;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px 18px;box-shadow:0 18px 36px -16px rgba(58,44,32,.25);font-family:var(--maru);display:flex;align-items:center;gap:11px}
+  .fv-photo .sticker .ico{width:38px;height:38px;border-radius:50%;background:var(--accent-l);display:flex;align-items:center;justify-content:center;font-size:18px}
+  .fv-photo .sticker .text{font-size:12px;color:var(--ink);font-weight:700;line-height:1.5}
+  .fv-photo .sticker .text small{display:block;font-size:10.5px;color:var(--soft);font-weight:500;margin-top:2px}
+  .fv-photo .s1{top:14%;right:-28px;animation:float 6s ease-in-out infinite .5s}
+  .fv-photo .s2{bottom:8%;left:-24px;animation:float 7s ease-in-out infinite 1s}
+  @media(prefers-reduced-motion:reduce){.fv-photo .sticker{animation:none}}
+
+  /* Section */
+  .sec{padding:90px 0;position:relative}
+  .sec-eyebrow{font-family:var(--quick);font-size:11.5px;font-weight:700;letter-spacing:.2em;color:var(--accent-d);text-transform:uppercase;display:inline-block}
+  .sec-h2{font-family:var(--maru);font-weight:900;font-size:clamp(26px,3.5vw,38px);color:var(--ink);line-height:1.45;margin-top:12px;letter-spacing:.005em}
+  .sec-lead{font-size:14.5px;color:var(--ink2);line-height:2.05;margin-top:16px;max-width:38em;font-weight:500}
+
+  /* Services */
+  .services .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:42px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px 26px;transition:transform .35s cubic-bezier(.2,.7,.3,1),box-shadow .35s}
+  .svc:hover{transform:translateY(-4px);box-shadow:0 30px 50px -28px rgba(58,44,32,.25)}
+  .svc .ic{width:64px;height:64px;background:var(--accent-l);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:18px}
+  .svc h3{font-family:var(--maru);font-weight:900;font-size:18px;color:var(--ink);line-height:1.55;margin-bottom:10px}
+  .svc p{font-size:13.5px;color:var(--ink2);line-height:1.95;font-weight:500}
+  .svc .px{margin-top:14px;font-family:var(--quick);font-weight:700;font-size:17px;color:var(--accent-d);letter-spacing:.02em}
+  .svc .px small{font-family:var(--maru);font-size:11.5px;color:var(--soft);font-weight:500;margin-left:4px}
+
+  /* Day Flow with actual pet photos */
+  .flow{background:var(--bg-2)}
+  .flow-grid{margin-top:42px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+  .step-photo{aspect-ratio:4/5;background:var(--accent-l);overflow:hidden}
+  .step-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.3,1)}
+  .step:hover .step-photo img{transform:scale(1.04)}
+  .step-body{padding:18px 16px 22px}
+  .step-body .num{font-family:var(--quick);font-weight:700;font-size:11px;color:var(--accent-d);letter-spacing:.14em}
+  .step-body h4{font-family:var(--maru);font-weight:900;font-size:15px;color:var(--ink);margin-top:6px;line-height:1.5}
+  .step-body p{font-size:12.5px;color:var(--soft);line-height:1.85;margin-top:7px;font-weight:500}
+
+  /* Gallery */
+  .gallery{background:var(--bg)}
+  .gallery-grid{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .gallery-grid .g-tall{grid-row:span 2}
+  .g{position:relative;overflow:hidden;border-radius:24px;background:var(--accent-l)}
+  .g img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5;transition:transform 1s cubic-bezier(.2,.7,.3,1);display:block}
+  .g:hover img{transform:scale(1.04)}
+  .g-tall img{aspect-ratio:auto;width:100%;height:100%;object-fit:cover}
+
+  /* FAQ */
+  .faq{background:var(--bg-2)}
+  .faq-list{margin-top:36px;display:grid;gap:12px}
+  .faq-list details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:0 24px;transition:box-shadow .25s}
+  .faq-list details[open]{box-shadow:0 20px 40px -20px rgba(58,44,32,.18)}
+  .faq-list summary{list-style:none;cursor:pointer;padding:18px 0;font-family:var(--maru);font-weight:900;font-size:14.5px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;gap:14px;line-height:1.55}
+  .faq-list summary::-webkit-details-marker{display:none}
+  .faq-list summary::after{content:"+";color:var(--accent-d);font-size:22px;font-weight:700;transition:transform .25s}
+  .faq-list details[open] summary::after{transform:rotate(45deg)}
+  .faq-list .a{padding:0 0 20px;font-size:13px;color:var(--ink2);line-height:2;font-weight:500}
+
+  /* Access */
+  .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-top:36px}
+  .access-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px 28px}
+  .access-card h3{font-family:var(--maru);font-weight:900;font-size:17px;color:var(--ink);margin-bottom:18px}
+  .access-card dl{display:grid;grid-template-columns:90px 1fr;gap:11px 16px;font-size:13.5px;line-height:1.85}
+  .access-card dt{color:var(--accent-d);font-weight:900;font-size:12.5px;letter-spacing:.04em}
+  .access-card dd{color:var(--ink2);font-weight:500}
+  .access-card dd small{display:block;font-size:11.5px;color:var(--soft);margin-top:4px;font-weight:500}
+
+  /* LINE big block */
+  .line-big{background:#06c755;padding:60px 0;color:#fff;text-align:center;position:relative;overflow:hidden}
+  .line-big::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 50%),radial-gradient(circle at 80% 70%,rgba(255,255,255,.1),transparent 50%);pointer-events:none}
+  .line-big h2{font-family:var(--maru);font-weight:900;font-size:clamp(22px,3vw,30px);line-height:1.55;color:#fff;letter-spacing:.005em;position:relative;z-index:1}
+  .line-big p{font-size:14.5px;color:rgba(255,255,255,.92);margin-top:16px;line-height:2;font-weight:500;position:relative;z-index:1}
+  .line-big .btn-line-big{display:inline-block;background:#fff;color:#06c755;font-weight:900;font-size:15.5px;padding:18px 36px;border-radius:99px;margin-top:28px;letter-spacing:.04em;box-shadow:0 18px 36px -14px rgba(0,0,0,.3);transition:transform .25s;position:relative;z-index:1}
+  .btn-line-big:hover{transform:translateY(-3px)}
+  .line-big .fine{font-size:11.5px;color:rgba(255,255,255,.7);margin-top:14px;position:relative;z-index:1;font-weight:500}
+
+  /* MISERU 帯 */
+  .miseru-band{background:#1c1a17;color:#f1ece3;padding:50px 0;text-align:center}
+  .miseru-band .disclaimer{background:rgba(255,255,255,.05);border:1px dashed rgba(241,236,227,.2);border-radius:8px;padding:16px 22px;max-width:640px;margin:0 auto 26px;font-size:12.5px;line-height:1.95;color:rgba(241,236,227,.78);text-align:left}
+  .miseru-band .disclaimer b{color:#fff;font-weight:700}
+  .miseru-band h2{font-family:'Shippori Mincho',serif;font-weight:600;font-size:clamp(20px,2.5vw,26px);line-height:1.55;color:#fff}
+  .miseru-band p{color:rgba(241,236,227,.75);margin-top:14px;font-size:14px;line-height:1.95}
+  .miseru-band .acts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:24px}
+  .miseru-band .b1{background:#b15c3c;color:#fff;font-weight:700;font-size:14px;padding:14px 26px;border-radius:3px;letter-spacing:.04em;display:inline-flex;align-items:center;gap:9px}
+  .miseru-band .b1:hover{background:#974b2f}
+  .miseru-band .b2{background:transparent;color:#f1ece3;border:1px solid rgba(241,236,227,.35);font-size:13.5px;padding:14px 24px;border-radius:3px;font-weight:700;letter-spacing:.04em;display:inline-flex;align-items:center;gap:9px}
+  .miseru-band .b2:hover{background:rgba(241,236,227,.05)}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.65);padding:36px 0 28px;font-size:12px;text-align:center}
+  footer .copy{font-family:var(--quick);letter-spacing:.06em;font-size:11px}
+  footer .meta{margin-top:8px;font-size:11px;line-height:1.85}
+
+  .mctabar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:none;gap:8px;padding:10px 12px;background:rgba(58,44,32,.95);backdrop-filter:blur(8px);box-shadow:0 -8px 24px -8px rgba(58,44,32,.4)}
+  .mctabar a{flex:1;text-align:center;font-size:13.5px;font-weight:900;padding:13px 0;border-radius:99px;letter-spacing:.02em}
+  .mctabar .m1{background:var(--accent);color:#fff}
+  .mctabar .m2{background:#06c755;color:#fff}
+
+  /* Responsive */
+  @media(max-width:880px){
+    .fv{padding:48px 0 40px}
+    .fv .grid{grid-template-columns:1fr;gap:32px}
+    .fv-photo .main-img{max-width:440px;margin:0 auto;aspect-ratio:1/1}
+    .fv-photo .sticker.s2{display:none}
+    .services .svc-grid{grid-template-columns:1fr 1fr;gap:14px}
+    .flow-grid{grid-template-columns:1fr 1fr;gap:14px}
+    .gallery-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .gallery-grid .g-tall{grid-row:auto}
+    .access-grid{grid-template-columns:1fr;gap:18px}
+    .sec{padding:64px 0}
+    .mctabar{display:flex}
+    body{padding-bottom:64px}
+  }
+  @media(max-width:520px){
+    .services .svc-grid{grid-template-columns:1fr}
+    .fv-photo .sticker.s1{right:-8px;padding:10px 14px}
+    .fv-photo .sticker .ico{width:32px;height:32px;font-size:15px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="in">
+    <div class="brand">
+      <div class="brand-mark">HB</div>
+      <div class="brand-name">ハニービス<small>HONEY BEES · 小型犬専門お預かり</small></div>
+    </div>
+    <nav>
+      <a href="#services">サービス</a>
+      <a href="#flow">一日の流れ</a>
+      <a href="#gallery">預かりの様子</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#line" class="head-cta">LINEで予約</a>
+    </nav>
+  </div>
+</header>
+
+<!-- FV -->
+<section class="fv">
+  <div class="wrap">
+    <div class="grid">
+      <div class="anim">
+        <span class="badge">小型犬専門 / 5kg まで</span>
+        <h1>うちの子の<br><span class="accent">いつもの一日</span>を、<br>ここでも。</h1>
+        <p class="sub">8 畳の小さな部屋で、3 頭まで。混ぜずに、慣れた子だけと過ごします。<br>毎日のお散歩、お昼寝、おやつ時間。預かり中の様子は写真で LINE に届きます。</p>
+        <div class="checks">
+          <span>5kg まで</span>
+          <span>1 日 3 頭まで</span>
+          <span>狂犬病・5種混合</span>
+          <span>写真報告つき</span>
+        </div>
+        <div class="acts">
+          <a href="#line" class="btn-line">LINE で予約・相談 <span>→</span></a>
+          <a href="#services" class="btn-primary">料金を見る <span class="arw">→</span></a>
+        </div>
+        <p class="fv-fine">※ 架空サンプル：これは MISERU が描いた見本サイトです。実在のお店ではありません。</p>
+      </div>
+      <div class="fv-photo">
+        <img class="main-img" src="img/samples/pet/pet-hero.jpg" alt="芝生で笑顔の小型犬（架空サンプル写真）">
+        <div class="sticker s1">
+          <div class="ic">📷</div>
+          <div class="text">毎日のお写真<small>LINE で届きます</small></div>
+        </div>
+        <div class="sticker s2">
+          <div class="ic">🐾</div>
+          <div class="text">慣れた子だけ<small>3 頭まで</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="sec services" id="services">
+  <div class="wrap">
+    <span class="sec-eyebrow">Services</span>
+    <h2 class="sec-h2">うちでお預かりできる、<br>3 つのコース。</h2>
+    <p class="sec-lead">飼い主さまの予定に合わせて、半日・1 日・お泊まりからお選びいただけます。料金はすべて 1 頭・税込です（架空料金）。</p>
+    <div class="svc-grid">
+      <div class="svc"><div class="ic">🌅</div><h3>半日お預かり</h3><p>4 時間まで。お買い物や通院のすきまに、安心して預けたい方へ。お散歩 1 回つき。</p><div class="px">¥3,500<small>/ 4 時間</small></div></div>
+      <div class="svc"><div class="ic">☀️</div><h3>1 日お預かり</h3><p>8:00 〜 19:00。お仕事の日や外出が長い日に。お散歩 2 回・お昼寝・写真報告つき。</p><div class="px">¥6,500<small>/ 1 日</small></div></div>
+      <div class="svc"><div class="ic">🌙</div><h3>お泊まりお預かり</h3><p>1 泊から。旅行・帰省・出張の際に。専用ベッド、夜のお散歩、朝の写真報告つき。</p><div class="px">¥9,800〜<small>/ 1 泊</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Day flow with actual photos -->
+<section class="sec flow" id="flow">
+  <div class="wrap">
+    <span class="sec-eyebrow">A Day at HoneyBees</span>
+    <h2 class="sec-h2">預かり中の、<br>うちの子の一日。</h2>
+    <p class="sec-lead">朝のお散歩から、お昼寝、おやつ、夕方のお迎えまで。慣れた流れで、いつもの一日に近づけます。</p>
+    <div class="flow-grid">
+      <div class="step reveal">
+        <div class="step-photo"><img src="img/samples/pet/pet-step-01.jpg" alt="朝のお散歩の様子（架空サンプル）"></div>
+        <div class="step-body"><div class="num">01 — MORNING</div><h4>朝のお散歩</h4><p>体調をみながら、30 分歩きます。</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-photo"><img src="img/samples/pet/pet-step-02.jpg" alt="おもちゃ箱の前でくつろぐ様子（架空サンプル）"></div>
+        <div class="step-body"><div class="num">02 — DAYTIME</div><h4>遊びの時間</h4><p>お気に入りのおもちゃで、自由に。</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-photo"><img src="img/samples/pet/pet-step-03.jpg" alt="毛布の上でお昼寝の様子（架空サンプル）"></div>
+        <div class="step-body"><div class="num">03 — NAP</div><h4>お昼寝タイム</h4><p>専用ベッドでゆっくり休みます。</p></div>
+      </div>
+      <div class="step reveal">
+        <div class="step-photo"><img src="img/samples/pet/pet-step-04.jpg" alt="夕方の様子（架空サンプル）"></div>
+        <div class="step-body"><div class="num">04 — EVENING</div><h4>お迎え準備</h4><p>夕方の散歩後、お迎えを待ちます。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Photo gallery -->
+<section class="sec gallery" id="gallery">
+  <div class="wrap">
+    <span class="sec-eyebrow">Photo Gallery</span>
+    <h2 class="sec-h2">預かり中、こんな風に過ごしています。</h2>
+    <p class="sec-lead">LINE でお届けする「毎日のお写真」と同じ感覚で、お預かり中の様子をお見せします。</p>
+    <div class="gallery-grid">
+      <div class="g g-tall"><img src="img/samples/pet/pet-care.jpg" alt="あくびするトイプードル（架空サンプル）" style="object-position:center 35%"></div>
+      <div class="g"><img src="img/samples/pet/pet-gateway-card.jpg" alt="ケージ越しの嬉しそうな子（架空サンプル）" style="object-position:center 30%"></div>
+      <div class="g"><img src="img/samples/pet/pet-step-04.jpg" alt="赤い首輪のトイプードル（架空サンプル）"></div>
+      <div class="g"><img src="img/samples/pet/pet-step-03.jpg" alt="毛布の上でくつろぐ（架空サンプル）"></div>
+      <div class="g"><img src="img/samples/pet/pet-step-02.jpg" alt="おもちゃ箱の前で（架空サンプル）"></div>
+    </div>
+    <p style="font-size:11.5px;color:var(--soft);margin-top:18px;text-align:center;font-weight:500">※ 写真はサンプルです。実在クライアントの事例ではありません。</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <span class="sec-eyebrow">FAQ</span>
+    <h2 class="sec-h2">はじめての方へ、<br>よくあるご質問。</h2>
+    <div class="faq-list">
+      <details><summary>はじめてでも、お預かりしてもらえますか？</summary><div class="a">はい、まずは LINE か電話でお話を聞かせてください。事前に 30 分の面談（無料）をお願いしています。性格・好きなこと・苦手なこと・お薬の有無などを確認したうえで、無理のない範囲でお預かりします。</div></details>
+      <details><summary>大きい子も預かれますか？</summary><div class="a">5kg までの小型犬専門です。安全のため、それ以上の体重の子はお預かりしていません。</div></details>
+      <details><summary>必要なワクチンはありますか？</summary><div class="a">狂犬病ワクチンと、5 種以上の混合ワクチン（1 年以内）が必要です。ご予約時に証明書のお写真を LINE で送っていただいています。</div></details>
+      <details><summary>お薬を飲んでいる子も大丈夫ですか？</summary><div class="a">大丈夫です。お薬の種類・タイミング・量を、事前にお伺いします。心配な場合は、半日からのお試しもおすすめしています。</div></details>
+      <details><summary>急なキャンセルはできますか？</summary><div class="a">前日 18:00 までのキャンセルは無料です。当日キャンセルは料金の 50% を申し受けます。体調不良など、やむを得ない場合はご相談ください。</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- Access -->
+<section class="sec" id="access">
+  <div class="wrap">
+    <span class="sec-eyebrow">Access</span>
+    <h2 class="sec-h2">場所と、営業時間。</h2>
+    <div class="access-grid">
+      <div class="access-card">
+        <h3>営業時間</h3>
+        <dl>
+          <dt>平日</dt><dd>8:00 - 19:00<small>※ お預かりは 18:30 まで</small></dd>
+          <dt>土日祝</dt><dd>9:00 - 18:00</dd>
+          <dt>定休日</dt><dd>毎週水曜日<small>※ お盆・年末年始の営業は LINE でご案内します</small></dd>
+        </dl>
+      </div>
+      <div class="access-card">
+        <h3>場所</h3>
+        <dl>
+          <dt>住所</dt><dd>○○県○○市○○町 1-2-3<small>※ 架空住所です</small></dd>
+          <dt>最寄駅</dt><dd>○○線 ○○駅 徒歩 5 分</dd>
+          <dt>駐車場</dt><dd>店舗前に 2 台<small>無料・予約不要</small></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINE big -->
+<section class="line-big" id="line">
+  <div class="wrap">
+    <h2>まずは、LINE でお話を<br>聞かせてください。</h2>
+    <p>ご予約・お問い合わせ・はじめての面談予約も、LINE からどうぞ。<br>当日の様子は、毎日 LINE で写真をお送りします。</p>
+    <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn-line-big">MISERU公式LINEで相談する（サンプル動線）→</a>
+    <p class="fine">※ LINE は別タブで開きます ／ ハニービス（架空サンプル）</p>
+  </div>
+</section>
+
+<!-- MISERU 帯 -->
+<section class="miseru-band">
+  <div class="wrap">
+    <div class="disclaimer">
+      <b>これは MISERU が描いた架空サンプル HP です。</b>「ハニービス」というお店は実在しません。実在クライアントの事例ではなく、MISERU の "見せ方を整える編集" がどんな紙面を作れるかをお見せするための見本です。<br>
+      <b>※ 無料の 1 ページ改善案に、実際の写真撮影は含まれません。</b>まずは今ある写真で何をどう見せるかを整理します。
+    </div>
+    <h2>あなたのお店も、こんな見せ方に整えられます。</h2>
+    <p>MISERU は「見せ方を整える編集室」です。写真・文章・スマホ導線を整えて、<br>"相談されるページ" に近づけます。まず 1 ページ、無料で見立てをお返しします。</p>
+    <div class="acts">
+      <a href="index.html#contact" class="b1">MISERU に 1 ページ改善案を相談する <span>→</span></a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="b2">MISERU の公式 LINE で相談 <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="copy">© HONEY BEES（架空サンプル・MISERU 制作見本）</div>
+    <div class="meta">MISERU sample · 実在事例ではありません · <a href="index.html" style="border-bottom:1px solid rgba(255,255,255,.4)">MISERU トップへ</a></div>
+  </div>
+</footer>
+
+<div class="mctabar">
+  <a href="#line" class="m1">予約・相談</a>
+  <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="m2">MISERU公式LINE</a>
+</div>
+
+<script>
+  (function(){
+    if(!('IntersectionObserver' in window)){document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});return;}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+  })();
+</script>
+</body>
+</html>
