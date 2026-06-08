@@ -264,6 +264,9 @@ body.ready .loader{opacity:0;pointer-events:none}
   .intro h1{font-size:clamp(32px,12vw,60px)}.chip{font-size:10.5px;padding:7px 10px}
   .topbar{padding:12px 14px;font-size:10.5px}.topnav{gap:10px}
 }
+/* garage — photo removed, 4-col info cards */
+.garage .ginfo{grid-template-columns:repeat(4,1fr)}
+@media(max-width:860px){.garage .ginfo{grid-template-columns:1fr 1fr}}
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.001s!important;animation-iteration-count:1!important}
   .rv,.split span{transition:opacity .4s!important;transform:none!important}
@@ -311,17 +314,6 @@ body.ready .loader{opacity:0;pointer-events:none}
       <h1 class="anton"><span class="split chrome">CREATIVE CAR</span><br><span class="split l2">EXPERIENCES</span></h1>
       <div class="jp jpttl rv d3">一台のこだわりを、相談につなげる。</div>
       <p class="rv d3" style="margin:14px 0 24px;color:var(--dim);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;line-height:1.95;max-width:62ch">これは <b style="color:var(--amber);font-weight:700">MISERU が制作した演出強めの車・バイク見せ方サンプル</b>です。実在店舗・実在事例ではありません。写真・グラフィック・動き・相談導線を組み合わせた表現の幅をお見せしています。</p>
-      <div class="ama rv d4">
-        <div class="alabel"><span class="dd"></span> 何を見たいですか？ — タグから飛びます</div>
-        <div class="chatlog" id="chatlog" aria-live="polite"></div>
-        <div class="chips" id="chips" role="navigation" aria-label="セクションへのジャンプ">
-          <span class="chip" data-q="カスタムの相談" data-h>CUSTOM</span>
-          <span class="chip" data-q="コーティングしたい" data-h>COATING</span>
-          <span class="chip" data-q="写真を撮りたい" data-h>PHOTO</span>
-          <span class="chip" data-q="売る前に綺麗にしたい" data-h>SALES</span>
-          <span class="chip" data-q="料金が知りたい" data-h>PRICE</span>
-        </div>
-      </div>
     </div>
     <div class="scrollcue">SCROLL<span class="bar"></span></div>
   </header>
@@ -420,19 +412,15 @@ body.ready .loader{opacity:0;pointer-events:none}
   <!-- GARAGE -->
   <section class="garage" id="studio">
     <div class="cap">
-      <div class="glay">
-        <div class="gimg rv"><span class="lab">DAIKANYAMA · GARAGE</span><img class="warp parallax" data-speed="0.07" src="img/samples/car/optimized/car-owner-a.jpg" alt="ガレージの薄暗い空間で赤いスポーツカーの運転席に人物が座る後ろ姿の写真"/></div>
-        <div>
-          <div class="shead" style="margin-bottom:0"><span class="eyebrow rv">The garage</span><h2 class="jpttl rv d1">代官山の路地、<br>奥の二階建て（想定）。</h2>
-            <p class="lead rv d2">大通りからは見えない住宅街の路地で、屋号を出さずに静かに営む — そんな小さなガレージの見せ方サンプルです。一日一台のペースで向き合うイメージ。</p></div>
-          <div class="ginfo">
-            <div class="gcell rv"><div class="k">Location <span style="color:var(--faint);font-size:10px">(架空)</span></div><div class="v">東京都渋谷区代官山町 ◯-◯（架空の住所例）<br>恵比寿駅 徒歩 9 分・代官山駅 徒歩 5 分の想定。看板はありません。</div></div>
-            <div class="gcell rv d1"><div class="k">Hours</div><div class="v"><b>11:00 — 19:00</b><br>火曜・水曜定休。撮影は夜間も承ります。</div></div>
-            <div class="gcell rv d2"><div class="k">Capacity</div><div class="v">屋内ピット <b>2 台</b> / 撮影 <b>1 台</b><br>一日一台のペースを想定（サンプル）。</div></div>
-            <div class="gcell rv d3"><div class="k">Visit</div><div class="v"><b>完全予約制</b><br>ご来店前に必ず LINE で日時をご相談ください。</div></div>
-          </div>
-        </div>
+      <div class="shead" style="margin-bottom:0"><span class="eyebrow rv">The garage</span><h2 class="jpttl rv d1">代官山の路地、<br>奥の二階建て（想定）。</h2>
+        <p class="lead rv d2">大通りからは見えない住宅街の路地で、屋号を出さずに静かに営む — そんな小さなガレージの見せ方サンプルです。一日一台のペースで向き合うイメージ。</p></div>
+      <div class="ginfo">
+        <div class="gcell rv"><div class="k">Location <span style="color:var(--faint);font-size:10px">(架空)</span></div><div class="v">東京都渋谷区代官山町 ◯-◯（架空の住所例）<br>恵比寿駅 徒歩 9 分・代官山駅 徒歩 5 分の想定。看板はありません。</div></div>
+        <div class="gcell rv d1"><div class="k">Hours</div><div class="v"><b>11:00 — 19:00</b><br>火曜・水曜定休。撮影は夜間も承ります。</div></div>
+        <div class="gcell rv d2"><div class="k">Capacity</div><div class="v">屋内ピット <b>2 台</b> / 撮影 <b>1 台</b><br>一日一台のペースを想定（サンプル）。</div></div>
+        <div class="gcell rv d3"><div class="k">Visit</div><div class="v"><b>完全予約制</b><br>ご来店前に必ず LINE で日時をご相談ください。</div></div>
       </div>
+      <p class="pnote rv" style="border-top:1px solid var(--line);padding-top:20px;margin-top:32px;font-family:var(--mono)">車両の持ち込み・駐車スペースについては、ご来店前に LINE でお知らせください。路地が細いため、事前に進入路のご案内をお送りします。</p>
     </div>
   </section>
 
