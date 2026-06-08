@@ -214,14 +214,25 @@
   .chk .body b{color:var(--ink);font-weight:700}
   .chk .body small{display:block;color:var(--ink-soft);font-size:12px;margin-top:3px;font-weight:400;letter-spacing:.005em}
 
-  /* chk: interactive — input[checkbox] + label */
-  .chk-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
-  label.chk{cursor:pointer;position:relative;min-height:44px}
-  .chk{transition:padding .2s var(--ease),background .2s,border-radius .2s}
-  .chk-input:checked + .box{background:var(--green);border-color:var(--green)}
-  .chk-input:checked + .box::after{opacity:1}
-  label.chk:has(.chk-input:checked){background:rgba(122,195,166,.08);border-radius:8px;padding-left:10px;padding-right:8px}
-  .chk-line-note{font-family:var(--gothic);font-size:12.5px;color:var(--ink-soft);margin-top:18px;padding:10px 14px;background:rgba(122,195,166,.1);border-radius:8px;border-left:2px solid var(--green);line-height:1.8;font-weight:500;letter-spacing:.005em}
+  /* === accordion (不安解消) === */
+  .acc-lead{font-family:var(--gothic);font-size:13.5px;color:var(--ink-soft);margin-top:8px;margin-bottom:18px;line-height:1.75;font-weight:500}
+  .acc-list{display:grid;gap:0}
+  .acc-item{border-bottom:1px dotted var(--ink-line)}
+  .acc-item:last-child{border-bottom:0}
+  .acc-btn{width:100%;background:none;border:0;padding:14px 0;display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:center;cursor:pointer;text-align:left;min-height:44px;border-radius:8px;transition:background .2s;font-family:var(--gothic)}
+  .acc-btn:hover,.acc-item.open .acc-btn{background:rgba(122,195,166,.08)}
+  .acc-icon{width:22px;height:22px;border:2px solid var(--green);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--green);transition:background .2s,color .2s;font-family:var(--gothic);line-height:1}
+  .acc-item.open .acc-icon{background:var(--green);color:#fff}
+  .acc-q{font-family:var(--gothic);font-size:14px;color:var(--ink);font-weight:700;line-height:1.65;letter-spacing:.005em}
+  .acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease}
+  .acc-item.open .acc-panel{grid-template-rows:1fr}
+  .acc-inner{overflow:hidden}
+  .acc-ans{font-family:var(--gothic);font-size:13.5px;color:var(--ink);line-height:1.85;font-weight:400;letter-spacing:.005em;padding:4px 6px 16px 40px}
+  .acc-line-wrap{margin-top:24px;padding:16px 18px;background:rgba(122,195,166,.1);border-radius:12px;border-left:2px solid var(--green);display:flex;flex-direction:column;gap:12px}
+  .acc-line-note{font-family:var(--gothic);font-size:13px;color:var(--ink);line-height:1.75;font-weight:500}
+  .btn-line-sm{display:inline-flex;align-items:center;gap:8px;background:var(--line-green);color:#fff;font-family:var(--gothic);font-weight:700;font-size:13px;padding:10px 20px;letter-spacing:.04em;border-radius:999px;transition:transform .2s,box-shadow .2s;box-shadow:0 8px 18px -10px rgba(6,199,85,.4);align-self:flex-start}
+  .btn-line-sm::before{content:"";width:14px;height:14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 3C6.48 3 2 6.7 2 11.27c0 2.93 1.85 5.49 4.62 6.93-.2.74-.74 2.81-.85 3.25-.13.55.2.55.43.4.18-.12 2.79-1.9 3.92-2.68.62.09 1.24.13 1.88.13 5.52 0 10-3.7 10-8.27S17.52 3 12 3z'/></svg>") center/contain no-repeat}
+  .btn-line-sm:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(6,199,85,.5)}
 
   .check-side{display:grid;gap:24px;align-self:stretch}
   .check-info{background:var(--paper-mint);border-radius:22px;padding:30px 30px 28px;position:relative}
@@ -560,15 +571,49 @@
 
     <div class="check-grid">
       <div class="check-sheet r">
-        <div class="h">気になることを、チェック</div>
-        <div class="chk-list stg">
-          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>はじめての場所が、ちょっと怖い</b><small>はじめは抱っこのままご挨拶 → 慣れたら少しずつ。無理に離しません。</small></span></label>
-          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>シニア、足腰が心配</b><small>段差なしの静かなお部屋でゆっくり。散歩の歩幅も合わせます。</small></span></label>
-          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>お薬を飲ませる必要がある</b><small>時間・量を LINE で事前にお預かり。投薬時刻もメモでお返しします。</small></span></label>
-          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>ふだんのごはんを持参したい</b><small>大歓迎です。普段のリズムを崩さない方が、その子も楽です。</small></span></label>
-          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>ほかの犬がちょっと苦手</b><small>1 日 4 頭までの少人数制。ご縁次第で完全 1on1 もご相談ください。</small></span></label>
+        <div class="h">気になることを、押してみてください。</div>
+        <p class="acc-lead">はじめてのお預かりで不安になりやすいことを、先に確認できます。</p>
+        <div class="acc-list stg">
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="acc-1">
+              <span class="acc-icon" aria-hidden="true">＋</span>
+              <span class="acc-q">はじめての場所が不安</span>
+            </button>
+            <div class="acc-panel" id="acc-1" aria-hidden="true"><div class="acc-inner"><p class="acc-ans">最初は抱っこのままご挨拶して、慣れてきたら少しずつ距離を取ります。無理に離したり、すぐ他の犬と合わせたりしません。</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="acc-2">
+              <span class="acc-icon" aria-hidden="true">＋</span>
+              <span class="acc-q">シニア・足腰が心配</span>
+            </button>
+            <div class="acc-panel" id="acc-2" aria-hidden="true"><div class="acc-inner"><p class="acc-ans">段差の少ない静かなスペースで過ごせます。散歩の長さや歩くペースも、普段の様子に合わせます。</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="acc-3">
+              <span class="acc-icon" aria-hidden="true">＋</span>
+              <span class="acc-q">お薬やごはんのことを伝えたい</span>
+            </button>
+            <div class="acc-panel" id="acc-3" aria-hidden="true"><div class="acc-inner"><p class="acc-ans">時間・量・飲ませ方を事前にLINEで確認します。投薬後や食事の様子も、通い帳メモでお返しします。</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="acc-4">
+              <span class="acc-icon" aria-hidden="true">＋</span>
+              <span class="acc-q">ほかの犬が少し苦手</span>
+            </button>
+            <div class="acc-panel" id="acc-4" aria-hidden="true"><div class="acc-inner"><p class="acc-ans">少人数制なので、その子の距離感に合わせて過ごせます。必要に応じて1対1の時間もご相談できます。</p></div></div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="acc-5">
+              <span class="acc-icon" aria-hidden="true">＋</span>
+              <span class="acc-q">お迎えまでの様子を知りたい</span>
+            </button>
+            <div class="acc-panel" id="acc-5" aria-hidden="true"><div class="acc-inner"><p class="acc-ans">お預かり中の様子は、通い帳メモとしてお返しします。食事・お散歩・過ごし方などを、あとから見返せます。</p></div></div>
+          </div>
         </div>
-        <p class="chk-line-note">気になる項目があれば、LINEでそのまま相談できます。</p>
+        <div class="acc-line-wrap">
+          <p class="acc-line-note">気になることがあれば、LINEでそのまま相談できます。</p>
+          <a href="#chat" class="btn-line-sm">LINEで相談する</a>
+        </div>
       </div>
 
       <div class="check-side">
@@ -800,6 +845,19 @@
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('.r,.stg').forEach(function(e){io.observe(e)});
   })();
+  // accordion
+  document.querySelectorAll('.acc-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var item=btn.closest('.acc-item');
+      var panel=document.getElementById(btn.getAttribute('aria-controls'));
+      var isOpen=item.classList.contains('open');
+      item.classList.toggle('open',!isOpen);
+      btn.setAttribute('aria-expanded',String(!isOpen));
+      if(panel){panel.setAttribute('aria-hidden',String(isOpen));}
+      var icon=btn.querySelector('.acc-icon');
+      if(icon){icon.textContent=isOpen?'＋':'−';}
+    });
+  });
 </script>
 </body>
 </html>
