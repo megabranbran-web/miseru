@@ -77,6 +77,14 @@
     margin:0 auto;
   }
   .disclaimer-band b{color:var(--ink);font-weight:700}
+  /* このサンプルで見てほしいこと */
+  .watch-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8px}
+  .watch-item{border-top:2px solid var(--accent);padding-top:18px}
+  .watch-item .wn{font-family:var(--font-mincho);font-size:20px;color:var(--accent);display:block;margin-bottom:8px;line-height:1}
+  .watch-item h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.5}
+  .watch-item p{font-size:13px;color:var(--muted);line-height:1.85}
+  @media(max-width:760px){.watch-grid{grid-template-columns:1fr 1fr;gap:16px 14px}}
+  @media(max-width:430px){.watch-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -88,7 +96,7 @@
     </a>
     <nav class="nav-links" aria-label="サンプルナビ">
       <a href="#samples">3業種サンプル</a>
-      <a href="index.html#contact" class="nav-cta">相談する</a>
+      <a href="index.html#contact" class="nav-cta" data-cta="free-consult">相談する</a>
     </nav>
   </div>
 </header>
@@ -104,8 +112,8 @@
           スマホでもPCでも、本物のHPと同じように動きます。気になる業種を選んでご覧ください。
         </p>
         <div class="gateway-actions">
-          <a href="#samples" class="btn btn-cream">3つのサンプルを見る →</a>
-          <a href="index.html#contact" class="btn btn-line-soft">1ページ改善案を相談する</a>
+          <a href="#samples" class="btn btn-cream" data-cta="sample-gallery">3つのサンプルを見る →</a>
+          <a href="index.html#contact" class="btn btn-line-soft" data-cta="free-consult">URLを送って無料相談</a>
         </div>
         <p class="gateway-note">
           ※ すべて架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。
@@ -127,7 +135,7 @@
       </div>
 
       <div class="sample-card-grid">
-        <a class="sample-card" href="sample-pet.html">
+        <a class="sample-card" href="sample-pet.html" data-cta="sample-pet">
           <figure>
             <img src="img/sample-pet.jpg" alt="ペット業向け完成HPサンプル">
             <span class="tag">Pet</span>
@@ -139,7 +147,7 @@
           </div>
         </a>
 
-        <a class="sample-card" href="sample-food.html">
+        <a class="sample-card" href="sample-food.html" data-cta="sample-food">
           <figure>
             <img src="img/sample-food.jpg" alt="飲食店の完成HPサンプル">
             <span class="tag">Food</span>
@@ -151,7 +159,7 @@
           </div>
         </a>
 
-        <a class="sample-card" href="sample-car.html">
+        <a class="sample-card" href="sample-car.html" data-cta="sample-car">
           <figure>
             <img src="img/sample-car.jpg" alt="車・バイク系サービスの完成HPサンプル">
             <span class="tag">Car</span>
@@ -166,25 +174,44 @@
     </div>
   </section>
 
+  <section class="sec watch-sec">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">What to see</span>
+          <h2 class="mincho">このサンプルで、<br>見てほしいこと。</h2>
+        </div>
+        <p class="lead">デザインの好みではなく、「相談されるための工夫」を4点。業種が違っても、この“見せ方の型”はそのまま移せます。</p>
+      </div>
+      <div class="watch-grid">
+        <div class="watch-item"><span class="wn">01</span><h3>写真の見せ方</h3><p>実物の良さが伝わるトリミング・大きさ・並べ方。</p></div>
+        <div class="watch-item"><span class="wn">02</span><h3>料金の見せ方</h3><p>不安にならない料金の出し方と、段階の見せ方。</p></div>
+        <div class="watch-item"><span class="wn">03</span><h3>不安の消し方</h3><p>「頼んで大丈夫」と思える一言と、導線の置き方。</p></div>
+        <div class="watch-item"><span class="wn">04</span><h3>LINE相談までの導線</h3><p>迷わず相談に届く、ボタンとひとことの設計。</p></div>
+      </div>
+    </div>
+  </section>
+
   <section class="disclaimer-band">
     <div class="wrap">
       <div class="disc-inner">
         <b>※ サンプル利用に関するお願い</b><br>
         ・3つのサンプル（ペット・飲食・車）は、すべて<b>架空サンプル</b>です。実在クライアント・実在店舗・実在の販売車両ではありません。<br>
         ・掲載写真は<b>見せ方サンプル</b>であり、制作実績ではありません。<br>
-        ・<b>無料の1ページ改善案に、実際の写真撮影は含まれません。</b>撮影が必要な場合は、内容に応じて別途お見積もりとなります。
+        ・<b>無料相談・初回見立てシートに、実際の写真撮影は含まれません。</b>撮影が必要な場合は、現地撮影オプション（+¥59,800〜）または撮影込みLP制作（¥298,000〜）でご案内します。
       </div>
     </div>
   </section>
 
   <section class="return-band">
     <div class="wrap">
-      <h2>気になる業種があれば、<br>まずは相談を。</h2>
-      <p>無料の1ページ改善案で、今ある写真と文章を1ページ分整理してお返しします。続けるかどうかは、ご覧になってから決めていただけます。</p>
+      <h2>あなたの業種にも、<br>この見せ方を。</h2>
+      <p>無料相談では、方向性と合いそうな進め方・プラン目安までお返しします。具体的な改善案・写真選定・文章案・レイアウト案・ラフは、初回見立てシート（¥9,800〜）から対応します。</p>
       <div class="acts">
-        <a href="index.html#contact" class="btn btn-cream">1ページ改善案を相談する</a>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-line-soft">MISERU公式LINEで相談</a>
+        <a href="index.html#contact" class="btn btn-cream" data-cta="free-consult">URLを送って無料相談</a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-line-soft" data-cta="line-consult">MISERU公式LINEで相談</a>
       </div>
+      <p style="margin-top:18px;font-size:13px"><a href="index.html#returns" data-cta="initial-sheet" style="color:rgba(255,255,255,.82);border-bottom:1px solid var(--accent);padding-bottom:2px">初回見立てシート（¥9,800〜）って何？ →</a></p>
     </div>
   </section>
 </main>
@@ -204,8 +231,8 @@
 </footer>
 
 <div class="fixed-cta" aria-label="スマホ固定CTA">
-  <a class="primary" href="index.html#contact">1ページ改善案</a>
-  <a class="line" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEで相談</a>
+  <a class="primary" href="index.html#contact" data-cta="free-consult">無料相談</a>
+  <a class="line" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINEで相談</a>
 </div>
 </body>
 </html>

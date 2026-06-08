@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ミセル｜いい仕事は、見せ方で伝わる。 — 中小事業のHP・見せ方改善</title>
-<meta name="description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のホームページを「相談されるページ」に整える編集室、ミセル。まずは1ページだけ、無料で見せ方を整理します。">
+<meta name="description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のホームページを「相談されるページ」に整える編集室、ミセル。まずは無料相談で、今のHP・Instagramの方向性とプラン目安をお返しします。">
 <meta property="og:title" content="ミセル｜いい仕事は、見せ方で伝わる。">
 <meta property="og:description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のHPを「相談されるページ」に整えます。">
 <meta property="og:type" content="website">
@@ -121,6 +121,13 @@
   .loss-item{display:flex;gap:15px;padding:21px 0;border-bottom:1px solid var(--line);align-items:baseline}
   .loss-item .no{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none}
   .loss-item p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+  /* miss（見られているのに相談されていない・痛みチェック） */
+  .miss-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,60px);margin-top:42px}
+  .miss-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .miss-item .mk{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none;min-width:1.7em}
+  .miss-item p{font-size:15px;color:var(--ink2);line-height:1.75}
+  .miss-foot{margin-top:26px;font-size:14px;color:var(--soft);line-height:1.9}
+  .miss-foot b{color:var(--accent-d);font-weight:700}
 
   /* do */
   .do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3.5vw,50px);margin-top:54px}
@@ -233,6 +240,12 @@
   .about p{font-size:15.5px;color:var(--ink2);line-height:2.05;margin-bottom:16px}
   .about .sign{font-family:var(--mincho);font-weight:600;font-size:17px;color:var(--ink);margin-top:8px;letter-spacing:.05em}
   .about .sign small{font-family:var(--gothic);font-weight:400;font-size:12px;color:var(--soft);letter-spacing:.08em;margin-left:10px}
+  /* look-card（MISERUで見るところ・信頼補強） */
+  .look-card{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:22px 24px;margin:22px 0}
+  .look-card .look-h{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px}
+  .look-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
+  .look-list li{position:relative;padding-left:22px;font-size:14px;color:var(--ink2);line-height:1.6}
+  .look-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent-d);font-weight:700;font-size:13px}
 
   /* final cta */
   .final{text-align:center}
@@ -299,7 +312,7 @@
   .sample figcaption{font-size:13px;color:var(--soft);margin-top:12px;line-height:1.6}
   .sample figcaption b{color:var(--ink);font-weight:700;margin-right:6px}
   .samples-note{font-size:12.5px;color:var(--soft2);margin-top:24px;letter-spacing:.02em}
-  /* --- 追加：1ページ改善案で返すもの --- */
+  /* --- 追加：初回見立てシートで返すもの --- */
   .returns-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px);margin-top:46px}
   .ret{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 20px}
   .ret .rn{font-family:var(--mincho);font-size:15px;color:var(--accent-d);display:block;margin-bottom:12px}
@@ -433,6 +446,8 @@
     body{padding-bottom:64px}
     .returns-grid{grid-template-columns:1fr}
     .loss-grid{grid-template-columns:1fr;gap:0}
+    .miss-grid{grid-template-columns:1fr}
+    .look-list{grid-template-columns:1fr;gap:9px}
     .ba-grid{grid-template-columns:1fr;gap:26px}
     .ba-points{grid-template-columns:1fr;gap:13px;margin-top:26px}
     .price-row{grid-template-columns:1fr 1fr;gap:12px 16px}
@@ -773,8 +788,8 @@
     <a href="#pricing" data-close>料金</a>
     <a href="#flow" data-close>進め方</a>
     <a href="#faq" data-close>よくある質問</a>
-    <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-close>LINEで相談 →</a>
-    <a href="#contact" data-close style="color:var(--accent-d)">無料相談する →</a>
+    <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-close data-cta="line-consult">LINEで相談 →</a>
+    <a href="#contact" data-close data-cta="free-consult" style="color:var(--accent-d)">無料相談する →</a>
   </div>
 </div>
 
@@ -790,15 +805,15 @@
     <div class="cfv-samples" aria-label="完成HPサンプル（架空）">
       <div class="cfv-samples-lbl">完成HPサンプル<span class="tag">架空サンプル／制作実績ではありません</span></div>
       <div class="cfv-cards">
-        <a class="cfv-card" href="sample-pet.html">
+        <a class="cfv-card" href="sample-pet.html" data-cta="sample-pet">
           <div class="ph"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
           <div class="mt"><span class="biz">Pet Service</span><span class="nm">うちのこ通い帳</span><span class="ty">お預かりの一日を通い帳で — 「安心して預けたい」の見せ方</span><span class="op">完成HPを開く →</span></div>
         </a>
-        <a class="cfv-card" href="sample-food.html">
+        <a class="cfv-card" href="sample-food.html" data-cta="sample-food">
           <div class="ph"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
           <div class="mt"><span class="biz">Restaurant</span><span class="nm">夜小路</span><span class="ty">七席だけの季節のおまかせ — 「品と余韻」の見せ方</span><span class="op">完成HPを開く →</span></div>
         </a>
-        <a class="cfv-card" href="sample-car.html">
+        <a class="cfv-card" href="sample-car.html" data-cta="sample-car">
           <div class="ph"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
           <div class="mt"><span class="biz">Car &amp; Bike</span><span class="nm">RED HORSE TOKYO</span><span class="ty">一台のこだわりを相談へ — 「迫力と編集感」の見せ方</span><span class="op">完成HPを開く →</span></div>
         </a>
@@ -807,8 +822,8 @@
     </div>
     <div class="cfv-aside">
       <div class="cfv-acts">
-        <a href="#contact" class="fh-d3-btn">無料相談する <span class="arw">→</span></a>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="cfv-line">LINEで相談 <span class="arw">→</span></a>
+        <a href="#contact" class="fh-d3-btn" data-cta="free-consult">URLを送って無料相談 <span class="arw">→</span></a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="cfv-line" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
       </div>
       <div class="cfv-trust">
         <span><b>◯</b>写真がなくても相談OK</span>
@@ -821,9 +836,9 @@
 </section>
 <nav class="fh-d3-teaser" aria-label="ページ内ガイド">
   <div class="fh-d3-teaser-row">
-    <a href="#industry-samples">完成HPサンプルを見る <span class="fh-d3-ta">→</span></a>
-    <a href="#returns">初回見立てシート（¥9,800〜） <span class="fh-d3-ta">→</span></a>
-    <a href="#pricing">料金を見る <span class="fh-d3-ta">→</span></a>
+    <a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る <span class="fh-d3-ta">→</span></a>
+    <a href="#returns" data-cta="initial-sheet">初回見立てシート（¥9,800〜） <span class="fh-d3-ta">→</span></a>
+    <a href="#pricing" data-cta="pricing">料金を見る <span class="fh-d3-ta">→</span></a>
   </div>
 </nav>
 <div class="fh-d3-bridge" aria-hidden="true"></div>
@@ -837,7 +852,23 @@
   </div>
 </section>
 
-<!-- LOSS セクションは削除（不安煽り→前向き「整えると相談されやすい」表現を次の DO リードへ統合）-->
+<!-- MISS：見られているのに相談されていない（痛みチェック→前向き着地。煽りにしない）-->
+<section class="sec" id="miss">
+  <div class="wrap">
+    <span class="eyebrow">Maybe</span>
+    <h2 class="title">見られているのに、<br>相談されていないHPへ。</h2>
+    <p class="sub-lead">実力の問題ではなく、“見え方”で問い合わせを逃していることがあります。あてはまる項目があれば、その1ページから一緒に整えられます。</p>
+    <div class="miss-grid stagger">
+      <div class="miss-item reveal"><span class="mk">01</span><p>写真が小さく、実物の良さが伝わっていない</p></div>
+      <div class="miss-item reveal"><span class="mk">02</span><p>何を頼める会社か、ひと目で分からない</p></div>
+      <div class="miss-item reveal"><span class="mk">03</span><p>スマホでLINE・予約・問い合わせまでが遠い</p></div>
+      <div class="miss-item reveal"><span class="mk">04</span><p>料金や進め方が見えず、相談前に不安が止まる</p></div>
+      <div class="miss-item reveal"><span class="mk">05</span><p>Instagramは動いているのに、HPだけ古く見える</p></div>
+      <div class="miss-item reveal"><span class="mk">06</span><p>実力ではなく“見え方”で、問い合わせを逃しているかも</p></div>
+    </div>
+    <p class="miss-foot">— ひとつでも心当たりがあれば、まずは<b>無料相談</b>で方向性とプラン目安を。今のHP・InstagramのURLを送るだけでも大丈夫です。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。</p>
+  </div>
+</section>
 
 <!-- DO -->
 <section class="sec" id="do">
@@ -942,9 +973,9 @@
 </section>
 
 <!-- DEMO（SS参考デモ）はユーザー要望でいったん撤去。CSS .demo-* は未使用で残置（無害）。
-     復元する場合は git(87026bb)/MISERU_index_未コミット差分_保存用.patch から、または非SSのデモ（例：1ページ改善案の見本）を用意してから。 -->
+     復元する場合は git(87026bb)/MISERU_index_未コミット差分_保存用.patch から、または非SSのデモ（例：初回見立てシートの見本）を用意してから。 -->
 
-<!-- RETURNS（1ページ改善案で返すもの／相談の不安を消す） -->
+<!-- RETURNS（初回見立てシートで返すもの／相談の不安を消す） -->
 <section class="sec bg-sand" id="returns">
   <div class="wrap">
     <span class="eyebrow">Sheet</span>
@@ -994,8 +1025,8 @@
         <h3>まずは<span class="em">“見立て”</span>から。作り直しは、その先です。</h3>
         <p>いきなり作り直すのではなく、初回見立てシート（¥9,800〜）で1ページ分だけ、写真の見せ方・見出し・問い合わせ導線を整理して紙面にまとめます。<b>無料相談は、方向性と合いそうなプラン目安まで。</b>具体的な改善案・ラフは、この初回見立てシートから対応します。</p>
         <div class="smp-cta">
-          <a href="#contact" class="btn btn-ink">無料相談する（¥0）<span class="arw">→</span></a>
-          <a href="#industry-samples" class="textlink">完成HPサンプルを見る</a>
+          <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料相談する（¥0）<span class="arw">→</span></a>
+          <a href="#industry-samples" class="textlink" data-cta="sample-gallery">完成HPサンプルを見る</a>
         </div>
         <p class="smp-annot">
           ※これは初回見立てシートの見本です。実在するクライアント事例ではありません。
@@ -1018,7 +1049,7 @@
           <div class="is-num">01 — Pet Service</div>
           <h3 class="is-title"><small>うちのこ通い帳 SAMPLE</small>お預かりの一日を通い帳でお返しするサンプル。</h3>
           <p class="is-desc">やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプル HP です。</p>
-          <a href="sample-pet.html" class="is-link">完成HPを開く →</a>
+          <a href="sample-pet.html" class="is-link" data-cta="sample-pet">完成HPを開く →</a>
         </div>
       </article>
       <article class="is-card reveal">
@@ -1027,7 +1058,7 @@
           <div class="is-num">02 — Restaurant</div>
           <h3 class="is-title"><small>夜小路 SAMPLE</small>七席だけの季節のおまかせサンプル。</h3>
           <p class="is-desc">明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプル HP です。</p>
-          <a href="sample-food.html" class="is-link">完成HPを開く →</a>
+          <a href="sample-food.html" class="is-link" data-cta="sample-food">完成HPを開く →</a>
         </div>
       </article>
       <article class="is-card reveal">
@@ -1036,7 +1067,7 @@
           <div class="is-num">03 — Car & Bike</div>
           <h3 class="is-title"><small>RED HORSE TOKYO SAMPLE</small>一台のこだわりを相談につなげるサンプル。</h3>
           <p class="is-desc">黒×赤・大型欧文・実車写真で「迫力と編集感」を作る方向。架空サンプル HP です。</p>
-          <a href="sample-car.html" class="is-link">完成HPを開く →</a>
+          <a href="sample-car.html" class="is-link" data-cta="sample-car">完成HPを開く →</a>
         </div>
       </article>
     </div>
@@ -1152,6 +1183,22 @@
   </div>
 </section>
 
+<!-- FAQ 構造化データ（FAQPage・可視FAQと一致。架空サンプルは含めない）-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"本当に無料ですか？","acceptedAnswer":{"@type":"Answer","text":"無料相談（方向性と合いそうなプラン目安まで）は無料です。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。費用が発生する作業は、必ず範囲と金額をお見せして、ご承諾いただいてからです。"}},
+    {"@type":"Question","name":"相談すると、しつこく営業されませんか？","acceptedAnswer":{"@type":"Answer","text":"しません。まずは無料相談で、方向性と合いそうなプラン目安をお返しするだけです。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。続けるかどうかは、ご覧になってから決めていただけます。"}},
+    {"@type":"Question","name":"相談すると、具体的に何が返ってきますか？","acceptedAnswer":{"@type":"Answer","text":"無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、こう見せる簡単なラフ、必要な場合の範囲と費用の目安をお返しします。"}},
+    {"@type":"Question","name":"いきなり作り直しになりませんか？","acceptedAnswer":{"@type":"Answer","text":"なりません。今のサイトを活かして、写真・文章・スマホ導線を整えるところから始めます。作り直しが必要な場合も、範囲と費用の目安を先にお見せしてから判断いただけます。"}},
+    {"@type":"Question","name":"AIで作ったHPとの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"AIツールは、安く早くページの形を作るのが得意です。MISERUは、すでにある実物（写真・実績・現場）を、どう見せれば伝わるかを人が考えて整えます。作る前の今の見え方を確かめたい段階に向いています。"}},
+    {"@type":"Question","name":"HPが古くても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。"}}
+  ]
+}
+</script>
+
 <!-- ABOUT -->
 <section class="sec" id="about">
   <div class="wrap about-grid">
@@ -1160,6 +1207,17 @@
       <h2 class="title mincho" style="font-weight:600">ひとりで、一つひとつの商いに向き合います。</h2>
       <p>大きな制作会社ではありません。だからこそ、写真の選び方からスマホの導線、ことばの一つひとつまで、あなたの「いい仕事」が伝わるように手を動かします。</p>
       <p>建設会社のサイト制作など、現場仕事のWebに取り組んできました。一眼での撮影もでき、実物の魅力を引き出す“見せ方”を、編集者のように整えるのが役割です。</p>
+      <div class="look-card">
+        <span class="look-h">MISERUで見るところ</span>
+        <ul class="look-list">
+          <li>スマホで最初に、何が目に入るか</li>
+          <li>写真が小さく見えていないか</li>
+          <li>何を頼める会社か、3秒で分かるか</li>
+          <li>LINEや予約ボタンまで、迷わず届くか</li>
+          <li>料金や進め方で、不安が止まっていないか</li>
+          <li>実物の良さが、文章で薄まっていないか</li>
+        </ul>
+      </div>
       <div class="sign">ラン<small>MISERU ／ 実物が伝わるWeb改善</small></div>
     </div>
   </div>
@@ -1170,7 +1228,7 @@
   <div class="wrap">
     <h2>まずは、1ページから<br>見せ方を相談してみませんか。</h2>
     <p>無料相談で、方向性と合いそうなプラン目安をお返しします。具体的な整理は初回見立てシート（¥9,800〜）から。相談だけでも大丈夫です。</p>
-    <a href="#contact" class="btn btn-ink">無料相談する <span class="arw">→</span></a>
+    <a href="#contact" class="btn btn-ink" data-cta="free-consult">URLを送って無料相談 <span class="arw">→</span></a>
   </div>
 </section>
 
@@ -1187,14 +1245,14 @@
         <span class="line-card-tag">LINE</span>
         <h3>LINEで気軽に相談できます</h3>
         <p>サイトURLやスクショを送っていただければ、無料相談で方向性と合いそうなプラン目安をお返しします。フォームが面倒な方は、LINEからどうぞ。</p>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-ink line-card-btn">
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-ink line-card-btn" data-cta="line-consult">
           公式LINEで相談する <span class="arw">→</span>
         </a>
         <p class="line-card-note">※ 別タブで LINE が開きます。友だち追加後、トーク画面でメッセージを送ってください。</p>
       </aside>
 
       <div class="mailrow">直接のご連絡：<a href="mailto:megabranbran@gmail.com">megabranbran@gmail.com</a></div>
-      <div class="mailrow"><a href="sample.html">業種別サンプルを見る →</a></div>
+      <div class="mailrow"><a href="sample.html" data-cta="sample-gallery">業種別サンプルを見る →</a></div>
     </div>
     <form class="form" action="https://formsubmit.co/megabranbran@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="ミセル：無料相談のお問い合わせ">
@@ -1217,7 +1275,7 @@
         <label>ひとこと <span class="opt">（任意）</span></label>
         <textarea name="message" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
       </div>
-      <button type="submit" class="btn btn-ink">無料相談する（¥0）<span class="arw">→</span></button>
+      <button type="submit" class="btn btn-ink" data-cta="free-consult">無料相談する（¥0）<span class="arw">→</span></button>
     </form>
   </div>
 </section>
@@ -1228,23 +1286,23 @@
       <div class="mk">MISERU</div>
       <p class="fnote">実物が伝わるWeb改善。写真・実績・現場感が大事な中小事業のために、スマホの問い合わせ導線、写真の見せ方、実績の信頼設計を、小さく始められる形で整えます。</p>
       <nav class="foot-links" aria-label="フッターナビ">
-        <a href="sample.html">業種別サンプル</a>
+        <a href="sample.html" data-cta="sample-gallery">業種別サンプル</a>
         <a href="#pricing">料金</a>
         <a href="#faq">よくある質問</a>
         <a href="#contact">お問い合わせ</a>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINE</a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINE</a>
       </nav>
     </div>
     <div style="text-align:right">
-      <a href="#contact" class="textlink" style="color:#e0c2b2;border-color:var(--accent)">無料相談する →</a>
+      <a href="#contact" class="textlink" data-cta="free-consult" style="color:#e0c2b2;border-color:var(--accent)">無料相談する →</a>
     </div>
   </div>
   <div class="wrap foot-copy">© ミセル（MISERU）／ ラン</div>
 </footer>
 
 <div class="mcta">
-  <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="m1">LINEで相談</a>
-  <a href="#contact" class="m2">無料相談（¥0）</a>
+  <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="m1" data-cta="line-consult">LINEで相談</a>
+  <a href="#contact" class="m2" data-cta="free-consult">無料相談（¥0）</a>
 </div>
 
 <script>
