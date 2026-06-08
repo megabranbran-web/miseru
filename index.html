@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -652,6 +652,90 @@
     .sample:hover img{transform:none}
     *{animation:none!important;transition:none!important}
   }
+
+  .cfv-hero{min-height:auto;padding:120px 0 60px}
+  .cfv-grid{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:.94fr 1.06fr;column-gap:clamp(30px,4vw,58px);row-gap:0;align-content:center;align-items:start;grid-template-areas:"intro samples" "aside samples"}
+  .cfv-intro{grid-area:intro}
+  .cfv-samples{grid-area:samples}
+  .cfv-aside{grid-area:aside}
+  .cfv-h1{font-family:var(--mincho);font-weight:600;color:var(--ink);font-size:clamp(29px,3.9vw,50px);line-height:1.32;letter-spacing:.02em;margin-top:4px}
+  .cfv-h1 .em{color:var(--accent-d)}
+  .cfv-sub{font-family:var(--gothic);font-size:clamp(14px,1.05vw,16px);line-height:1.95;color:var(--soft);margin-top:20px;max-width:30em}
+  .cfv-sub b{color:var(--ink);font-weight:700}
+  .cfv-acts{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:28px}
+  .cfv-line{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.03em;padding:19px 28px;border-radius:2px;background:transparent;color:var(--ink);border:1px solid var(--ink);transition:.25s}
+  .cfv-line:hover{background:var(--ink);color:#fff}
+  .cfv-line .arw{color:var(--accent-d)}
+  .cfv-line:hover .arw{color:var(--accent-l)}
+  .cfv-trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .cfv-trust span{font-size:12px;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:7px 14px;line-height:1.3}
+  .cfv-trust span b{color:var(--accent-d);font-weight:700;margin-right:5px}
+  .cfv-fine{font-size:12.5px;color:var(--soft2);margin-top:16px;line-height:1.75;max-width:32em}
+  .cfv-samples{position:relative}
+  .cfv-samples-lbl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.12em;color:var(--accent-d);text-transform:uppercase;font-weight:700;margin-bottom:14px}
+  .cfv-samples-lbl .tag{font-size:10.5px;color:var(--soft2);letter-spacing:.03em;font-weight:500;text-transform:none}
+  .cfv-cards{display:grid;gap:12px}
+  .cfv-card{display:grid;grid-template-columns:108px 1fr;background:var(--white);border:1px solid var(--line);border-radius:9px;overflow:hidden;transition:border-color .3s,transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+  .cfv-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 22px 46px -28px rgba(177,92,60,.32)}
+  .cfv-card .ph{position:relative;overflow:hidden;background:#1f1c18;min-height:100px}
+  .cfv-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+  .cfv-card:hover .ph img{transform:scale(1.05)}
+  .cfv-card .ph .xtag{position:absolute;left:7px;top:7px;font-size:8.5px;font-weight:700;letter-spacing:.04em;color:#fff;background:rgba(28,26,23,.74);border-radius:3px;padding:3px 7px}
+  .cfv-card .mt{padding:13px 16px;display:flex;flex-direction:column;justify-content:center}
+  .cfv-card .biz{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;letter-spacing:.14em;color:var(--accent-d);text-transform:uppercase}
+  .cfv-card .nm{font-family:var(--mincho);font-weight:600;font-size:16px;color:var(--ink);line-height:1.4;margin:2px 0 4px}
+  .cfv-card .ty{font-size:12px;color:var(--soft);line-height:1.55}
+  .cfv-card .op{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent-d);letter-spacing:.02em}
+  .cfv-card:hover .op{color:var(--ink)}
+  .cfv-cards-note{font-size:11.5px;color:var(--soft2);margin-top:13px;line-height:1.75}
+  /* compare 1行バンド */
+  .cand-compare{text-align:center;padding:clamp(44px,6vw,72px) 0}
+  .cand-compare .wrap{max-width:760px}
+  /* 料金グループ見出し（撮影なし軽改善 / 制作 を明確に分ける）*/
+  .price-group{font-size:11px;font-weight:700;letter-spacing:.13em;color:var(--accent-d);text-transform:uppercase;padding:26px 6px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+  .price-group::before{content:"";width:18px;height:1px;background:var(--accent);flex:none}
+  .price-group small{font-weight:400;letter-spacing:.02em;color:var(--soft2);font-size:11px;text-transform:none}
+  @media(max-width:880px){
+    .cfv-hero{padding:96px 0 32px}
+    .cfv-grid{display:flex;flex-direction:column;gap:0;grid-template-areas:none}
+    .cfv-intro{order:1}
+    .cfv-samples{order:2;margin-top:22px}
+    .cfv-aside{order:3;margin-top:20px}
+    .cfv-h1{font-size:clamp(26px,7vw,36px);line-height:1.32}
+    .cfv-sub{font-size:13.5px;line-height:1.75;margin-top:14px;max-width:none}
+    /* ②修正：SPはCTA縦積み・折返し禁止 */
+    .cfv-acts{flex-direction:column;align-items:stretch;gap:10px;margin-top:0}
+    .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{width:100%;justify-content:center;white-space:nowrap}
+  }
+  /* ①修正：SP専用 FVサンプルを3枚横並びミニカードに（PCの大カードは不変） */
+  @media(max-width:600px){
+    .cfv-samples-lbl{margin-bottom:9px;font-size:11px}
+    .cfv-samples-lbl .tag{font-size:10px}
+    .cfv-cards{grid-template-columns:repeat(3,1fr);gap:8px}
+    .cfv-card{display:block;grid-template-columns:none}
+    .cfv-card .ph{min-height:0;aspect-ratio:4/3}
+    .cfv-card .ph .xtag{font-size:7.5px;padding:2px 5px;left:5px;top:5px}
+    .cfv-card .mt{padding:7px 8px 9px}
+    .cfv-card .biz{display:none}
+    .cfv-card .ty{display:none}
+    .cfv-card .op{display:none}
+    .cfv-card .nm{font-size:11.5px;line-height:1.3;margin:0;letter-spacing:-.01em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.6em}
+    .cfv-cards-note{font-size:11px;margin-top:10px}
+  }
+  @media(max-width:380px){
+    .cfv-hero{padding-top:84px}
+    .cfv-h1{font-size:22px;line-height:1.28}
+    .cfv-sub{font-size:13px;line-height:1.6;margin-top:11px}
+    .cfv-card .ph{aspect-ratio:16/10}
+    .cfv-card .nm{font-size:10.5px}
+    .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{font-size:14.5px;padding:14px 16px}
+  }
+  /* 最小幅(320系)：RED HORSE TOKYO を2行に収めるため名前を少し小さく */
+  @media(max-width:360px){
+    .cfv-cards{gap:6px}
+    .cfv-card .mt{padding:6px 6px 8px}
+    .cfv-card .nm{font-size:9.5px;letter-spacing:-.02em}
+  }
 </style>
 </head>
 <body>
@@ -667,10 +751,9 @@
       </span>
     </a>
     <nav class="nav">
-      <a href="#loss">お悩み</a>
       <a href="#do">整えること</a>
+      <a href="#industry-samples">サンプル</a>
       <a href="#ba">事例</a>
-      <a href="sample.html">業種別サンプル</a>
       <a href="#pricing">料金</a>
       <a href="#flow">進め方</a>
       <a href="#contact" class="nav-cta">相談する</a>
@@ -683,137 +766,90 @@
   <div class="ov" data-close></div>
   <div class="panel">
     <button class="x" id="drawerX" aria-label="閉じる">×</button>
-    <a href="#loss" data-close>お悩み</a>
     <a href="#do" data-close>整えること</a>
     <a href="#ba" data-close>Before / After</a>
-    <a href="sample.html" data-close>業種別サンプルHP</a>
+    <a href="#industry-samples" data-close>完成HPサンプル</a>
+    <a href="#returns" data-close>初回見立てシート</a>
     <a href="#pricing" data-close>料金</a>
     <a href="#flow" data-close>進め方</a>
     <a href="#faq" data-close>よくある質問</a>
+    <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-close>LINEで相談 →</a>
     <a href="#contact" data-close style="color:var(--accent-d)">無料相談する →</a>
   </div>
 </div>
 
-<!-- HERO（FV v3：ハイブリッド・fh-d3- 名前空間）-->
-<section class="fh-d3" id="top">
+<section class="fh-d3 cfv-hero" id="top">
   <div class="fh-d3-bg" aria-hidden="true"></div>
   <div class="fh-d3-grid-bg" aria-hidden="true"></div>
-  <div class="fh-d3-inner">
-    <div>
-      <div class="fh-d3-rule"></div>
+  <div class="cfv-grid">
+    <div class="cfv-intro">
       <span class="fh-d3-eyebrow">MISERU — Editorial Room</span>
-      <h1 class="fh-d3-h1">
-        <span class="ln ln1"><span>— いい仕事は、見せ方で伝わる。</span></span>
-        <span class="ln ln2a"><span>作り直す前に、</span></span>
-        <span class="ln ln2b"><span><span class="em">見せ方</span>だけ整える。</span></span>
-        <span class="ln ln3"><span>— 中小事業者・店舗・職人のための編集室。</span></span>
-      </h1>
-      <p class="fh-d3-sub"><b>大手に頼むほどじゃない、でも今のままはもったいない。</b>そんな段階向け。写真・文章・スマホ導線を見直して、実物の良さが伝わる形へ。まず 1 ページ分、無料で整理してお返しします。</p>
-      <div class="fh-d3-acts">
-        <!-- TODO: LINE URL確定後、主CTAをLINEにするか #contact と併設。現状は汎用文言＋#contactフォーム。 -->
-        <a href="#contact" class="fh-d3-btn">無料相談する <span class="arw">→</span></a>
-        <a href="#industry-samples" class="fh-d3-tlink">業種別サンプルを見る</a>
-      </div>
-      <p class="fh-d3-fine">— 見るだけでも大丈夫。不要な営業はしません。</p>
+      <h1 class="cfv-h1">いい仕事は、<span class="em">見せ方</span>で伝わる。<br>作り直す前に、見せ方だけ整える。</h1>
+      <p class="cfv-sub">中小事業のための「見せ方を整える編集室」。写真・文章・スマホ導線を整えて、実物の良さが伝わるHPへ。まずは<b>無料相談</b>で、方向性と合いそうなプラン目安までお返しします。</p>
     </div>
-    <aside class="fh-d3-right" aria-label="初回見立てシートで整理するもの">
-      <div class="fh-d3-panel">
-        <span class="fh-d3-panel-tag">Initial Sheet / ¥9,800〜</span>
-        <h2 class="fh-d3-panel-h">初回見立てシートで<br>整理するもの。</h2>
-        <div class="fh-d3-stats">
-          <div class="fh-d3-stat">
-            <div class="v">04<small>項目</small></div>
-            <div class="l">伝わりにくい箇所・改善案・ラフ・範囲目安</div>
-          </div>
-          <div class="fh-d3-stat">
-            <div class="v">¥9,800<small>〜</small></div>
-            <div class="l">A4数枚で1ページ分にまとめてお返し</div>
-          </div>
-          <div class="fh-d3-stat">
-            <div class="v">1<small>編集者</small></div>
-            <div class="l">一人の編集者が、実物を見て手を動かす</div>
-          </div>
-        </div>
-        <span class="fh-d3-panel-stamp">MISERU 編集室</span>
+    <div class="cfv-samples" aria-label="完成HPサンプル（架空）">
+      <div class="cfv-samples-lbl">完成HPサンプル<span class="tag">架空サンプル／制作実績ではありません</span></div>
+      <div class="cfv-cards">
+        <a class="cfv-card" href="sample-pet.html">
+          <div class="ph"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
+          <div class="mt"><span class="biz">Pet Service</span><span class="nm">うちのこ通い帳</span><span class="ty">お預かりの一日を通い帳で — 「安心して預けたい」の見せ方</span><span class="op">完成HPを開く →</span></div>
+        </a>
+        <a class="cfv-card" href="sample-food.html">
+          <div class="ph"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
+          <div class="mt"><span class="biz">Restaurant</span><span class="nm">夜小路</span><span class="ty">七席だけの季節のおまかせ — 「品と余韻」の見せ方</span><span class="op">完成HPを開く →</span></div>
+        </a>
+        <a class="cfv-card" href="sample-car.html">
+          <div class="ph"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
+          <div class="mt"><span class="biz">Car &amp; Bike</span><span class="nm">RED HORSE TOKYO</span><span class="ty">一台のこだわりを相談へ — 「迫力と編集感」の見せ方</span><span class="op">完成HPを開く →</span></div>
+        </a>
       </div>
-    </aside>
+      <p class="cfv-cards-note">業種が違っても「見せ方の型」は移せます。3つとも架空サンプルで、実在クライアント・実在店舗ではありません。</p>
+    </div>
+    <div class="cfv-aside">
+      <div class="cfv-acts">
+        <a href="#contact" class="fh-d3-btn">無料相談する <span class="arw">→</span></a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="cfv-line">LINEで相談 <span class="arw">→</span></a>
+      </div>
+      <div class="cfv-trust">
+        <span><b>◯</b>写真がなくても相談OK</span>
+        <span><b>◯</b>業種は問いません</span>
+        <span><b>◯</b>しつこい営業なし</span>
+      </div>
+      <p class="cfv-fine">— 無料相談は方向性とプラン目安まで。具体的な整理は初回見立てシート（¥9,800〜）から。見るだけでも大丈夫です。</p>
+    </div>
   </div>
 </section>
 <nav class="fh-d3-teaser" aria-label="ページ内ガイド">
   <div class="fh-d3-teaser-row">
-    <a href="#compare">大手・AI・MISERUの比較 <span class="fh-d3-ta">→</span></a>
-    <a href="#returns">初回見立てシートで整理するもの <span class="fh-d3-ta">→</span></a>
-    <a href="#ba">Before / After を見る <span class="fh-d3-ta">→</span></a>
+    <a href="#industry-samples">完成HPサンプルを見る <span class="fh-d3-ta">→</span></a>
+    <a href="#returns">初回見立てシート（¥9,800〜） <span class="fh-d3-ta">→</span></a>
+    <a href="#pricing">料金を見る <span class="fh-d3-ta">→</span></a>
   </div>
 </nav>
 <div class="fh-d3-bridge" aria-hidden="true"></div>
 
-<!-- 3者比較 -->
-<section class="sec" id="compare">
+<!-- COMPARE：1行に縮小（詳しい比較はFAQへ吸収）。旧「無料の改善案から」の不整合を除去 -->
+<section class="sec cand-compare" id="compare">
   <div class="wrap">
-    <span class="eyebrow">Which</span>
-    <h2 class="title">大きく作る前に、まず見せ方を確認できます。</h2>
-    <p class="sub-lead">大手に頼むのが合う方も、自分で作るのが合う方もいます。MISERUはその手前で、今の見え方だけ小さく整えたい方向けです。向き不向きで、正直に並べました。</p>
-    <div class="cmp3">
-      <div class="cmp3-col reveal">
-        <div class="cmp3-h">大手・制作会社</div><div class="cmp3-role">一から、しっかり作る</div>
-        <div class="cmp3-row"><span class="cmp3-k">向いている人</span><span class="cmp3-v">大きく刷新したい／予算がある</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">始め方</span><span class="cmp3-v">見積もり・打ち合わせから</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">作り直し</span><span class="cmp3-v">基本まるごと</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">写真・文章・導線</span><span class="cmp3-v">制作の一部として</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">小さく試せる</span><span class="cmp3-v">まとまった単位から</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">相談のしやすさ</span><span class="cmp3-v">担当が付く（規模大）</span></div>
-      </div>
-      <div class="cmp3-col reveal">
-        <div class="cmp3-h">AI / DIYホームページ作成</div><div class="cmp3-role">自分で、安く作る</div>
-        <div class="cmp3-row"><span class="cmp3-k">向いている人</span><span class="cmp3-v">とにかく安く自分で</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">始め方</span><span class="cmp3-v">ツール契約・自分で作業</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">作り直し</span><span class="cmp3-v">自分で作り直す</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">写真・文章・導線</span><span class="cmp3-v">自分で用意する</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">小さく試せる</span><span class="cmp3-v">はい（自分の手で）</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">相談のしやすさ</span><span class="cmp3-v">基本セルフ</span></div>
-      </div>
-      <div class="cmp3-col me reveal">
-        <div class="cmp3-h">MISERU <span class="cmp3-badge">3つ目の選択肢</span></div><div class="cmp3-role">作り直さず、見せ方を整える</div>
-        <div class="cmp3-row"><span class="cmp3-k">向いている人</span><span class="cmp3-v">大手ほどじゃないが、今の見え方は整えたい</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">始め方</span><span class="cmp3-v">まず1ページ、無料の改善案から</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">作り直し</span><span class="cmp3-v">しない（活かして整える）</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">写真・文章・導線</span><span class="cmp3-v">そこを“編集”するのが本業</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">小さく試せる</span><span class="cmp3-v">1ページから・まず無料</span></div>
-        <div class="cmp3-row"><span class="cmp3-k">相談のしやすさ</span><span class="cmp3-v">一人の編集者が実物を見る</span></div>
-      </div>
-    </div>
-    <p class="cmp3-note">どれも“アリ”です。大きく作り直すなら制作会社、自分で安くならDIY。その手前で見せ方だけ整えたいなら、MISERU。</p>
+    <span class="eyebrow" style="display:inline-block">Which</span>
+    <h2 class="title" style="font-size:clamp(20px,2.7vw,28px)">作り直さず、見せ方を整える——<br>大手とDIYのあいだの「3つ目の選択肢」。</h2>
+    <p class="sub-lead" style="margin-left:auto;margin-right:auto">大きく刷新するなら制作会社、自分で安く作るならDIY。その手前で「今の見せ方だけ」を整えたい中小事業に向いています。大手・AI・MISERUの違いは <a href="#faq" class="textlink">よくあるご質問</a> でも説明しています。</p>
   </div>
 </section>
 
-<!-- LOSS -->
-<section class="sec bg-sand" id="loss">
-  <div class="wrap">
-    <span class="eyebrow">Concern</span>
-    <h2 class="title"><span class="l">いい仕事なのに、</span>Webでは伝わりきっていないかもしれません。</h2>
-    <div class="loss-grid">
-      <div class="loss-item"><span class="no">01</span><p>写真が小さく、実物の魅力が伝わっていない</p></div>
-      <div class="loss-item"><span class="no">02</span><p>スマホで問い合わせ・予約がしづらい</p></div>
-      <div class="loss-item"><span class="no">03</span><p>施工事例・実績が整理されていない</p></div>
-      <div class="loss-item"><span class="no">04</span><p>Instagramは動いているのに、HPが古い</p></div>
-      <div class="loss-item"><span class="no">05</span><p>代表やお店の空気感、人柄が伝わらない</p></div>
-      <div class="loss-item"><span class="no">06</span><p>何を頼める会社なのか、ひと目で分かりづらい</p></div>
-    </div>
-  </div>
-</section>
+<!-- LOSS セクションは削除（不安煽り→前向き「整えると相談されやすい」表現を次の DO リードへ統合）-->
 
 <!-- DO -->
 <section class="sec" id="do">
   <div class="wrap">
     <span class="eyebrow">What we do</span>
-    <h2 class="title">写真・文章・導線を、伝わる形に整えます。</h2>
-    <p class="sub-lead">いきなり大きく作り直す必要はありません。いまあるサイトやSNSを活かして、効くところから少しずつ。</p>
+    <h2 class="title">作り直さなくても、整えるだけで相談されやすくなります。</h2>
+    <p class="sub-lead">写真が小さい・スマホで問い合わせしにくい・古く見える——それだけで損をしていることがあります。いまあるサイトやSNSを活かして、効くところから整えます。</p>
     <div class="do-grid">
       <div class="do-item reveal">
         <span class="dn">01 ／ PHOTO</span>
-        <h3>写真の見せ方と、撮影</h3>
-        <p>手元にある写真を活かし、トリミング・並べ方・Before/Afterで実物の良さを引き出します。そのうえで、足りない場合はHPに掲載するための写真素材の撮影まで対応します。商品・店舗・施工・仕事風景・手元など、Webで伝わるカットを一緒に用意します。</p>
+        <h3>写真の見せ方</h3>
+        <p>手元の写真を活かし、トリミング・並べ方・Before/Afterで実物の良さを引き出します。足りない場合は撮影も（現地撮影オプション）。<b>写真がなくても、まず相談できます。</b></p>
       </div>
       <div class="do-item reveal">
         <span class="dn">02 ／ CONTACT</span>
@@ -920,17 +956,7 @@
       <div class="ret reveal"><span class="rn">03</span><h4>「こう見せる」イメージ</h4><p>改善後の見せ方を、簡単なラフでお見せします。</p></div>
       <div class="ret reveal"><span class="rn">04</span><h4>必要な範囲と費用の目安</h4><p>制作・改善が必要な場合だけ、範囲と目安を。押し売りはしません。</p></div>
     </div>
-  </div>
-</section>
-
-<!-- 実物見本への導線 -->
-<!-- SAMPLE サマリー（深掘り再設計版から移植・2026-06-04）-->
-<section class="sec" id="sample">
-  <div class="wrap">
-    <span class="eyebrow">Sample</span>
-    <h2 class="title">初回見立てシートでは、こんな整理をお返しします。</h2>
-    <p class="sub-lead">今のページを1つ見て、どこで魅力が伝わりにくくなっているか、どう整えると見やすくなるかを、<b>初回見立てシート（¥9,800〜）</b>として A4 数枚にまとめてお返しします。</p>
-    <div class="smp-grid">
+    <div class="smp-grid" style="margin-top:38px">
       <div class="smp-doc reveal">
         <div class="smp-thumb" aria-label="初回見立てシート 紙面サムネ（架空）">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 210" role="img" aria-hidden="true">
@@ -961,15 +987,15 @@
             <text x="203" y="198" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#cf7b56" font-weight="700">After</text>
           </svg>
         </div>
-        <span class="smp-thumb-tag">紙面サムネ（実物見本の縮小）</span>
+        <span class="smp-thumb-tag">紙面サムネ（実物見本の縮小・架空）</span>
         <span class="smp-stamp">MISERU 編集室</span>
       </div>
       <div class="smp-meta reveal">
-        <h3>申し込むと、まず<span class="em">“見立て”</span>が返ってきます。</h3>
-        <p>いきなり作り直すのではなく、まず<b>初回見立てシート（¥9,800〜）</b>で1ページ分だけ確認します。写真をどう見せるか、見出しをどう変えるか、問い合わせまで迷わないかを整理して、紙面にまとめてお返しします。無料相談では、方向性と合いそうなプラン目安までです。</p>
+        <h3>まずは<span class="em">“見立て”</span>から。作り直しは、その先です。</h3>
+        <p>いきなり作り直すのではなく、初回見立てシート（¥9,800〜）で1ページ分だけ、写真の見せ方・見出し・問い合わせ導線を整理して紙面にまとめます。<b>無料相談は、方向性と合いそうなプラン目安まで。</b>具体的な改善案・ラフは、この初回見立てシートから対応します。</p>
         <div class="smp-cta">
-          <a href="#industry-samples" class="btn btn-ink">業種別サンプルを見る <span class="arw">→</span></a>
-          <a href="#contact" class="textlink">そのまま相談する</a>
+          <a href="#contact" class="btn btn-ink">無料相談する（¥0）<span class="arw">→</span></a>
+          <a href="#industry-samples" class="textlink">完成HPサンプルを見る</a>
         </div>
         <p class="smp-annot">
           ※これは初回見立てシートの見本です。実在するクライアント事例ではありません。
@@ -990,7 +1016,7 @@
         <div class="is-photo"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）"></div>
         <div class="is-meta">
           <div class="is-num">01 — Pet Service</div>
-          <h3 class="is-title"><small>HONEY BEES SAMPLE</small>小型犬専門のお預かりサンプル。</h3>
+          <h3 class="is-title"><small>うちのこ通い帳 SAMPLE</small>お預かりの一日を通い帳でお返しするサンプル。</h3>
           <p class="is-desc">やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプル HP です。</p>
           <a href="sample-pet.html" class="is-link">完成HPを開く →</a>
         </div>
@@ -999,7 +1025,7 @@
         <div class="is-photo"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）"></div>
         <div class="is-meta">
           <div class="is-num">02 — Restaurant</div>
-          <h3 class="is-title"><small>SAI KOH SAMPLE</small>カウンター7席のおまかせサンプル。</h3>
+          <h3 class="is-title"><small>夜小路 SAMPLE</small>七席だけの季節のおまかせサンプル。</h3>
           <p class="is-desc">明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプル HP です。</p>
           <a href="sample-food.html" class="is-link">完成HPを開く →</a>
         </div>
@@ -1008,7 +1034,7 @@
         <div class="is-photo"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）"></div>
         <div class="is-meta">
           <div class="is-num">03 — Car & Bike</div>
-          <h3 class="is-title"><small>RED HORSE TOKYO SAMPLE</small>強い写真の世界観サンプル。</h3>
+          <h3 class="is-title"><small>RED HORSE TOKYO SAMPLE</small>一台のこだわりを相談につなげるサンプル。</h3>
           <p class="is-desc">黒×赤・大型欧文・実車写真で「迫力と編集感」を作る方向。架空サンプル HP です。</p>
           <a href="sample-car.html" class="is-link">完成HPを開く →</a>
         </div>
@@ -1028,7 +1054,7 @@
     <h2 class="title">料金の目安。</h2>
     <p class="sub-lead">無料相談で方向性を、初回見立てシートで具体案を、必要なら改善・制作へ。段階的に進めます。</p>
     <div class="price-list">
-      <!-- 相談・見立て -->
+      <div class="price-group">まず相談・見立て <small>方向性は無料、具体整理は¥9,800〜</small></div>
       <div class="price-row reveal">
         <div class="pname">無料相談<small>方向性のお返事のみ。具体的な改善案・文章案・写真選定・レイアウト案はお返ししません。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥0</span></div>
@@ -1039,7 +1065,7 @@
         <div class="pcol"><span class="lab">料金</span><span class="first">¥9,800〜</span></div>
         <div class="pcol"><span class="lab">所要</span><span class="normal">約 1 週間</span></div>
       </div>
-      <!-- 部分改善 -->
+      <div class="price-group">撮影なし・軽い改善 <small>いまのページを活かす／作り直さない</small></div>
       <div class="price-row reveal">
         <div class="pname">スマホ導線改善<small>LINE / 問い合わせ / 予約 / SP 固定 CTA の最適化のみ。文章・FV は含みません。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥29,800〜</span></div>
@@ -1050,7 +1076,7 @@
         <div class="pcol"><span class="lab">料金</span><span class="first">¥49,800〜</span></div>
         <div class="pcol"><span class="lab">所要</span><span class="normal">2〜3 週間</span></div>
       </div>
-      <!-- 制作 -->
+      <div class="price-group">制作（作り直し） <small>1ページLP〜小規模リニューアル／撮影は別</small></div>
       <div class="price-row reveal">
         <div class="pname">1ページ LP 制作<small>1 ページを作り直し。既存写真を活用。<b>撮影は含みません。</b>必要な場合は現地撮影オプションを併用。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥198,000〜</span></div>
@@ -1066,13 +1092,13 @@
         <div class="pcol"><span class="lab">料金</span><span class="first">¥398,000〜</span></div>
         <div class="pcol"><span class="lab">所要</span><span class="normal">6〜10 週間</span></div>
       </div>
-      <!-- オプション -->
+      <div class="price-group">オプション <small>制作・改善への追加のみ</small></div>
       <div class="price-row reveal">
         <div class="pname">現地撮影オプション<small>半日撮影 + 編集込みデータ納品（20〜30 カット目安）。<b>単体でのご依頼はお受けしません。</b>1ページ改善ライト以上のプランに併用する形のみ。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">+¥59,800〜</span></div>
         <div class="pcol"><span class="lab">所要</span><span class="normal">半日（編集込み）</span></div>
       </div>
-      <!-- 継続 -->
+      <div class="price-group">公開のあと <small>必要な方だけ</small></div>
       <div class="price-row reveal">
         <div class="pname">継続更新・運用<small>写真追加・実績追加・文章更新を毎月。月単位でいつでも休止・再開できます。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥9,800〜/月</span></div>
@@ -1105,7 +1131,7 @@
     <span class="eyebrow" style="display:block;text-align:center;margin-bottom:12px">FAQ</span>
     <h2 class="title" style="text-align:center">よくあるご質問。</h2>
     <div class="faq">
-      <details class="qa"><summary>相談すると、しつこく営業されませんか？</summary><div class="a">しません。まずは1ページ分の改善案を無料でお返しするだけです。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。</div></details>
+      <details class="qa"><summary>相談すると、しつこく営業されませんか？</summary><div class="a">しません。まずは無料相談で、方向性と合いそうなプラン目安をお返しするだけです。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。</div></details>
       <details class="qa"><summary>本当に無料ですか？</summary><div class="a">無料相談（方向性と合いそうなプラン目安まで）は無料です。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。費用が発生する作業は、必ず範囲と金額をお見せして、ご承諾いただいてからです。</div></details>
       <details class="qa"><summary>なぜ無料相談を置いているんですか？</summary><div class="a">料金やお見積もりだけ先に見せられても、判断しづらいと思うからです。無料相談で方向性と合いそうなプラン目安をお伝えし、続けるかどうかをまず決めていただきます。具体的な整理（写真選定・文章・導線・ラフ）は、初回見立てシート（¥9,800〜）で1ページにまとめてお返しします。段階的に進めていただける入り口として用意しています。</div></details>
       <details class="qa"><summary>制作会社に頼まなくて大丈夫ですか？</summary><div class="a">大きく作り直すなら、専門の制作会社がしっかりしています。MISERUは“その手前”で、今のページの見せ方だけを整える役割です。無料相談では方向性と合いそうなプラン目安まで確認できます。具体的な整理は、初回見立てシート（¥9,800〜）でご判断いただけます。</div></details>
@@ -1121,7 +1147,7 @@
       <details class="qa"><summary>LINEやフォームの導線も作れますか？</summary><div class="a">はい。LINE相談・予約・問い合わせフォームへの導線づくりも対応しています。</div></details>
       <details class="qa"><summary>遠方でも依頼できますか？</summary><div class="a">HP・LPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</div></details>
       <details class="qa"><summary>小さなお店・個人事業でも相談できますか？</summary><div class="a">もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのお手伝いを得意としています。</div></details>
-      <details class="qa"><summary>LINEでも相談できますか？</summary><div class="a">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、1ページ分の見せ方を確認してお返しします。フォームやメールでのご相談も大丈夫です。</div></details>
+      <details class="qa"><summary>LINEでも相談できますか？</summary><div class="a">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。</div></details>
     </div>
   </div>
 </section>
@@ -1142,8 +1168,8 @@
 <!-- FINAL CTA -->
 <section class="sec bg-sand final">
   <div class="wrap">
-    <h2>まずは、1ページだけ<br>見せ方を整えてみませんか。</h2>
-    <p>無料でお見せします。見るだけで大丈夫です。不要な営業はしません。</p>
+    <h2>まずは、1ページから<br>見せ方を相談してみませんか。</h2>
+    <p>無料相談で、方向性と合いそうなプラン目安をお返しします。具体的な整理は初回見立てシート（¥9,800〜）から。相談だけでも大丈夫です。</p>
     <a href="#contact" class="btn btn-ink">無料相談する <span class="arw">→</span></a>
   </div>
 </section>
@@ -1217,8 +1243,8 @@
 </footer>
 
 <div class="mcta">
-  <a href="#contact" class="m2">無料相談</a>
-  <a href="#contact" class="m1">相談する</a>
+  <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="m1">LINEで相談</a>
+  <a href="#contact" class="m2">無料相談（¥0）</a>
 </div>
 
 <script>
