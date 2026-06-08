@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"/>
+<title>演出強めの車・バイク見せ方サンプル｜MISERU SAMPLE — Graphic Edition</title>
+<meta name="description" content="MISERUが制作した、車・バイク系サービス向けの演出強め見せ方サンプル（架空）。WebGL／canvas／インタラクションを組み合わせて、写真と相談導線を一段引き上げる構成を提示します。実在店舗・実在事例ではありません。"/>
+<meta name="robots" content="noindex,nofollow"/>
+<meta name="theme-color" content="#060507"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060507;--panel:#0c0b0e;--ink:#f2efe9;--dim:#948d86;--faint:#5f5853;
+  --red:#e2241b;--amber:#ffad5a;--amber2:#ff8a2e;--line:rgba(242,239,233,.13);
+  --anton:"Anton",sans-serif;--zen:"Zen Kaku Gothic New",system-ui,sans-serif;--mono:"Space Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--zen);line-height:1.8;-webkit-font-smoothing:antialiased;overflow-x:hidden;cursor:none}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+::selection{background:var(--amber);color:#1a0f00}
+
+#bg{position:fixed;inset:0;z-index:0;display:block}
+.grain{position:fixed;inset:-50%;z-index:3;pointer-events:none;mix-blend-mode:soft-light;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='150'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");animation:gr 7s steps(7) infinite}
+@keyframes gr{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-4%)}75%{transform:translate(-4%,3%)}100%{transform:translate(0,0)}}
+.stage{position:relative;z-index:2}
+.svgdefs{position:absolute;width:0;height:0}
+.warp{filter:url(#warp)}
+body.noflt .warp{filter:none}
+
+/* fixed UI */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;
+  padding:22px 28px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;mix-blend-mode:difference}
+.brand{display:flex;align-items:center;gap:12px}
+.brand .g{width:9px;height:9px;background:var(--amber);border-radius:50%;box-shadow:0 0 12px var(--amber);animation:pls 2s ease-in-out infinite}
+@keyframes pls{0%,100%{opacity:.4;transform:scale(.7)}50%{opacity:1;transform:scale(1)}}
+.brand b{font-weight:700;letter-spacing:.22em}
+.topnav{display:flex;gap:24px}.topnav a{position:relative}
+.topnav a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:#fff;transition:width .3s}.topnav a:hover::after{width:100%}
+
+.sidemenu{position:fixed;left:28px;bottom:30px;z-index:38;font-family:var(--mono);opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s;pointer-events:none}
+body.ui-on .sidemenu{opacity:1;transform:none;pointer-events:auto}
+.sidemenu .h{font-size:10px;letter-spacing:.24em;color:var(--dim);margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.sidemenu .h::before{content:"";width:18px;height:1px;background:var(--amber)}
+.sidemenu a{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.05em;margin:5px 0;transition:transform .3s,color .3s}
+.sidemenu a .x{color:var(--faint);transition:transform .3s,color .3s}
+.sidemenu a:hover{transform:translateX(8px);color:var(--amber)}.sidemenu a:hover .x{color:var(--amber);transform:translateX(3px)}
+
+.linepill{position:fixed;right:28px;bottom:30px;z-index:38;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:#fff;background:var(--red);padding:13px 20px;border-radius:40px;box-shadow:0 14px 44px -14px rgba(226,36,27,.8);opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s,background .3s;pointer-events:none}
+body.ui-on .linepill{opacity:1;transform:none;pointer-events:auto}
+.linepill:hover{background:#ff3528;transform:translateY(-2px)}.linepill .d{width:6px;height:6px;border-radius:50%;background:#fff;animation:pls 1.6s ease-in-out infinite}
+
+.prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#7a0f0a,var(--red),var(--amber));z-index:45}
+.cur{position:fixed;z-index:50;top:0;left:0;width:34px;height:34px;border:1px solid var(--amber);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;transition:width .25s,height .25s,background .25s,border-color .25s;mix-blend-mode:screen}
+.cur.on{width:10px;height:10px;background:var(--amber);border-color:transparent}
+.cur.drag{width:64px;height:64px}
+.cur .lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:#000;opacity:0;transition:opacity .2s}
+.cur.drag .lbl{opacity:1}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--amber);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:30px;height:1px;background:var(--amber)}
+.anton{font-family:var(--anton);text-transform:uppercase;line-height:.9;letter-spacing:.005em}
+.chrome{background:linear-gradient(180deg,#fff 0%,#cfd2d8 38%,#8a8d94 55%,#f3f4f6 70%,#aeb2ba 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+.chrome span{background-image:linear-gradient(180deg,#fff 0%,#cfd2d8 38%,#8a8d94 55%,#f3f4f6 70%,#aeb2ba 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.jpttl{font-family:var(--zen);font-weight:900;line-height:1.3;letter-spacing:.01em}
+.mono{font-family:var(--mono)}.lead{color:#d6d0c8;font-size:clamp(14px,1.45vw,16.5px);line-height:2.0;max-width:50ch}
+.dim{color:var(--dim)}.faint{color:var(--faint)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+.split span{display:inline-block;transform:translateY(115%) rotate(5deg);opacity:0;transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .9s}
+.split.in span{transform:none;opacity:1}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;letter-spacing:.08em;padding:15px 26px;border-radius:2px;transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s,border-color .3s,color .3s}
+.btn .a{transition:transform .3s}.btn:hover{transform:translateY(-2px)}.btn:hover .a{transform:translateX(5px)}
+.btn-p{background:var(--red);color:#fff;box-shadow:0 14px 44px -16px rgba(226,36,27,.8)}.btn-p:hover{background:#ff3528}
+.btn-g{border:1px solid var(--line)}.btn-g:hover{border-color:var(--ink)}
+
+.cap{max-width:1200px;margin:0 auto;padding:0 28px;width:100%}
+.scene{min-height:100svh;display:flex;align-items:center;position:relative;padding:14vh 0}
+
+/* INTRO + CHAT */
+.intro{min-height:100svh;display:flex;align-items:center;position:relative}
+.intro-photo{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.intro-photo img{width:100%;height:100%;object-fit:cover;object-position:55% 50%;filter:brightness(.55) saturate(1.15) contrast(1.05);transform:scale(1.05);animation:fvZoom 28s ease-in-out infinite alternate;will-change:transform}
+@keyframes fvZoom{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.1) translate3d(-1.2%,-.5%,0)}}
+.intro-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,5,7,.96) 0%,rgba(6,5,7,.78) 32%,rgba(6,5,7,.4) 60%,rgba(6,5,7,.82) 100%),linear-gradient(180deg,transparent 0%,transparent 60%,rgba(6,5,7,.75) 100%)}
+.intro .cap{position:relative;z-index:3}
+@media (max-width:860px){
+  .intro-photo img{object-position:50% 50%;filter:brightness(.45) saturate(1.1) contrast(1.05)}
+  .intro-photo::after{background:linear-gradient(180deg,rgba(6,5,7,.85) 0%,rgba(6,5,7,.55) 38%,rgba(6,5,7,.88) 100%)}
+}
+.intro .eyebrow{margin-bottom:28px}
+.intro h1{font-size:clamp(40px,9.5vw,128px);margin-bottom:4px}
+.hl{position:relative}
+.hl::before{content:"";position:absolute;inset:-12px;border:1px solid rgba(255,173,90,.7);box-shadow:inset 0 0 80px rgba(255,173,90,.18),0 0 60px rgba(255,173,90,.25);pointer-events:none;animation:hlfade 1.8s ease-out forwards;z-index:5}
+@keyframes hlfade{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+.intro h1 .l2{-webkit-text-fill-color:transparent;color:transparent;-webkit-text-stroke:1.4px rgba(242,239,233,.85)}
+.intro .jp{font-size:clamp(18px,3vw,36px);margin:22px 0 30px}
+.ama{max-width:560px}
+.ama .alabel{font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--dim);margin-bottom:12px;display:flex;align-items:center;gap:9px}
+.ama .alabel .dd{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 10px var(--amber);animation:pls 1.6s ease-in-out infinite}
+.chatlog{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;min-height:0}
+.msg{font-family:var(--mono);font-size:13px;line-height:1.7;padding:11px 15px;border-radius:12px;max-width:90%;opacity:0;transform:translateY(8px);animation:msgin .4s forwards}
+@keyframes msgin{to{opacity:1;transform:none}}
+.msg.u{align-self:flex-end;background:rgba(226,36,27,.16);border:1px solid rgba(226,36,27,.35)}
+.msg.b{align-self:flex-start;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.msg.b .go{color:var(--amber);display:inline-block;margin-top:4px;font-size:11px}
+.typing span{display:inline-block;width:5px;height:5px;margin:0 1px;background:var(--dim);border-radius:50%;animation:ty 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes ty{0%,60%,100%{opacity:.25;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.askrow{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:40px;padding:6px 6px 6px 20px;background:rgba(255,255,255,.03);backdrop-filter:blur(8px);transition:border-color .3s}
+.askrow:focus-within{border-color:var(--amber)}
+.askrow input{flex:1;background:none;border:none;outline:none;color:var(--ink);font-family:var(--mono);font-size:14px;letter-spacing:.02em}
+.askrow input::placeholder{color:var(--faint)}
+.askrow button{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:#fff;background:var(--red);border:none;border-radius:30px;padding:11px 18px;cursor:pointer;transition:background .3s}
+.askrow button:hover{background:#ff3528}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--dim);border:1px solid var(--line);border-radius:30px;padding:7px 13px;cursor:pointer;transition:color .3s,border-color .3s,background .3s}
+.chip:hover{color:var(--amber);border-color:var(--amber)}
+.scrollcue{position:absolute;right:28px;bottom:30px;font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--dim);writing-mode:vertical-rl;display:flex;align-items:center;gap:14px;text-transform:uppercase}
+.scrollcue .bar{writing-mode:initial;width:1px;height:46px;background:linear-gradient(var(--amber),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%,100%{opacity:.3;transform:scaleY(.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* section header */
+.shead{display:flex;flex-direction:column;gap:18px;margin-bottom:54px}
+.shead h2{font-size:clamp(26px,4.4vw,56px)}
+.shead .ix{font-family:var(--anton);font-size:clamp(40px,7vw,90px);color:transparent;-webkit-text-stroke:1px rgba(242,239,233,.16);line-height:1}
+
+/* WORKS — main + thumbnails (横スクロール廃止・写真主役) */
+.works{padding:14vh 0 10vh;overflow:hidden}
+.gal{margin-top:48px;display:grid;grid-template-columns:1fr;gap:18px}
+.gal-main{position:relative}
+.gal-frame{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0c0b0e;border:1px solid var(--line);box-shadow:0 30px 80px -40px rgba(0,0,0,.65)}
+.gal-frame img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .45s ease,transform .9s var(--ease)}
+.gal-frame .gal-shade{position:absolute;left:0;right:0;bottom:0;height:30%;background:linear-gradient(180deg,transparent,rgba(6,5,7,.55));pointer-events:none;z-index:1}
+.gal-frame .gal-edge{position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,173,90,.18);pointer-events:none;z-index:2}
+.gal-frame.swap img{opacity:0;transform:scale(1.015)}
+.gal-meta{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:18px;padding:0 4px}
+.gal-num{font-family:var(--anton);font-size:clamp(48px,5.6vw,84px);color:transparent;-webkit-text-stroke:1.3px rgba(255,173,90,.6);line-height:.9;letter-spacing:.005em}
+.gal-title{display:flex;flex-direction:column;gap:6px;flex:1;padding:0 8px}
+.gal-en{font-family:var(--anton);font-size:clamp(22px,2.6vw,32px);letter-spacing:.04em;line-height:1}
+.gal-jp{font-family:var(--zen);font-size:14.5px;color:var(--dim);font-weight:500;line-height:1.6}
+.gal-active{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;color:var(--amber);border:1px solid var(--amber);padding:5px 10px;border-radius:2px;white-space:nowrap;align-self:center}
+
+.gal-thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:18px}
+.thumb{position:relative;aspect-ratio:5/4;border:1px solid var(--line);background:#0c0b0e;cursor:pointer;padding:0;overflow:hidden;transition:border-color .35s,transform .35s var(--ease);font-family:inherit}
+.thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .35s,opacity .35s;display:block}
+.thumb::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease);z-index:3}
+.thumb:hover{border-color:rgba(255,173,90,.55);transform:translateY(-3px)}
+.thumb:hover img{transform:scale(1.04)}
+.thumb.on{border-color:var(--amber)}
+.thumb.on::after{transform:scaleX(1)}
+.thumb.on img{filter:brightness(1) saturate(1)}
+.thumb:not(.on) img{filter:brightness(.62) saturate(.85)}
+.thumb .t-tag{position:absolute;left:7px;bottom:7px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:#fff;background:rgba(6,5,7,.78);padding:3px 7px;border-radius:2px;z-index:2;text-transform:uppercase}
+
+.gal-ctrl{display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-top:18px;padding:0 4px}
+.gal-ctrl .g-btn{width:46px;height:46px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--ink);font-family:var(--mono);font-size:18px;border-radius:50%;cursor:pointer;transition:border-color .3s,background .3s,color .3s,transform .3s var(--ease);display:inline-flex;align-items:center;justify-content:center}
+.gal-ctrl .g-btn:hover{border-color:var(--amber);color:var(--amber);background:rgba(255,173,90,.06);transform:translateY(-2px)}
+.gal-ctrl .g-idx{font-family:var(--mono);font-size:13px;letter-spacing:.16em;color:var(--dim);padding:0 6px;min-width:84px;text-align:center}
+.gal-ctrl .g-idx #gNow{color:var(--amber);font-weight:700}
+
+/* HOW */
+.how{padding:12vh 0}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.step{padding:34px 28px;border-right:1px solid var(--line)}.step:last-child{border-right:none}
+.step .n{font-family:var(--anton);font-size:48px;color:#3a1410;line-height:1;margin-bottom:16px;-webkit-text-stroke:1px rgba(255,173,90,.25)}
+.step p{font-size:15px;line-height:1.75}.step b{color:var(--amber)}
+
+/* PRICING */
+.pricing{padding:13vh 0}
+.plist{border-top:1px solid var(--line)}
+.prow{display:grid;grid-template-columns:54px 1fr 1.7fr auto auto;gap:24px;align-items:center;padding:26px 8px;border-bottom:1px solid var(--line);transition:background .35s,padding-left .35s}
+.prow:hover{background:rgba(255,173,90,.05);padding-left:18px}
+.prow .ix{font-family:var(--anton);font-size:26px;color:var(--amber)}
+.prow .cat{font-family:var(--mono);font-weight:700;letter-spacing:.12em;font-size:14px}
+.prow .desc{color:var(--dim);font-size:13.5px}
+.prow .price{font-family:var(--anton);font-size:30px;white-space:nowrap}
+.prow .unit{display:block;font-family:var(--mono);font-size:10px;color:var(--faint);letter-spacing:.1em;text-align:right;margin-top:3px}
+.prow .pl{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--amber);white-space:nowrap;transition:transform .3s}.prow:hover .pl{transform:translateX(5px)}
+.pnote{margin-top:24px;font-size:12.5px;color:var(--faint);line-height:1.9;max-width:62ch}
+
+/* GARAGE */
+.garage{padding:13vh 0}
+.glay{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
+.gimg{position:relative;overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line);background:#0c0b0e}
+.gimg img{width:100%;height:100%;object-fit:cover;will-change:transform}
+.gimg .lab{position:absolute;top:16px;left:16px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:#fff;background:rgba(6,5,7,.45);backdrop-filter:blur(4px);padding:6px 12px}
+.ginfo{display:grid;grid-template-columns:1fr 1fr;gap:30px 34px;margin-top:34px}
+.gcell .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.gcell .v{font-size:14px;line-height:1.85;color:#d6d0c8}.gcell .v b{color:var(--ink);font-weight:700}
+
+/* STORIES */
+.stories{padding:13vh 0}
+.scards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.scard{border:1px solid var(--line);padding:30px 26px 32px;background:rgba(12,11,14,.5);backdrop-filter:blur(6px);transition:border-color .4s,transform .4s,background .4s}
+.scard:hover{border-color:rgba(255,173,90,.45);transform:translateY(-4px)}
+.scard .no{font-family:var(--anton);font-size:30px;color:var(--amber);margin-bottom:16px}
+.scard h3{font-family:var(--zen);font-weight:700;font-size:20px;line-height:1.5;margin-bottom:6px}
+.scard .en{font-family:var(--mono);font-size:11px;color:var(--faint);margin-bottom:16px}
+.scard p{font-size:13.5px;color:var(--dim);line-height:1.95;margin-bottom:20px}
+.scard .spec{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:var(--faint);line-height:2.1;border-top:1px solid var(--line);padding-top:14px}.scard .spec b{color:var(--ink)}
+
+/* CONTACT */
+.contact{padding:18vh 0 13vh;text-align:center}
+.contact .big{font-family:var(--anton);font-size:clamp(60px,16vw,240px);line-height:.86}
+.contact .big .dot{color:var(--red)}
+.contact .lead{margin:30px auto 36px;text-align:center}
+.contact .disc{max-width:64ch;margin:48px auto 0;font-size:12px;color:var(--faint);line-height:2.0;text-align:left;border-top:1px solid var(--line);padding-top:26px}
+.contact .disc b{color:var(--dim);font-weight:700}.contact .disc .warn{color:var(--amber)}
+
+/* MISERU */
+.miseru{padding:13vh 0;border-top:1px solid var(--line);text-align:center;background:linear-gradient(180deg,transparent,rgba(122,15,10,.08))}
+.miseru h2{font-family:var(--zen);font-weight:900;font-size:clamp(24px,3.6vw,44px);margin-bottom:22px}
+.miseru .lead{margin:0 auto 34px;text-align:center;max-width:56ch}
+.miseru .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+footer{padding:46px 0;border-top:1px solid var(--line);text-align:center}
+footer .fm{font-family:var(--mono);letter-spacing:.18em;font-size:13px;margin-bottom:12px}
+footer .fl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--faint)}footer .fl a{color:var(--amber)}
+.imgfb{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,#160a0c,#0a0709);color:var(--faint);font-family:var(--mono);font-size:12px;letter-spacing:.2em}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:60;background:var(--bg);display:grid;place-items:center;transition:opacity .8s}
+.loader .lt{font-family:var(--anton);font-size:clamp(40px,9vw,120px);text-transform:uppercase}
+.loader .lt b{color:transparent;-webkit-text-stroke:1.2px var(--ink)}
+.loader .lt i{font-style:normal;color:var(--red)}
+body.ready .loader{opacity:0;pointer-events:none}
+.stage,.topbar{opacity:0;transition:opacity 1s ease .3s}body.ready .stage,body.ready .topbar{opacity:1}
+
+@media (max-width:860px){
+  body{cursor:auto;padding-bottom:78px}.cur{display:none}.topbar{mix-blend-mode:normal;padding:14px 18px}
+  .topnav{gap:14px;font-size:11px}.sidemenu{display:none}.linepill{left:18px;right:18px;justify-content:center;bottom:18px}
+  .intro h1{font-size:clamp(38px,11vw,76px)}
+  .intro .jp{font-size:clamp(15px,4.2vw,22px);margin:14px 0 18px}
+  .ama{max-width:none}
+  .chips{gap:6px}.chip{font-size:11px;padding:8px 12px}
+  .scrollcue{display:none}
+  .gal-frame{aspect-ratio:4/3}
+  .gal-meta{flex-wrap:wrap;gap:8px 14px;padding:0;align-items:flex-start}
+  .gal-num{font-size:42px}
+  .gal-title{padding:0;flex-basis:60%}
+  .gal-en{font-size:20px}
+  .gal-jp{font-size:13px}
+  .gal-active{font-size:9.5px;padding:4px 8px;align-self:flex-start;margin-left:auto}
+  .gal-thumbs{grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+  .thumb{aspect-ratio:1/1}
+  .thumb .t-tag{font-size:8.5px;padding:2px 5px;letter-spacing:.04em;left:4px;bottom:4px}
+  .gal-ctrl{justify-content:center;margin-top:14px}
+  .gal-ctrl .g-btn{width:44px;height:44px}
+  .steps{grid-template-columns:1fr}.step{border-right:none;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:none}
+  .prow{grid-template-columns:40px 1fr;gap:4px 14px;align-items:start}.prow .desc,.prow .price,.prow .pl{grid-column:2}.prow .price{margin-top:6px}.prow .unit{text-align:left}.prow .pl{margin-top:6px}
+  .glay{grid-template-columns:1fr;gap:32px}.scards{grid-template-columns:1fr}
+  .scene{padding:10vh 0}.works{padding:10vh 0 8vh}
+}
+@media (max-width:380px){
+  .intro h1{font-size:clamp(32px,12vw,60px)}.chip{font-size:10.5px;padding:7px 10px}
+  .topbar{padding:12px 14px;font-size:10.5px}.topnav{gap:10px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s!important;animation-iteration-count:1!important}
+  .rv,.split span{transition:opacity .4s!important;transform:none!important}
+  .warp{filter:none!important}html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="grain"></div>
+<div class="prog" id="prog"></div>
+<div class="cur" id="cur"><span class="lbl">DRAG</span></div>
+<div class="loader"><div class="lt"><b>MISERU</b> <i>GRAPHIC</i></div></div>
+
+<svg class="svgdefs" aria-hidden="true">
+  <filter id="warp" x="-15%" y="-15%" width="130%" height="130%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.008 0.013" numOctaves="2" seed="11" stitchTiles="stitch" result="n"/>
+    <feDisplacementMap id="dmap" in="SourceGraphic" in2="n" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="topbar">
+  <div class="brand"><span class="g"></span><b>MISERU SAMPLE / GRAPHIC</b></div>
+  <div class="topnav"><a href="#works" data-h>WORKS</a><a href="#contact" data-h>CONTACT</a></div>
+</div>
+<nav class="sidemenu">
+  <div class="h">WHAT DO YOU NEED?</div>
+  <a href="#pricing" data-h><span class="x">→</span> CUSTOM</a>
+  <a href="#pricing" data-h><span class="x">→</span> COATING</a>
+  <a href="#pricing" data-h><span class="x">→</span> PHOTO</a>
+  <a href="#pricing" data-h><span class="x">→</span> SALES</a>
+  <a href="#contact" data-h><span class="x">→</span> CONTACT</a>
+</nav>
+<a href="#contact" class="linepill" data-h><span class="d"></span> LINEで相談 ⏎</a>
+
+<div class="stage">
+
+  <!-- INTRO + ASK ME ANYTHING -->
+  <header class="intro" id="top">
+    <div class="intro-photo" aria-hidden="true">
+      <img src="img/sample-car.jpg" alt="夜の街路でライトアップされた赤いランボルギーニ・アヴェンタドールを斜め前方から撮影した写真">
+    </div>
+    <div class="cap">
+      <span class="eyebrow">MISERU Sample · Fictional · 演出強め版</span>
+      <h1 class="anton"><span class="split chrome">CREATIVE CAR</span><br><span class="split l2">EXPERIENCES</span></h1>
+      <div class="jp jpttl rv d3">一台のこだわりを、相談につなげる。</div>
+      <p class="rv d3" style="margin:14px 0 24px;color:var(--dim);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;line-height:1.95;max-width:62ch">これは <b style="color:var(--amber);font-weight:700">MISERU が制作した演出強めの車・バイク見せ方サンプル</b>です。実在店舗・実在事例ではありません。写真・グラフィック・動き・相談導線を組み合わせた表現の幅をお見せしています。</p>
+      <div class="ama rv d4">
+        <div class="alabel"><span class="dd"></span> 何を見たいですか？ — タグから飛びます</div>
+        <div class="chatlog" id="chatlog" aria-live="polite"></div>
+        <div class="chips" id="chips" role="navigation" aria-label="セクションへのジャンプ">
+          <span class="chip" data-q="カスタムの相談" data-h>CUSTOM</span>
+          <span class="chip" data-q="コーティングしたい" data-h>COATING</span>
+          <span class="chip" data-q="写真を撮りたい" data-h>PHOTO</span>
+          <span class="chip" data-q="売る前に綺麗にしたい" data-h>SALES</span>
+          <span class="chip" data-q="料金が知りたい" data-h>PRICE</span>
+        </div>
+      </div>
+    </div>
+    <div class="scrollcue">SCROLL<span class="bar"></span></div>
+  </header>
+
+  <!-- WORKS — main + thumbnails -->
+  <section class="works" id="works">
+    <div class="cap">
+      <div class="shead">
+        <span class="ix anton rv">005 / STYLES</span>
+        <span class="eyebrow rv d1">Five styles — main + thumbnails</span>
+        <h2 class="jpttl rv d2">同じ一台を、5 つの見せ方で。</h2>
+        <p class="lead rv d3">販売前に映える型、SNS で伸びる型、街での日常の型。どの写真をどう見せるかで、伝わるものが変わります。</p>
+      </div>
+
+      <div class="gal rv d2">
+        <div class="gal-main">
+          <div class="gal-frame" id="galFrame">
+            <img id="galImg" src="img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー" loading="eager" decoding="async">
+            <div class="gal-shade" aria-hidden="true"></div>
+            <div class="gal-edge" aria-hidden="true"></div>
+          </div>
+          <div class="gal-meta">
+            <span class="gal-num anton">01</span>
+            <div class="gal-title">
+              <span class="gal-en anton">STREET SHOT</span>
+              <span class="gal-jp">街の中で、存在感を見せる。</span>
+            </div>
+            <span class="gal-active">ACTIVE</span>
+          </div>
+        </div>
+
+        <div class="gal-thumbs" role="tablist" aria-label="ギャラリー切替">
+          <button class="thumb on" data-i="0" data-h aria-label="01 STREET SHOT">
+            <img src="img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー">
+            <span class="t-tag">01 STREET</span>
+          </button>
+          <button class="thumb" data-i="1" data-h aria-label="02 URBAN FRONT">
+            <img src="img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー">
+            <span class="t-tag">02 URBAN</span>
+          </button>
+          <button class="thumb" data-i="2" data-h aria-label="03 DAYTIME">
+            <img src="img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）">
+            <span class="t-tag">03 DAY</span>
+          </button>
+          <button class="thumb" data-i="3" data-h aria-label="04 DOORS OPEN">
+            <img src="img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー">
+            <span class="t-tag">04 DOORS</span>
+          </button>
+          <button class="thumb" data-i="4" data-h aria-label="05 GARAGE CUT">
+            <img src="img/samples/car/optimized/car-owner-a.jpg" alt="ガレージで運転席に座る人物">
+            <span class="t-tag">05 GARAGE</span>
+          </button>
+        </div>
+
+        <div class="gal-ctrl">
+          <button id="gPrev" class="g-btn" data-h aria-label="前の写真">&larr;</button>
+          <span class="g-idx mono"><span id="gNow">01</span> / <span id="gTotal">05</span></span>
+          <button id="gNext" class="g-btn" data-h aria-label="次の写真">&rarr;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="how">
+    <div class="cap">
+      <div class="shead"><span class="eyebrow rv">Quote on chat</span><h2 class="jpttl rv d1">車両写真と、ご希望で。<br>仕様相談から。</h2></div>
+      <div class="steps">
+        <div class="step rv"><div class="n">01</div><p><b>車両写真と、ご希望</b>を一言だけ。</p></div>
+        <div class="step rv d1"><div class="n">02</div><p>カスタム / コーティング / 販売前相談 — <b>方向の希望</b>を共有。</p></div>
+        <div class="step rv d2"><div class="n">03</div><p>合う方向と<b>概算の例</b>を、LINE でお返し。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pricing">
+    <div class="cap">
+      <div class="rv" style="margin-bottom:38px;padding:18px 22px;border:1px solid rgba(255,173,90,.4);background:rgba(255,173,90,.06);border-radius:4px;font-family:var(--mono);font-size:12.5px;line-height:1.95;color:#e6dfd6;letter-spacing:.03em">
+        <b style="color:var(--amber);font-weight:700;letter-spacing:.08em;font-size:13px">※ 以下は架空の車関連サービスサイトとしての料金表示例です</b><br>
+        これは MISERU が制作した架空サンプル HP の表示パターンであり、<b style="color:var(--ink);font-weight:700">MISERU の料金ではありません</b>。MISERU 自身の料金（無料相談 ¥0／初回見立てシート ¥9,800〜／1ページ改善ライト ¥49,800〜／1ページLP制作 ¥198,000〜／撮影込みLP ¥298,000〜 ほか）は <a href="index.html" style="color:var(--amber);text-decoration:underline;font-weight:700">MISERU トップ</a> でご確認ください。
+      </div>
+      <div class="shead"><span class="ix anton rv">PRICE</span><span class="eyebrow rv d1">Price sheet — sample only</span><h2 class="jpttl rv d2">仕事と料金の早見表（架空例）。</h2>
+        <p class="lead rv d3">下記は架空ガレージの料金表示パターンです。実在の料金ではありません。MISERU 自身の料金は別途。</p></div>
+      <div class="plist">
+        <div class="prow rv"><span class="ix">01</span><span class="cat">CUSTOM</span><span class="desc">仕様相談 / ホイール / 車高 / エアロ。一台ずつ図面、最低受注額あり。</span><span class="price">¥80,000〜<span class="unit">per project</span></span><a href="#contact" class="pl" data-h>相談する →</a></div>
+        <div class="prow rv"><span class="ix">02</span><span class="cat">COATING</span><span class="desc">スタンダード（ガラス系）。下地洗浄 + 1 層 / 2 日。</span><span class="price">¥58,000<span class="unit">standard</span></span><a href="#contact" class="pl" data-h>相談する →</a></div>
+        <div class="prow rv"><span class="ix">03</span><span class="cat">COATING</span><span class="desc">プレミアム（多層ガラス）。下地補修 + 多層 / 3 日。</span><span class="price">¥128,000<span class="unit">premium</span></span><a href="#contact" class="pl" data-h>相談する →</a></div>
+        <div class="prow rv"><span class="ix">04</span><span class="cat">PHOTO</span><span class="desc">仕上がり撮影 / 5 カット。仕様の見え方を残す目的の撮影。</span><span class="price">¥38,000<span class="unit">5 cuts</span></span><a href="#contact" class="pl" data-h>相談する →</a></div>
+        <div class="prow rv"><span class="ix">05</span><span class="cat">SALES</span><span class="desc">販売前の見せ方相談。写真の選び方・文章・出品ページの整え方。</span><span class="price">¥48,000〜<span class="unit">per project</span></span><a href="#contact" class="pl" data-h>相談する →</a></div>
+      </div>
+      <p class="pnote rv">※ 出張対応・特殊塗装・パーツ持込はご相談ください。記載のない仕様も、まずは LINE でお話しさせていただきます。</p>
+    </div>
+  </section>
+
+  <!-- GARAGE -->
+  <section class="garage" id="studio">
+    <div class="cap">
+      <div class="glay">
+        <div class="gimg rv"><span class="lab">DAIKANYAMA · GARAGE</span><img class="warp parallax" data-speed="0.07" src="img/samples/car/optimized/car-owner-a.jpg" alt="ガレージの薄暗い空間で赤いスポーツカーの運転席に人物が座る後ろ姿の写真"/></div>
+        <div>
+          <div class="shead" style="margin-bottom:0"><span class="eyebrow rv">The garage</span><h2 class="jpttl rv d1">代官山の路地、<br>奥の二階建て（想定）。</h2>
+            <p class="lead rv d2">大通りからは見えない住宅街の路地で、屋号を出さずに静かに営む — そんな小さなガレージの見せ方サンプルです。一日一台のペースで向き合うイメージ。</p></div>
+          <div class="ginfo">
+            <div class="gcell rv"><div class="k">Location <span style="color:var(--faint);font-size:10px">(架空)</span></div><div class="v">東京都渋谷区代官山町 ◯-◯（架空の住所例）<br>恵比寿駅 徒歩 9 分・代官山駅 徒歩 5 分の想定。看板はありません。</div></div>
+            <div class="gcell rv d1"><div class="k">Hours</div><div class="v"><b>11:00 — 19:00</b><br>火曜・水曜定休。撮影は夜間も承ります。</div></div>
+            <div class="gcell rv d2"><div class="k">Capacity</div><div class="v">屋内ピット <b>2 台</b> / 撮影 <b>1 台</b><br>一日一台のペースを想定（サンプル）。</div></div>
+            <div class="gcell rv d3"><div class="k">Visit</div><div class="v"><b>完全予約制</b><br>ご来店前に必ず LINE で日時をご相談ください。</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORIES -->
+  <section class="stories" id="stories">
+    <div class="cap">
+      <div class="shead"><span class="ix anton rv">003 / CASES</span><span class="eyebrow rv d1">Three examples</span><h2 class="jpttl rv d2">三つの相談例。</h2>
+        <p class="lead rv d3">引き算からはじめる、と書きました。一台ずつ違う「やめておく勇気」があります。三件だけ、進め方の例を。</p></div>
+      <div class="scards">
+        <article class="scard rv"><div class="no">N°01</div><h3>足回りだけ、半歩。</h3><div class="en">Wheel &amp; ride height</div><p>「もっと盛りたい」というご相談には、まずホイールだけ変えて 1 ヶ月乗っていただく形を提案することも。足回り以外は触らない方向に落ち着く例も。やらないことを決めるのも、仕事のうち。</p><div class="spec"><b>輸入セダン想定</b> / Wheel / Ride-height</div></article>
+        <article class="scard rv d1"><div class="no">N°02</div><h3>艶を出す前に、下地。</h3><div class="en">Surface &amp; coating</div><p>「とりあえずコーティングだけ」というご相談には、塗装の状態を見て下地補修からお勧めすることも。プレミアムコート前に 1 日多くお時間を。深い艶は、下地が 8 割。</p><div class="spec"><b>国産クーペ想定</b> / Polish / Premium coat</div></article>
+        <article class="scard rv d2"><div class="no">N°03</div><h3>売却用に、夜の撮影で。</h3><div class="en">Photoshoot</div><p>売却サイトの写真として、昼ではなく夜・室内灯下で 7 カットといった見せ方も。ヘッドライトと塗装の艶が映る構図に絞ると、写真の訴求が変わります。</p><div class="spec"><b>輸入スポーツ想定</b> / Photo only / 7 cuts</div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="cap">
+      <div class="big anton rv">LINE<span class="dot">.</span> FIRST<span class="dot">.</span></div>
+      <p class="lead rv d1">まずは車両写真と、ご相談を一言。<br>こちらから、合う方向と概算の例を LINE でお返しします。</p>
+      <div class="rv d2"><a href="https://lin.ee/8StAYYY" class="btn btn-p" data-h>LINEで仕様を相談する <span class="a">→</span></a></div>
+      <div class="disc rv d3">
+        ※ LINE ボタンはすべて MISERU 公式 LINE につながります（架空店舗の連絡先ではありません）。<br><br>
+        <b>これは MISERU が制作した架空の演出強めサンプル HP です。</b>掲載されているガレージ・住所・料金はすべて<b>見せ方の表示例（架空）</b>で、実在店舗・実在事例ではありません。<br>
+        <span class="warn">※ 無料の 1 ページ改善案・無料相談に、実際の写真撮影は含まれません。</span>まずは今ある写真で、何をどう見せるかを整理します。<br><br>
+        — このサンプルでは、<b>車の迫力に加えて「写真／グラフィック／動き／相談導線が一体で動くか」</b>を技術見本としても提示しています。MISERU 自身の料金・サービス内容は <a href="index.html" style="color:var(--amber);text-decoration:underline">MISERU トップ</a> をご覧ください。
+      </div>
+    </div>
+  </section>
+
+  <!-- MISERU -->
+  <section class="miseru">
+    <div class="cap">
+      <h2 class="rv">この表現を、あなたの仕事に合わせて。</h2>
+      <p class="lead rv d1">MISERU は中小事業の Web を整える編集室。写真・文章・スマホ導線を整えて、"相談されるページ" に近づけます。まず 1 ページ、無料で見立てをお返しします。</p>
+      <div class="cta rv d2">
+        <a href="index.html#contact" class="btn btn-p" data-h>MISERU に無料相談する <span class="a">→</span></a>
+        <a href="https://lin.ee/8StAYYY" class="btn btn-g" data-h>MISERU 公式 LINE で相談 →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer><div class="cap"><div class="fm">MISERU SAMPLE — GRAPHIC EDITION</div>
+    <div class="fl">fictional website · 実在事例ではありません · <a href="index.html" data-h>MISERU トップへ</a> · <a href="sample-car.html" data-h>通常版 sample-car</a></div></div></footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var isMobile=window.innerWidth<860;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  document.querySelectorAll('img.warp').forEach(function(img){img.addEventListener('error',function(){var d=document.createElement('div');d.className='imgfb';d.textContent='IMAGE';if(img.parentNode)img.parentNode.replaceChild(d,img);});});
+
+  document.querySelectorAll('.split').forEach(function(el){var t=el.textContent,f='';for(var i=0;i<t.length;i++){var c=t[i];f+= c===' '?'<span style="width:.3em">&nbsp;</span>':'<span style="transition-delay:'+(i*0.035).toFixed(3)+'s">'+c+'</span>';}el.innerHTML=f;});
+
+  var prog=0, vel=0, carVel=0;
+
+  /* ===== WebGL ===== */
+  var canvas=document.getElementById('bg'),renderer,ok=true;
+  try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true,alpha:false,powerPreference:'high-performance'});}catch(e){ok=false;}
+  if(ok&&(!renderer||!renderer.getContext()))ok=false;
+  if(ok){
+    var DPR=Math.min(window.devicePixelRatio||1,isMobile?1.5:2);renderer.setPixelRatio(DPR);renderer.setClearColor(0x060507,1);
+    var persp=new THREE.PerspectiveCamera(50,1,0.1,100);persp.position.set(0,0,14);
+    var ortho=new THREE.OrthographicCamera(-1,1,1,-1,0,1);
+    var gradScene=new THREE.Scene(),fxScene=new THREE.Scene();
+    var rtScale=isMobile?0.4:0.7;
+    var rt=new THREE.WebGLRenderTarget(2,2,{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,format:THREE.RGBAFormat});
+    var NOISE=`float h21(vec2 p){p=fract(p*vec2(123.34,345.45));p+=dot(p,p+34.345);return fract(p.x*p.y);}
+      float vn(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.0-2.0*f);float a=h21(i),b=h21(i+vec2(1.,0.)),c=h21(i+vec2(0.,1.)),d=h21(i+vec2(1.,1.));return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);}
+      float fbm(vec2 p){float v=0.,a=.5;mat2 m=mat2(1.6,1.2,-1.2,1.6);for(int i=0;i<5;i++){v+=a*vn(p);p=m*p;a*=.5;}return v;}`;
+    // near-black bg, color only as faint streaks (so red/photos pop)
+    var gradMat=new THREE.ShaderMaterial({depthTest:false,depthWrite:false,
+      uniforms:{uTime:{value:0},uRes:{value:new THREE.Vector2(1,1)},uScroll:{value:0},uVel:{value:0}},
+      vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+      fragmentShader:NOISE+`varying vec2 vUv;uniform float uTime;uniform vec2 uRes;uniform float uScroll;uniform float uVel;
+        void main(){vec2 uv=vUv;vec2 p=uv;p.x*=uRes.x/uRes.y;float t=uTime*0.035;
+          vec2 w=vec2(fbm(p*2.0+t),fbm(p*2.0-t+3.1));p+=(w-0.5)*(0.08+uVel*0.4);p.y+=uScroll*0.7;
+          float n=fbm(p*1.7+vec2(t,-t));float n2=fbm(p*2.8-vec2(t*0.6,t*0.3)+n);
+          vec3 col=vec3(0.012,0.010,0.014);
+          col=mix(col,vec3(0.07,0.012,0.02),smoothstep(0.35,0.85,n)*0.7);
+          float s=sin((uv.x*1.3+uv.y*0.5)*5.0-uTime*0.45+uScroll*5.0+n*3.0);float streak=smoothstep(0.7,1.0,s*0.5+0.5);
+          col+=vec3(1.0,0.55,0.22)*pow(streak,3.0)*(0.06+uVel*1.2);
+          float vig=smoothstep(1.2,0.2,length(uv-0.5));col*=mix(0.22,1.0,vig);
+          gl_FragColor=vec4(col,1.0);}`});
+    gradScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),gradMat));
+    // embers
+    var EC=isMobile?160:700;var pg=new THREE.BufferGeometry();
+    var pos=new Float32Array(EC*3),sd=new Float32Array(EC),sz=new Float32Array(EC);
+    for(var i=0;i<EC;i++){pos[i*3]=(Math.random()-0.5)*40;pos[i*3+1]=(Math.random()-0.5)*28;pos[i*3+2]=(Math.random()-0.5)*26-4;sd[i]=Math.random();sz[i]=Math.random()*2.2+0.5;}
+    pg.setAttribute('position',new THREE.BufferAttribute(pos,3));pg.setAttribute('aSeed',new THREE.BufferAttribute(sd,1));pg.setAttribute('aSize',new THREE.BufferAttribute(sz,1));
+    var pMat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,depthTest:false,blending:THREE.AdditiveBlending,
+      uniforms:{uTime:{value:0},uVel:{value:0}},
+      vertexShader:`attribute float aSeed;attribute float aSize;uniform float uTime;uniform float uVel;varying float vS;
+        void main(){vS=aSeed;vec3 p=position;p.x+=sin(uTime*0.25+aSeed*30.0)*1.4;p.y+=cos(uTime*0.2+aSeed*22.0)*1.2+uTime*0.28*(0.3+aSeed);p.y=mod(p.y+14.0,28.0)-14.0;
+          vec4 mv=modelViewMatrix*vec4(p,1.0);gl_PointSize=aSize*(1.0+uVel*2.0)*(300.0/max(-mv.z,0.1));gl_Position=projectionMatrix*mv;}`,
+      fragmentShader:`varying float vS;void main(){vec2 c=gl_PointCoord-0.5;float d=length(c);if(d>0.5)discard;float a=smoothstep(0.5,0.0,d);
+        vec3 col=mix(vec3(1.0,0.6,0.25),vec3(1.0,0.25,0.12),vS);gl_FragColor=vec4(col,a*0.6);}`});
+    var pts=new THREE.Points(pg,pMat);fxScene.add(pts);
+    // chrome orb
+    var geo=new THREE.IcosahedronGeometry(2.0,3);
+    var orbMat=new THREE.ShaderMaterial({depthTest:true,depthWrite:true,
+      uniforms:{uScene:{value:rt.texture},uRes:{value:new THREE.Vector2(1,1)},uTime:{value:0}},
+      vertexShader:`varying vec3 vN;void main(){vN=normalize(normalMatrix*normal);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}`,
+      fragmentShader:`precision highp float;uniform sampler2D uScene;uniform vec2 uRes;uniform float uTime;varying vec3 vN;
+        void main(){vec2 sUv=gl_FragCoord.xy/uRes;vec2 off=vN.xy*0.14;float ca=0.022;
+          vec3 col;col.r=texture2D(uScene,sUv-off*(1.0+ca)).r;col.g=texture2D(uScene,sUv-off).g;col.b=texture2D(uScene,sUv-off*(1.0-ca)).b;
+          float fres=pow(1.0-max(vN.z,0.0),2.6);
+          vec3 irid=0.5+0.5*cos(6.2831*(vN.y*0.5+0.5+vec3(0.0,0.33,0.67)));
+          col=mix(col,col*1.3+vec3(0.85)*fres,fres*0.75);
+          col=mix(col,col*irid*1.25,0.22);
+          col+=fres*vec3(1.0,0.96,0.9)*0.55;
+          col+=vec3(0.5,0.08,0.05)*pow(fres,1.5)*0.3;
+          gl_FragColor=vec4(col,1.0);}`});
+    var orb=new THREE.Mesh(geo,orbMat);fxScene.add(orb);
+    var db=new THREE.Vector2();
+    function rs(){var w=window.innerWidth,h=window.innerHeight;renderer.setSize(w,h,false);persp.aspect=w/h;persp.updateProjectionMatrix();
+      renderer.getDrawingBufferSize(db);rt.setSize(Math.max(2,Math.floor(db.x*rtScale)),Math.max(2,Math.floor(db.y*rtScale)));
+      gradMat.uniforms.uRes.value.set(db.x,db.y);orbMat.uniforms.uRes.value.set(db.x,db.y);}
+    window.addEventListener('resize',rs);rs();
+    var clock=new THREE.Clock();
+    window.__rl=function(){var t=clock.getElapsedTime();
+      gradMat.uniforms.uTime.value=t;gradMat.uniforms.uScroll.value=prog;gradMat.uniforms.uVel.value=vel;
+      pMat.uniforms.uTime.value=t;pMat.uniforms.uVel.value=vel;orbMat.uniforms.uTime.value=t;
+      var e=prog;orb.rotation.x+=0.0025+vel*0.04;orb.rotation.y+=0.004+vel*0.05;
+      orb.position.x=4.6+e*5.5;orb.position.y=1.2+Math.sin(t*0.4)*0.3-e*3.0;orb.position.z=-2.0;
+      var sc=(0.85-e*0.45)*(1.0+vel*0.1);if(sc<0.22)sc=0.22;orb.scale.setScalar(sc);
+      orb.visible=false;pts.visible=true;
+      renderer.setRenderTarget(rt);renderer.autoClear=true;renderer.render(gradScene,ortho);renderer.autoClear=false;renderer.render(fxScene,persp);
+      renderer.setRenderTarget(null);renderer.autoClear=true;renderer.render(gradScene,ortho);renderer.autoClear=false;renderer.render(fxScene,persp);
+      if(!isMobile){orb.visible=true;pts.visible=false;renderer.clearDepth();renderer.render(fxScene,persp);}renderer.autoClear=true;};
+  }
+
+  /* ===== ASK ME ANYTHING (canned, keyword routed) ===== */
+  var intents=[
+    {k:['コーティング','コート','艶','光沢','ガラス','coat','保護'],a:'コーティングですね。下地洗浄から丁寧に、ガラス系で 2〜3 日が目安です。料金の早見表でプラン感をどうぞ。',go:'#pricing',label:'PRICING を見る'},
+    {k:['売','手放','処分','査定','sell','sale'],a:'売却前の見せ方ですね。夜・室内灯下で 7 カットなど、艶が映る撮り方の例があります。',go:'#stories',label:'相談例を見る'},
+    {k:['カスタム','ホイール','車高','エアロ','custom','弄','イジ','改造','下げ'],a:'カスタムですね。まずは引き算から。一台ずつ図面を引いて進めます。仕様は LINE でどうぞ。',go:'#pricing',label:'PRICING を見る'},
+    {k:['写真','撮影','photo','shoot','カット','映え','sns','インスタ'],a:'撮影ですね。仕様の見え方を残す 5 カットなど、目的に合わせて。まずは型を見てみてください。',go:'#works',label:'STYLES を見る'},
+    {k:['料金','価格','値段','いくら','費用','price','cost','相場'],a:'料金の早見表はこちらです。実物を拝見してからのお見積りが基本で、押し売りはしません。',go:'#pricing',label:'PRICING を見る'},
+    {k:['場所','どこ','住所','アクセス','駅','garage','studio','店'],a:'代官山の住宅街にある小さな工房（架空）です。完全予約制で、看板は出していません。',go:'#studio',label:'GARAGE を見る'},
+    {k:['バイク','二輪','単車','bike','moto'],a:'バイクも同じ考え方で。仕様相談・コーティング・撮影まで一台ずつ。まずは LINE でお話を。',go:'#contact',label:'CONTACT へ'}
+  ];
+  var def={a:'なるほど。まずは車両写真と、ご希望を一言だけ LINE で教えてください。合う方向と概算をお返しします。',go:'#contact',label:'LINE で相談'};
+  var chatlog=document.getElementById('chatlog');
+  function add(cls,html){if(!chatlog)return null;var d=document.createElement('div');d.className='msg '+cls;d.innerHTML=html;chatlog.appendChild(d);while(chatlog.children.length>3)chatlog.removeChild(chatlog.firstChild);return d;}
+  function match(q){q=(q||'').toLowerCase();for(var i=0;i<intents.length;i++){for(var j=0;j<intents[i].k.length;j++){if(q.indexOf(intents[i].k[j].toLowerCase())>=0)return intents[i];}}return def;}
+  function highlight(el){if(!el)return;el.classList.add('hl');setTimeout(function(){el.classList.remove('hl');},1800);}
+  var busy=false;
+  function ask(q){if(busy||!q)return;busy=true;
+    var hit=match(q);
+    add('b',hit.a+'<br><span class="go">'+hit.label+' →</span>');
+    setTimeout(function(){var el=document.querySelector(hit.go);if(el){el.scrollIntoView({behavior:reduce?'auto':'smooth'});highlight(el);}busy=false;},650);
+  }
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){ask(c.getAttribute('data-q'));});});
+
+  /* ===== Gallery (main + thumbs) — 横スクロール廃止 ===== */
+  var track=null,lastSL=0; // legacy refs kept null for loop() guards
+  var galData=[
+    {src:'img/samples/car/optimized/car-hero.jpg',  alt:'建物前の赤いスポーツカー',           en:'STREET SHOT', jp:'街の中で、存在感を見せる。'},
+    {src:'img/samples/car/optimized/car-westin.jpg',alt:'ホテル前の赤いスポーツカー',         en:'URBAN FRONT', jp:'都市の前景に、車を置く。'},
+    {src:'img/samples/car/optimized/car-rolex.jpg', alt:'街中の赤いスポーツカー（昼）',       en:'DAYTIME',     jp:'日中の光で、艶を見せる。'},
+    {src:'img/samples/car/optimized/car-street.jpg',alt:'ドアを開けた赤いスポーツカー',       en:'DOORS OPEN',  jp:'ドアの開き方で、所作を見せる。'},
+    {src:'img/samples/car/optimized/car-owner-a.jpg',alt:'ガレージで運転席に座る人物',         en:'GARAGE CUT',  jp:'保管環境とオーナー感を見せる。'}
+  ];
+  var galImg=document.getElementById('galImg');
+  var galFrame=document.getElementById('galFrame');
+  var galNum=document.querySelector('.gal-num');
+  var galEn=document.querySelector('.gal-en');
+  var galJp=document.querySelector('.gal-jp');
+  var gNow=document.getElementById('gNow');
+  var gTotal=document.getElementById('gTotal');
+  var thumbs=document.querySelectorAll('.thumb');
+  var galIdx=0,galBusy=false;
+  function pad2(n){return ('0'+n).slice(-2);}
+  if(gTotal)gTotal.textContent=pad2(galData.length);
+  function setGal(i){
+    if(galBusy)return;
+    if(i<0)i=galData.length-1;
+    if(i>=galData.length)i=0;
+    if(i===galIdx)return;
+    galBusy=true;galIdx=i;
+    var d=galData[i];
+    if(galFrame)galFrame.classList.add('swap');
+    setTimeout(function(){
+      if(galImg){galImg.src=d.src;galImg.alt=d.alt;}
+      if(galNum)galNum.textContent=pad2(i+1);
+      if(galEn)galEn.textContent=d.en;
+      if(galJp)galJp.textContent=d.jp;
+      if(gNow)gNow.textContent=pad2(i+1);
+      thumbs.forEach(function(t,k){t.classList.toggle('on',k===i);});
+      requestAnimationFrame(function(){if(galFrame)galFrame.classList.remove('swap');galBusy=false;});
+    },260);
+  }
+  thumbs.forEach(function(t){t.addEventListener('click',function(){setGal(parseInt(t.getAttribute('data-i'),10));});});
+  var gPrev=document.getElementById('gPrev'),gNext=document.getElementById('gNext');
+  if(gPrev)gPrev.addEventListener('click',function(){setGal(galIdx-1);});
+  if(gNext)gNext.addEventListener('click',function(){setGal(galIdx+1);});
+  // keyboard
+  document.addEventListener('keydown',function(e){
+    if(e.target&&/^(INPUT|TEXTAREA)$/.test(e.target.tagName))return;
+    if(e.key==='ArrowLeft')setGal(galIdx-1);
+    else if(e.key==='ArrowRight')setGal(galIdx+1);
+  });
+  // swipe (補助)
+  if(galFrame){
+    var sX=0,sY=0,sw=false;
+    galFrame.addEventListener('pointerdown',function(e){sX=e.clientX;sY=e.clientY;sw=true;});
+    galFrame.addEventListener('pointerup',function(e){
+      if(!sw)return;sw=false;
+      var dx=e.clientX-sX,dy=e.clientY-sY;
+      if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5){if(dx<0)setGal(galIdx+1);else setGal(galIdx-1);}
+    });
+    galFrame.addEventListener('pointercancel',function(){sw=false;});
+  }
+
+  /* ===== scroll loop ===== */
+  var dmap=document.getElementById('dmap');
+  var parImgs=Array.prototype.slice.call(document.querySelectorAll('.parallax'));
+  var prgEl=document.getElementById('prog');
+  var lastY=window.scrollY,smoothV=0,vh=window.innerHeight,introH=window.innerHeight;
+  document.body.classList.add('noflt');
+  window.addEventListener('resize',function(){vh=window.innerHeight;introH=window.innerHeight;});
+  function loop(){
+    var y=window.scrollY,raw=y-lastY;lastY=y;smoothV+=(raw-smoothV)*0.18;var av=Math.min(Math.abs(smoothV),60);
+    if(track){var dsl=track.scrollLeft-lastSL;lastSL=track.scrollLeft;carVel=Math.min(Math.abs(dsl),80);} 
+    var maxv=Math.max(av,carVel*0.7);
+    vel+=(av/60-vel)*0.15;
+    var docH=document.documentElement.scrollHeight-vh;prog=docH>0?y/docH:0;
+    if(prgEl)prgEl.style.width=(prog*100).toFixed(2)+'%';
+    if(!reduce){ if(maxv>0.8)document.body.classList.remove('noflt'); else if(maxv<0.3)document.body.classList.add('noflt');
+      if(dmap){var sc=1.4+Math.min(maxv,45)*0.55;dmap.setAttribute('scale',sc.toFixed(2));} }
+    if(y>introH*0.5)document.body.classList.add('ui-on');else document.body.classList.remove('ui-on');
+    var cy=vh*0.5;
+    for(var i=0;i<parImgs.length;i++){var el=parImgs[i];var r=el.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)continue;
+      var off=(r.top+r.height*0.5-cy);var sp=parseFloat(el.getAttribute('data-speed'))||0.06;var mv=-off*sp,lim=r.height*0.07;if(mv>lim)mv=lim;if(mv<-lim)mv=-lim;
+      el.style.transform='translate3d(0,'+mv.toFixed(1)+'px,0) scale(1.16)';}
+    if(window.__rl)window.__rl();
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+
+  /* reveals */
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    document.querySelectorAll('.rv,.split').forEach(function(el){io.observe(el);});}
+  else document.querySelectorAll('.rv,.split').forEach(function(el){el.classList.add('in');});
+
+  /* cursor */
+  if(!isMobile){var cur=document.getElementById('cur'),cx=innerWidth/2,cyy=innerHeight/2,tx=cx,ty=cyy;
+    window.addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;});
+    (function ez(){cx+=(tx-cx)*0.2;cyy+=(ty-cyy)*0.2;cur.style.left=cx+'px';cur.style.top=cyy+'px';requestAnimationFrame(ez);})();
+    document.querySelectorAll('[data-h]').forEach(function(el){el.addEventListener('mouseenter',function(){cur.classList.add('on');});el.addEventListener('mouseleave',function(){cur.classList.remove('on');});});
+    if(track){track.addEventListener('mouseenter',function(){cur.classList.add('drag');});track.addEventListener('mouseleave',function(){cur.classList.remove('drag');});}
+  }
+
+  /* boot */
+  function boot(){document.body.classList.add('ready');document.querySelectorAll('.split').forEach(function(e){e.classList.add('in');});}
+  if(document.fonts&&document.fonts.ready){var done=false;document.fonts.ready.then(function(){if(!done){done=true;boot();}});setTimeout(function(){if(!done){done=true;boot();}},1600);}
+  else boot();
+})();
+</script>
+</body>
+</html>
