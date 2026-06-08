@@ -214,6 +214,15 @@
   .chk .body b{color:var(--ink);font-weight:700}
   .chk .body small{display:block;color:var(--ink-soft);font-size:12px;margin-top:3px;font-weight:400;letter-spacing:.005em}
 
+  /* chk: interactive — input[checkbox] + label */
+  .chk-input{position:absolute;opacity:0;width:1px;height:1px;overflow:hidden;pointer-events:none}
+  label.chk{cursor:pointer;position:relative;min-height:44px}
+  .chk{transition:padding .2s var(--ease),background .2s,border-radius .2s}
+  .chk-input:checked + .box{background:var(--green);border-color:var(--green)}
+  .chk-input:checked + .box::after{opacity:1}
+  label.chk:has(.chk-input:checked){background:rgba(122,195,166,.08);border-radius:8px;padding-left:10px;padding-right:8px}
+  .chk-line-note{font-family:var(--gothic);font-size:12.5px;color:var(--ink-soft);margin-top:18px;padding:10px 14px;background:rgba(122,195,166,.1);border-radius:8px;border-left:2px solid var(--green);line-height:1.8;font-weight:500;letter-spacing:.005em}
+
   .check-side{display:grid;gap:24px;align-self:stretch}
   .check-info{background:var(--paper-mint);border-radius:22px;padding:30px 30px 28px;position:relative}
   .check-info::before{content:"";position:absolute;top:-12px;left:30px;background:#fff;border:1px solid var(--ink-line);width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--hand);font-weight:700;font-size:24px;color:var(--coral-d);box-shadow:0 6px 14px -6px rgba(40,54,72,.18);content:"i"}
@@ -553,12 +562,13 @@
       <div class="check-sheet r">
         <div class="h">気になることを、チェック</div>
         <div class="chk-list stg">
-          <div class="chk"><span class="box" aria-hidden="true"></span><span class="body"><b>はじめての場所が、ちょっと怖い</b><small>はじめは抱っこのままご挨拶 → 慣れたら少しずつ。無理に離しません。</small></span></div>
-          <div class="chk"><span class="box" aria-hidden="true"></span><span class="body"><b>シニア、足腰が心配</b><small>段差なしの静かなお部屋でゆっくり。散歩の歩幅も合わせます。</small></span></div>
-          <div class="chk"><span class="box" aria-hidden="true"></span><span class="body"><b>お薬を飲ませる必要がある</b><small>時間・量を LINE で事前にお預かり。投薬時刻もメモでお返しします。</small></span></div>
-          <div class="chk"><span class="box" aria-hidden="true"></span><span class="body"><b>ふだんのごはんを持参したい</b><small>大歓迎です。普段のリズムを崩さない方が、その子も楽です。</small></span></div>
-          <div class="chk"><span class="box" aria-hidden="true"></span><span class="body"><b>ほかの犬がちょっと苦手</b><small>1 日 4 頭までの少人数制。ご縁次第で完全 1on1 もご相談ください。</small></span></div>
+          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>はじめての場所が、ちょっと怖い</b><small>はじめは抱っこのままご挨拶 → 慣れたら少しずつ。無理に離しません。</small></span></label>
+          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>シニア、足腰が心配</b><small>段差なしの静かなお部屋でゆっくり。散歩の歩幅も合わせます。</small></span></label>
+          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>お薬を飲ませる必要がある</b><small>時間・量を LINE で事前にお預かり。投薬時刻もメモでお返しします。</small></span></label>
+          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>ふだんのごはんを持参したい</b><small>大歓迎です。普段のリズムを崩さない方が、その子も楽です。</small></span></label>
+          <label class="chk"><input type="checkbox" class="chk-input"><span class="box" aria-hidden="true"></span><span class="body"><b>ほかの犬がちょっと苦手</b><small>1 日 4 頭までの少人数制。ご縁次第で完全 1on1 もご相談ください。</small></span></label>
         </div>
+        <p class="chk-line-note">気になる項目があれば、LINEでそのまま相談できます。</p>
       </div>
 
       <div class="check-side">
