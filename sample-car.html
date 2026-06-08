@@ -292,14 +292,6 @@ body.ready .loader{opacity:0;pointer-events:none}
   <a href="index.html" class="brand" aria-label="MISERU トップへ戻る" data-h><span class="g"></span><b>MISERU SAMPLE / GRAPHIC</b></a>
   <div class="topnav"><a href="#works" data-h>WORKS</a><a href="#contact" data-h>CONTACT</a></div>
 </div>
-<nav class="sidemenu">
-  <div class="h">WHAT DO YOU NEED?</div>
-  <a href="#pricing" data-h><span class="x">→</span> CUSTOM</a>
-  <a href="#pricing" data-h><span class="x">→</span> COATING</a>
-  <a href="#pricing" data-h><span class="x">→</span> PHOTO</a>
-  <a href="#pricing" data-h><span class="x">→</span> SALES</a>
-  <a href="#contact" data-h><span class="x">→</span> CONTACT</a>
-</nav>
 <a href="#contact" class="linepill" data-h><span class="d"></span> LINEで相談 ⏎</a>
 
 <div class="stage">
@@ -362,9 +354,9 @@ body.ready .loader{opacity:0;pointer-events:none}
             <img src="img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー">
             <span class="t-tag">04 DOORS</span>
           </button>
-          <button class="thumb" data-i="4" data-h aria-label="05 GARAGE CUT">
-            <img src="img/samples/car/optimized/car-owner-a.jpg" alt="ガレージで運転席に座る人物">
-            <span class="t-tag">05 GARAGE</span>
+          <button class="thumb" data-i="4" data-h aria-label="05 OWNER CUT">
+            <img src="img/samples/car/optimized/car-owner-a.jpg" alt="運転席に座るオーナーの後ろ姿">
+            <span class="t-tag">05 OWNER</span>
           </button>
         </div>
 
@@ -406,21 +398,6 @@ body.ready .loader{opacity:0;pointer-events:none}
         <div class="prow rv"><span class="ix">05</span><span class="cat">SALES</span><span class="desc">販売前の見せ方相談。写真の選び方・文章・出品ページの整え方。</span><span class="price">¥48,000〜<span class="unit">per project</span></span><a href="#contact" class="pl" data-h>相談する →</a></div>
       </div>
       <p class="pnote rv">※ 出張対応・特殊塗装・パーツ持込はご相談ください。記載のない仕様も、まずは LINE でお話しさせていただきます。</p>
-    </div>
-  </section>
-
-  <!-- GARAGE -->
-  <section class="garage" id="studio">
-    <div class="cap">
-      <div class="shead" style="margin-bottom:0"><span class="eyebrow rv">The garage</span><h2 class="jpttl rv d1">代官山の路地、<br>奥の二階建て（想定）。</h2>
-        <p class="lead rv d2">大通りからは見えない住宅街の路地で、屋号を出さずに静かに営む — そんな小さなガレージの見せ方サンプルです。一日一台のペースで向き合うイメージ。</p></div>
-      <div class="ginfo">
-        <div class="gcell rv"><div class="k">Location <span style="color:var(--faint);font-size:10px">(架空)</span></div><div class="v">東京都渋谷区代官山町 ◯-◯（架空の住所例）<br>恵比寿駅 徒歩 9 分・代官山駅 徒歩 5 分の想定。看板はありません。</div></div>
-        <div class="gcell rv d1"><div class="k">Hours</div><div class="v"><b>11:00 — 19:00</b><br>火曜・水曜定休。撮影は夜間も承ります。</div></div>
-        <div class="gcell rv d2"><div class="k">Capacity</div><div class="v">屋内ピット <b>2 台</b> / 撮影 <b>1 台</b><br>一日一台のペースを想定（サンプル）。</div></div>
-        <div class="gcell rv d3"><div class="k">Visit</div><div class="v"><b>完全予約制</b><br>ご来店前に必ず LINE で日時をご相談ください。</div></div>
-      </div>
-      <p class="pnote rv" style="border-top:1px solid var(--line);padding-top:20px;margin-top:32px;font-family:var(--mono)">車両の持ち込み・駐車スペースについては、ご来店前に LINE でお知らせください。路地が細いため、事前に進入路のご案内をお送りします。</p>
     </div>
   </section>
 
@@ -557,29 +534,6 @@ body.ready .loader{opacity:0;pointer-events:none}
       if(!isMobile){orb.visible=true;pts.visible=false;renderer.clearDepth();renderer.render(fxScene,persp);}renderer.autoClear=true;};
   }
 
-  /* ===== ASK ME ANYTHING (canned, keyword routed) ===== */
-  var intents=[
-    {k:['コーティング','コート','艶','光沢','ガラス','coat','保護'],a:'コーティングですね。下地洗浄から丁寧に、ガラス系で 2〜3 日が目安です。料金の早見表でプラン感をどうぞ。',go:'#pricing',label:'PRICING を見る'},
-    {k:['売','手放','処分','査定','sell','sale'],a:'売却前の見せ方ですね。夜・室内灯下で 7 カットなど、艶が映る撮り方の例があります。',go:'#stories',label:'相談例を見る'},
-    {k:['カスタム','ホイール','車高','エアロ','custom','弄','イジ','改造','下げ'],a:'カスタムですね。まずは引き算から。一台ずつ図面を引いて進めます。仕様は LINE でどうぞ。',go:'#pricing',label:'PRICING を見る'},
-    {k:['写真','撮影','photo','shoot','カット','映え','sns','インスタ'],a:'撮影ですね。仕様の見え方を残す 5 カットなど、目的に合わせて。まずは型を見てみてください。',go:'#works',label:'STYLES を見る'},
-    {k:['料金','価格','値段','いくら','費用','price','cost','相場'],a:'料金の早見表はこちらです。実物を拝見してからのお見積りが基本で、押し売りはしません。',go:'#pricing',label:'PRICING を見る'},
-    {k:['場所','どこ','住所','アクセス','駅','garage','studio','店'],a:'代官山の住宅街にある小さな工房（架空）です。完全予約制で、看板は出していません。',go:'#studio',label:'GARAGE を見る'},
-    {k:['バイク','二輪','単車','bike','moto'],a:'バイクも同じ考え方で。仕様相談・コーティング・撮影まで一台ずつ。まずは LINE でお話を。',go:'#contact',label:'CONTACT へ'}
-  ];
-  var def={a:'なるほど。まずは車両写真と、ご希望を一言だけ LINE で教えてください。合う方向と概算をお返しします。',go:'#contact',label:'LINE で相談'};
-  var chatlog=document.getElementById('chatlog');
-  function add(cls,html){if(!chatlog)return null;var d=document.createElement('div');d.className='msg '+cls;d.innerHTML=html;chatlog.appendChild(d);while(chatlog.children.length>3)chatlog.removeChild(chatlog.firstChild);return d;}
-  function match(q){q=(q||'').toLowerCase();for(var i=0;i<intents.length;i++){for(var j=0;j<intents[i].k.length;j++){if(q.indexOf(intents[i].k[j].toLowerCase())>=0)return intents[i];}}return def;}
-  function highlight(el){if(!el)return;el.classList.add('hl');setTimeout(function(){el.classList.remove('hl');},1800);}
-  var busy=false;
-  function ask(q){if(busy||!q)return;busy=true;
-    var hit=match(q);
-    add('b',hit.a+'<br><span class="go">'+hit.label+' →</span>');
-    setTimeout(function(){var el=document.querySelector(hit.go);if(el){el.scrollIntoView({behavior:reduce?'auto':'smooth'});highlight(el);}busy=false;},650);
-  }
-  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){ask(c.getAttribute('data-q'));});});
-
   /* ===== Gallery (main + thumbs) — 横スクロール廃止 ===== */
   var track=null,lastSL=0; // legacy refs kept null for loop() guards
   var galData=[
@@ -587,7 +541,7 @@ body.ready .loader{opacity:0;pointer-events:none}
     {src:'img/samples/car/optimized/car-westin.jpg',alt:'ホテル前の赤いスポーツカー',         en:'URBAN FRONT', jp:'都市の前景に、車を置く。'},
     {src:'img/samples/car/optimized/car-rolex.jpg', alt:'街中の赤いスポーツカー（昼）',       en:'DAYTIME',     jp:'日中の光で、艶を見せる。'},
     {src:'img/samples/car/optimized/car-street.jpg',alt:'ドアを開けた赤いスポーツカー',       en:'DOORS OPEN',  jp:'ドアの開き方で、所作を見せる。'},
-    {src:'img/samples/car/optimized/car-owner-a.jpg',alt:'ガレージで運転席に座る人物',         en:'GARAGE CUT',  jp:'保管環境とオーナー感を見せる。'}
+    {src:'img/samples/car/optimized/car-owner-a.jpg',alt:'運転席に座るオーナーの後ろ姿',         en:'OWNER CUT',   jp:'オーナー感とこだわりを見せる。'}
   ];
   var galImg=document.getElementById('galImg');
   var galFrame=document.getElementById('galFrame');
