@@ -83,7 +83,20 @@
   .watch-item .wn{font-family:var(--font-mincho);font-size:20px;color:var(--accent);display:block;margin-bottom:8px;line-height:1}
   .watch-item h3{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px;line-height:1.5}
   .watch-item p{font-size:13px;color:var(--muted);line-height:1.85}
+  .sample-guide{
+    margin:0 0 28px;
+    padding:18px 20px;
+    background:rgba(255,255,255,.66);
+    border:1px solid var(--line);
+    border-left:3px solid var(--accent);
+    border-radius:0 8px 8px 0;
+  }
+  .sample-guide b{display:block;color:var(--ink);font-size:14px;margin-bottom:8px}
+  .sample-guide ul{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0;padding:0;list-style:none}
+  .sample-guide li{font-size:12.8px;line-height:1.7;color:var(--muted)}
+  .sample-guide strong{color:var(--accent);font-weight:700}
   @media(max-width:760px){.watch-grid{grid-template-columns:1fr 1fr;gap:16px 14px}}
+  @media(max-width:760px){.sample-guide ul{grid-template-columns:1fr}.sample-guide{padding:16px 17px;margin-bottom:22px}}
   @media(max-width:430px){.watch-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -132,6 +145,14 @@
         <p class="lead">
           実際に開けて、スクロールして、見え方を確認できます。気になる業種をお選びください。
         </p>
+      </div>
+      <div class="sample-guide" aria-label="どのサンプルを見るか迷ったときの案内">
+        <b>どれを見るか迷ったら</b>
+        <ul>
+          <li><strong>相談しやすさ・不安解消</strong>を見るなら：ペット</li>
+          <li><strong>品と写真・予約導線</strong>を見るなら：飲食</li>
+          <li><strong>技術表現・強い写真表現</strong>を見るなら：車</li>
+        </ul>
       </div>
 
       <div class="sample-card-grid">
