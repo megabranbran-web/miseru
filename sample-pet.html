@@ -235,6 +235,17 @@
   .btn-line-sm::before{content:"";width:14px;height:14px;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'><path d='M12 3C6.48 3 2 6.7 2 11.27c0 2.93 1.85 5.49 4.62 6.93-.2.74-.74 2.81-.85 3.25-.13.55.2.55.43.4.18-.12 2.79-1.9 3.92-2.68.62.09 1.24.13 1.88.13 5.52 0 10-3.7 10-8.27S17.52 3 12 3z'/></svg>") center/contain no-repeat}
   .btn-line-sm:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px rgba(6,199,85,.5)}
 
+  /* === SNS表示例（架空・タップ無効） === */
+  .diary-sns{margin-top:36px;background:#fff;border:1px solid var(--ink-line);border-radius:22px;padding:28px 30px 24px;text-align:center;box-shadow:0 18px 40px -28px rgba(40,54,72,.16)}
+  .diary-sns .h{font-family:var(--gothic);font-weight:800;font-size:15.5px;color:var(--ink);letter-spacing:.005em}
+  .diary-sns .icons{display:flex;justify-content:center;gap:20px;margin-top:18px}
+  .sns-badge{display:inline-flex;align-items:flex-end;justify-content:center;width:56px;height:56px;cursor:default;user-select:none}
+  .sns-badge svg{width:56px;height:64px;display:block}
+  .diary-sns .note{font-family:var(--gothic);font-size:11.5px;color:var(--ink-soft);margin-top:14px;letter-spacing:.005em}
+  .sns-mini{display:inline-flex;gap:8px;align-items:center;cursor:default;user-select:none}
+  .sns-mini svg{width:32px;height:37px;display:block}
+  .sns-mini .lbl{font-family:var(--gothic);font-size:10px;color:var(--ink-soft)}
+
   .check-side{display:grid;gap:24px;align-self:stretch}
   .check-info{background:var(--paper-mint);border-radius:22px;padding:30px 30px 28px;position:relative}
   .check-info::before{content:"";position:absolute;top:-12px;left:30px;background:#fff;border:1px solid var(--ink-line);width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--hand);font-weight:700;font-size:24px;color:var(--coral-d);box-shadow:0 6px 14px -6px rgba(40,54,72,.18);content:"i"}
@@ -560,6 +571,56 @@
         </div>
       </article>
     </div>
+
+    <!-- SNS表示例（架空サンプル・リンクなし）
+         TODO: ユーザー支給の透過PNG（子犬×Instagram・柴犬×X）が img/samples/pet/sns/ に用意できたら、
+               下のインラインSVGを <img>（128/256px webp+png）に差し替え -->
+    <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+      <defs>
+        <linearGradient id="sns-igg" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stop-color="#fed373"/><stop offset=".3" stop-color="#f55245"/><stop offset=".65" stop-color="#d6249f"/><stop offset="1" stop-color="#6053dc"/>
+        </linearGradient>
+        <g id="sns-sym-ig">
+          <ellipse cx="27" cy="22" rx="10" ry="13" fill="#c98a4b" transform="rotate(-24 27 22)"/>
+          <ellipse cx="73" cy="22" rx="10" ry="13" fill="#c98a4b" transform="rotate(24 73 22)"/>
+          <rect x="14" y="38" width="72" height="70" rx="17" fill="url(#sns-igg)"/>
+          <rect x="31" y="55" width="38" height="38" rx="11" fill="none" stroke="#fff" stroke-width="4.6"/>
+          <circle cx="50" cy="74" r="9" fill="none" stroke="#fff" stroke-width="4.6"/>
+          <circle cx="62.6" cy="61.4" r="2.9" fill="#fff"/>
+          <circle cx="50" cy="23" r="19.5" fill="#e9bc7e"/>
+          <path d="M33 17 a19.5 19.5 0 0 1 34 0 l-7.4 9 h-19.2 z" fill="#f7e7cb"/>
+          <circle cx="42" cy="20.5" r="3.2" fill="#37281a"/><circle cx="58" cy="20.5" r="3.2" fill="#37281a"/>
+          <circle cx="43.1" cy="19.4" r=".95" fill="#fff"/><circle cx="59.1" cy="19.4" r=".95" fill="#fff"/>
+          <ellipse cx="50" cy="27" rx="3.4" ry="2.6" fill="#37281a"/>
+          <path d="M45.6 30.5 q4.4 3.6 8.8 0" stroke="#37281a" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+          <ellipse cx="32.5" cy="40" rx="6.6" ry="4.6" fill="#f7e7cb"/><ellipse cx="67.5" cy="40" rx="6.6" ry="4.6" fill="#f7e7cb"/>
+          <path d="M30 41.5 v-2.6 M34.8 41.5 v-2.6 M65.2 41.5 v-2.6 M70 41.5 v-2.6" stroke="#dcbf92" stroke-width="1.2" stroke-linecap="round"/>
+        </g>
+        <g id="sns-sym-x">
+          <path d="M28 24 L18 6 q9 -5 16 1 z" fill="#e89b4e"/><path d="M72 24 L82 6 q-9 -5 -16 1 z" fill="#e89b4e"/>
+          <path d="M27 22 L20 9 q7 -3.4 12 1.8 z" fill="#f7e7cb"/><path d="M73 22 L80 9 q-7 -3.4 -12 1.8 z" fill="#f7e7cb"/>
+          <rect x="14" y="38" width="72" height="70" rx="17" fill="#0f1419"/>
+          <path d="M32 54 h10.5 L50 64.5 57.5 54 H68 L55 71.5 69 91 H58.5 L50 78.8 41.5 91 H31 L45 71.5 Z" fill="#fff"/>
+          <circle cx="50" cy="23" r="19.5" fill="#e89b4e"/>
+          <path d="M36 30 a19.5 19.5 0 0 0 28 0 q-6 8 -14 8 t-14 -8z" fill="#f7e7cb"/>
+          <ellipse cx="50" cy="31" rx="11" ry="8.6" fill="#f7e7cb"/>
+          <circle cx="41.5" cy="21" r="3.2" fill="#37281a"/><circle cx="58.5" cy="21" r="3.2" fill="#37281a"/>
+          <circle cx="42.6" cy="19.9" r=".95" fill="#fff"/><circle cx="59.6" cy="19.9" r=".95" fill="#fff"/>
+          <ellipse cx="50" cy="27.5" rx="3.2" ry="2.5" fill="#37281a"/>
+          <path d="M45.8 31 q4.2 3.4 8.4 0" stroke="#37281a" stroke-width="1.9" fill="none" stroke-linecap="round"/>
+          <ellipse cx="32.5" cy="40" rx="6.6" ry="4.6" fill="#f7e7cb"/><ellipse cx="67.5" cy="40" rx="6.6" ry="4.6" fill="#f7e7cb"/>
+          <path d="M30 41.5 v-2.6 M34.8 41.5 v-2.6 M65.2 41.5 v-2.6 M70 41.5 v-2.6" stroke="#dcbf92" stroke-width="1.2" stroke-linecap="round"/>
+        </g>
+      </defs>
+    </svg>
+    <div class="diary-sns r">
+      <div class="h">ふだんの様子は、InstagramとXでも。</div>
+      <div class="icons">
+        <span class="sns-badge" role="img" aria-label="Instagram の表示例（架空サンプル）"><svg viewBox="0 0 100 112"><use href="#sns-sym-ig"/></svg></span>
+        <span class="sns-badge" role="img" aria-label="X の表示例（架空サンプル）"><svg viewBox="0 0 100 112"><use href="#sns-sym-x"/></svg></span>
+      </div>
+      <p class="note">※ 架空サンプルのSNS表示例です（リンク先はありません）</p>
+    </div>
   </div>
 </section>
 
@@ -621,7 +682,7 @@
         <div class="check-info r">
           <div class="h">第一種動物取扱業 登録済み</div>
           <p>店主は元・動物看護師。お薬対応・シニア対応の経験があり、近くに動物病院もあるため、もしものときも安心していただけます。</p>
-          <div class="lic"><b>動物取扱業登録</b><br>東京都 第◯◯◯◯◯号（保管）<br>取扱責任者：Misaki</div>
+          <div class="lic"><b>動物取扱業登録</b><br>東京都 第◯◯◯◯◯号（保管）<small style="opacity:.8">（架空の表示例です）</small><br>取扱責任者：Misaki</div>
         </div>
 
         <div class="trial-card r">
@@ -829,6 +890,11 @@
 <footer>
   <div class="wrap">
     <div class="copy">うちのこ通い帳<small>MISERU SAMPLE</small></div>
+    <div class="sns-mini" role="img" aria-label="SNSアイコンの表示例（架空サンプル）">
+      <svg viewBox="0 0 100 112" aria-hidden="true"><use href="#sns-sym-ig"/></svg>
+      <svg viewBox="0 0 100 112" aria-hidden="true"><use href="#sns-sym-x"/></svg>
+      <span class="lbl">表示例</span>
+    </div>
     <div class="meta">fictional website · 実在事例ではありません · <a href="index.html">MISERU トップへ</a></div>
   </div>
 </footer>
