@@ -215,6 +215,7 @@
   .price-row .first{color:var(--accent-d);font-weight:900;font-size:17px}
   .price-row .normal{color:var(--soft);font-size:14.5px}
   .price-foot{margin-top:22px;font-size:13px;color:var(--soft);line-height:1.9}
+  .price-inline-note{padding:14px 6px 4px;font-size:13px;color:var(--accent-d);font-weight:500;border-bottom:1px solid var(--line)}
 
   /* flow */
   .flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:50px;counter-reset:fl}
@@ -1039,50 +1040,46 @@
     <div class="price-list">
       <div class="price-group">まず相談・見立て <small>方向性は無料、具体整理は¥9,800〜</small></div>
       <div class="price-row reveal">
-        <div class="pname">無料相談<small>方向性のお返事のみ。具体的な改善案・文章案・写真選定・レイアウト案はお返ししません。</small></div>
+        <div class="pname">無料相談<small>方向性・合うプラン・概算の目安をお返しします。具体的な改善案・文章案・写真選定はお返ししません。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥0</span></div>
         <div class="pcol"><span class="lab">所要</span><span class="normal">2〜3 営業日</span></div>
       </div>
       <div class="price-row reveal">
-        <div class="pname">初回見立てシート<small>1ページ分の課題・写真・文章・SP導線を A4 数枚に整理。<b>具体的な改善案はここから対応します。</b></small></div>
+        <div class="pname">初回見立てシート<small>1ページ分の改善案を A4 数枚に整理。<b>具体的な改善案はここから対応します。</b></small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥9,800〜</span></div>
         <div class="pcol"><span class="lab">所要</span><span class="normal">約 1 週間</span></div>
       </div>
       <div class="price-group">基本プラン <small>3つから選べる料金の軸</small></div>
       <div class="price-row reveal">
-        <div class="pname">BASIC｜見せ方ライト改善<small>今あるHP・Instagram・写真を活かし、見出し・写真の並び・スマホ導線を整えます。<b>撮影は含みません。</b></small></div>
+        <div class="pname">BASIC｜見せ方リペア<small>今あるHP・Instagram・写真を活かして整えます。<b>撮影なし。</b>　向いている方：今ある素材を活かしたい</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥98,000〜</span></div>
-        <div class="pcol"><span class="lab">向いている方</span><span class="normal">今ある素材を活かしたい</span></div>
+        <div class="pcol"><span class="lab">目安納期</span><span class="normal">2〜3 週間〜</span></div>
       </div>
       <div class="price-row feature reveal">
-        <div class="pname">STANDARD｜撮影込み1ページLP<small><b>おすすめ。</b>現地撮影 + 1ページLP制作。写真が足りない方、最初から整えたい方向け。</small></div>
+        <div class="pname">STANDARD｜撮影込み・おまかせHP<small><b>おすすめ。</b>現地撮影＋トップ＋必要な2〜4ページ（料金・アクセス・FAQ・問い合わせ等）。　向いている方：写真ごと、ちゃんと整えたい</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥298,000〜</span></div>
-        <div class="pcol"><span class="lab">向いている方</span><span class="normal">写真から整えたい</span></div>
+        <div class="pcol"><span class="lab">目安納期</span><span class="normal">4〜6 週間〜</span></div>
       </div>
       <div class="price-row reveal">
-        <div class="pname">PREMIUM｜撮影込みブランドLP / 小規模HP<small>撮影・文章・構成・下層導線まで整える上位プラン。情報量やブランド感が必要な方向け。</small></div>
+        <div class="pname">PREMIUM｜撮影込み・しっかりHP<small>撮影＋10ページ前後＋構成・文章の全面設計。　向いている方：事業の顔になるHPが欲しい</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥498,000〜</span></div>
-        <div class="pcol"><span class="lab">向いている方</span><span class="normal">しっかり作り直したい</span></div>
+        <div class="pcol"><span class="lab">目安納期</span><span class="normal">1.5〜2 ヶ月〜</span></div>
       </div>
-      <div class="price-group">補足プラン <small>条件に合わせて選べる枠</small></div>
-      <div class="price-row reveal">
-        <div class="pname">撮影なし1ページ制作<small>写真が揃っている方向け。既存写真で1ページLPを制作します。<b>撮影は含みません。</b></small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥198,000〜</span></div>
-        <div class="pcol"><span class="lab">条件</span><span class="normal">既存写真あり</span></div>
-      </div>
+      <p class="price-inline-note">※ 写真が揃っている方は、STANDARD / PREMIUM を<b>撮影分 −¥100,000</b> でご提案します。</p>
+      <div class="price-group">補足 <small>必要な方だけ</small></div>
       <div class="price-row reveal">
         <div class="pname">追加撮影<small>店舗・商品・施工・人物など、必要な写真を整理して撮影します。<b>単体撮影のみは要相談。</b></small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">+¥120,000〜</span></div>
         <div class="pcol"><span class="lab">条件</span><span class="normal">制作プランに追加</span></div>
       </div>
-      <div class="price-group">公開後の更新 <small>必要な方だけ</small></div>
       <div class="price-row reveal">
-        <div class="pname">継続更新・運用<small>公開後の写真差し替え・実績追加・文章更新を毎月。必要な月だけ相談できます。</small></div>
+        <div class="pname">継続更新・運用<small>公開後の写真差し替え・実績追加・文章更新。必要な月だけ相談できます。</small></div>
         <div class="pcol"><span class="lab">料金</span><span class="first">¥9,800〜/月</span></div>
-        <div class="pcol"><span class="lab">条件</span><span class="normal">公開後のみ</span></div>
+        <div class="pcol"><span class="lab">条件</span><span class="normal">必要な月だけ</span></div>
       </div>
     </div>
-    <p class="price-foot">具体的な改善案・文章案・写真選定・レイアウト案は、<b>初回見立てシート（¥9,800〜）から対応しています。</b>無料相談は方向性のお返事のみです。<br>※ <b>写真がある方も、ない方も大丈夫です。</b>写真が揃っている場合は撮影なし1ページ制作、写真が足りない場合は撮影込みプランまたは追加撮影をご提案します。<br>※ <b>無料相談・初回見立てシートに撮影は含まれません。</b>撮影が必要な場合は STANDARD / PREMIUM、または追加撮影（+¥120,000〜）をご検討ください。<br>※ 金額は内容により前後します。確定見積もりは初回見立てシート以降でお出しします。</p>
+    <!-- 要確認：支払い条件（着手時50%・公開時50%）は変更可。確定したらこの注記を最終化 -->
+    <p class="price-foot">具体的な改善案・文章案・写真選定・レイアウト案は、<b>初回見立てシート（¥9,800〜）から対応しています。</b>無料相談は方向性のお返事のみです。<br>※ <b>写真がある方も、ない方も大丈夫です。</b>写真が揃っている方は BASIC、または撮影分 −¥100,000 の STANDARD / PREMIUM をご提案します。<br>※ <b>無料相談・初回見立てシートに撮影は含まれません。</b>撮影が必要な場合は STANDARD / PREMIUM、または追加撮影（+¥120,000〜）をご検討ください。<br>※ お支払いは着手時50%・公開時50%です。<br>※ 納期は撮影日程・素材状況により前後します。金額は内容により前後し、確定見積もりは初回見立てシート以降でお出しします。</p>
   </div>
 </section>
 
@@ -1118,11 +1115,11 @@
       <details class="qa"><summary>相談すると、具体的に何が返ってきますか？</summary><div class="a">無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「初回見立てシートで整理するもの」をご覧ください）。</div></details>
       <details class="qa"><summary>HPが古くても大丈夫ですか？</summary><div class="a">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</div></details>
       <details class="qa"><summary>写真がうまく撮れていません。</summary><div class="a">お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。</div></details>
-      <details class="qa"><summary>HPに使う写真も撮ってもらえますか？</summary><div class="a">はい、必要な場合はHPやLPに掲載するための写真撮影も対応できます。ただし、無料相談・初回見立てシート・BASIC・撮影なし1ページ制作には撮影は含まれません。写真が足りない場合は、STANDARD（撮影込み1ページLP ¥298,000〜）、PREMIUM（¥498,000〜）、または追加撮影（+¥120,000〜）をご提案します。まずは今ある写真で足りるかを確認します。</div></details>
+      <details class="qa"><summary>HPに使う写真も撮ってもらえますか？</summary><div class="a">はい、必要な場合はHPに掲載するための写真撮影も対応できます。ただし、無料相談・初回見立てシート・BASIC（見せ方リペア）に撮影は含まれません。写真が足りない場合は、STANDARD（撮影込み・おまかせHP ¥298,000〜）、PREMIUM（撮影込み・しっかりHP ¥498,000〜）、または追加撮影（+¥120,000〜）をご提案します。まずは今ある写真で足りるかを確認します。</div></details>
       <details class="qa"><summary>写真がほとんどなくても相談できますか？</summary><div class="a">はい。写真が少ない場合でも相談できます。初回見立てシート（¥9,800〜）では、今ある素材で使えるものを整理し、足りない場合は「どんな写真を撮ると伝わりやすいか」までご提案します。</div></details>
       <details class="qa"><summary>スマホだけ改善することもできますか？</summary><div class="a">できます。スマホでの見やすさ・問い合わせ導線だけを整えるご依頼も多いです。</div></details>
       <details class="qa"><summary>LINEやフォームの導線も作れますか？</summary><div class="a">はい。LINE相談・予約・問い合わせフォームへの導線づくりも対応しています。</div></details>
-      <details class="qa"><summary>遠方でも依頼できますか？</summary><div class="a">HP・LPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</div></details>
+      <details class="qa"><summary>遠方でも依頼できますか？</summary><div class="a">HPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</div></details>
       <details class="qa"><summary>小さなお店・個人事業でも相談できますか？</summary><div class="a">もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのお手伝いを得意としています。</div></details>
       <details class="qa"><summary>LINEでも相談できますか？</summary><div class="a">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。</div></details>
     </div>
