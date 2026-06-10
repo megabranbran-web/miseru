@@ -236,9 +236,16 @@
   .qa .a{padding:0 2px 22px;color:var(--soft);font-size:14.5px;line-height:1.95}
 
   /* about (warm, was black) */
-  .about-grid{display:block;max-width:42em;margin-left:auto;margin-right:auto}
-  .about-photo{aspect-ratio:4/5;border-radius:4px;overflow:hidden;background:var(--sand-d);display:flex;align-items:center;justify-content:center;border:1px solid var(--line)}
-  .about-photo .ph-tag{font-size:12.5px;color:var(--soft);padding:18px;text-align:center;line-height:1.7}
+  .about-grid{display:grid;grid-template-columns:280px 1fr;gap:50px;max-width:920px;margin-left:auto;margin-right:auto;align-items:start}
+  .about-photo{margin:0;display:block}
+  .about-photo svg,.about-photo img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
+  .about-photo figcaption{font-size:10.5px;color:var(--soft2);letter-spacing:.14em;margin-top:10px;text-transform:uppercase;text-align:center}
+  .about-profile{display:grid;gap:8px;margin:18px 0 4px;padding:16px 20px;background:var(--white);border:1px solid var(--line);border-radius:6px}
+  .about-profile[hidden]{display:none}
+  .about-profile div{display:flex;gap:14px;font-size:13.5px}
+  .about-profile dt{color:var(--soft2);font-weight:700;min-width:6em}
+  .about-profile dd{margin:0;color:var(--ink)}
+  /* （旧 .about-photo プレースホルダールールは G-2 で新実装に置換済み） */
   .about h2.title{margin-bottom:22px}
   .about p{font-size:15.5px;color:var(--ink2);line-height:2.05;margin-bottom:16px}
   .about .sign{font-family:var(--mincho);font-weight:600;font-size:17px;color:var(--ink);margin-top:8px;letter-spacing:.05em}
@@ -1080,6 +1087,12 @@
     </div>
     <!-- 要確認：支払い条件（着手時50%・公開時50%）は変更可。確定したらこの注記を最終化 -->
     <p class="price-foot">具体的な改善案・文章案・写真選定・レイアウト案は、<b>初回見立てシート（¥9,800〜）から対応しています。</b>無料相談は方向性のお返事のみです。<br>※ <b>写真がある方も、ない方も大丈夫です。</b>写真が揃っている方は BASIC、または撮影分 −¥100,000 の STANDARD / PREMIUM をご提案します。<br>※ <b>無料相談・初回見立てシートに撮影は含まれません。</b>撮影が必要な場合は STANDARD / PREMIUM、または追加撮影（+¥120,000〜）をご検討ください。<br>※ お支払いは着手時50%・公開時50%です。<br>※ 納期は撮影日程・素材状況により前後します。金額は内容により前後し、確定見積もりは初回見立てシート以降でお出しします。</p>
+
+    <!-- G-6 モニター枠（要記入）：価格が決まったら hidden を外して有効化 -->
+    <div class="monitor-band" hidden aria-hidden="true" style="margin-top:34px;padding:24px 26px;background:var(--white);border:1px solid var(--accent);border-radius:8px">
+      <p style="font-size:11px;font-weight:700;letter-spacing:.13em;color:var(--accent-d);text-transform:uppercase">Monitor — 先着3社</p>
+      <p style="font-size:14px;line-height:2;margin-top:8px">先着3社モニター枠｜掲載許可とご感想をいただける方に、STANDARD相当を<b>【価格未定・要記入】</b>でご提供します。実績として Before / After を掲載させていただきます。</p>
+    </div>
   </div>
 </section>
 
@@ -1122,34 +1135,78 @@
       <details class="qa"><summary>遠方でも依頼できますか？</summary><div class="a">HPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</div></details>
       <details class="qa"><summary>小さなお店・個人事業でも相談できますか？</summary><div class="a">もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのお手伝いを得意としています。</div></details>
       <details class="qa"><summary>LINEでも相談できますか？</summary><div class="a">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。</div></details>
+      <!-- G-7（要確認）：返信速度を約束できる場合のみ、上のLINE回答に「LINEなら原則翌営業日までに一次返信します（無料相談の正式なお返事は2〜3営業日）」を追記して有効化 -->
+      <details class="qa"><summary>補助金は使えますか？</summary><div class="a">小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。</div></details>
     </div>
   </div>
 </section>
 
 <!-- FAQ 構造化データ（FAQPage・可視FAQと一致。架空サンプルは含めない）-->
+<!-- FAQPage：可視FAQ（#faq）全問と本文一致。FAQ文言を変えたらここも更新すること -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
+    {"@type":"Question","name":"相談すると、しつこく営業されませんか？","acceptedAnswer":{"@type":"Answer","text":"しません。まずは無料相談で、方向性と合いそうなプラン目安をお返しするだけです。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。"}},
     {"@type":"Question","name":"本当に無料ですか？","acceptedAnswer":{"@type":"Answer","text":"無料相談（方向性と合いそうなプラン目安まで）は無料です。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。費用が発生する作業は、必ず範囲と金額をお見せして、ご承諾いただいてからです。"}},
-    {"@type":"Question","name":"相談すると、しつこく営業されませんか？","acceptedAnswer":{"@type":"Answer","text":"しません。まずは無料相談で、方向性と合いそうなプラン目安をお返しするだけです。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。続けるかどうかは、ご覧になってから決めていただけます。"}},
-    {"@type":"Question","name":"相談すると、具体的に何が返ってきますか？","acceptedAnswer":{"@type":"Answer","text":"無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、こう見せる簡単なラフ、必要な場合の範囲と費用の目安をお返しします。"}},
+    {"@type":"Question","name":"なぜ無料相談を置いているんですか？","acceptedAnswer":{"@type":"Answer","text":"料金やお見積もりだけ先に見せられても、判断しづらいと思うからです。無料相談で方向性と合いそうなプラン目安をお伝えし、続けるかどうかをまず決めていただきます。具体的な整理（写真選定・文章・導線・ラフ）は、初回見立てシート（¥9,800〜）で1ページにまとめてお返しします。段階的に進めていただける入り口として用意しています。"}},
+    {"@type":"Question","name":"制作会社に頼まなくて大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"大きく作り直すなら、専門の制作会社がしっかりしています。MISERUは“その手前”で、今のページの見せ方だけを整える役割です。無料相談では方向性と合いそうなプラン目安まで確認できます。具体的な整理は、初回見立てシート（¥9,800〜）でご判断いただけます。"}},
+    {"@type":"Question","name":"AIで作ったHPとの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"AIツールは、安く早く“ページの形”を作るのが得意です。MISERUは、すでにある実物（写真・実績・現場）を、どう見せれば伝わるかを人が考えて整えます。作る前の「今の見え方を確かめたい」「実物の良さが伝わっていない」段階に向いています。"}},
     {"@type":"Question","name":"いきなり作り直しになりませんか？","acceptedAnswer":{"@type":"Answer","text":"なりません。今のサイトを活かして、写真・文章・スマホ導線を整えるところから始めます。作り直しが必要な場合も、範囲と費用の目安を先にお見せしてから判断いただけます。"}},
-    {"@type":"Question","name":"AIで作ったHPとの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"AIツールは、安く早くページの形を作るのが得意です。MISERUは、すでにある実物（写真・実績・現場）を、どう見せれば伝わるかを人が考えて整えます。作る前の今の見え方を確かめたい段階に向いています。"}},
-    {"@type":"Question","name":"HPが古くても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。"}}
+    {"@type":"Question","name":"まだ作り直すか決めていなくても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"大丈夫です。むしろ決める前の方が向いています。初回見立てシート（¥9,800〜）で「整えるだけで十分か」「作り直した方がよいか」の判断材料を整理します。急いで決めていただく必要はありません。"}},
+    {"@type":"Question","name":"相談すると、具体的に何が返ってきますか？","acceptedAnswer":{"@type":"Answer","text":"無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「初回見立てシートで整理するもの」をご覧ください）。"}},
+    {"@type":"Question","name":"HPが古くても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。"}},
+    {"@type":"Question","name":"写真がうまく撮れていません。","acceptedAnswer":{"@type":"Answer","text":"お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。"}},
+    {"@type":"Question","name":"HPに使う写真も撮ってもらえますか？","acceptedAnswer":{"@type":"Answer","text":"はい、必要な場合はHPに掲載するための写真撮影も対応できます。ただし、無料相談・初回見立てシート・BASIC（見せ方リペア）に撮影は含まれません。写真が足りない場合は、STANDARD（撮影込み・おまかせHP ¥298,000〜）、PREMIUM（撮影込み・しっかりHP ¥498,000〜）、または追加撮影（+¥120,000〜）をご提案します。まずは今ある写真で足りるかを確認します。"}},
+    {"@type":"Question","name":"写真がほとんどなくても相談できますか？","acceptedAnswer":{"@type":"Answer","text":"はい。写真が少ない場合でも相談できます。初回見立てシート（¥9,800〜）では、今ある素材で使えるものを整理し、足りない場合は「どんな写真を撮ると伝わりやすいか」までご提案します。"}},
+    {"@type":"Question","name":"スマホだけ改善することもできますか？","acceptedAnswer":{"@type":"Answer","text":"できます。スマホでの見やすさ・問い合わせ導線だけを整えるご依頼も多いです。"}},
+    {"@type":"Question","name":"LINEやフォームの導線も作れますか？","acceptedAnswer":{"@type":"Answer","text":"はい。LINE相談・予約・問い合わせフォームへの導線づくりも対応しています。"}},
+    {"@type":"Question","name":"遠方でも依頼できますか？","acceptedAnswer":{"@type":"Answer","text":"HPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。"}},
+    {"@type":"Question","name":"小さなお店・個人事業でも相談できますか？","acceptedAnswer":{"@type":"Answer","text":"もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのお手伝いを得意としています。"}},
+    {"@type":"Question","name":"LINEでも相談できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、公式LINEで相談できます。こちらから友だち追加して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。"}},
+    {"@type":"Question","name":"補助金は使えますか？","acceptedAnswer":{"@type":"Answer","text":"小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。"}}
   ]
+}
+</script>
+<!-- DOMAIN-MIGRATION: 独自ドメイン移行時に url を要書き換え -->
+<!-- TODO: SNS開設後に sameAs へURLを追加 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "MISERU（ミセル）",
+  "url": "https://miseru-web.pages.dev/",
+  "description": "中小事業の見せ方を整えるWeb改善・HP制作。写真・文章・スマホ導線から、実物の魅力が伝わるHPへ整えます。",
+  "priceRange": "¥9,800〜¥498,000",
+  "areaServed": "JP",
+  "sameAs": []
 }
 </script>
 
 <!-- ABOUT -->
 <section class="sec" id="about">
   <div class="wrap about-grid">
+    <figure class="about-photo">
+      <!-- TODO: 一眼ポートレートに差し替え（4:5推奨・現場感のある実写） -->
+      <svg viewBox="0 0 400 500" role="img" aria-label="ポートレート写真（準備中）">
+        <rect width="400" height="500" fill="#ece6dc"/>
+        <circle cx="200" cy="190" r="80" fill="#d9cfbf"/>
+        <path d="M58 500 C58 372 122 330 200 330 C278 330 342 372 342 500 Z" fill="#d9cfbf"/>
+        <text x="200" y="468" text-anchor="middle" font-family="sans-serif" font-size="15" letter-spacing="3" fill="#a89b86">PORTRAIT</text>
+      </svg>
+      <figcaption>撮影準備中</figcaption>
+    </figure>
     <div>
       <span class="eyebrow">Who</span>
       <h2 class="title mincho" style="font-weight:600">ひとりで、一つひとつの商いに向き合います。</h2>
       <p>大きな制作会社ではありません。だからこそ、写真の選び方からスマホの導線、ことばの一つひとつまで、あなたの「いい仕事」が伝わるように手を動かします。</p>
-      <p>建設会社のサイト制作など、現場仕事のWebに取り組んできました。一眼での撮影もでき、実物の魅力を引き出す“見せ方”を、編集者のように整えるのが役割です。</p>
+      <p>一眼レフでの撮影と、建設・現場系Webの制作経験。あなたの仕事を撮って、整えて、伝わる形にします。</p>
+      <!-- TODO: 開業届後に名前・拠点エリアを記入し、hidden を外す（G-2） -->
+      <dl class="about-profile" hidden>
+        <div><dt>名前</dt><dd>【要記入】</dd></div>
+        <div><dt>拠点エリア</dt><dd>【要記入】</dd></div>
+      </dl>
       <div class="look-card">
         <span class="look-h">MISERUで見るところ</span>
         <ul class="look-list">
@@ -1181,6 +1238,7 @@
     <div class="contact-info">
       <span class="eyebrow">Contact</span>
       <h2 class="title">ご相談・お問い合わせ。</h2>
+      <!-- G-7（要確認）：返信速度を約束できる場合のみ、下の文に「LINEなら原則翌営業日までに一次返信します。」を追記して有効化（正式なお返事=2〜3営業日 と区別） -->
       <p>HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを教えていただければ、まずは方向性と合いそうなプラン目安をお返しします。しつこい営業はしません。</p>
 
       <!-- LINE カード（主導線として強化）-->
@@ -1235,6 +1293,13 @@
         <a href="#faq">よくある質問</a>
         <a href="#contact">お問い合わせ</a>
         <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINE</a>
+        <a href="tokushoho.html">特定商取引法に基づく表記</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+      </nav>
+      <!-- G-5 TODO: SNSアカウント開設後にURLを入れて display:none を外す -->
+      <nav class="foot-sns" aria-label="MISERU公式SNS" style="display:none">
+        <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#" target="_blank" rel="noopener noreferrer">X</a>
       </nav>
     </div>
     <div style="text-align:right">
