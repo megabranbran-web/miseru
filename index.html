@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ミセル｜いい仕事は、見せ方で伝わる。 — 中小事業のHP・見せ方改善</title>
 <meta name="description" content="HP・Instagram・Googleマップ・写真から、実物の魅力が伝わる1ページへ。中小事業の見せ方を整える編集室、ミセル。HPがなくても、まずは無料相談で方向性とプラン目安をお返しします。">
+<!-- DOMAIN-MIGRATION: 独自ドメイン移行時に要書き換え（canonical / og:url / og:image / twitter:image / JSON-LD内URL） -->
+<link rel="canonical" href="https://miseru-web.pages.dev/">
 <meta property="og:title" content="ミセル｜いい仕事は、見せ方で伝わる。">
 <meta property="og:description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のHPを「相談されるページ」に整えます。">
 <meta property="og:type" content="website">
@@ -669,10 +671,13 @@
   }
 
   .cfv-hero{min-height:auto;padding:120px 0 60px}
-  .cfv-grid{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:.94fr 1.06fr;column-gap:clamp(30px,4vw,58px);row-gap:0;align-content:center;align-items:start;grid-template-areas:"intro samples" "aside samples"}
+  .cfv-grid{position:relative;z-index:2;max-width:820px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:1fr;row-gap:0;align-content:center;grid-template-areas:"intro" "aside"}
   .cfv-intro{grid-area:intro}
-  .cfv-samples{grid-area:samples}
-  .cfv-aside{grid-area:aside}
+  .cfv-aside{grid-area:aside;margin-top:30px}
+  .cfv-sample-link{margin-top:22px;font-size:14px}
+  .cfv-sample-link a{font-weight:700;color:var(--accent-d);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .25s}
+  .cfv-sample-link a:hover{color:var(--ink)}
+  .cfv-sample-link .nt{margin-left:12px;font-size:11.5px;color:var(--soft2)}
   .cfv-h1{font-family:var(--mincho);font-weight:600;color:var(--ink);font-size:clamp(29px,3.9vw,50px);line-height:1.32;letter-spacing:.02em;margin-top:4px}
   .cfv-h1 .em{color:var(--accent-d)}
   .cfv-sub{font-family:var(--gothic);font-size:clamp(14px,1.05vw,16px);line-height:1.95;color:var(--soft);margin-top:20px;max-width:30em}
@@ -686,23 +691,7 @@
   .cfv-trust span{font-size:12px;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:7px 14px;line-height:1.3}
   .cfv-trust span b{color:var(--accent-d);font-weight:700;margin-right:5px}
   .cfv-fine{font-size:12.5px;color:var(--soft2);margin-top:16px;line-height:1.75;max-width:32em}
-  .cfv-samples{position:relative}
-  .cfv-samples-lbl{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11.5px;letter-spacing:.12em;color:var(--accent-d);text-transform:uppercase;font-weight:700;margin-bottom:14px}
-  .cfv-samples-lbl .tag{font-size:10.5px;color:var(--soft2);letter-spacing:.03em;font-weight:500;text-transform:none}
-  .cfv-cards{display:grid;gap:12px}
-  .cfv-card{display:grid;grid-template-columns:108px 1fr;background:var(--white);border:1px solid var(--line);border-radius:9px;overflow:hidden;transition:border-color .3s,transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
-  .cfv-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 22px 46px -28px rgba(177,92,60,.32)}
-  .cfv-card .ph{position:relative;overflow:hidden;background:#1f1c18;min-height:100px}
-  .cfv-card .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
-  .cfv-card:hover .ph img{transform:scale(1.05)}
-  .cfv-card .ph .xtag{position:absolute;left:7px;top:7px;font-size:8.5px;font-weight:700;letter-spacing:.04em;color:#fff;background:rgba(28,26,23,.74);border-radius:3px;padding:3px 7px}
-  .cfv-card .mt{padding:13px 16px;display:flex;flex-direction:column;justify-content:center}
-  .cfv-card .biz{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;letter-spacing:.14em;color:var(--accent-d);text-transform:uppercase}
-  .cfv-card .nm{font-family:var(--mincho);font-weight:600;font-size:16px;color:var(--ink);line-height:1.4;margin:2px 0 4px}
-  .cfv-card .ty{font-size:12px;color:var(--soft);line-height:1.55}
-  .cfv-card .op{margin-top:8px;font-size:12px;font-weight:700;color:var(--accent-d);letter-spacing:.02em}
-  .cfv-card:hover .op{color:var(--ink)}
-  .cfv-cards-note{font-size:11.5px;color:var(--soft2);margin-top:13px;line-height:1.75}
+  /* （FVサンプル3カードは B-4 で削除。リンクは .cfv-sample-link に集約） */
   /* compare 1行バンド */
   .cand-compare{text-align:center;padding:clamp(44px,6vw,72px) 0}
   .cand-compare .wrap{max-width:760px}
@@ -714,42 +703,18 @@
     .cfv-hero{padding:96px 0 32px}
     .cfv-grid{display:flex;flex-direction:column;gap:0;grid-template-areas:none}
     .cfv-intro{order:1}
-    .cfv-samples{order:2;margin-top:22px}
-    .cfv-aside{order:3;margin-top:20px}
+    .cfv-aside{order:2;margin-top:20px}
     .cfv-h1{font-size:clamp(26px,7vw,36px);line-height:1.32}
     .cfv-sub{font-size:13.5px;line-height:1.75;margin-top:14px;max-width:none}
     /* ②修正：SPはCTA縦積み・折返し禁止 */
     .cfv-acts{flex-direction:column;align-items:stretch;gap:10px;margin-top:0}
     .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{width:100%;justify-content:center;white-space:nowrap}
   }
-  /* ①修正：SP専用 FVサンプルを3枚横並びミニカードに（PCの大カードは不変） */
-  @media(max-width:600px){
-    .cfv-samples-lbl{margin-bottom:9px;font-size:11px}
-    .cfv-samples-lbl .tag{font-size:10px}
-    .cfv-cards{grid-template-columns:repeat(3,1fr);gap:8px}
-    .cfv-card{display:block;grid-template-columns:none}
-    .cfv-card .ph{min-height:0;aspect-ratio:4/3}
-    .cfv-card .ph .xtag{font-size:7.5px;padding:2px 5px;left:5px;top:5px}
-    .cfv-card .mt{padding:7px 8px 9px}
-    .cfv-card .biz{display:none}
-    .cfv-card .ty{display:none}
-    .cfv-card .op{display:none}
-    .cfv-card .nm{font-size:11.5px;line-height:1.3;margin:0;letter-spacing:-.01em;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.6em}
-    .cfv-cards-note{font-size:11px;margin-top:10px}
-  }
   @media(max-width:380px){
     .cfv-hero{padding-top:84px}
     .cfv-h1{font-size:22px;line-height:1.28}
     .cfv-sub{font-size:13px;line-height:1.6;margin-top:11px}
-    .cfv-card .ph{aspect-ratio:16/10}
-    .cfv-card .nm{font-size:10.5px}
     .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{font-size:14.5px;padding:14px 16px}
-  }
-  /* 最小幅(320系)：RED HORSE TOKYO を2行に収めるため名前を少し小さく */
-  @media(max-width:360px){
-    .cfv-cards{gap:6px}
-    .cfv-card .mt{padding:6px 6px 8px}
-    .cfv-card .nm{font-size:9.5px;letter-spacing:-.02em}
   }
 </style>
 </head>
@@ -801,24 +766,7 @@
       <span class="fh-d3-eyebrow">MISERU — Editorial Room</span>
       <h1 class="cfv-h1">いい仕事は、<span class="em">見せ方</span>で伝わる。<br>作り直す前に、見せ方だけ整える。</h1>
       <p class="cfv-sub">中小事業のための「見せ方を整える編集室」。HP・Instagram・Googleマップ・写真から、実物の良さが伝わる1ページへ。HPがなくても、まずは<b>無料相談</b>で方向性と合いそうなプラン目安までお返しします。</p>
-    </div>
-    <div class="cfv-samples" aria-label="完成HPサンプル（架空）">
-      <div class="cfv-samples-lbl">完成HPサンプル<span class="tag">架空サンプル／制作実績ではありません</span></div>
-      <div class="cfv-cards">
-        <a class="cfv-card" href="sample-pet.html" data-cta="sample-pet">
-          <div class="ph"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
-          <div class="mt"><span class="biz">Pet Service</span><span class="nm">うちのこ通い帳</span><span class="ty">お預かりの一日を通い帳で — 「安心して預けたい」の見せ方</span><span class="op">完成HPを開く →</span></div>
-        </a>
-        <a class="cfv-card" href="sample-food.html" data-cta="sample-food">
-          <div class="ph"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
-          <div class="mt"><span class="biz">Restaurant</span><span class="nm">夜小路</span><span class="ty">七席だけの季節のおまかせ — 「品と余韻」の見せ方</span><span class="op">完成HPを開く →</span></div>
-        </a>
-        <a class="cfv-card" href="sample-car.html" data-cta="sample-car">
-          <div class="ph"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空）"><span class="xtag">架空サンプル</span></div>
-          <div class="mt"><span class="biz">Car &amp; Bike</span><span class="nm">RED HORSE TOKYO</span><span class="ty">一台のこだわりを相談へ — 「迫力と編集感」の見せ方</span><span class="op">完成HPを開く →</span></div>
-        </a>
-      </div>
-      <p class="cfv-cards-note">業種が違っても「見せ方の型」は移せます。3つとも架空サンプルで、実在クライアント・実在店舗ではありません。</p>
+      <p class="cfv-sample-link"><a href="sample.html" data-cta="sample-gallery">完成HPサンプルを見る <span class="arw">→</span></a><span class="nt">3業種・すべて架空サンプルです</span></p>
     </div>
     <div class="cfv-aside">
       <div class="cfv-acts">
@@ -830,7 +778,7 @@
         <span><b>◯</b>写真が少なくてもOK</span>
         <span><b>◯</b>しつこい営業なし</span>
       </div>
-      <p class="cfv-fine">— 無料相談は方向性とプラン目安まで。具体的な整理は初回見立てシート（¥9,800〜）から。見るだけでも大丈夫です。</p>
+      <p class="cfv-fine">— 無料相談は方向性とプラン目安まで。見るだけでも大丈夫です。（<a href="#pricing" class="textlink">料金へ →</a>）</p>
     </div>
   </div>
 </section>
@@ -866,7 +814,7 @@
       <div class="miss-item reveal"><span class="mk">05</span><p>HPがなく、InstagramやGoogleマップだけで伝えている</p></div>
       <div class="miss-item reveal"><span class="mk">06</span><p>実力ではなく“見え方”で、問い合わせを逃しているかも</p></div>
     </div>
-    <p class="miss-foot">— ひとつでも心当たりがあれば、まずは<b>無料相談</b>で方向性とプラン目安を。HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを送るだけでも大丈夫です。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。</p>
+    <p class="miss-foot">— ひとつでも心当たりがあれば、まずは<b>無料相談</b>で方向性とプラン目安を。HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを送るだけでも大丈夫です。（<a href="#pricing" class="textlink">料金へ →</a>）</p>
   </div>
 </section>
 
@@ -980,7 +928,7 @@
   <div class="wrap">
     <span class="eyebrow">Sheet</span>
     <h2 class="title">初回見立てシートでは、こんな整理をお返しします。</h2>
-    <p class="sub-lead">無料相談では方向性と合いそうなプラン目安までお返しします。<b>具体的な整理は、初回見立てシート（¥9,800〜）から</b>。申し込んだ後に何が起きるかも、最初にはっきりさせます。</p>
+    <p class="sub-lead">無料相談では方向性と合いそうなプラン目安までお返しします。<b>具体的な整理は、初回見立てシートから</b>。申し込んだ後に何が起きるかも、最初にはっきりさせます。</p>
     <div class="returns-grid">
       <div class="ret reveal"><span class="rn">01</span><h4>伝わりにくい箇所の指摘</h4><p>今のページで「もったいない」点を、具体的にお伝えします。</p></div>
       <div class="ret reveal"><span class="rn">02</span><h4>写真・文章・導線の改善案</h4><p>どこをどう変えると伝わるか、要点で整理。今ある写真で足りるか、撮ると伝わる写真は何かも確認します。</p></div>
@@ -1216,7 +1164,7 @@
           <li>実物の良さが、文章で薄まっていないか</li>
         </ul>
       </div>
-      <div class="sign">ラン<small>MISERU ／ 実物が伝わるWeb改善</small></div>
+      <div class="sign">MISERU<small>実物が伝わるWeb改善</small></div>
     </div>
   </div>
 </section>
@@ -1225,7 +1173,7 @@
 <section class="sec bg-sand final">
   <div class="wrap">
     <h2>まずは、1ページから<br>見せ方を相談してみませんか。</h2>
-    <p>無料相談で、方向性と合いそうなプラン目安をお返しします。具体的な整理は初回見立てシート（¥9,800〜）から。HP・Instagram・Googleマップ・写真だけでも、相談だけでも大丈夫です。</p>
+    <p>無料相談で、方向性と合いそうなプラン目安をお返しします。HP・Instagram・Googleマップ・写真だけでも、相談だけでも大丈夫です。</p>
     <a href="#contact" class="btn btn-ink" data-cta="free-consult">写真・URLで相談する <span class="arw">→</span></a>
   </div>
 </section>
@@ -1236,7 +1184,7 @@
     <div class="contact-info">
       <span class="eyebrow">Contact</span>
       <h2 class="title">ご相談・お問い合わせ。</h2>
-      <p>HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを教えていただければ、まずは方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。しつこい営業はしません。</p>
+      <p>HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを教えていただければ、まずは方向性と合いそうなプラン目安をお返しします。しつこい営業はしません。</p>
 
       <!-- LINE カード（主導線として強化）-->
       <aside class="line-card" aria-label="公式LINEで相談">
@@ -1256,7 +1204,7 @@
       <input type="hidden" name="_subject" value="ミセル：無料相談のお問い合わせ">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2営業日以内を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— ミセル（MISERU）／ ラン">
+      <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2営業日以内を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
       <div class="row">
         <label>HP / Instagram / Googleマップ / 写真など <span class="opt">（任意・あると具体的になります）</span></label>
         <input type="text" name="url" placeholder="https:// / Instagram URL / GoogleマップURL / 写真だけでもOK">
@@ -1296,7 +1244,7 @@
       <a href="#contact" class="textlink" data-cta="free-consult" style="color:#e0c2b2;border-color:var(--accent)">無料相談する →</a>
     </div>
   </div>
-  <div class="wrap foot-copy">© ミセル（MISERU）／ ラン</div>
+  <div class="wrap foot-copy">© MISERU（ミセル）</div>
 </footer>
 
 <div class="mcta">
