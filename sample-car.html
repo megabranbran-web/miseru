@@ -148,9 +148,9 @@ body.ready .hero-sub{opacity:1;transform:none}
 /* ============ STATEMENT ============ */
 #statement{padding:140px 0}
 .stmt-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
-.stmt-photo{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:4px;clip-path:inset(12% 12% 12% 12%);transition:clip-path 1.1s cubic-bezier(.16,1,.3,1);background:linear-gradient(160deg,#1B1726,#0C0A13);border:1px solid var(--line)}
+.stmt-photo{position:relative;display:flex;align-items:center;aspect-ratio:16/10;overflow:hidden;border-radius:4px;clip-path:inset(12% 12% 12% 12%);transition:clip-path 1.1s cubic-bezier(.16,1,.3,1);background:linear-gradient(160deg,#1B1726,#0C0A13);border:1px solid var(--line)}
 .stmt-photo.in{clip-path:inset(0 0 0 0)}
-.stmt-photo img{width:100%;height:120%;object-fit:cover;will-change:transform}
+.stmt-photo img{width:100%;height:112%;object-fit:cover;object-position:50% 50%;will-change:transform}
 .stmt-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(20deg,rgba(255,30,45,.22),transparent 55%);mix-blend-mode:screen}
 .stmt-copy p{margin-top:26px;color:var(--smoke);font-size:13.5px;line-height:2.2;max-width:46ch}
 .stmt-copy p strong{color:var(--headlight);font-weight:600}
@@ -719,7 +719,7 @@ function frame(){
     var r = sp.getBoundingClientRect();
     if(r.top < innerHeight && r.bottom > 0){
       var p = (innerHeight - r.top) / (innerHeight + r.height);
-      document.getElementById("stmtImg").style.transform = "translateY(" + ((p - 0.5) * -14) + "%)";
+      document.getElementById("stmtImg").style.transform = "translateY(" + ((p - 0.5) * -7) + "%)";
     }
   }
 
