@@ -960,6 +960,12 @@ button, input, textarea { font: inherit; }
   .mock-footer nav { margin-top: 18px; }
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: .001ms !important;
