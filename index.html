@@ -723,6 +723,20 @@
   .edm-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
   .edm-foot .fl{font-size:11px;color:var(--soft);letter-spacing:.02em}
   .edm-foot .fl b{color:var(--accent);font-weight:700}
+  /* BA Slider */
+  .bas{user-select:none;-webkit-user-select:none}
+  .bas-track{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:3px;cursor:ew-resize;touch-action:pan-y}
+  .bas-after,.bas-before{position:absolute;inset:0}
+  .bas-after img,.bas-before img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .bas-before{clip-path:inset(0 50% 0 0)}
+  .bas-lbl{position:absolute;bottom:9px;font-family:var(--gothic);font-size:9px;font-weight:700;letter-spacing:.1em;padding:3px 7px;border-radius:2px}
+  .bas-lbl-before{left:9px;background:rgba(28,26,23,.65);color:#f6f3ee}
+  .bas-lbl-after{right:9px;background:var(--accent);color:#fff}
+  .bas-handle{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:40px;display:flex;flex-direction:column;align-items:center;pointer-events:none}
+  .bas-line{flex:1;width:2px;background:#fff;box-shadow:0 0 6px rgba(0,0,0,.35)}
+  .bas-knob{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.22);color:var(--ink)}
+  .bas-caps{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--gothic);font-size:11px;color:var(--soft)}
+  .bas-acap{text-align:right}
   .edm-note{font-size:10.5px;color:var(--soft2);text-align:center;margin-top:11px;letter-spacing:.04em}
   .cfv-sample-link{margin-top:22px;font-size:14px}
   .cfv-sample-link a{font-weight:700;color:var(--accent-d);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .25s}
@@ -787,7 +801,6 @@
     <nav class="nav">
       <a href="#do">整えること</a>
       <a href="#industry-samples">サンプル</a>
-      <a href="#ba">Before / After</a>
       <a href="#pricing">料金</a>
       <a href="#flow">進め方</a>
       <a href="#contact" class="nav-cta">相談する</a>
@@ -801,7 +814,6 @@
   <div class="panel">
     <button class="x" id="drawerX" aria-label="閉じる">×</button>
     <a href="#do" data-close>整えること</a>
-    <a href="#ba" data-close>Before / After</a>
     <a href="#industry-samples" data-close>完成HPサンプル</a>
     <a href="#returns" data-close>初回見立てシート</a>
     <a href="#pricing" data-close>料金</a>
@@ -841,37 +853,31 @@
           <span class="dtag">編集 / EDIT</span>
         </div>
         <div class="edm-rule" aria-hidden="true"></div>
-        <div class="edm-cols">
-          <div class="edm-panel edm-before" aria-label="ビフォー：スマホでそのまま撮った焼き鳥の写真">
-            <span class="plab">BEFORE</span>
-            <div class="bshot">
-              <picture>
-                <source srcset="img/home/demo-yakitori-before.webp" type="image/webp">
-                <img src="img/home/demo-yakitori-before.jpg" alt="スマホでそのまま撮った焼き鳥の写真">
-              </picture>
-            </div>
-            <p class="bcap">スマホで、そのまま。</p>
-            <span class="bcapsub">— 記録には十分。でも、主役になれていない</span>
-          </div>
-          <div class="edm-panel edm-after" aria-label="アフター：一眼で撮って見せ方を整えた焼き鳥">
-            <span class="plab">AFTER</span>
-            <div class="big">
-              <span class="edm-cmk tl" aria-hidden="true"></span>
-              <span class="edm-cmk tr" aria-hidden="true"></span>
-              <span class="edm-cmk bl" aria-hidden="true"></span>
-              <span class="edm-cmk br" aria-hidden="true"></span>
+        <div class="bas" role="group" aria-label="焼き鳥 ビフォー・アフタースライダー（ハンドルをドラッグして比較）">
+          <div class="bas-track" id="bas-track">
+            <div class="bas-after">
               <picture>
                 <source srcset="img/home/demo-yakitori.webp" type="image/webp">
-                <img src="img/home/demo-yakitori.jpg" alt="一眼で撮り、余白とトリミングで主役にした焼き鳥の写真">
+                <img src="img/home/demo-yakitori.jpg" alt="一眼で撮り、余白とトリミングで主役にした焼き鳥の写真" draggable="false">
               </picture>
+              <span class="bas-lbl bas-lbl-after" aria-hidden="true">AFTER</span>
             </div>
-            <p class="cap">炭の香りまで、伝わる一皿。</p>
-            <span class="capsub">— 光・寄り・余白で「主役」にする</span>
+            <div class="bas-before" id="bas-before">
+              <picture>
+                <source srcset="img/home/demo-yakitori-before.webp" type="image/webp">
+                <img src="img/home/demo-yakitori-before.jpg" alt="スマホでそのまま撮った焼き鳥の写真" draggable="false">
+              </picture>
+              <span class="bas-lbl bas-lbl-before" aria-hidden="true">BEFORE</span>
+            </div>
+            <div class="bas-handle" id="bas-handle" tabindex="0" role="slider" aria-label="ドラッグして比較" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+              <span class="bas-line" aria-hidden="true"></span>
+              <span class="bas-knob" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 3L3 10L7 17M13 3L17 10L13 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
           </div>
-          <div class="edm-mid" aria-hidden="true">→</div>
-        </div>
-        <div class="edm-foot">
-          <span class="fl">違いは<b>撮り方と見せ方</b>だけ。</span>
+          <div class="bas-caps">
+            <span class="bas-bcap">スマホで、そのまま。</span>
+            <span class="bas-acap">炭の香りまで、伝わる一皿。</span>
+          </div>
         </div>
         <p class="edm-note">表現サンプル（AFTER：自社撮影）／実在クライアント・実在店舗ではありません<br>※ 撮影は STANDARD / PREMIUM プランに含まれます（BASIC は撮影なし）</p>
       </div>
@@ -933,15 +939,6 @@
 <!-- #sample-detail 後方互換アンカー（旧リンク/LINEリッチメニュー対応・業種別サンプルへ誘導）-->
 <section id="sample-detail" style="height:0;overflow:hidden;scroll-margin-top:80px" aria-hidden="true"></section>
 
-<!-- COMPARE：1行に縮小（詳しい比較はFAQへ吸収）。旧「無料の改善案から」の不整合を除去 -->
-<section class="sec cand-compare" id="compare">
-  <div class="wrap">
-    <span class="eyebrow" style="display:inline-block">Which</span>
-    <h2 class="title" style="font-size:clamp(20px,2.7vw,28px)">作り直さず、見せ方を整える——<br>大手とDIYのあいだの「3つ目の選択肢」。</h2>
-    <p class="sub-lead" style="margin-left:auto;margin-right:auto">大きく刷新するなら制作会社、自分で安く作るならDIY。その手前で「今の見せ方だけ」を整えたい中小事業に向いています。大手・AI・MISERUの違いは <a href="#faq" class="textlink">よくあるご質問</a> でも説明しています。</p>
-  </div>
-</section>
-
 <!-- MISS：見られているのに相談されていない（痛みチェック→前向き着地。煽りにしない）-->
 <section class="sec" id="miss">
   <div class="wrap">
@@ -982,63 +979,6 @@
         <h3>レイアウトとことば</h3>
         <p>ファーストビュー、実績ページ、文章の整理まで。「何屋で、何が強みか」がひと目で伝わる構成に整えます。</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- BEFORE / AFTER (前半・暖色背景) -->
-<section class="sec bg-sand" id="ba">
-  <div class="wrap">
-    <span class="eyebrow">Before / After</span>
-    <h2 class="title">少し整えるだけで、伝わり方は変わります。</h2>
-    <p class="sub-lead">作り直すのではなく、写真の置き方・導線・見出しを整える。それだけで「相談されるページ」に近づきます。</p>
-    <div class="ba-grid">
-      <div class="ba-col before reveal">
-        <span class="ba-tag">Before <em>／ 今ありがちな状態</em></span>
-        <div class="ba-screen" aria-label="改善前のページ構造ラフ（架空・SVG）">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-hidden="true">
-            <rect width="300" height="400" fill="#fbf8f1"/>
-            <rect x="0" y="0" width="300" height="34" fill="#efeae1"/>
-            <rect x="14" y="13" width="56" height="8" rx="2" fill="#bdb19a"/>
-            <g fill="#c4b89e"><rect x="232" y="13" width="14" height="8" rx="2"/><rect x="252" y="13" width="14" height="8" rx="2"/><rect x="272" y="13" width="14" height="8" rx="2"/></g>
-            <rect x="14" y="50" width="78" height="58" rx="3" fill="#d6ccba"/>
-            <g fill="#dad0bf"><rect x="100" y="56" width="180" height="6" rx="2"/><rect x="100" y="70" width="160" height="6" rx="2"/><rect x="100" y="84" width="170" height="6" rx="2"/><rect x="100" y="98" width="140" height="6" rx="2"/></g>
-            <g fill="#dad0bf"><rect x="14" y="124" width="270" height="6" rx="2"/><rect x="14" y="138" width="260" height="6" rx="2"/><rect x="14" y="152" width="268" height="6" rx="2"/><rect x="14" y="166" width="240" height="6" rx="2"/><rect x="14" y="180" width="270" height="6" rx="2"/><rect x="14" y="194" width="250" height="6" rx="2"/><rect x="14" y="208" width="265" height="6" rx="2"/><rect x="14" y="222" width="245" height="6" rx="2"/><rect x="14" y="236" width="270" height="6" rx="2"/><rect x="14" y="250" width="252" height="6" rx="2"/><rect x="14" y="264" width="260" height="6" rx="2"/><rect x="14" y="278" width="240" height="6" rx="2"/><rect x="14" y="292" width="270" height="6" rx="2"/><rect x="14" y="306" width="255" height="6" rx="2"/></g>
-            <rect x="108" y="360" width="84" height="22" rx="3" fill="none" stroke="#a99f8c" stroke-width="1"/>
-            <text x="150" y="375" text-anchor="middle" font-size="9" fill="#a99f8c" font-family="sans-serif">お問い合わせ</text>
-          </svg>
-        </div>
-        <p class="ba-note"><b>写真が小さく、文章が長い。</b>何を頼めるか分かりにくく、問い合わせボタンも下に埋もれている。</p>
-      </div>
-      <div class="ba-col after reveal">
-        <span class="ba-tag">After <em>／ 見せ方を整えた状態</em></span>
-        <div class="ba-screen" aria-label="改善後のページ構造ラフ（架空・SVG）">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" role="img" aria-hidden="true">
-            <rect width="300" height="400" fill="#ffffff"/>
-            <rect x="0" y="0" width="300" height="34" fill="#1c1a17"/>
-            <rect x="14" y="13" width="56" height="8" rx="2" fill="#f6f3ee"/>
-            <rect x="216" y="8" width="70" height="18" rx="3" fill="#b15c3c"/>
-            <text x="251" y="20" text-anchor="middle" font-size="9" fill="#fff" font-family="sans-serif" font-weight="700">相談する</text>
-            <rect x="14" y="48" width="272" height="148" rx="3" fill="#e8ddcb"/>
-            <g stroke="#d2c5a8" stroke-width="1" fill="none"><path d="M14 196 L80 130 L120 158 L180 110 L230 142 L286 100"/></g>
-            <circle cx="240" cy="78" r="14" fill="#d2c5a8"/>
-            <text x="150" y="178" text-anchor="middle" font-size="10" fill="#a08f76" font-family="sans-serif" font-style="italic">写真（主役）</text>
-            <rect x="14" y="212" width="220" height="11" rx="2" fill="#1c1a17"/>
-            <rect x="14" y="228" width="170" height="11" rx="2" fill="#1c1a17"/>
-            <rect x="14" y="248" width="180" height="6" rx="2" fill="#9a9286"/>
-            <g fill="#e8ddcb"><rect x="14" y="270" width="86" height="34" rx="3"/><rect x="106" y="270" width="86" height="34" rx="3"/><rect x="198" y="270" width="88" height="34" rx="3"/></g>
-            <g fill="#1c1a17"><rect x="22" y="283" width="50" height="4" rx="1"/><rect x="114" y="283" width="50" height="4" rx="1"/><rect x="206" y="283" width="50" height="4" rx="1"/><rect x="22" y="292" width="36" height="4" rx="1"/><rect x="114" y="292" width="36" height="4" rx="1"/><rect x="206" y="292" width="36" height="4" rx="1"/></g>
-            <rect x="14" y="352" width="272" height="34" rx="3" fill="#b15c3c"/>
-            <text x="150" y="373" text-anchor="middle" font-size="12" fill="#fff" font-family="sans-serif" font-weight="700">無料相談する →</text>
-          </svg>
-        </div>
-        <p class="ba-note">写真が主役になり、強みがひと目で伝わる。整理された3項目と、はっきりした相談ボタンで、問い合わせまで迷わない。</p>
-      </div>
-    </div>
-    <div class="ba-points stagger">
-      <div class="bp"><span class="n">01</span><p>写真を大きく見せる</p></div>
-      <div class="bp"><span class="n">02</span><p>何を頼めるか分かる</p></div>
-      <div class="bp"><span class="n">03</span><p>相談まで迷わない導線</p></div>
     </div>
   </div>
 </section>
@@ -1409,6 +1349,25 @@
     },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal,.stagger').forEach(function(el){io.observe(el);});
   }else{document.querySelectorAll('.reveal,.stagger').forEach(function(el){el.classList.add('in');});}
+  // BA Slider
+  (function(){
+    var track=document.getElementById('bas-track');
+    if(!track)return;
+    var before=document.getElementById('bas-before');
+    var handle=document.getElementById('bas-handle');
+    var pct=50;
+    function set(p){pct=Math.max(2,Math.min(98,p));before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';handle.style.left=pct+'%';handle.setAttribute('aria-valuenow',Math.round(pct));}
+    function xPct(e){var r=track.getBoundingClientRect();return((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*100;}
+    var drag=false;
+    track.addEventListener('mousedown',function(e){drag=true;set(xPct(e));e.preventDefault();});
+    document.addEventListener('mousemove',function(e){if(drag)set(xPct(e));});
+    document.addEventListener('mouseup',function(){drag=false;});
+    track.addEventListener('touchstart',function(e){drag=true;set(xPct(e));},{passive:true});
+    track.addEventListener('touchmove',function(e){if(drag){set(xPct(e));e.preventDefault();}},{passive:false});
+    track.addEventListener('touchend',function(){drag=false;});
+    handle.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')set(pct-2);if(e.key==='ArrowRight')set(pct+2);});
+    set(50);
+  })();
   // FAQ exclusive accordion
   document.querySelectorAll('.qa').forEach(function(d){
     d.addEventListener('toggle',function(){
