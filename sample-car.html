@@ -143,17 +143,12 @@ body.ready .hero-sub{opacity:1;transform:none}
 
 /* ============ STATEMENT ============ */
 #statement{padding:140px 0}
-.stmt-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
-.stmt-photo{position:relative;display:flex;align-items:center;aspect-ratio:16/10;overflow:hidden;border-radius:4px;clip-path:inset(12% 12% 12% 12%);transition:clip-path 1.1s cubic-bezier(.16,1,.3,1);background:linear-gradient(160deg,#1B1726,#0C0A13);border:1px solid var(--line)}
-.stmt-photo.in{clip-path:inset(0 0 0 0)}
-.stmt-photo img{width:100%;height:112%;object-fit:cover;object-position:50% 50%;will-change:transform}
-.stmt-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(20deg,rgba(255,30,45,.22),transparent 55%);mix-blend-mode:screen}
+.stmt-grid{max-width:720px;margin:0 auto}
 .stmt-copy p{margin-top:26px;color:var(--smoke);font-size:13.5px;line-height:2.2;max-width:46ch}
 .stmt-copy p strong{color:var(--headlight);font-weight:600}
 .kpi{display:flex;gap:36px;margin-top:40px;font-family:var(--mono)}
 .kpi div b{display:block;font-size:26px;font-weight:800;color:var(--headlight);letter-spacing:0;font-variant-numeric:tabular-nums}
 .kpi div span{font-size:9px;letter-spacing:.25em;color:var(--smoke)}
-@media (max-width:860px){.stmt-grid{grid-template-columns:1fr;gap:42px}}
 
 /* ============ PRICE ============ */
 #price{padding:120px 0;background:linear-gradient(rgba(10,8,16,.55),rgba(6,5,9,.8))}
@@ -279,7 +274,6 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
 <!-- ================= STATEMENT ================= -->
 <section id="statement">
   <div class="wrap stmt-grid">
-    <figure class="stmt-photo" id="stmtPhoto"><img id="stmtImg" src="img/sample-car.jpg" alt="夜の街路でライトアップされた赤いスーパーカー"></figure>
     <div class="stmt-copy">
       <div class="eyebrow rev">NIGHT / STATEMENT ／ FORM 03 — TYPE</div>
       <h2 class="sec rev">引き算から、<br>はじめる。</h2>
@@ -435,7 +429,7 @@ var io = new IntersectionObserver(function(es){
     }
   });
 }, {threshold:0.18});
-document.querySelectorAll(".rev,.stmt-photo").forEach(function(el){ io.observe(el); });
+document.querySelectorAll(".rev").forEach(function(el){ io.observe(el); });
 function startCount(el){
   var end = parseInt(el.getAttribute("data-count"), 10), t0 = performance.now(), dur = 1400;
   (function step(){
@@ -668,14 +662,6 @@ function frame(){
     c2.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
   }
 
-  var sp = document.getElementById("stmtPhoto");
-  if(sp){
-    var r = sp.getBoundingClientRect();
-    if(r.top < innerHeight && r.bottom > 0){
-      var p = (innerHeight - r.top) / (innerHeight + r.height);
-      document.getElementById("stmtImg").style.transform = "translateY(" + ((p - 0.5) * -7) + "%)";
-    }
-  }
 
   if(canRun && P){
     P.t += 0.016;
