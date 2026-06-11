@@ -19,9 +19,10 @@
 body{font-family:var(--gothic);background:var(--bg);color:var(--ink);line-height:2;font-size:14.5px;-webkit-font-smoothing:antialiased}
 a{color:var(--accent-d);text-decoration:none}
 a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);background:var(--bg)}
+header{border-bottom:1px solid var(--line);background:rgba(246,243,238,.94);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
 .hdr{max-width:880px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
-.hdr .mk{font-weight:700;letter-spacing:.18em;font-size:15px;color:var(--ink)}
+.hdr .mk{font-weight:700;letter-spacing:.18em;font-size:15px;color:var(--ink);display:flex;flex-direction:column;line-height:1.2}
+.hdr .mk small{font-weight:400;font-size:10.5px;letter-spacing:.06em;color:var(--soft);margin-top:3px}
 .hdr .bk{font-size:12.5px;font-weight:500}
 main{max-width:880px;margin:0 auto;padding:64px 24px 80px}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--accent-d);text-transform:uppercase}
@@ -42,7 +43,7 @@ footer{border-top:1px solid var(--line);margin-top:40px}
 <body>
 <header>
   <div class="hdr">
-    <a href="index.html" class="mk">MISERU</a>
+    <a href="index.html" class="mk">MISERU<small>ミセル｜見せ方を整える編集室</small></a>
     <a href="index.html" class="bk">← トップへ戻る</a>
   </div>
 </header>
