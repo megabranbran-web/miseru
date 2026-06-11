@@ -1,8 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ミセル｜いい仕事は、見せ方で伝わる。 — 中小事業のHP・見せ方改善</title>
 <meta name="description" content="HP・Instagram・Googleマップ・写真から、実物の魅力が伝わる1ページへ。中小事業の見せ方を整える編集室、ミセル。HPがなくても、まずは無料相談で方向性とプラン目安をお返しします。">
 <!-- DOMAIN-MIGRATION: 独自ドメイン移行時に要書き換え（canonical / og:url / og:image / twitter:image / JSON-LD内URL） -->
@@ -20,798 +20,528 @@
 <meta name="twitter:title" content="ミセル｜いい仕事は、見せ方で伝わる。">
 <meta name="twitter:description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のHPを「相談されるページ」に整えます。">
 <meta name="twitter:image" content="https://miseru-web.pages.dev/img/og-image.png">
-<meta name="theme-color" content="#1c1a17">
+<meta name="theme-color" content="#1B1916">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!--
-  ============ 画像メモ ============
-  ・実写（ラン撮影＝「見せ方サンプル」。制作実績ではない）：
-    - Before/After After主役: img/after-main.jpg（牛カツサンド）
-    - 見せ方サンプル帯: img/sample-food.jpg / img/sample-pet.jpg / img/sample-car.jpg
-  ・仮画像（Pexels 無料・商用可・帰属不要・後で差し替え予定）：
-    - hero 右: 案C「返るものカード」(.hero-offer)＝画像なし。※旧スクラップ画像30101198は撤去済み
-    - 参考デモ枠（SS）: 撤去済み（旧Pexels 16741356。ユーザー要望でいったん非表示）
+  ============ 2026-06 「朱入れ」全面リデザイン（モック _mock-top-shuire-v2.html より移植） ============
+  ・コンセプト：校正・編集室メタファー（朱赤 #D8321E／紙 #F6F3ED／墨 #1B1916／トンボ・縦書きレール・mono）
+  ・FVの没コピー取り消し線＝「作り直さず整える」の実演
+  ・旧アンカー互換：#industry-samples / #miss / #industries / #about / #sample-detail を維持
+  ・実写（自社撮影＝「見せ方サンプル」。制作実績ではない）：
+    - FVスライダー: img/home/demo-yakitori(-before).webp/.jpg（焼き鳥）
+    - サンプル帯: img/samples/{pet,food,car}/optimized/*-hero
   ==============================================================
 -->
 <style>
-  :root{
-    --paper:#f6f3ee;       /* 地 */
-    --sand:#e8ddcb;        /* 沈めた暖色（濃淡を強めて締める） */
-    --sand-d:#e4d9c7;
-    --ink:#1c1a17;         /* 墨（見出し・締め） */
-    --ink2:#2f2a24;        /* 本文 */
-    --soft:#6c655b;        /* 補助 */
-    --soft2:#9a9286;       /* ラベル等 */
-    --line:#dcd3c4;        /* 罫線（少し見える） */
-    --accent:#b15c3c;      /* 差し色テラコッタ */
-    --accent-d:#974b2f;
-    --white:#fff;
-    --mincho:"Shippori Mincho",serif;
-    --gothic:"Zen Kaku Gothic New",sans-serif;
-    --maxw:1180px;
+/* ============ TOKENS ============ */
+:root{
+  --ink:#1B1916;
+  --ink-2:#242019;
+  --paper:#F6F3ED;
+  --paper-2:#FBF9F4;
+  --shu:#D8321E;
+  --shu-deep:#B0260F;
+  --shu-soft:#E8604C;
+  --grey:#877F73;
+  --line:#DDD5C8;
+  --line-ink:rgba(246,243,237,.16);
+  --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif;
+  --sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --max:1080px;
+  --pad:clamp(20px,5vw,48px);
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{
+  font-family:var(--sans);
+  background:var(--ink);
+  color:var(--ink);
+  line-height:1.95;
+  letter-spacing:.03em;
+  font-size:15.5px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:700;line-height:1.55;letter-spacing:.04em;font-feature-settings:"palt"}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+:focus-visible{outline:2px solid var(--shu);outline-offset:3px;border-radius:2px}
+.sec--ink :focus-visible{outline-color:var(--shu-soft)}
+
+/* ============ 校正記号（共通装飾） ============ */
+.kicker{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  color:var(--shu);text-transform:uppercase;display:flex;align-items:center;gap:10px;
+}
+.kicker::before{
+  content:"";width:26px;height:1px;background:var(--shu);
+  transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease) .15s;
+}
+.kicker.in::before{transform:scaleX(1)}
+.sec--ink .kicker{color:var(--shu-soft)}
+.sec--ink .kicker::before{background:var(--shu-soft)}
+.u-shu{
+  background:linear-gradient(transparent 78%, rgba(216,50,30,.85) 78%, rgba(216,50,30,.85) 92%, transparent 92%);
+  padding:0 .06em;
+}
+
+/* ============ HEADER ============ */
+header{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  background:rgba(27,25,22,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-ink);
+}
+.hd{display:flex;align-items:center;justify-content:space-between;height:60px;max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.hd-logo{font-family:var(--serif);font-weight:800;font-size:18px;color:var(--paper);text-decoration:none;letter-spacing:.08em;display:flex;align-items:baseline;gap:10px}
+.hd-logo small{font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.18em;color:var(--grey)}
+.hd-nav{display:none;gap:26px}
+.hd-nav a{color:#CFC8BC;text-decoration:none;font-size:13px;letter-spacing:.08em}
+.hd-nav a:hover{color:var(--paper)}
+.hd-cta{display:none;font-size:12.5px;font-weight:700;color:var(--paper);text-decoration:none;border:1px solid var(--shu);background:var(--shu);padding:8px 16px;border-radius:3px;letter-spacing:.06em}
+.hd-cta:hover{background:var(--shu-deep)}
+.burger{
+  display:flex;flex-direction:column;justify-content:center;gap:5px;
+  width:42px;height:42px;padding:0 8px;background:transparent;border:1px solid var(--line-ink);
+  border-radius:3px;cursor:pointer;
+}
+.burger span{display:block;height:1.5px;background:var(--paper);transition:transform .3s}
+@media(min-width:880px){
+  .hd-nav{display:flex}
+  .hd-cta{display:inline-block}
+  .burger{display:none}
+}
+@media(max-width:560px){.hd-logo small{display:none}}
+
+/* drawer（モバイルナビ） */
+.drawer{position:fixed;inset:0;z-index:80;display:none}
+.drawer.open{display:block}
+.drawer .ov{position:absolute;inset:0;background:rgba(15,13,11,.6)}
+.drawer .panel{
+  position:absolute;top:0;right:0;bottom:0;width:min(82vw,330px);
+  background:var(--ink);border-left:1px solid var(--line-ink);
+  padding:64px 30px 30px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;
+}
+.drawer .panel a{
+  color:#CFC8BC;text-decoration:none;font-size:14.5px;font-weight:500;
+  padding:13px 2px;border-bottom:1px solid var(--line-ink);letter-spacing:.05em;
+}
+.drawer .panel a:hover{color:var(--paper)}
+.drawer .x{
+  position:absolute;top:14px;right:18px;width:38px;height:38px;
+  background:transparent;border:0;color:var(--paper);font-size:22px;cursor:pointer;
+}
+
+/* ============ SECTIONS ============ */
+.sec{padding:clamp(72px,11vw,120px) 0;background:var(--paper);color:var(--ink)}
+.sec--ink{background:var(--ink);color:var(--paper)}
+.sec--alt{background:var(--paper-2)}
+.sec-grid{display:grid;gap:18px}
+@media(min-width:1000px){
+  .sec-grid{grid-template-columns:60px 1fr;gap:0}
+  .rail{position:relative}
+  .rail span{
+    writing-mode:vertical-rl;text-orientation:mixed;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.34em;color:var(--grey);
+    position:sticky;top:100px;display:inline-block;padding-top:14px;
+    border-top:1px solid currentColor;
   }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;scroll-padding-top:84px}
-  body{font-family:var(--gothic);color:var(--ink2);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased;font-size:16px;overflow-x:hidden}
-  img{max-width:100%;display:block}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-  .sec{padding:clamp(64px,9.5vw,128px) 0}
-  .bg-sand{background:var(--sand)}
+  .sec--ink .rail span{color:#7A7468}
+}
+@media(max-width:999px){
+  .rail span{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--grey)}
+}
+.h2{font-size:clamp(24px,4vw,34px);margin:14px 0 18px}
+.lead{max-width:640px;color:#4A443B}
+.sec--ink .lead{color:#BBB3A4}
 
-  /* labels & headings */
-  .eyebrow{font-family:var(--gothic);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--accent-d);text-transform:uppercase;display:inline-block;margin-bottom:20px}
-  .eyebrow::before{content:"";display:inline-block;width:24px;height:1px;background:var(--accent);vertical-align:middle;margin-right:11px}
-  h2.title{font-family:var(--gothic);font-weight:900;font-size:clamp(23px,3.3vw,34px);line-height:1.5;letter-spacing:.01em;color:var(--ink)}
-  h2.title .l{display:block}
-  .mincho{font-family:var(--mincho);font-weight:500}
-  .sub-lead{font-size:15.5px;color:var(--soft);margin-top:18px;max-width:640px;line-height:1.95}
+/* ============ FV ============ */
+.fv{background:var(--paper);padding:calc(60px + clamp(48px,8vw,84px)) 0 clamp(64px,9vw,100px);position:relative}
+.fv::before{content:"";position:absolute;inset:60px 0 auto 0;height:8px;background:var(--ink)}
+.fv-grid{display:grid;gap:44px;align-items:center}
+@media(min-width:960px){.fv-grid{grid-template-columns:1.05fr .95fr;gap:56px}}
+.fv-meta{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;color:var(--grey);margin-bottom:26px;display:flex;gap:14px;flex-wrap:wrap}
+.fv-meta b{color:var(--shu);font-weight:500}
+.draft{
+  display:inline-block;position:relative;
+  font-family:var(--mono);font-size:clamp(12px,1.6vw,13.5px);color:#9B9385;
+  letter-spacing:.1em;margin-bottom:14px;
+}
+.draft::after{
+  content:"";position:absolute;left:-2px;right:-2px;top:55%;height:2px;background:var(--shu);
+  transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.7,0,.2,1) .5s;
+}
+.draft.on::after{transform:scaleX(1)}
+.fv h1{font-size:clamp(30px,5.4vw,48px);font-weight:800;line-height:1.5;margin-bottom:22px}
+.fv h1 .sm{display:block;font-size:.62em;font-weight:700;color:#3A352D;margin-top:10px}
+.fv-lead{max-width:520px;color:#4A443B;margin-bottom:24px;font-size:15px}
+.fv-sample-link{margin-bottom:22px;font-size:14px}
+.fv-sample-link a{font-weight:700;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--shu);padding-bottom:2px}
+.fv-sample-link .nt{display:inline-block;margin-left:12px;font-size:11px;color:var(--grey)}
+.fv-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;text-decoration:none;
+  font-weight:700;font-size:14.5px;letter-spacing:.05em;
+  padding:15px 26px;border-radius:3px;transition:transform .2s,box-shadow .2s,background .2s;
+  border:0;cursor:pointer;font-family:var(--sans);
+}
+.btn:hover{transform:translateY(-2px)}
+.btn .arw{transition:transform .25s}
+.btn:hover .arw{transform:translateX(3px)}
+.btn--shu{background:var(--shu);color:#fff;box-shadow:0 6px 18px rgba(216,50,30,.25)}
+.btn--shu:hover{background:var(--shu-deep)}
+.btn--ghost{border:1.5px solid var(--ink);color:var(--ink);background:transparent}
+.sec--ink .btn--ghost{border-color:var(--paper);color:var(--paper)}
+.badges{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:#5A5346;margin-bottom:10px}
+.badges b{color:var(--shu);font-weight:700;margin-right:3px}
+.fv-note{font-size:11.5px;color:var(--grey)}
+.fv-note a{color:var(--grey)}
 
-  /* buttons */
-  .btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.04em;padding:17px 34px;border-radius:3px;transition:.25s cubic-bezier(.2,.7,.3,1);cursor:pointer;border:1px solid transparent}
-  .btn-ink{background:var(--ink);color:#fff}
-  .btn-ink:hover{background:#000}
-  .btn-ink .arw{color:var(--accent);transition:.25s}
-  .btn-ink:hover .arw{transform:translateX(4px)}
-  .btn-line{background:transparent;color:var(--ink);border-color:var(--ink)}
-  .btn-line:hover{background:var(--ink);color:#fff}
-  .textlink{font-size:14.5px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:3px;transition:.2s}
-  .textlink:hover{color:var(--accent-d)}
+/* --- 朱入れスライダー --- */
+.proof{position:relative}
+.tonbo{position:relative}
+.tonbo i{position:absolute;width:16px;height:16px;border:0 solid var(--ink);z-index:4;pointer-events:none}
+.tonbo .t1{top:-7px;left:-7px;border-top-width:1.5px;border-left-width:1.5px}
+.tonbo .t2{top:-7px;right:-7px;border-top-width:1.5px;border-right-width:1.5px}
+.tonbo .t3{bottom:-7px;left:-7px;border-bottom-width:1.5px;border-left-width:1.5px}
+.tonbo .t4{bottom:-7px;right:-7px;border-bottom-width:1.5px;border-right-width:1.5px}
+.cmp{
+  position:relative;overflow:hidden;border-radius:2px;
+  aspect-ratio:4/5;max-height:560px;width:100%;
+  box-shadow:0 24px 60px -18px rgba(27,25,22,.38);
+  touch-action:pan-y;cursor:ew-resize;user-select:none;-webkit-user-select:none;
+  --pos:50%;
+}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cmp .before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.cmp-bar{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:var(--shu);z-index:3;transform:translateX(-1px)}
+.cmp-handle{
+  position:absolute;top:50%;left:var(--pos);transform:translate(-50%,-50%);z-index:4;
+  width:46px;height:46px;border-radius:50%;background:var(--shu);color:#fff;
+  display:flex;align-items:center;justify-content:center;gap:2px;
+  font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.35);
+  outline-offset:3px;
+}
+.cmp-handle:focus-visible{outline:2px solid var(--ink)}
+.cmp-tag{
+  position:absolute;z-index:3;top:14px;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  padding:5px 10px;border-radius:2px;
+}
+.tag-b{left:14px;background:rgba(27,25,22,.78);color:#E8E2D6}
+.tag-a{right:14px;background:rgba(216,50,30,.92);color:#fff}
+.cmp-cap{
+  position:absolute;z-index:3;bottom:0;left:0;right:0;
+  padding:42px 16px 14px;color:#fff;font-size:13px;font-weight:500;letter-spacing:.05em;
+  background:linear-gradient(transparent,rgba(15,13,11,.72));pointer-events:none;
+}
+.proof-notes{margin-top:20px;font-size:12px;color:var(--grey);line-height:1.8}
+.proof-notes b{color:var(--ink)}
 
-  /* header */
-  header{position:fixed;top:0;left:0;width:100%;z-index:1000;transition:.35s}
-  header::before{content:"";position:absolute;inset:0;background:var(--paper);opacity:0;transition:.35s;border-bottom:1px solid transparent}
-  header.scrolled::before{opacity:.97;border-bottom:1px solid var(--line)}
-  .hdr-in{position:relative;display:flex;align-items:center;justify-content:space-between;height:70px}
-  .logo{display:flex;flex-direction:column;line-height:1}
-  .logo .mk{font-weight:900;font-size:20px;letter-spacing:.16em;color:var(--ink)}
-  .logo .sb{font-size:10.5px;letter-spacing:.08em;color:var(--ink2);margin-top:5px}
-  .nav{display:flex;align-items:center;gap:28px}
-  .nav a{font-size:13.5px;font-weight:500;color:var(--ink2);letter-spacing:.03em;position:relative;transition:.2s}
-  .nav a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:.3s}
-  .nav a:not(.nav-cta):hover::after{width:100%}
-  .nav-cta{padding:9px 18px;background:transparent;color:var(--ink);border:1px solid var(--ink);border-radius:3px;font-size:13px;font-weight:500;transition:.25s}
-  .nav-cta:hover{background:var(--ink);color:#fff}
-  .burger{display:none;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px}
-  .burger span{width:25px;height:1.5px;background:var(--ink);transition:.3s}
+/* ============ TEASER（墨帯・3分岐） ============ */
+.teaser{background:var(--ink);border-top:1px solid var(--line-ink)}
+.teaser .row{
+  max-width:var(--max);margin:0 auto;padding:0 var(--pad);
+  display:grid;grid-template-columns:repeat(3,1fr);
+}
+.teaser a{
+  display:flex;align-items:center;gap:10px;justify-content:center;
+  padding:20px 10px;text-decoration:none;color:#CFC8BC;font-size:13.5px;font-weight:700;letter-spacing:.05em;
+  border-left:1px solid var(--line-ink);transition:color .25s,background .25s;
+}
+.teaser a:first-child{border-left:0}
+.teaser a:hover{color:var(--paper);background:rgba(216,50,30,.1)}
+.teaser .no{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--shu-soft);font-weight:400}
+@media(max-width:760px){
+  .teaser .row{grid-template-columns:1fr}
+  .teaser a{border-left:0;border-top:1px solid var(--line-ink);justify-content:flex-start;padding:15px 4px}
+  .teaser a:first-child{border-top:0}
+}
 
-  /* hero */
-  .hero{padding-top:118px;padding-bottom:clamp(40px,5vw,64px)}
-  .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(34px,5vw,72px);align-items:center}
-  .hero-eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;color:var(--accent-d);text-transform:uppercase;margin-bottom:26px}
-  .hero h1{font-family:var(--mincho);font-weight:600;font-size:clamp(32px,5.6vw,58px);line-height:1.4;letter-spacing:.03em;color:var(--ink);margin-bottom:26px}
-  .hero h1 .em{color:var(--accent-d)}
-  .hero-p{font-size:16px;color:var(--ink2);line-height:2;max-width:470px;margin-bottom:30px}
-  .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-  .hero-fine{font-size:13px;color:var(--soft);margin-top:16px;line-height:1.8}
-  .hero-chips{display:flex;gap:10px;margin-top:30px;flex-wrap:wrap}
-  .chip{font-size:13px;font-weight:500;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:9px 16px}
-  .chip b{color:var(--accent-d);font-weight:700;margin-right:5px}
-  /* hero board (実写を見比べて整える) */
-  .hero-board{position:relative}
-  .hb-main{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:4px;box-shadow:0 24px 56px -32px rgba(28,26,23,.4)}
-  .hb-main img{width:100%;height:100%;object-fit:cover}
-  .hb-sub{position:absolute;right:-6px;bottom:-6px;width:46%;aspect-ratio:1/1;overflow:hidden;border-radius:4px;border:5px solid var(--paper);box-shadow:0 16px 34px -16px rgba(28,26,23,.5)}
-  .hb-sub img{width:100%;height:100%;object-fit:cover}
-  .hb-tag{position:absolute;left:-10px;top:16px;z-index:2;background:var(--ink);color:#fff;font-size:11px;letter-spacing:.08em;padding:7px 13px;border-radius:3px}
-  .hb-cap{font-size:11px;color:var(--soft2);margin-top:10px;letter-spacing:.04em;text-align:right}
+/* ============ SAMPLES（墨） ============ */
+.cards3{display:grid;gap:22px;margin-top:34px}
+@media(min-width:820px){.cards3{grid-template-columns:repeat(3,1fr)}}
+.scard{background:var(--ink-2);border:1px solid var(--line-ink);border-radius:4px;overflow:hidden;text-decoration:none;color:var(--paper);display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.scard:hover{transform:translateY(-4px);border-color:rgba(216,50,30,.55)}
+.scard .ph{aspect-ratio:4/3;overflow:hidden;background:#2C2823}
+.scard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.scard:hover .ph img{transform:scale(1.02)}
+.scard .bd{padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.scard .no{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:#9A9184}
+.scard h3{font-size:18px;color:var(--paper)}
+.scard h3 small{font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.16em;color:#9A9184;margin-left:8px;vertical-align:2px}
+.scard p{font-size:13px;color:#B5AC9D;line-height:1.85;flex:1}
+.scard .go{font-size:13px;font-weight:700;color:#FF6B55}
+.s-guide{margin-top:26px;font-size:13.5px;color:#BBB3A4;border-left:2px solid var(--shu);padding-left:14px;line-height:2}
+.s-guide b{color:var(--paper)}
+/* 編集後記（正直宣言） */
+.honesty{
+  margin-top:34px;background:var(--ink-2);border:1px dashed rgba(246,243,237,.25);
+  border-radius:4px;padding:24px 26px;position:relative;
+}
+.honesty .hh{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--shu-soft);margin-bottom:12px}
+.honesty p{font-size:12.5px;color:#B5AC9D;line-height:2.05}
+.honesty b{color:var(--paper)}
 
-  /* loss */
-  #loss{padding-top:clamp(52px,7vw,100px)}
-  .loss-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 60px;margin-top:42px}
-  .loss-item{display:flex;gap:15px;padding:21px 0;border-bottom:1px solid var(--line);align-items:baseline}
-  .loss-item .no{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none}
-  .loss-item p{font-size:15.5px;color:var(--ink2);line-height:1.8}
-  /* miss（見られているのに相談されていない・痛みチェック） */
-  .miss-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,4vw,60px);margin-top:42px}
-  .miss-item{display:flex;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
-  .miss-item .mk{font-family:var(--mincho);font-size:14px;color:var(--accent-d);flex:none;min-width:1.7em}
-  .miss-item p{font-size:15px;color:var(--ink2);line-height:1.75}
-  .miss-foot{margin-top:26px;font-size:14px;color:var(--soft);line-height:1.9}
-  .miss-foot b{color:var(--accent-d);font-weight:700}
+/* ============ チェックリスト ============ */
+.checks{display:grid;gap:0;margin-top:30px;border-top:1px solid var(--line)}
+.checks li{
+  list-style:none;display:flex;gap:16px;align-items:flex-start;
+  padding:18px 6px;border-bottom:1px solid var(--line);font-size:15px;font-weight:500;
+}
+.checks .bx{flex:none;width:20px;height:20px;margin-top:5px;border:1.5px solid var(--shu);border-radius:2px;position:relative}
+.checks .bx::after{
+  content:"";position:absolute;inset:3px;background:var(--shu);border-radius:1px;
+  transform:scale(0);transition:transform .35s cubic-bezier(.6,1.6,.4,1);
+}
+.checks li.in .bx::after{transform:scale(1)}
+.checks .num{font-family:var(--mono);font-size:10.5px;color:var(--grey);letter-spacing:.15em;margin-top:8px;flex:none;width:24px}
+.aftercheck{margin-top:24px;font-size:13.5px;color:#5A5346}
+.aftercheck a{color:#5A5346}
 
-  /* do */
-  .do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3.5vw,50px);margin-top:54px}
-  .do-item .dn{font-size:13px;font-weight:700;color:var(--accent-d);letter-spacing:.08em;padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--line);display:block}
-  .do-item h3{font-weight:700;font-size:19px;line-height:1.55;margin-bottom:13px;color:var(--ink)}
-  .do-item p{font-size:14.5px;color:var(--soft);line-height:1.95}
+/* ============ 整える3つ ============ */
+.do3{display:grid;gap:20px;margin-top:34px}
+@media(min-width:820px){.do3{grid-template-columns:repeat(3,1fr)}}
+.do3 article{border:1px solid var(--line);background:#FBF9F4;border-radius:4px;padding:26px 24px}
+.do3 .no{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--shu)}
+.do3 h3{font-size:18px;margin:10px 0 10px}
+.do3 p{font-size:13.5px;color:#4A443B;line-height:1.95}
 
-  /* before/after (light, warm) */
-  /* before/after — 証明セクション（ブラウザ枠つきモック） */
-  .ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3.5vw,38px);margin-top:46px;align-items:stretch}
-  .ba-col{display:flex;flex-direction:column}
-  .ba-tag{font-size:13px;font-weight:800;letter-spacing:.06em;margin-bottom:13px;display:flex;align-items:center;gap:9px}
-  .ba-tag::before{content:"";width:10px;height:10px;border-radius:2px;flex:none}
-  .ba-tag em{font-style:normal;font-weight:500;font-size:12px;color:var(--soft);letter-spacing:.02em}
-  .ba-col.before .ba-tag{color:var(--ink2)} .ba-col.before .ba-tag::before{background:var(--soft2)}
-  .ba-col.after .ba-tag{color:var(--accent-d)} .ba-col.after .ba-tag::before{background:var(--accent)}
-  .screen{border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;height:394px;box-shadow:0 22px 48px -22px rgba(28,26,23,.42)}
-  .screen .bar0{height:26px;flex:none;display:flex;align-items:center;gap:5px;padding:0 11px;border-bottom:1px solid var(--line)}
-  .screen .bar0 i{width:7px;height:7px;border-radius:50%;background:#d8cfc0}
-  .screen .bar0 .url{margin-left:8px;height:8px;width:52%;border-radius:4px;background:#ece4d6}
-  .screen .body{flex:1;padding:15px;display:flex;flex-direction:column;gap:8px;overflow:hidden}
-  .screen .hd{display:flex;justify-content:space-between;align-items:center}
-  .screen .hd .nv{display:flex;gap:6px}
-  /* BEFORE = 弱いHP */
-  .screen.before{background:#efeae1}
-  .before .hd .lg{width:60px;height:11px;background:#cabfad;border-radius:3px}
-  .before .hd .nv span{width:22px;height:6px;background:#dcd3c3;border-radius:3px}
-  .before .row{display:flex;gap:10px;margin-top:2px}
-  .before .ph{width:74px;height:54px;background:#d6ccba;border-radius:4px;flex:none}
-  .before .tx{flex:1;display:flex;flex-direction:column;gap:5px;padding-top:2px}
-  .before .tx .h{height:9px;width:66%;background:#c4b9a6;border-radius:3px}
-  .before .l{height:6px;background:#dcd3c3;border-radius:3px}
-  .before .para{display:flex;flex-direction:column;gap:5px;margin-top:1px}
-  .before .thumbs{display:flex;gap:5px;align-items:flex-end;margin-top:auto}
-  .before .thumbs span{width:30px;height:24px;background:#d6ccba;border-radius:3px}
-  .before .thumbs span:nth-child(2){height:29px} .before .thumbs span:nth-child(4){width:23px;height:21px}
-  .before .ghost{align-self:flex-start;margin-top:8px;font-size:9.5px;color:#a99f8c;border:1px solid #d8cfbf;border-radius:3px;padding:5px 9px}
-  /* AFTER = 整えたHP */
-  .screen.after{background:var(--white)}
-  .after .hd .lg{width:56px;height:11px;background:var(--ink);border-radius:3px}
-  .after .hd .nv span{width:20px;height:6px;background:var(--line);border-radius:3px}
-  .after .shot{height:185px;border-radius:6px;overflow:hidden;flex:none;margin-top:2px}
-  .after .shot img{width:100%;height:100%;object-fit:cover;object-position:50% 45%}
-  .after .h{height:12px;width:62%;background:var(--ink);border-radius:3px;margin-top:3px}
-  .after .sub{height:6px;width:42%;background:var(--line);border-radius:3px}
-  .after .thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:2px}
-  .after .thumbs span{height:32px;background:var(--sand-d);border-radius:4px}
-  .after .cta{margin-top:auto;text-align:center;font-size:12px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:11px}
-  /* notes & 整えた3点 */
-  .ba-screen{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 20px 40px -26px rgba(28,26,23,.35)}
-  .ba-screen svg{display:block;width:100%;height:auto}
-  .ba-note{font-size:13px;line-height:1.75;margin-top:13px;color:var(--soft)}
-  .ba-col.before .ba-note b{color:var(--ink2);font-weight:700}
-  .ba-points{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,22px);margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
-  .ba-points .bp{display:flex;gap:11px;align-items:flex-start}
-  .ba-points .bp .n{font-family:var(--mincho);font-size:17px;color:var(--accent-d);line-height:1.15;flex:none}
-  .ba-points .bp p{font-size:14px;font-weight:500;color:var(--ink2);line-height:1.5}
+/* ============ For業種チップ ============ */
+.chips{display:grid;gap:12px;margin-top:30px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:880px){.chips{grid-template-columns:repeat(4,1fr)}}
+.chip{border:1px solid var(--line);border-radius:4px;padding:16px 16px 14px;background:#FBF9F4}
+.chip b{display:block;font-size:14px;letter-spacing:.04em}
+.chip i{display:block;font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--grey);margin:2px 0 8px}
+.chip p{font-size:11.8px;color:#5A5346;line-height:1.75}
 
-  /* industries */
-  .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:48px;background:var(--line);border:1px solid var(--line)}
-  .ind{background:var(--paper);padding:30px 22px;transition:.3s;min-height:118px;display:flex;flex-direction:column;justify-content:center}
-  .ind:hover{background:var(--white)}
-  .ind .jp{font-weight:700;font-size:16.5px;letter-spacing:.03em;margin-bottom:6px;color:var(--ink)}
-  .ind .en{font-size:10px;letter-spacing:.16em;color:var(--soft2);text-transform:uppercase}
+/* ============ 見立てシート（墨に浮く紙） ============ */
+.sheet-grid{display:grid;gap:44px;margin-top:36px;align-items:center}
+@media(min-width:960px){.sheet-grid{grid-template-columns:1fr 1fr}}
+.sheet-list{display:grid;gap:22px}
+.sheet-list article{display:flex;gap:16px}
+.sheet-list .sq{flex:none;width:10px;height:10px;background:var(--shu);margin-top:11px}
+.sheet-list h3{font-size:16.5px;color:var(--paper);margin-bottom:4px}
+.sheet-list p{font-size:13px;color:#B5AC9D;line-height:1.85}
+.a4{
+  background:#FCFAF5;color:var(--ink);border-radius:2px;
+  padding:30px 26px;transform:rotate(-1.2deg);
+  box-shadow:0 30px 70px -20px rgba(0,0,0,.6),0 4px 16px rgba(0,0,0,.3);
+  font-size:12px;line-height:1.8;position:relative;max-width:430px;margin:0 auto;
+}
+.a4 .mh{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--grey);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+.a4 h4{font-family:var(--serif);font-size:15px;margin-bottom:10px}
+.a4 dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-bottom:14px}
+.a4 dt{font-weight:700;color:var(--shu);font-size:11px}
+.a4 dd{font-size:11.5px}
+.a4 .rows{display:grid;gap:8px}
+.a4 .rows div{border:1px solid var(--line);border-radius:2px;padding:8px 10px;font-size:11px}
+.a4 .rows b{color:var(--shu);font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;margin-right:8px}
+.a4 .ba{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.a4 .ba figure{position:relative;aspect-ratio:16/10;border-radius:2px;overflow:hidden;border:1px solid var(--line)}
+.a4 .ba img{width:100%;height:100%;object-fit:cover}
+.a4 .ba figcaption{
+  position:absolute;left:0;bottom:0;right:0;
+  font-family:var(--mono);font-size:8px;letter-spacing:.18em;color:#fff;
+  background:rgba(27,25,22,.55);padding:2px 6px;
+}
+.a4 .ba .af figcaption{background:rgba(216,50,30,.8)}
+.a4 .stamp{
+  position:absolute;top:18px;right:18px;transform:rotate(8deg);
+  border:1.5px solid var(--shu);color:var(--shu);border-radius:3px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.2em;padding:4px 8px;
+}
+.a4-cap{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:#8B8376;text-align:center;margin-top:18px}
+.sheet-cta{margin-top:34px;border:1px solid var(--line-ink);border-radius:4px;padding:26px 24px;background:var(--ink-2)}
+.sheet-cta h3{font-size:19px;color:var(--paper);margin-bottom:10px}
+.sheet-cta p{font-size:13.5px;color:#B5AC9D;line-height:2;margin-bottom:14px}
+.sheet-cta .pr{font-family:var(--serif);font-weight:800;font-size:24px;color:var(--paper)}
+.sheet-cta .pr small{font-size:12px;color:#9A9184;font-family:var(--sans);font-weight:400;margin-left:10px}
+.sheet-cta .juto{font-size:12.5px;color:#D8C9B8;margin:6px 0 0}
+.sheet-cta .juto b{color:var(--shu-soft)}
+.s-disc{margin-top:26px;font-size:11.5px;color:#8B8376;line-height:1.9}
 
-  /* demo */
-  .demo-card{display:block;margin-top:46px}
-  .demo-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(26px,4.5vw,58px);align-items:center}
-  .demo-photo{position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:4px;box-shadow:0 24px 56px -32px rgba(28,26,23,.5)}
-  .demo-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s cubic-bezier(.2,.7,.3,1)}
-  .demo-card:hover .demo-photo img{transform:scale(1.04)}
-  .demo-photo .pin{position:absolute;left:14px;top:14px;background:rgba(28,26,23,.82);color:#fff;font-size:11px;letter-spacing:.06em;padding:6px 12px;border-radius:3px}
-  .demo-meta .tag{font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--accent-d);text-transform:uppercase;margin-bottom:16px;display:block}
-  .demo-meta h3{font-weight:700;font-size:clamp(19px,2.4vw,25px);line-height:1.55;margin-bottom:16px;color:var(--ink)}
-  .demo-meta p{font-size:14.5px;color:var(--soft);line-height:1.95;margin-bottom:22px}
+/* ============ 料金 ============ */
+.p-entry{display:grid;gap:14px;margin:32px 0 26px}
+@media(min-width:760px){.p-entry{grid-template-columns:1fr 1fr}}
+.p-entry article{border:1px solid var(--line);border-radius:4px;padding:22px;background:#FBF9F4;display:flex;flex-direction:column;gap:6px}
+.p-entry h3{font-size:16px}
+.p-entry p{font-size:12.5px;color:#5A5346;line-height:1.85;flex:1}
+.p-price{font-family:var(--serif);font-weight:800;font-size:25px}
+.p-price small{font-size:11.5px;font-family:var(--sans);font-weight:400;color:var(--grey);margin-left:8px}
+.plans{display:grid;gap:18px;margin-top:8px}
+@media(min-width:880px){.plans{grid-template-columns:repeat(3,1fr)}}
+.plan{border:1px solid var(--line);border-radius:5px;padding:26px 22px;background:#FBF9F4;position:relative;display:flex;flex-direction:column;gap:8px}
+.plan--reco{border:2px solid var(--shu);background:#fff;box-shadow:0 16px 40px -16px rgba(216,50,30,.22);overflow:visible}
+.plan .reco{
+  position:absolute;top:-12px;left:20px;background:var(--shu);color:#fff;
+  font-size:10.5px;font-weight:700;letter-spacing:.14em;padding:4px 12px;border-radius:2px;
+}
+.plan .nm{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--grey)}
+.plan h3{font-size:18px}
+.plan p{font-size:12.8px;color:#4A443B;line-height:1.9;flex:1}
+.plan .dl{font-size:11.5px;color:var(--grey)}
+/* 手書き風の朱丸（編集者が選んだ印） */
+.maru-wrap{position:relative;display:inline-block}
+.maru{
+  position:absolute;left:50%;top:50%;width:150%;height:210%;
+  transform:translate(-50%,-52%) rotate(-2deg);pointer-events:none;overflow:visible;
+}
+.maru ellipse{
+  fill:none;stroke:var(--shu);stroke-width:2.6;stroke-linecap:round;opacity:.85;
+  stroke-dasharray:100;stroke-dashoffset:100;
+  transition:stroke-dashoffset 1.1s var(--ease) .45s;
+}
+.plan--reco.in .maru ellipse{stroke-dashoffset:0}
+.p-notes{margin-top:30px;border-top:1px solid var(--line);padding-top:20px;font-size:12px;color:#5A5346;line-height:2.05}
+.p-add{display:grid;gap:14px;margin-top:26px}
+@media(min-width:760px){.p-add{grid-template-columns:1fr 1fr}}
+.p-add article{border:1px dashed var(--line);border-radius:4px;padding:18px 20px;font-size:12.5px;color:#4A443B}
+.p-add b{display:block;font-size:14px;color:var(--ink);margin-bottom:4px}
+.p-add .p-price{font-size:19px}
+/* モニター枠 */
+.monitor{
+  margin-top:30px;border:1.5px solid var(--shu);border-radius:6px;
+  background:#fff;padding:24px 26px;position:relative;
+}
+.monitor .mtag{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.2em;color:var(--shu);text-transform:uppercase}
+.monitor p{font-size:13.5px;line-height:2;margin-top:8px}
+.monitor b{color:var(--shu-deep)}
+/* 料金直下CTA */
+.p-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.p-cta-note{margin-top:10px;font-size:11.5px;color:var(--grey)}
 
-  /* pricing */
-  .price-list{margin-top:46px;border-top:1px solid var(--line)}
-  .price-row{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:22px;padding:24px 6px;border-bottom:1px solid var(--line);align-items:center}
-  .price-row .pname{font-weight:700;font-size:17px;color:var(--ink)}
-  .price-row .pname small{display:block;font-weight:400;font-size:12.5px;color:var(--soft);margin-top:5px}
-  .price-row .pcol .lab{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--soft2);margin-bottom:4px}
-  .price-row .first{color:var(--accent-d);font-weight:900;font-size:17px}
-  .price-row .normal{color:var(--soft);font-size:14.5px}
-  .price-foot{margin-top:22px;font-size:13px;color:var(--soft);line-height:1.9}
-  .price-inline-note{padding:14px 6px 4px;font-size:13px;color:var(--accent-d);font-weight:500;border-bottom:1px solid var(--line)}
+/* ============ WHO（料金直後） ============ */
+.who-grid{display:grid;gap:36px;margin-top:34px}
+@media(min-width:920px){.who-grid{grid-template-columns:1.1fr .9fr}}
+.who p{font-size:14px;color:#4A443B;line-height:2.1;margin-bottom:16px}
+.who-look{border:1px solid var(--line);border-radius:4px;padding:24px;background:#FBF9F4}
+.who-look h3{font-size:13px;font-family:var(--mono);font-weight:500;letter-spacing:.2em;color:var(--grey);margin-bottom:14px}
+.who-look ul{list-style:none}
+.who-look li{font-size:13px;color:#4A443B;padding:7px 0;border-bottom:1px dashed var(--line);display:flex;gap:10px}
+.who-look li::before{content:"・";color:var(--shu);flex:none}
+.who-sign{margin-top:22px;font-family:var(--serif);font-weight:800;font-size:18px}
+.who-sign small{display:block;font-family:var(--mono);font-weight:400;font-size:9.5px;letter-spacing:.2em;color:var(--grey);margin-top:4px}
 
-  /* flow */
-  .flow-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:50px;counter-reset:fl}
-  .flow{position:relative;padding-top:34px}
-  .flow::before{counter-increment:fl;content:"0" counter(fl);position:absolute;top:0;left:0;font-weight:900;font-size:14px;color:var(--accent-d);letter-spacing:.05em}
-  .flow::after{content:"";position:absolute;top:7px;left:32px;right:-7px;height:1px;background:var(--line)}
-  .flow:last-child::after{display:none}
-  .flow h4{font-weight:700;font-size:15.5px;margin-bottom:7px;color:var(--ink)}
-  .flow p{font-size:13px;color:var(--soft);line-height:1.8}
+/* ============ 進め方（価格ラベル付き） ============ */
+.flow{display:grid;gap:0;margin-top:34px;counter-reset:fl}
+.flow li{
+  list-style:none;display:flex;gap:18px;align-items:flex-start;
+  padding:20px 4px;border-bottom:1px solid var(--line);counter-increment:fl;
+}
+.flow .cn{
+  flex:none;width:34px;height:34px;border:1.5px solid var(--shu);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;color:var(--shu);margin-top:3px;
+}
+.flow .cn::before{content:counter(fl)}
+.flow h3{font-size:16px;margin-bottom:2px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.flow h3 .yen{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--shu-deep);background:rgba(216,50,30,.08);border:1px solid rgba(216,50,30,.3);border-radius:2px;padding:1px 8px}
+.flow p{font-size:13px;color:#5A5346}
 
-  /* faq */
-  .faq{max-width:780px;margin:44px auto 0}
-  .qa{border-bottom:1px solid var(--line)}
-  .qa summary{list-style:none;cursor:pointer;padding:22px 2px;font-weight:700;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
-  .qa summary::-webkit-details-marker{display:none}
-  .qa summary::after{content:"";flex:none;width:18px;height:18px;margin-top:2px;border:1px solid var(--line);border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M9 4v10M4 9h10' stroke='%236c655b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .35s cubic-bezier(.2,.7,.3,1),background-color .25s}
-  .qa[open] summary::after{transform:rotate(45deg);background-color:var(--accent);border-color:var(--accent);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M9 4v10M4 9h10' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")}
-  .qa .a{overflow:hidden;padding:0 2px 22px;color:var(--soft);font-size:14.5px;line-height:1.95}
+/* ============ FAQ ============ */
+.faq{margin-top:30px;border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{
+  list-style:none;cursor:pointer;display:flex;gap:14px;align-items:baseline;
+  padding:19px 4px;font-weight:700;font-size:14.5px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:"Q";font-family:var(--mono);color:var(--shu);flex:none;font-size:13px}
+.faq summary::after{content:"＋";margin-left:auto;color:var(--grey);font-weight:400;transition:transform .25s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .ans{padding:0 4px 22px 30px;font-size:13.5px;color:#4A443B;line-height:2}
+.faq .ans a{color:var(--shu-deep)}
+.faq-cta{margin-top:30px;font-size:14px}
+.faq-cta a{font-weight:700;color:var(--ink);border-bottom:2px solid var(--shu);text-decoration:none;padding-bottom:2px}
 
-  /* about：2026-06 集客改善で人物プレースホルダー撤去→「編集室カード」型1カラム（who-card） */
-  .who-wrap{max-width:880px;margin:0 auto;padding:0 28px}
-  .who-card{position:relative;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:clamp(30px,5vw,56px);box-shadow:0 30px 60px -40px rgba(28,26,23,.3)}
-  .who-card::before{content:"";position:absolute;top:0;left:clamp(30px,5vw,56px);width:46px;height:3px;background:var(--accent);border-radius:2px}
-  .who-tab{position:absolute;top:-13px;right:clamp(24px,5vw,48px);font-family:var(--mincho);font-style:italic;font-size:12px;color:var(--soft);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px 14px;letter-spacing:.06em}
-  .who-card h2.title{margin-bottom:22px}
-  .who-card>p{font-size:15.5px;color:var(--ink2);line-height:2.05;margin-bottom:16px;max-width:36em}
-  .who-card .sign{font-family:var(--mincho);font-weight:600;font-size:17px;color:var(--ink);margin-top:8px;letter-spacing:.05em}
-  .who-card .sign small{font-family:var(--gothic);font-weight:400;font-size:12px;color:var(--soft);letter-spacing:.08em;margin-left:10px}
-  .about-profile{display:grid;gap:8px;margin:18px 0 4px;padding:16px 20px;background:var(--white);border:1px solid var(--line);border-radius:6px}
-  .about-profile[hidden]{display:none}
-  .about-profile div{display:flex;gap:14px;font-size:13.5px}
-  .about-profile dt{color:var(--soft2);font-weight:700;min-width:6em}
-  .about-profile dd{margin:0;color:var(--ink)}
-  /* look-card（MISERUで見るところ・信頼補強） */
-  .look-card{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:22px 24px;margin:22px 0}
-  .look-card .look-h{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px}
-  .look-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}
-  .look-list li{position:relative;padding-left:22px;font-size:14px;color:var(--ink2);line-height:1.6}
-  .look-list li::before{content:"✓";position:absolute;left:0;top:0;color:var(--accent-d);font-weight:700;font-size:13px}
+/* ============ FINAL + CONTACT（墨） ============ */
+.final-h{font-size:clamp(24px,3.6vw,32px);color:var(--paper);margin-bottom:14px}
+.final-p{color:#BBB3A4;font-size:14px;margin-bottom:26px;max-width:560px}
+.c-grid{display:grid;gap:24px;margin-top:40px}
+@media(min-width:920px){.c-grid{grid-template-columns:1fr 1fr}}
+.c-line{border:1px solid rgba(216,50,30,.5);border-radius:5px;padding:28px 26px;background:linear-gradient(150deg,rgba(216,50,30,.12),rgba(216,50,30,.03))}
+.c-line .ctag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--shu-soft);margin-bottom:10px;display:block}
+.c-line h3{font-size:18px;color:var(--paper);margin-bottom:10px}
+.c-line p{font-size:13px;color:#C5BDAF;line-height:2;margin-bottom:18px}
+.c-line .sm{font-size:11px;color:#8B8376;margin-top:12px}
+.c-mail{font-size:12px;color:#9A9184;margin-top:14px}
+.c-mail a{color:#C5BDAF}
+.c-form{border:1px solid var(--line-ink);border-radius:5px;padding:28px 26px;background:var(--ink-2)}
+.c-form h3{font-size:18px;color:var(--paper);margin-bottom:14px}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-size:11.5px;color:#9A9184;margin-bottom:6px;letter-spacing:.08em}
+.fld label em{font-style:normal;color:var(--shu-soft);font-size:10px;margin-left:6px}
+.fld input,.fld textarea{
+  width:100%;background:#1E1B17;border:1px solid rgba(246,243,237,.2);border-radius:3px;
+  padding:12px 13px;color:var(--paper);font-size:16px;font-family:var(--sans);
+}
+.fld input:focus-visible,.fld textarea:focus-visible{outline:2px solid var(--shu);outline-offset:1px;border-color:transparent}
+.fld .hint{font-size:10.5px;color:#7A7468;margin-top:5px;line-height:1.7}
+.fld .hint a{color:#B5AC9D}
+.c-form .btn{width:100%;justify-content:center;margin-top:6px}
+.c-form .fine{font-size:10.5px;color:#7A7468;margin-top:10px;line-height:1.8}
+.c-form .fine a{color:#9A9184}
+#form-result{display:none;color:var(--paper)}
+#form-result .ok{font-family:var(--serif);font-size:18px;padding:32px 0;line-height:1.8}
+#form-result .ok small{display:block;font-family:var(--sans);font-size:13px;color:#9A9184;margin-top:10px}
+#form-result .ng{color:#FF8A75;font-size:13px;padding:8px 0;line-height:1.9}
 
-  /* final cta */
-  .final{text-align:center}
-  .final h2{font-family:var(--mincho);font-weight:600;font-size:clamp(24px,3.8vw,38px);line-height:1.55;letter-spacing:.03em;margin-bottom:16px;color:var(--ink)}
-  .final p{font-size:15px;color:var(--soft);margin-bottom:36px;line-height:1.9}
+/* ============ FOOTER ============ */
+footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
+@media(min-width:768px){footer{padding-bottom:48px}}
+.ft{max-width:var(--max);margin:0 auto;padding:0 var(--pad)}
+.ft-logo{font-family:var(--serif);font-weight:800;font-size:17px;color:var(--paper);margin-bottom:10px}
+.ft p{max-width:520px;line-height:1.9;margin-bottom:22px}
+.ft-nav{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:26px}
+.ft-nav a{color:#B5AC9D;text-decoration:none}
+.ft-nav a:hover{color:var(--paper)}
+.ft small{display:block;color:#6B655A;font-family:var(--mono);letter-spacing:.12em;font-size:10px}
 
-  /* contact */
-  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,68px)}
-  .contact-info h2.title{margin-bottom:20px}
-  .contact-info p{font-size:14.5px;color:var(--soft);line-height:2;margin-bottom:22px}
-  .contact-info .mailrow{font-size:14px;color:var(--ink2)}
-  .contact-info .mailrow a{border-bottom:1px solid var(--accent);padding-bottom:2px}
-  /* LINE カード（主導線・公式LINEへ）*/
-  .line-card{background:#fffdfa;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:22px 24px;margin:24px 0 22px;box-shadow:0 18px 36px -28px rgba(28,26,23,.35)}
-  .line-card .line-card-tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.16em;color:#fff;background:var(--accent);padding:4px 11px;border-radius:99px;text-transform:uppercase}
-  .line-card h3{font-family:var(--gothic);font-weight:900;font-size:17px;color:var(--ink);line-height:1.55;margin:12px 0 8px}
-  .line-card p{font-size:13.5px;color:var(--soft);line-height:1.95;margin-bottom:14px}
-  .line-card .line-card-btn{padding:13px 22px;font-size:14px}
-  .line-card .line-card-note{font-size:11.5px;color:var(--soft2);margin-top:12px;margin-bottom:0;line-height:1.7}
-  /* footer 内ナビゲーション */
-  .foot-links{margin-top:16px;display:flex;flex-wrap:wrap;gap:14px 20px;font-size:12.5px}
-  .foot-links a{color:rgba(241,236,227,.78);border-bottom:1px solid transparent;padding-bottom:2px;transition:border-color .25s,color .2s}
-  .foot-links a:hover{border-color:var(--accent);color:var(--paper)}
-  .form .row{margin-bottom:17px}
-  .form label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;color:var(--ink2)}
-  .form label .opt{color:var(--soft2);font-weight:400;font-size:11.5px}
-  .form input,.form textarea{width:100%;border:1px solid var(--line);background:var(--white);border-radius:3px;padding:14px 15px;font-size:16px;font-family:inherit;color:var(--ink);transition:.2s}
-  .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent)}
-  .form textarea{min-height:100px;resize:vertical}
-  .form .btn-ink{width:100%;margin-top:4px;justify-content:center}
+/* ============ STICKY CTA（モバイル）============ */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:1px;
+  background:rgba(20,18,16,.95);backdrop-filter:blur(6px);
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  border-top:1px solid var(--line-ink);
+}
+.sticky a{
+  flex:1;text-align:center;text-decoration:none;font-size:13px;font-weight:700;
+  padding:13px 6px;border-radius:3px;letter-spacing:.04em;
+}
+.sticky .l1{background:#06C755;color:#fff}
+.sticky .l2{background:var(--paper);color:var(--ink)}
+@media(min-width:768px){.sticky{display:none}}
 
-  /* footer (dark ok) */
-  footer{background:var(--ink);color:#9a9286;padding:52px 0 38px}
-  .foot-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
-  .foot-in .mk{font-weight:900;font-size:19px;letter-spacing:.16em;color:var(--paper)}
-  .foot-in .fnote{font-size:12.5px;line-height:1.9;max-width:520px;margin-top:13px}
-  .foot-copy{font-size:11px;letter-spacing:.05em;margin-top:28px;color:#6a635a}
-
-  /* mobile sticky cta */
-  .mcta{display:none;position:fixed;left:0;bottom:0;width:100%;z-index:1100;padding:10px 12px;gap:10px;background:rgba(246,243,238,.97);backdrop-filter:blur(8px);border-top:1px solid var(--line)}
-  .mcta a{flex:1;text-align:center;padding:14px 6px;border-radius:3px;font-size:14px;font-weight:700;letter-spacing:.02em}
-  .mcta .m1{border:1px solid var(--ink);color:var(--ink)}
-  .mcta .m2{background:var(--ink);color:#fff}
-
-  /* reveal */
-  .js .reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1)}
-  .js .reveal.in{opacity:1;transform:none}
-
-  /* drawer */
-  .drawer{position:fixed;inset:0;z-index:1200;pointer-events:none;opacity:0;transition:.3s}
-  .drawer.open{opacity:1;pointer-events:auto}
-  .drawer .ov{position:absolute;inset:0;background:rgba(28,26,23,.45)}
-  .drawer .panel{position:absolute;top:0;right:0;height:100%;width:80%;max-width:320px;background:var(--paper);padding:28px;display:flex;flex-direction:column;gap:4px;transform:translateX(100%);transition:.32s cubic-bezier(.2,.7,.3,1)}
-  .drawer.open .panel{transform:none}
-  .drawer .panel a{padding:15px 2px;border-bottom:1px solid var(--line);font-size:15.5px;font-weight:500;color:var(--ink)}
-  .drawer .x{align-self:flex-end;background:none;border:none;font-size:26px;cursor:pointer;color:var(--ink);margin-bottom:8px;line-height:1}
-
-  /* --- 追加：Before/After主役を大きく＋①②③ --- */
-  /* （Before/After のCSSは上部 .ba-grid 群に統合済み） */
-  /* --- 追加：見せ方サンプル帯 --- */
-  .samples-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,22px);margin-top:48px}
-  .sample{margin:0}
-  .sample img{aspect-ratio:3/2;width:100%;height:auto;object-fit:cover;display:block;border-radius:5px;box-shadow:0 16px 40px -28px rgba(28,26,23,.45)}
-  .sample figcaption{font-size:13px;color:var(--soft);margin-top:12px;line-height:1.6}
-  .sample figcaption b{color:var(--ink);font-weight:700;margin-right:6px}
-  .samples-note{font-size:12.5px;color:var(--soft2);margin-top:24px;letter-spacing:.02em}
-  /* --- 追加：初回見立てシートで返すもの --- */
-  .returns-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(16px,2vw,24px);margin-top:46px}
-  .ret{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 20px}
-  .ret .rn{font-family:var(--mincho);font-size:15px;color:var(--accent-d);display:block;margin-bottom:12px}
-  .ret h4{font-weight:700;font-size:15px;line-height:1.5;color:var(--ink);margin-bottom:8px}
-  .ret p{font-size:13px;color:var(--soft);line-height:1.8}
-  /* --- 追加：業種カードのHOW --- */
-  .ind .ind-how{font-size:12px;color:var(--soft);line-height:1.6;margin-top:9px;font-weight:400}
-  /* --- FV 案C オファーカード --- */
-  .hero-offer{position:relative;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:32px 30px 24px;box-shadow:0 28px 60px -38px rgba(28,26,23,.45)}
-  .hero-offer::before{content:"";position:absolute;left:30px;right:30px;top:0;height:2px;background:var(--accent);border-radius:0 0 2px 2px}
-  .hero-offer .ho-label{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--accent-d);text-transform:uppercase}
-  .hero-offer .ho-title{font-family:var(--mincho);font-weight:600;font-size:19px;color:var(--ink);margin:10px 0 18px}
-  .hero-offer ul{list-style:none}
-  .hero-offer li{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.7;color:var(--ink2)}
-  .hero-offer li:last-child{border-bottom:none}
-  .hero-offer li .n{font-family:var(--mincho);color:var(--accent-d);font-weight:600;flex:none}
-  .hero-offer .ho-free{text-align:right;margin-top:13px;font-size:12px;color:var(--soft);line-height:1.7;letter-spacing:.03em}
-  /* FVブランド補助行 */
-  .hero-brand{font-family:var(--mincho);font-size:14px;color:var(--soft);margin:12px 0 14px;letter-spacing:.04em}
-  /* 3者比較（cmp3-で namespacing・既存と非衝突） */
-  .cmp3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,20px);margin-top:44px}
-  .cmp3-col{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px 20px;display:flex;flex-direction:column}
-  .cmp3-col.me{position:relative;border:1px solid var(--accent);box-shadow:0 22px 48px -30px rgba(177,92,60,.4)}
-  .cmp3-h{font-weight:900;font-size:15.5px;color:var(--ink);letter-spacing:.01em}
-  .cmp3-col.me .cmp3-h{color:var(--accent-d)}
-  .cmp3-role{font-size:12px;color:var(--soft2);margin:5px 0 14px;min-height:34px}
-  .cmp3-row{padding:10px 0;border-top:1px solid var(--line)}
-  .cmp3-k{display:block;font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--soft2);text-transform:uppercase;margin-bottom:3px}
-  .cmp3-v{font-size:13.5px;color:var(--ink2);line-height:1.55}
-  .cmp3-col.me .cmp3-v{color:var(--ink)}
-  .cmp3-note{font-size:12.5px;color:var(--soft);margin-top:18px;line-height:1.8}
-  .js .cmp3-col.me.reveal{transition-delay:.18s}
-  .cmp3-col.me::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:3px;background:var(--accent);border-radius:12px 12px 0 0}
-  .cmp3-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;margin-left:8px;vertical-align:middle}
-  /* 実物見本への導線 */
-  /* sample サマリー（深掘り再設計版・サムネSVG＋見立てメタ）*/
-  .smp-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(28px,4vw,52px);align-items:start;margin-top:42px}
-  .smp-doc{position:relative;background:#fffdfa;border:1px solid var(--line);border-radius:7px;padding:22px;box-shadow:0 30px 60px -44px rgba(28,26,23,.5);overflow:hidden}
-  .smp-doc .smp-thumb{border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#fff;aspect-ratio:4/3;max-height:380px}
-  .smp-doc .smp-thumb svg{display:block;width:100%;height:100%}
-  .smp-doc .smp-thumb-tag{display:inline-block;margin-top:14px;font-size:11px;letter-spacing:.1em;color:var(--soft2);text-transform:uppercase}
-  .smp-doc .smp-stamp{position:absolute;right:16px;bottom:14px;font-family:var(--mincho);font-size:10.5px;color:var(--accent-d);letter-spacing:.14em}
-  .smp-meta h3{font-weight:900;font-size:clamp(20px,2.2vw,24px);color:var(--ink);line-height:1.5;margin-bottom:14px;font-family:var(--gothic)}
-  .smp-meta h3 .em{color:var(--accent-d)}
-  .smp-meta p{font-size:14.5px;color:var(--soft);line-height:1.95;margin-bottom:22px}
-  .smp-meta .smp-annot{font-size:11.5px;color:var(--soft2);margin-top:14px;line-height:1.75}
-  .smp-meta .smp-annot b{color:var(--accent-d);font-weight:700}
-  .smp-cta{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-
-  /* sample 詳細（同じ index.html 内に展開・別ファイル無し）*/
-  .sd-wrap{max-width:980px;margin:0 auto;padding:0 28px}
-  .sd-paper{position:relative;background:#fff;border:1px solid var(--line);border-radius:8px;padding:clamp(28px,4vw,48px);box-shadow:0 30px 60px -44px rgba(28,26,23,.4);margin-top:42px;overflow:hidden}
-  .sd-paper::before{content:"";position:absolute;left:0;top:0;width:6px;height:100%;background:var(--accent)}
-  .sd-paper h3{font-family:var(--mincho);font-weight:600;font-size:clamp(20px,2.2vw,26px);color:var(--ink);line-height:1.5;margin-bottom:8px}
-  .sd-paper .sd-sub{font-size:13px;color:var(--soft2);margin-bottom:28px;line-height:1.7}
-  .sd-block{margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
-  .sd-block:first-of-type{border-top:0;padding-top:0;margin-top:0}
-  .sd-block-h{display:flex;align-items:baseline;gap:12px;margin-bottom:14px}
-  .sd-block-h .n{font-family:var(--mincho);font-size:22px;color:var(--accent-d);line-height:1;font-weight:600}
-  .sd-block-h h4{font-family:var(--gothic);font-weight:900;font-size:16.5px;color:var(--ink);line-height:1.55}
-  .sd-target{background:var(--sand);border:1px solid var(--line);border-radius:6px;padding:18px 22px;display:grid;grid-template-columns:96px 1fr;gap:10px 18px;font-size:14px;line-height:1.7}
-  .sd-target dt{color:var(--accent-d);font-weight:700;font-size:12.5px;letter-spacing:.04em;padding-top:2px}
-  .sd-target dd{color:var(--ink2)}
-  .sd-numlist{list-style:none;display:grid;gap:10px}
-  .sd-numlist li{display:grid;grid-template-columns:40px 1fr;gap:14px;background:var(--sand-d);border:1px solid var(--line);border-radius:5px;padding:14px 16px;align-items:start}
-  .sd-numlist li .nn{font-family:var(--mincho);font-size:16px;color:var(--accent-d);font-weight:600;line-height:1.55}
-  .sd-numlist li p{font-size:13.5px;color:var(--ink2);line-height:1.75;margin:0}
-  .sd-numlist li p b{color:var(--ink);font-weight:700}
-  .sd-ba{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .sd-ba-col h5{font-size:11.5px;font-weight:800;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-  .sd-ba-col h5::before{content:"";width:9px;height:9px;border-radius:2px}
-  .sd-ba-col.before h5{color:var(--ink2)}
-  .sd-ba-col.before h5::before{background:var(--soft2)}
-  .sd-ba-col.after h5{color:var(--accent-d)}
-  .sd-ba-col.after h5::before{background:var(--accent)}
-  .sd-ba-screen{background:#fff;border:1px solid var(--line);border-radius:5px;overflow:hidden;box-shadow:0 16px 32px -24px rgba(28,26,23,.35);margin-bottom:10px}
-  .sd-ba-screen svg{display:block;width:100%;height:auto}
-  .sd-ba-points{background:#fff;border:1px solid var(--line);border-radius:5px;padding:12px 14px;list-style:none}
-  .sd-ba-points li{display:grid;grid-template-columns:26px 1fr;gap:8px;font-size:12.5px;color:var(--ink2);line-height:1.6;align-items:start;padding:4px 0}
-  .sd-ba-points li .nb{font-family:var(--mincho);font-size:12.5px;color:var(--accent-d);font-weight:600}
-  .sd-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  .sd-photo-box{background:#fff;border:1px solid var(--line);border-radius:5px;padding:14px 16px}
-  .sd-photo-box h5{font-size:12.5px;color:var(--accent-d);font-weight:700;margin-bottom:10px;letter-spacing:.02em}
-  .sd-photo-box ul{list-style:none;display:grid;gap:7px}
-  .sd-photo-box li{font-size:12.5px;color:var(--ink2);line-height:1.55;padding-left:14px;position:relative}
-  .sd-photo-box li::before{content:"";position:absolute;left:0;top:.65em;width:7px;height:1px;background:var(--accent)}
-  .sd-photo-note{margin-top:14px;background:var(--sand);border-left:3px solid var(--accent);border-radius:0 5px 5px 0;padding:14px 18px;font-size:13px;color:var(--ink2);line-height:1.8}
-  .sd-photo-note b{color:var(--ink);font-weight:700}
-  .sd-range{background:#fff;border:1px solid var(--line);border-radius:5px;overflow:hidden}
-  .sd-range .r{display:grid;grid-template-columns:1fr auto;gap:14px;padding:14px 18px;border-top:1px solid var(--line);align-items:start}
-  .sd-range .r:first-child{border-top:0}
-  .sd-range .rn{font-weight:700;color:var(--ink);font-size:14.5px;line-height:1.5}
-  .sd-range .rn small{display:block;font-weight:400;color:var(--soft);font-size:12.5px;margin-top:3px;line-height:1.65}
-  .sd-range .rp{color:var(--accent-d);font-weight:900;font-size:13.5px;white-space:nowrap;padding-top:2px}
-  .sd-range-foot{font-size:12px;color:var(--soft);margin-top:14px;line-height:1.85}
-  .sd-close{margin-top:34px;text-align:center}
-  .sd-close h4{font-family:var(--mincho);font-weight:600;font-size:clamp(18px,2vw,22px);color:var(--ink);line-height:1.55}
-  .sd-close .acts{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:18px}
-  /* 料金：まず無料を主役化 */
-  .price-row.feature{background:rgba(177,92,60,.05);border-radius:8px;margin:0 -12px;padding-left:18px;padding-right:18px}
-  .price-row.feature .pname{color:var(--accent-d)}
-  .price-row.feature .first{font-size:19px}
-  /* 追加モーション（控えめ・既存revealと同じtransition方式・reduced-motionで無効化） */
-  .js .stagger > *{opacity:0;transform:translateY(10px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
-  .js .stagger.in > *{opacity:1;transform:none}
-  .js .stagger.in > *:nth-child(1){transition-delay:.05s}
-  .js .stagger.in > *:nth-child(2){transition-delay:.13s}
-  .js .stagger.in > *:nth-child(3){transition-delay:.21s}
-  .js .stagger.in > *:nth-child(4){transition-delay:.29s}
-  .js .ba-col.after.reveal{transition-delay:.15s}
-  .sample{overflow:hidden;border-radius:5px;box-shadow:0 16px 40px -28px rgba(28,26,23,.45)}
-  .sample img{transition:transform .9s cubic-bezier(.2,.7,.3,1)}
-  .sample:hover img{transform:scale(1.04)}
-
-  @media(max-width:980px){
-    .returns-grid{grid-template-columns:repeat(2,1fr)}
-    .nav{display:none}.burger{display:flex}
-    .hero-grid{grid-template-columns:1fr;gap:38px}
-    .hero-board{order:2;max-width:440px;margin:0 auto}
-    .do-grid{grid-template-columns:1fr;gap:30px}
-    .demo-grid{grid-template-columns:1fr;gap:26px}
-    .who-wrap{padding:0 20px}.who-card{padding:26px 22px}.who-tab{right:18px}
-    .contact-grid{grid-template-columns:1fr;gap:32px}
-    .ind-grid{grid-template-columns:repeat(2,1fr)}
-    .cmp3{grid-template-columns:1fr;gap:14px}
-    .smp-grid{grid-template-columns:1fr;gap:22px}
-    .sd-ba{grid-template-columns:1fr;gap:18px}
-    .flow-grid{grid-template-columns:1fr 1fr;gap:28px 16px}.flow::after{display:none}
-  }
-  @media(max-width:880px){
-    body{padding-bottom:64px}
-    .mcta{display:flex}
-  }
-  @media(max-width:600px){
-    body{padding-bottom:64px}
-    .returns-grid{grid-template-columns:1fr}
-    .loss-grid{grid-template-columns:1fr;gap:0}
-    .miss-grid{grid-template-columns:1fr}
-    .look-list{grid-template-columns:1fr;gap:9px}
-    .ba-grid{grid-template-columns:1fr;gap:26px}
-    .ba-points{grid-template-columns:1fr;gap:13px;margin-top:26px}
-    .price-row{grid-template-columns:1fr 1fr;gap:12px 16px}
-    .price-row .pname{grid-column:1/-1;margin-bottom:2px}
-    .sd-photos{grid-template-columns:1fr}
-    .sd-target{grid-template-columns:80px 1fr;gap:8px 14px;font-size:13.5px}
-    .sd-paper{padding:24px 18px}
-    .mcta{display:flex}
-    .hero{padding-top:100px}
-    .hero h1{font-size:30px;letter-spacing:.005em;line-height:1.45}
-    .hero-actions{width:100%}
-    .hero-actions .btn-ink{width:100%;justify-content:center;white-space:nowrap;font-size:14.5px;padding:15px 18px}
-  }
-  /* ===== 新FV（候補C採用・名前空間 fh-・既存クラスと衝突させない）===== */
-  .fh-hero{min-height:100vh;display:flex;align-items:center;padding:118px 0 40px}
-  .fh-grid{display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:clamp(24px,3vw,44px);width:100%}
-  .fh-left{padding-right:clamp(0px,2vw,30px)}
-  .fh-rule{width:38px;height:2px;background:var(--accent);margin-bottom:22px;transform-origin:left}
-  .fh-eyebrow{font-family:var(--gothic);font-size:12px;font-weight:700;letter-spacing:.2em;color:var(--accent-d);margin-bottom:22px}
-  .fh-h1{font-family:var(--mincho);font-weight:600;color:var(--ink);font-size:clamp(34px,4.3vw,62px);line-height:1.2;letter-spacing:.005em}
-  .fh-brand{font-family:var(--mincho);font-weight:500;font-size:clamp(15px,1.5vw,19px);color:var(--ink2);margin-top:20px;letter-spacing:.04em}
-  .fh-lead{font-size:clamp(14px,1.1vw,16px);line-height:1.95;color:var(--soft);margin-top:20px;max-width:27em}
-  .fh-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:32px}
-  .fh-btn{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.03em;padding:17px 30px;border-radius:3px;background:var(--ink);color:#fff;transition:.25s cubic-bezier(.2,.7,.3,1)}
-  .fh-btn .fh-arw{display:inline-block;color:var(--accent);transition:transform .25s cubic-bezier(.2,.7,.3,1)}
-  .fh-btn:hover{background:#000;box-shadow:0 14px 30px -18px rgba(28,26,23,.75)}
-  .fh-btn:hover .fh-arw{transform:translateX(3px)}
-  .fh-tlink{font-size:14px;font-weight:500;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:3px;transition:.2s}
-  .fh-tlink:hover{color:var(--accent-d)}
-  .fh-calm{font-size:12.5px;color:var(--soft2);margin-top:20px;letter-spacing:.02em}
-  .fh-right{display:flex;flex-direction:column;gap:18px}
-  .fh-card{background:#fffdfa;border:1px solid var(--line);border-radius:9px;padding:26px clamp(20px,2vw,30px);box-shadow:0 30px 60px -44px rgba(28,26,23,.55)}
-  .fh-ribbon{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--accent-d);border:1px solid #ecc9b8;background:#fbeee7;border-radius:999px;padding:5px 12px;margin-bottom:16px}
-  .fh-cardttl{font-family:var(--gothic);font-weight:700;font-size:clamp(16px,1.4vw,18.5px);color:var(--ink);line-height:1.5;margin-bottom:18px}
-  .fh-list{list-style:none}
-  .fh-list li{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-top:1px solid #ece4d6}
-  .fh-list li:first-child{border-top:0;padding-top:2px}
-  .fh-n{font-family:var(--gothic);font-weight:700;font-size:12px;color:var(--accent);letter-spacing:.04em;min-width:20px;padding-top:2px}
-  .fh-t{font-size:13.8px;color:var(--ink2);line-height:1.6}
-  .fh-thumbs-wrap{padding-left:2px}
-  .fh-thumbs-lbl{font-size:11px;letter-spacing:.1em;color:var(--soft2);margin-bottom:9px}
-  .fh-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-  .fh-thumb{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--line);aspect-ratio:3/2;margin:0;max-width:420px}
-  .fh-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s cubic-bezier(.2,.7,.3,1)}
-  .fh-thumb:hover img{transform:scale(1.02)}
-  .fh-annot{font-size:10.8px;color:var(--soft2);margin-top:9px;letter-spacing:.01em}
-  .fh-teaser{border-top:1px solid var(--line)}
-  .fh-teaser-row{display:grid;grid-template-columns:repeat(3,1fr)}
-  .fh-teaser-row a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:22px clamp(8px,1.5vw,26px);font-size:13.5px;font-weight:500;color:var(--ink2);border-left:1px solid var(--line);transition:background .25s}
-  .fh-teaser-row a:first-child{border-left:0}
-  .fh-teaser-row a .fh-ta{color:var(--accent);transition:transform .25s cubic-bezier(.2,.7,.3,1)}
-  .fh-teaser-row a:hover{background:#f1ebe1}
-  .fh-teaser-row a:hover .fh-ta{transform:translateX(3px)}
-  /* イントロ：CSSアニメのみ・JS非依存・JS無効/reduced-motionでも内容が見える */
-  @keyframes fh-introUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
-  @keyframes fh-growLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-  .fh-anim{animation:fh-introUp .85s cubic-bezier(.2,.7,.3,1) both}
-  .fh-rule{animation:fh-growLine .7s cubic-bezier(.2,.7,.3,1) both}
-  .fh-hero .a-eb{animation-delay:.12s}.fh-hero .a-h1{animation-delay:.24s}.fh-hero .a-br{animation-delay:.42s}
-  .fh-hero .a-ld{animation-delay:.54s}.fh-hero .a-ac{animation-delay:.66s}.fh-hero .a-cl{animation-delay:.78s}
-  .fh-hero .a-cd{animation-delay:.5s}.fh-hero .a-th{animation-delay:1.05s}
-  .fh-list li{animation:fh-introUp .6s cubic-bezier(.2,.7,.3,1) both}
-  .fh-list li:nth-child(1){animation-delay:.66s}.fh-list li:nth-child(2){animation-delay:.78s}
-  .fh-list li:nth-child(3){animation-delay:.9s}.fh-list li:nth-child(4){animation-delay:1.02s}
-  @media(max-width:880px){
-    .fh-hero{min-height:auto;padding:104px 0 14px;align-items:start}
-    .fh-grid{grid-template-columns:1fr;gap:30px}
-    .fh-left{padding-right:0}
-    .fh-h1{font-size:clamp(32px,8.5vw,52px)}
-    .fh-btn{width:100%;justify-content:center}
-    .fh-teaser-row{grid-template-columns:1fr}
-    .fh-teaser-row a{border-left:0;border-top:1px solid var(--line)}
-    .fh-teaser-row a:first-child{border-top:0}
-  }
-
-  /* ============================================================
-     FV v3（fh-d3- 名前空間）— ハイブリッド：左 staged 明朝大見出し + 右 黒数値パネル
-     ============================================================ */
-  .fh-d3, .fh-d3-teaser, .fh-d3-bridge{
-    --paper-d:#ece5d4;
-    --accent-l:#cf7b56;
-    --cream:#f1ece3;
-    --darkpanel:#1c1a17;
-    --darkpanel-2:#26211c;
-    --easing:cubic-bezier(0.16,1,0.3,1);
-    --italic-loc:'Cormorant Garamond',serif;
-  }
-  .fh-d3{position:relative;min-height:100vh;display:flex;align-items:center;padding:130px 0 90px;overflow:hidden;background:var(--paper)}
-  .fh-d3-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-  .fh-d3-bg::before{content:"";position:absolute;left:-12%;top:14%;width:50%;height:60%;background:radial-gradient(circle,rgba(177,92,60,.10) 0%,transparent 70%);animation:fh-d3-float 18s ease-in-out infinite alternate}
-  .fh-d3-bg::after{content:"";position:absolute;right:-15%;bottom:0%;width:60%;height:80%;background:radial-gradient(circle,rgba(232,221,203,.4) 0%,transparent 70%);animation:fh-d3-float 22s ease-in-out infinite alternate-reverse}
-  @keyframes fh-d3-float{from{transform:translate(0,0) scale(1)}to{transform:translate(2%,2%) scale(1.06)}}
-  .fh-d3-grid-bg{position:absolute;inset:0;z-index:0;background-image:
-    linear-gradient(rgba(28,26,23,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(28,26,23,.04) 1px,transparent 1px);
-    background-size:96px 96px;mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
-    -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent)}
-
-  .fh-d3-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:center}
-
-  .fh-d3-rule{width:48px;height:2px;background:var(--accent);margin-bottom:24px;transform-origin:left;animation:fh-d3-rule 1s var(--easing) .2s both}
-  @keyframes fh-d3-rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-  .fh-d3-eyebrow{display:inline-flex;align-items:center;gap:11px;font-family:var(--italic-loc);font-style:italic;font-size:13.5px;color:var(--accent-d);letter-spacing:.22em;text-transform:uppercase;margin-bottom:24px;animation:fh-d3-up .9s var(--easing) .35s both}
-  @keyframes fh-d3-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
-
-  .fh-d3-h1{font-family:var(--mincho);font-weight:500;color:var(--ink);font-size:clamp(36px,5vw,72px);line-height:1.25;letter-spacing:.02em;position:relative}
-  .fh-d3-h1 .ln{display:block;overflow:hidden}
-  .fh-d3-h1 .ln span{display:inline-block;animation:fh-d3-slide 1s var(--easing) both}
-  .fh-d3-h1 .ln1 span{animation-delay:.45s}
-  .fh-d3-h1 .ln2a span{animation-delay:.60s}
-  .fh-d3-h1 .ln2b span{animation-delay:.74s}
-  .fh-d3-h1 .ln3 span{animation-delay:.88s}
-  @keyframes fh-d3-slide{from{opacity:0;transform:translateY(110%)}to{opacity:1;transform:translateY(0)}}
-  .fh-d3-h1 .em{color:var(--accent-d);font-weight:600;position:relative;display:inline-block}
-  .fh-d3-h1 .em::after{content:"";position:absolute;left:0;right:0;bottom:.07em;height:.16em;background:var(--accent);opacity:.18;z-index:-1;transform-origin:left;transform:scaleX(0);animation:fh-d3-hi .85s var(--easing) 1.2s forwards}
-  @keyframes fh-d3-hi{to{transform:scaleX(1)}}
-  .fh-d3-h1 .ln1, .fh-d3-h1 .ln3{font-family:var(--gothic);font-size:14px;color:var(--soft);font-weight:500;letter-spacing:.08em;line-height:1.7}
-  .fh-d3-h1 .ln1{margin-bottom:18px}
-  .fh-d3-h1 .ln3{margin-top:18px}
-
-  .fh-d3-sub{font-family:var(--gothic);font-size:clamp(15px,1.2vw,17px);color:var(--ink2);line-height:2.1;max-width:32em;margin-top:36px;letter-spacing:.02em;animation:fh-d3-up .9s var(--easing) 1.1s both}
-  .fh-d3-sub b{color:var(--ink);font-weight:700}
-
-  .fh-d3-acts{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-top:38px;animation:fh-d3-up .9s var(--easing) 1.25s both}
-  .fh-d3-btn{position:relative;display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);font-family:var(--gothic);font-weight:700;font-size:15.5px;padding:20px 36px;letter-spacing:.04em;transition:background .25s,transform .25s var(--easing),box-shadow .35s var(--easing);overflow:hidden;border-radius:2px;border:1px solid var(--ink)}
-  .fh-d3-btn::before{content:"";position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(207,123,86,.45),transparent);transition:left .55s var(--easing)}
-  .fh-d3-btn:hover{background:var(--accent-d);border-color:var(--accent-d);transform:translateY(-2px);box-shadow:0 22px 50px -18px rgba(177,92,60,.55)}
-  .fh-d3-btn:hover::before{left:100%}
-  .fh-d3-btn .arw{display:inline-block;color:var(--accent-l);transition:transform .25s var(--easing)}
-  .fh-d3-btn:hover .arw{color:var(--paper);transform:translateX(5px)}
-  .fh-d3-tlink{font-family:var(--mincho);font-weight:500;font-size:15px;color:var(--ink2);border-bottom:1px solid var(--accent);padding-bottom:5px;letter-spacing:.04em;transition:color .25s}
-  .fh-d3-tlink:hover{color:var(--accent-d)}
-
-  .fh-d3-fine{font-family:var(--italic-loc);font-style:italic;font-size:13px;color:var(--soft);margin-top:22px;letter-spacing:.04em;animation:fh-d3-up .9s var(--easing) 1.4s both}
-
-  .fh-d3-right{position:relative;animation:fh-d3-up 1s var(--easing) 1s both}
-  .fh-d3-panel{background:var(--darkpanel);color:var(--cream);padding:36px 32px 30px;position:relative;clip-path:polygon(0 0,100% 0,100% 93%,95% 100%,0 100%);box-shadow:0 32px 80px -28px rgba(28,26,23,.5);border:1px solid var(--darkpanel-2)}
-  .fh-d3-panel::before{content:"";position:absolute;left:0;top:0;width:3px;height:60%;background:var(--accent)}
-  .fh-d3-panel-tag{font-family:var(--italic-loc);font-style:italic;font-size:13px;color:var(--accent-l);letter-spacing:.22em;text-transform:uppercase}
-  .fh-d3-panel-h{font-family:var(--mincho);font-weight:600;font-size:clamp(17px,1.5vw,20px);color:var(--cream);margin-top:12px;line-height:1.6;letter-spacing:.03em}
-  .fh-d3-stats{margin-top:28px;display:grid;gap:0}
-  .fh-d3-stat{padding:20px 0;border-top:1px solid rgba(241,236,227,.10);display:flex;justify-content:space-between;align-items:baseline;gap:18px}
-  .fh-d3-stat:first-child{border-top:0;padding-top:6px}
-  .fh-d3-stat .v{font-family:var(--gothic);font-weight:900;font-size:46px;color:var(--cream);line-height:1;letter-spacing:-.02em}
-  .fh-d3-stat .v small{font-family:var(--gothic);font-weight:700;font-size:14.5px;color:var(--accent-l);margin-left:7px;letter-spacing:.04em}
-  .fh-d3-stat .l{font-family:var(--gothic);font-weight:400;font-size:12.5px;color:rgba(241,236,227,.72);letter-spacing:.02em;line-height:1.7;max-width:12em;text-align:right}
-  .fh-d3-panel-stamp{position:absolute;right:18px;bottom:14px;font-family:var(--mincho);font-size:11px;color:var(--accent-l);letter-spacing:.16em}
-
-  /* teaser bar */
-  .fh-d3-teaser{background:var(--ink);border-top:1px solid rgba(241,236,227,.10)}
-  .fh-d3-teaser-row{display:grid;grid-template-columns:repeat(3,1fr);max-width:1320px;margin:0 auto}
-  .fh-d3-teaser a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px clamp(20px,3vw,40px);font-family:var(--gothic);font-size:13.5px;font-weight:500;color:rgba(241,236,227,.85);border-left:1px solid rgba(241,236,227,.10);transition:background .25s}
-  .fh-d3-teaser a:first-child{border-left:0}
-  .fh-d3-teaser a .fh-d3-ta{color:var(--accent-l);transition:transform .25s}
-  .fh-d3-teaser a:hover{background:rgba(241,236,227,.04)}
-  .fh-d3-teaser a:hover .fh-d3-ta{transform:translateX(4px)}
-
-  .fh-d3-bridge{height:32px;background:linear-gradient(180deg, var(--ink) 0%, var(--sand-d) 100%)} /* 終端＝直下の業種別サンプル節(sand-d)に合わせる */
-
-  @media(max-width:880px){
-    .fh-d3{padding:120px 0 80px;align-items:start}
-    .fh-d3-inner{grid-template-columns:1fr;gap:42px}
-    .fh-d3-right{max-width:440px;width:100%}
-    .fh-d3-teaser-row{grid-template-columns:1fr}
-    .fh-d3-teaser a{border-left:0;border-top:1px solid rgba(241,236,227,.10)}
-    .fh-d3-teaser a:first-child{border-top:0}
-  }
-  @media(max-width:560px){
-    .fh-d3-inner{padding:0 24px}
-    .fh-d3-h1{font-size:32px;letter-spacing:.01em;line-height:1.3}
-    .fh-d3-h1 .ln1, .fh-d3-h1 .ln3{font-size:13px}
-    .fh-d3-acts{flex-direction:column;align-items:stretch;gap:14px}
-    .fh-d3-btn{justify-content:center;font-size:14.5px;padding:18px 24px}
-    .fh-d3-tlink{text-align:center}
-    .fh-d3-panel{padding:28px 24px}
-    .fh-d3-stat .v{font-size:36px}
-    .fh-d3-stat .l{font-size:11.5px;max-width:9em}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .fh-d3 *,.fh-d3 *::before,.fh-d3 *::after{animation:none!important}
-    .fh-d3-h1 .ln span{transform:none!important}
-  }
-
-  /* industry-samples 大カード（mock-d 由来）*/
-  .is-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:48px}
-  .is-card{position:relative;display:grid;grid-template-columns:1.4fr 1fr;gap:0;align-items:stretch;background:var(--paper);overflow:hidden;border:1px solid var(--line);transition:border-color .4s,box-shadow .4s,transform .4s cubic-bezier(.16,1,.3,1)}
-  .is-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 30px 70px -32px rgba(177,92,60,.32)}
-  .is-photo{aspect-ratio:16/10;overflow:hidden;position:relative;background:#1f1c18}
-  .is-photo img{width:100%;height:100%;object-fit:cover;transition:transform 1.3s cubic-bezier(.16,1,.3,1)}
-  .is-card:hover .is-photo img{transform:scale(1.05)}
-  .is-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(28,26,23,.16))}
-  .is-meta{padding:44px 36px;display:flex;flex-direction:column;justify-content:center}
-  .is-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--accent-d);letter-spacing:.22em;margin-bottom:12px}
-  .is-title{font-family:var(--mincho);font-weight:500;font-size:25px;color:var(--ink);line-height:1.5;letter-spacing:.02em}
-  .is-title small{display:block;font-family:var(--gothic);font-weight:700;font-size:11px;color:var(--soft);letter-spacing:.22em;margin-bottom:10px;text-transform:uppercase}
-  .is-desc{font-family:var(--gothic);font-size:14px;color:var(--ink2);line-height:2;margin-top:18px}
-  .is-link{margin-top:26px;font-family:var(--mincho);font-weight:500;font-size:14.5px;letter-spacing:.04em;color:var(--accent-d);display:inline-flex;align-items:center;gap:11px;border-bottom:1px solid var(--accent);padding-bottom:5px;align-self:flex-start;transition:gap .25s cubic-bezier(.16,1,.3,1),color .25s}
-  .is-card:hover .is-link{gap:16px;color:var(--ink)}
-  .is-link::after{content:"";position:absolute;inset:0}
-  @media(max-width:880px){
-    .is-card{grid-template-columns:1fr}
-    .is-meta{padding:30px 26px}
-  }
-
-  /* ロゴパルスドット */
-  .logo{flex-direction:row;gap:14px;align-items:center}
-  .logo-dot{width:9px;height:9px;background:var(--accent);border-radius:50%;box-shadow:0 0 0 4px rgba(177,92,60,.16);animation:logo-pulse 2.4s ease-in-out infinite;display:inline-block;flex:none}
-  @keyframes logo-pulse{0%,100%{box-shadow:0 0 0 4px rgba(177,92,60,.16)}50%{box-shadow:0 0 0 9px rgba(177,92,60,.04)}}
-  .logo-wrap{display:flex;flex-direction:column;line-height:1}
-  .logo .sb{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11.5px;letter-spacing:.08em;color:var(--soft);margin-top:5px}
-  @media(prefers-reduced-motion:reduce){.logo-dot{animation:none}}
-  @media(max-width:380px){ .fh-h1{font-size:30px} }
-
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
-
-  @media(prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    .js .reveal,.js .stagger>*{opacity:1;transform:none;transition:none}
-    .sample:hover img{transform:none}
-    *{animation:none!important;transition:none!important}
-  }
-
-  .cfv-hero{min-height:auto;padding:120px 0 60px}
-  /* 2026-06 集客改善：FVを「コピー｜編集デモカード」の2カラムへ（文字だけFVの解消） */
-  .cfv-grid{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:1fr .96fr;column-gap:clamp(34px,4.5vw,62px);align-items:center;grid-template-areas:"intro aside"}
-  .cfv-intro{grid-area:intro}
-  .cfv-aside{grid-area:aside;margin-top:0}
-  /* FV入場アニメ（reduced-motion時は animation:none で即・最終状態） */
-  @keyframes cfvUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes edmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  @keyframes edmLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-  .cfv-intro .fh-d3-eyebrow,.cfv-h1,.cfv-sub,.cfv-sample-link,.cfv-acts,.cfv-trust,.cfv-fine{animation:cfvUp .6s var(--easing,cubic-bezier(.2,.7,.3,1)) both}
-  .cfv-h1{animation-delay:.05s}.cfv-sub{animation-delay:.12s}.cfv-sample-link{animation-delay:.18s}
-  .cfv-acts{animation-delay:.24s}.cfv-trust{animation-delay:.3s}.cfv-fine{animation-delay:.34s}
-  /* 編集デモカード（同じ写真でも、見せ方でこう変わる）—— モックB由来 */
-  .edm{position:relative;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 24px 20px;box-shadow:0 30px 60px -34px rgba(28,26,23,.36);animation:edmFloat 6s ease-in-out infinite,cfvUp .7s var(--easing,cubic-bezier(.2,.7,.3,1)) .1s both}
-  .edm-annot{position:absolute;top:-11px;right:28px;z-index:6;font-family:var(--mincho);font-style:italic;font-size:11.5px;color:var(--accent);letter-spacing:.02em;background:var(--paper);padding:2px 9px;border:1px solid var(--accent);border-radius:14px;transform:rotate(-2deg)}
-  .edm-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
-  .edm-bar .dt{font-family:var(--mincho);font-weight:600;font-size:14.5px;color:var(--ink);letter-spacing:.04em}
-  .edm-bar .dtag{font-size:10.5px;letter-spacing:.14em;color:var(--accent);font-weight:700;border:1px solid var(--accent);border-radius:2px;padding:3px 9px;white-space:nowrap}
-  .edm-rule{height:2px;background:var(--accent);border-radius:2px;transform-origin:left;animation:edmLine .9s var(--easing,cubic-bezier(.2,.7,.3,1)) .35s both;margin-bottom:15px}
-  .edm-cols{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
-  .edm-panel{position:relative;border-radius:4px;overflow:hidden}
-  .edm-panel .plab{position:absolute;top:8px;left:8px;z-index:3;font-size:10px;font-weight:700;letter-spacing:.12em;padding:3px 8px;border-radius:2px}
-  .edm-before{background:#efeae1;border:1px solid #ddd4c4;padding:10px;display:flex;flex-direction:column}
-  .edm-before .plab{background:#cabfa9;color:#5c5443}
-  .edm-before .bshot{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/3;margin-bottom:9px}
-  .edm-before .bshot img{width:100%;height:100%;object-fit:cover}
-  .edm-before .bcap{font-family:var(--gothic);font-weight:700;font-size:12px;color:#6c655b;line-height:1.5;margin-bottom:3px}
-  .edm-before .bcapsub{font-size:10.5px;color:var(--soft2);letter-spacing:.02em}
-  .edm-after{background:var(--white);border:1px solid var(--line);padding:10px;display:flex;flex-direction:column}
-  .edm-after .plab{background:var(--accent);color:#fff}
-  .edm-after .big{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/3;margin-bottom:9px}
-  .edm-after .big img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--easing,cubic-bezier(.2,.7,.3,1))}
-  .edm:hover .edm-after .big img{transform:scale(1.04)}
-  .edm-after .cap{font-family:var(--mincho);font-weight:600;font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:3px}
-  .edm-after .capsub{font-size:10.5px;color:var(--soft);letter-spacing:.02em}
-  .edm-cmk{position:absolute;width:13px;height:13px;z-index:4;pointer-events:none}
-  .edm-cmk::before,.edm-cmk::after{content:"";position:absolute;background:var(--accent)}
-  .edm-cmk::before{width:13px;height:1.5px}.edm-cmk::after{height:13px;width:1.5px}
-  .edm-cmk.tl{top:5px;left:5px}.edm-cmk.tl::before{top:0;left:0}.edm-cmk.tl::after{top:0;left:0}
-  .edm-cmk.tr{top:5px;right:5px}.edm-cmk.tr::before{top:0;right:0}.edm-cmk.tr::after{top:0;right:0}
-  .edm-cmk.bl{bottom:5px;left:5px}.edm-cmk.bl::before{bottom:0;left:0}.edm-cmk.bl::after{bottom:0;left:0}
-  .edm-cmk.br{bottom:5px;right:5px}.edm-cmk.br::before{bottom:0;right:0}.edm-cmk.br::after{bottom:0;right:0}
-  .edm-mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 6px 16px -6px rgba(28,26,23,.6)}
-  .edm-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
-  .edm-foot .fl{font-size:11px;color:var(--soft);letter-spacing:.02em}
-  .edm-foot .fl b{color:var(--accent);font-weight:700}
-  /* BA Slider */
-  .bas{user-select:none;-webkit-user-select:none}
-  .bas-track{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:3px;cursor:ew-resize;touch-action:pan-y}
-  .bas-after,.bas-before{position:absolute;inset:0}
-  .bas-after img,.bas-before img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-  .bas-before{clip-path:inset(0 50% 0 0)}
-  .bas-lbl{position:absolute;bottom:9px;font-family:var(--gothic);font-size:9px;font-weight:700;letter-spacing:.1em;padding:3px 7px;border-radius:2px}
-  .bas-lbl-before{left:9px;background:rgba(28,26,23,.65);color:#f6f3ee}
-  .bas-lbl-after{right:9px;background:var(--accent);color:#fff}
-  .bas-handle{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:40px;display:flex;flex-direction:column;align-items:center;pointer-events:none}
-  .bas-line{flex:1;width:2px;background:#fff;box-shadow:0 0 6px rgba(0,0,0,.35)}
-  .bas-knob{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.22);color:var(--ink)}
-  .bas-caps{display:flex;justify-content:space-between;margin-top:7px;font-family:var(--gothic);font-size:11px;color:var(--soft)}
-  .bas-acap{text-align:right}
-  .edm-note{font-size:10.5px;color:var(--soft2);text-align:center;margin-top:11px;letter-spacing:.04em}
-  .cfv-sample-link{margin-top:22px;font-size:14px}
-  .cfv-sample-link a{font-weight:700;color:var(--accent-d);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .25s}
-  .cfv-sample-link a:hover{color:var(--ink)}
-  .cfv-sample-link .nt{margin-left:12px;font-size:11.5px;color:var(--soft2)}
-  .cfv-h1{font-family:var(--mincho);font-weight:600;color:var(--ink);font-size:clamp(29px,3.9vw,50px);line-height:1.32;letter-spacing:.02em;margin-top:4px}
-  .cfv-h1 .em{color:var(--accent-d)}
-  .cfv-sub{font-family:var(--gothic);font-size:clamp(14px,1.05vw,16px);line-height:1.95;color:var(--soft);margin-top:20px;max-width:30em}
-  .cfv-sub b{color:var(--ink);font-weight:700}
-  .cfv-acts{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:28px}
-  .cfv-line{display:inline-flex;align-items:center;gap:11px;font-family:var(--gothic);font-weight:700;font-size:15px;letter-spacing:.03em;padding:19px 28px;border-radius:2px;background:transparent;color:var(--ink);border:1px solid var(--ink);transition:.25s}
-  .cfv-line:hover{background:var(--ink);color:#fff}
-  .cfv-line .arw{color:var(--accent-d)}
-  .cfv-line:hover .arw{color:var(--accent-l)}
-  .cfv-trust{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .cfv-trust span{font-size:12px;color:var(--ink2);background:var(--white);border:1px solid var(--line);border-radius:40px;padding:7px 14px;line-height:1.3}
-  .cfv-trust span b{color:var(--accent-d);font-weight:700;margin-right:5px}
-  .cfv-fine{font-size:12.5px;color:var(--soft2);margin-top:16px;line-height:1.75;max-width:32em}
-  /* （FVサンプル3カードは B-4 で削除。リンクは .cfv-sample-link に集約） */
-  /* compare 1行バンド */
-  .cand-compare{text-align:center;padding:clamp(44px,6vw,72px) 0}
-  .cand-compare .wrap{max-width:760px}
-  /* 料金グループ見出し（撮影なし軽改善 / 制作 を明確に分ける）*/
-  .price-group{font-size:11px;font-weight:700;letter-spacing:.13em;color:var(--accent-d);text-transform:uppercase;padding:26px 6px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
-  .price-group::before{content:"";width:18px;height:1px;background:var(--accent);flex:none}
-  .price-group small{font-weight:400;letter-spacing:.02em;color:var(--soft2);font-size:11px;text-transform:none}
-  @media(max-width:880px){
-    .cfv-hero{padding:96px 0 32px}
-    .cfv-grid{display:flex;flex-direction:column;gap:0;grid-template-areas:none}
-    .cfv-intro{order:1}
-    .cfv-aside{order:2;margin-top:26px}
-    .edm{padding:18px 16px 16px}
-    .edm-cols{gap:10px}
-    .edm-bar .dt{font-size:13px}
-    .edm-annot{right:14px}
-    .cfv-h1{font-size:clamp(26px,7vw,36px);line-height:1.32}
-    .cfv-sub{font-size:13.5px;line-height:1.75;margin-top:14px;max-width:none}
-    /* ②修正：SPはCTA縦積み・折返し禁止（intro内に移動したため上余白を確保） */
-    .cfv-acts{flex-direction:column;align-items:stretch;gap:10px;margin-top:20px}
-    .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{width:100%;justify-content:center;white-space:nowrap}
-  }
-  @media(max-width:380px){
-    .cfv-hero{padding-top:84px}
-    .cfv-h1{font-size:22px;line-height:1.28}
-    .cfv-sub{font-size:13px;line-height:1.6;margin-top:11px}
-    .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{font-size:14.5px;padding:14px 16px}
-  }
+/* ============ REVEAL & MOTION ============ */
+/* NN/g: フェードは短く(〜400ms級)・一度だけ・本文を長く隠さない */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .55s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .rv{opacity:1;transform:none}
+  .maru ellipse{stroke-dashoffset:0!important}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
-<script>document.documentElement.classList.add('js');</script>
 
-<header id="header">
-  <div class="wrap hdr-in">
-    <a href="#top" class="logo">
-      <span class="logo-dot" aria-hidden="true"></span>
-      <span class="logo-wrap">
-        <span class="mk">MISERU</span>
-        <span class="sb">ミセル｜見せ方を整える編集室</span>
-      </span>
-    </a>
-    <nav class="nav">
+<header>
+  <div class="hd">
+    <a class="hd-logo" href="#top">MISERU<small>見せ方を整える編集室</small></a>
+    <nav class="hd-nav">
       <a href="#do">整えること</a>
       <a href="#industry-samples">サンプル</a>
       <a href="#pricing">料金</a>
       <a href="#flow">進め方</a>
-      <a href="#contact" class="nav-cta">相談する</a>
+      <a href="#faq">FAQ</a>
     </nav>
+    <a class="hd-cta" href="#contact" data-cta="free-consult">相談する</a>
     <button class="burger" id="burger" aria-label="メニュー"><span></span><span></span><span></span></button>
   </div>
 </header>
@@ -827,389 +557,456 @@
     <a href="#flow" data-close>進め方</a>
     <a href="#faq" data-close>よくある質問</a>
     <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-close data-cta="line-consult">LINEで相談 →</a>
-    <a href="#contact" data-close data-cta="free-consult" style="color:var(--accent-d)">無料相談する →</a>
+    <a href="#contact" data-close data-cta="free-consult" style="color:var(--shu-soft)">無料相談する →</a>
   </div>
 </div>
 
-<section class="fh-d3 cfv-hero" id="top">
-  <div class="fh-d3-bg" aria-hidden="true"></div>
-  <div class="fh-d3-grid-bg" aria-hidden="true"></div>
-  <div class="cfv-grid">
-    <div class="cfv-intro">
-      <span class="fh-d3-eyebrow">中小事業のための、見せ方を整える編集室</span>
-      <h1 class="cfv-h1">いい仕事は、<span class="em">見せ方</span>で伝わる。<br>作り直す前に、“相談されるHP”へ。</h1>
-      <p class="cfv-sub">HP・Instagram・Googleマップ・写真の“見せ方”を直して、問い合わせにつなげます。HPがなくても大丈夫。まずは<b>無料相談</b>で、どこを直すと良くなりそうかと、費用のだいたいの目安をお返しします。</p>
-      <p class="cfv-sample-link"><a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る <span class="arw">→</span></a><span class="nt">3業種・すべて架空サンプルです</span></p>
-      <div class="cfv-acts">
-        <a href="#contact" class="fh-d3-btn" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="cfv-line" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
+<!-- ============ FV：朱入れ ============ -->
+<section class="fv" id="top">
+  <div class="wrap fv-grid">
+    <div>
+      <div class="fv-meta"><span>中小事業のための、見せ方を整える編集室</span><b>校正中 / PROOFING</b></div>
+      <span class="draft" id="draft">「ホームページを、作り直しませんか？」</span>
+      <h1>いい仕事は、<span class="u-shu">見せ方</span>で伝わる。<span class="sm">作り直す前に、“相談されるHP”へ。</span></h1>
+      <p class="fv-lead">HP・Instagram・Googleマップ・写真の“見せ方”を直して、問い合わせにつなげます。HPがなくても大丈夫。まずは<b>無料相談</b>で、どこを直すと良くなりそうかと、費用のだいたいの目安をお返しします。</p>
+      <p class="fv-sample-link"><a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る →</a><span class="nt">3業種・すべて架空サンプルです</span></p>
+      <div class="fv-cta">
+        <a class="btn btn--shu" href="#contact" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
+        <a class="btn btn--ghost" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
       </div>
-      <div class="cfv-trust">
+      <div class="badges">
         <span><b>◯</b>HPがなくても相談OK</span>
         <span><b>◯</b>写真が少なくてもOK</span>
         <span><b>◯</b>しつこい営業なし</span>
       </div>
-      <p class="cfv-fine">— 無料相談は方向性とプラン目安まで。見るだけでも大丈夫です。（<a href="#pricing" class="textlink">料金へ →</a>）</p>
+      <p class="fv-note">— 無料相談は方向性とプラン目安まで。見るだけでも大丈夫です。（<a href="#pricing">料金へ →</a>）</p>
     </div>
-    <div class="cfv-aside">
-      <!-- 編集デモカード：スマホ撮りと一眼＋見せ方の対比（AFTER自社撮影の表現サンプル。店名は出さない） -->
-      <div class="edm" aria-label="撮り方と見せ方で、こう変わる（実演デモ）">
-        <span class="edm-annot" aria-hidden="true">焼き鳥の例</span>
-        <div class="edm-bar">
-          <span class="dt">撮り方と見せ方で、こう変わる。</span>
-          <span class="dtag">編集 / EDIT</span>
+
+    <div class="proof rv">
+      <div class="tonbo"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i>
+        <div class="cmp" id="cmp">
+          <picture>
+            <source srcset="img/home/demo-yakitori.webp" type="image/webp">
+            <img class="after" src="img/home/demo-yakitori.jpg" alt="一眼で撮り、余白とトリミングで主役にした焼き鳥の写真">
+          </picture>
+          <picture>
+            <source srcset="img/home/demo-yakitori-before.webp" type="image/webp">
+            <img class="before" src="img/home/demo-yakitori-before.jpg" alt="スマホでそのまま撮った焼き鳥の写真">
+          </picture>
+          <span class="cmp-tag tag-b">編集前 — BEFORE</span>
+          <span class="cmp-tag tag-a">編集後 — AFTER</span>
+          <div class="cmp-bar"></div>
+          <div class="cmp-handle" id="handle" role="slider" tabindex="0"
+               aria-label="編集前と編集後の比較。左右キーで動かせます"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">◂▸</div>
+          <div class="cmp-cap" id="cap">同じ一皿。違いは、撮り方と見せ方だけ。</div>
         </div>
-        <div class="edm-rule" aria-hidden="true"></div>
-        <div class="bas" role="group" aria-label="焼き鳥 ビフォー・アフタースライダー（ハンドルをドラッグして比較）">
-          <div class="bas-track" id="bas-track">
-            <div class="bas-after">
-              <picture>
-                <source srcset="img/home/demo-yakitori.webp" type="image/webp">
-                <img src="img/home/demo-yakitori.jpg" alt="一眼で撮り、余白とトリミングで主役にした焼き鳥の写真" draggable="false">
-              </picture>
-              <span class="bas-lbl bas-lbl-after" aria-hidden="true">AFTER</span>
-            </div>
-            <div class="bas-before" id="bas-before">
-              <picture>
-                <source srcset="img/home/demo-yakitori-before.webp" type="image/webp">
-                <img src="img/home/demo-yakitori-before.jpg" alt="スマホでそのまま撮った焼き鳥の写真" draggable="false">
-              </picture>
-              <span class="bas-lbl bas-lbl-before" aria-hidden="true">BEFORE</span>
-            </div>
-            <div class="bas-handle" id="bas-handle" tabindex="0" role="slider" aria-label="ドラッグして比較" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-              <span class="bas-line" aria-hidden="true"></span>
-              <span class="bas-knob" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7 3L3 10L7 17M13 3L17 10L13 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-          </div>
-          <div class="bas-caps">
-            <span class="bas-bcap">スマホで、そのまま。</span>
-            <span class="bas-acap">炭の香りまで、伝わる一皿。</span>
-          </div>
-        </div>
-        <p class="edm-note">表現サンプル（AFTER：自社撮影）／実在クライアント・実在店舗ではありません<br>※ 撮影は STANDARD / PREMIUM プランに含まれます（BASIC は撮影なし）</p>
       </div>
+      <p class="proof-notes">
+        <b>つまみを左右に動かしてみてください。</b><br>
+        表現サンプル（AFTER：自社撮影）／実在クライアント・実在店舗ではありません<br>
+        ※ 撮影は STANDARD / PREMIUM プランに含まれます（BASIC は撮影なし）
+      </p>
     </div>
   </div>
 </section>
-<nav class="fh-d3-teaser" aria-label="ページ内ガイド">
-  <div class="fh-d3-teaser-row">
-    <a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る <span class="fh-d3-ta">→</span></a>
-    <a href="#pricing" data-cta="pricing-teaser">料金を先に見る <span class="fh-d3-ta">→</span></a>
-    <a href="#contact" data-cta="free-consult">無料で相談する <span class="fh-d3-ta">→</span></a>
+
+<!-- ============ TEASER：3分岐 ============ -->
+<nav class="teaser" aria-label="ページ内ガイド">
+  <div class="row">
+    <a href="#industry-samples" data-cta="sample-gallery"><span class="no">01</span>完成HPサンプルを見る →</a>
+    <a href="#pricing" data-cta="pricing-teaser"><span class="no">02</span>料金を先に見る →</a>
+    <a href="#contact" data-cta="free-consult"><span class="no">03</span>無料で相談する →</a>
   </div>
 </nav>
-<div class="fh-d3-bridge" aria-hidden="true"></div>
 
-<!-- 業種別サンプルHP（pet/food/car）— 大カード型。2026-06 集客改善でFV直下へ移設（クリック前にサンプルをチラ見せ＝証明の先出し）-->
-<section class="sec" id="industry-samples" style="background:var(--sand-d);padding-top:72px;padding-bottom:88px">
-  <div class="wrap">
-    <span class="eyebrow">Industry samples</span>
-    <h2 class="title">あなたの業種が、どう見えるようになるか。</h2>
-    <p class="sub-lead">ペット・飲食・車関連の3業種で、実際に動く完成HPサンプルを用意しました。世界観が違っても、軸は「実物の良さを、写真と余白で伝える」こと。スマホでもPCでも、本物のHPと同じように動きます。</p>
-    <div class="samples-note" style="margin:18px 0 26px;text-align:left;background:rgba(255,255,255,.58);border:1px solid var(--line);padding:16px 18px;border-radius:8px">
-      <b style="color:var(--ink)">あなたの業種なら：</b>
-      美容・サロン・教室・ペットは「ペット」型（安心と日々の発信）、飲食・宿・カフェは「飲食」型（品と予約導線）、車・建設・職人・工房は「車」型（技術と実物の迫力）が近いです。業種が違っても“見せ方の型”はそのまま移せます。
+<!-- ============ 02 サンプル（証拠の先出し・墨） ============ -->
+<section class="sec sec--ink" id="industry-samples">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>証拠 — SAMPLES</span></div>
+    <div>
+      <p class="kicker">INDUSTRY SAMPLES</p>
+      <h2 class="h2 rv">あなたの業種が、<br>どう見えるようになるか。</h2>
+      <p class="lead rv">ペット・飲食・車関連の3業種で、実際に動く完成HPサンプルを用意しました。世界観が違っても、軸は「実物の良さを、写真と余白で伝える」こと。スマホでもPCでも、本物のHPと同じように動きます。</p>
+
+      <p class="s-guide rv"><b>あなたの業種なら</b> — 美容・サロン・教室・ペットは「ペット」型（安心と日々の発信）、飲食・宿・カフェは「飲食」型（品と予約導線）、車・建設・職人・工房は「車」型（技術と実物の迫力）が近いです。業種が違っても“見せ方の型”はそのまま移せます。</p>
+
+      <div class="cards3">
+        <a class="scard rv" href="sample-pet.html" data-cta="sample-pet">
+          <span class="ph"><img src="img/samples/pet/optimized/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></span>
+          <span class="bd">
+            <span class="no">01 — PET SERVICE</span>
+            <h3>うちのこ通い帳 <small>SAMPLE</small></h3>
+            <p>お預かりの一日を通い帳でお返しするサンプル。やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプルHPです。</p>
+            <span class="go">完成HPを開く →</span>
+          </span>
+        </a>
+        <a class="scard rv" href="sample-food.html" data-cta="sample-food">
+          <span class="ph"><picture><source srcset="img/samples/food/optimized/food-hero.webp" type="image/webp"><img src="img/samples/food/optimized/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></picture></span>
+          <span class="bd">
+            <span class="no">02 — RESTAURANT</span>
+            <h3>夜小路 <small>SAMPLE</small></h3>
+            <p>七席だけの季節のおまかせサンプル。明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプルHPです。</p>
+            <span class="go">完成HPを開く →</span>
+          </span>
+        </a>
+        <a class="scard rv" href="sample-car.html" data-cta="sample-car">
+          <span class="ph"><picture><source srcset="img/samples/car/optimized/car-hero.webp" type="image/webp"><img src="img/samples/car/optimized/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></picture></span>
+          <span class="bd">
+            <span class="no">03 — CAR &amp; BIKE</span>
+            <h3>GRAPHIC EDITION <small>SAMPLE</small></h3>
+            <p>一台のこだわりを相談につなげるサンプル。黒×赤・大型欧文・スクロールで姿を変える粒子演出。「え、こんなことできるの」を作る方向。架空サンプルHPです。</p>
+            <span class="go">完成HPを開く →</span>
+          </span>
+        </a>
+      </div>
+
+      <div class="honesty rv">
+        <p class="hh">編集後記 — HONESTY NOTE</p>
+        <p>※ 3つとも架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。ナンバープレートはサンプル制作上、塗りつぶし処理しています。<br>
+        ※ MISERUは開業準備中で、お客様の実績はまだありません。だからこそ実在のお客様を一切装わず、架空と明記した3業種ぶんのサンプルを本気で作りました。<b>仕事の質は、ここで確かめてください。このサイト自体も、MISERUの“見せ方”の実物です。</b></p>
+      </div>
     </div>
-    <div class="is-grid">
-      <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/pet/optimized/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></div>
-        <div class="is-meta">
-          <div class="is-num">01 — Pet Service</div>
-          <h3 class="is-title"><small>うちのこ通い帳 SAMPLE</small>お預かりの一日を通い帳でお返しするサンプル。</h3>
-          <p class="is-desc">やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプル HP です。</p>
-          <a href="sample-pet.html" class="is-link" data-cta="sample-pet">完成HPを開く →</a>
-        </div>
-      </article>
-      <article class="is-card reveal">
-        <div class="is-photo"><picture><source srcset="img/samples/food/optimized/food-hero.webp" type="image/webp"><img src="img/samples/food/optimized/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></picture></div>
-        <div class="is-meta">
-          <div class="is-num">02 — Restaurant</div>
-          <h3 class="is-title"><small>夜小路 SAMPLE</small>七席だけの季節のおまかせサンプル。</h3>
-          <p class="is-desc">明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプル HP です。</p>
-          <a href="sample-food.html" class="is-link" data-cta="sample-food">完成HPを開く →</a>
-        </div>
-      </article>
-      <article class="is-card reveal">
-        <div class="is-photo"><picture><source srcset="img/samples/car/optimized/car-hero.webp" type="image/webp"><img src="img/samples/car/optimized/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></picture></div>
-        <div class="is-meta">
-          <div class="is-num">03 — Car & Bike</div>
-          <h3 class="is-title"><small>GRAPHIC EDITION SAMPLE</small>一台のこだわりを相談につなげるサンプル。</h3>
-          <p class="is-desc">黒×赤・大型欧文・スクロールで姿を変える粒子演出。「え、こんなことできるの」を作る方向。架空サンプル HP です。</p>
-          <a href="sample-car.html" class="is-link" data-cta="sample-car">完成HPを開く →</a>
-        </div>
-      </article>
-    </div>
-    <p class="samples-note">※ 3つとも架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。ナンバープレートはサンプル制作上、塗りつぶし処理しています。<br>※ MISERUは開業準備中で、お客様の実績はまだありません。だからこそ実在のお客様を一切装わず、架空と明記した3業種ぶんのサンプルを本気で作りました。<b>仕事の質は、ここで確かめてください。</b>このサイト自体も、MISERUの“見せ方”の実物です。</p>
   </div>
 </section>
 
 <!-- #sample-detail 後方互換アンカー（旧リンク/LINEリッチメニュー対応・業種別サンプルへ誘導）-->
 <section id="sample-detail" style="height:0;overflow:hidden;scroll-margin-top:80px" aria-hidden="true"></section>
 
-<!-- MISS：見られているのに相談されていない（痛みチェック→前向き着地。煽りにしない）-->
+<!-- ============ 03 心当たりチェック ============ -->
 <section class="sec" id="miss">
-  <div class="wrap">
-    <span class="eyebrow">Check</span>
-    <h2 class="title">見られているのに、<br>相談が来ない。心当たりは？</h2>
-    <p class="sub-lead">実力の問題ではなく、“見え方”で問い合わせを逃していることがあります。あてはまる項目があれば、その1ページから一緒に整えられます。</p>
-    <div class="miss-grid stagger">
-      <div class="miss-item reveal"><span class="mk">01</span><p>写真が小さく、実物の良さが伝わっていない</p></div>
-      <div class="miss-item reveal"><span class="mk">02</span><p>何を頼める会社か、ひと目で分からない</p></div>
-      <div class="miss-item reveal"><span class="mk">03</span><p>スマホでLINE・予約・問い合わせまでが遠い</p></div>
-      <div class="miss-item reveal"><span class="mk">04</span><p>料金や進め方が見えず、相談前に不安が止まる</p></div>
-      <div class="miss-item reveal"><span class="mk">05</span><p>HPがなく、InstagramやGoogleマップだけで伝えている</p></div>
-      <div class="miss-item reveal"><span class="mk">06</span><p>実力ではなく“見え方”で、問い合わせを逃しているかも</p></div>
-    </div>
-    <p class="miss-foot">— ひとつでも心当たりがあれば、まずは<b>無料相談</b>から。今あるものを送るだけで大丈夫です。（<a href="#pricing" class="textlink">料金へ →</a>）</p>
-  </div>
-</section>
+  <div class="wrap sec-grid">
+    <div class="rail"><span>心当たり — CHECK</span></div>
+    <div>
+      <p class="kicker">CHECK</p>
+      <h2 class="h2 rv">見られているのに、<br>相談が来ない。心当たりは？</h2>
+      <p class="lead rv">実力の問題ではなく、“見え方”で問い合わせを逃していることがあります。あてはまる項目があれば、その1ページから一緒に整えられます。</p>
 
-<!-- DO -->
-<section class="sec" id="do">
-  <div class="wrap">
-    <span class="eyebrow">What we do</span>
-    <h2 class="title">作り直さなくても、整えるだけで相談されやすくなります。</h2>
-    <p class="sub-lead">写真が小さい・スマホで問い合わせしにくい・古く見える——それだけで損をしていることがあります。いまあるサイトやSNSを活かして、効くところから整えます。</p>
-    <div class="do-grid">
-      <div class="do-item reveal">
-        <span class="dn">01 ／ PHOTO</span>
-        <h3>写真の見せ方</h3>
-        <p>手元の写真を活かし、トリミング・並べ方・Before/Afterで実物の良さを引き出します。足りない場合は追加撮影も相談できます。<b>写真がなくても、まず相談できます。</b></p>
-      </div>
-      <div class="do-item reveal">
-        <span class="dn">02 ／ CONTACT</span>
-        <h3>スマホ問い合わせ導線</h3>
-        <p>電話・LINE・予約・フォームを、親指の届く位置へ。来てくれた方を取りこぼさず、相談・予約まで自然につなげます。</p>
-      </div>
-      <div class="do-item reveal">
-        <span class="dn">03 ／ LAYOUT</span>
-        <h3>レイアウトとことば</h3>
-        <p>ファーストビュー、実績ページ、文章の整理まで。「何屋で、何が強みか」がひと目で伝わる構成に整えます。</p>
-      </div>
+      <ul class="checks">
+        <li class="rv"><span class="num">01</span><span class="bx"></span>写真が小さく、実物の良さが伝わっていない</li>
+        <li class="rv"><span class="num">02</span><span class="bx"></span>何を頼める会社か、ひと目で分からない</li>
+        <li class="rv"><span class="num">03</span><span class="bx"></span>スマホでLINE・予約・問い合わせまでが遠い</li>
+        <li class="rv"><span class="num">04</span><span class="bx"></span>料金や進め方が見えず、相談前に不安が止まる</li>
+        <li class="rv"><span class="num">05</span><span class="bx"></span>HPがなく、InstagramやGoogleマップだけで伝えている</li>
+        <li class="rv"><span class="num">06</span><span class="bx"></span>実力ではなく“見え方”で、問い合わせを逃しているかも</li>
+      </ul>
+      <p class="aftercheck">— ひとつでも心当たりがあれば、まずは<b>無料相談</b>から。今あるものを送るだけで大丈夫です。（<a href="#pricing">料金へ →</a>）</p>
     </div>
   </div>
 </section>
 
-<!-- INDUSTRIES -->
-<section class="sec" id="industries">
-  <div class="wrap">
-    <span class="eyebrow">For</span>
-    <h2 class="title">“実物で選ばれる仕事”に向いています。</h2>
-    <p class="sub-lead">写真・実績・現場感・人柄が、そのまま信頼や売上につながる事業者に。</p>
-    <div class="ind-grid">
-      <div class="ind reveal"><span class="jp">建設・リフォーム</span><span class="en">Construction</span><p class="ind-how">施工写真を、信頼につながる事例ページへ。</p></div>
-      <div class="ind reveal"><span class="jp">外構・造園</span><span class="en">Exterior / Garden</span><p class="ind-how">施工前後を、依頼したくなる実績に。</p></div>
-      <div class="ind reveal"><span class="jp">飲食店</span><span class="en">Restaurant</span><p class="ind-how">料理写真と予約導線を、迷わず伝わる形へ。</p></div>
-      <div class="ind reveal"><span class="jp">美容・整体・サロン</span><span class="en">Beauty / Salon</span><p class="ind-how">雰囲気・メニュー・予約まで、スマホで見やすく。</p></div>
-      <div class="ind reveal"><span class="jp">車・バイク</span><span class="en">Car / Bike</span><p class="ind-how">在庫・カスタムを、問い合わせにつながる見せ方へ。</p></div>
-      <div class="ind reveal"><span class="jp">宿・民泊</span><span class="en">Stay</span><p class="ind-how">空間と体験を、予約まで迷わない導線で。</p></div>
-      <div class="ind reveal"><span class="jp">工房・職人</span><span class="en">Craft</span><p class="ind-how">作品や工程を、選ばれる理由として整理。</p></div>
-      <div class="ind reveal"><span class="jp">ペット・サービス業</span><span class="en">Pet / Service</span><p class="ind-how">安心感と料金を、相談しやすい形に。</p></div>
+<!-- ============ 04 整える3つ ============ -->
+<section class="sec" id="do" style="padding-top:0">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>整えること — EDIT</span></div>
+    <div>
+      <p class="kicker">WHAT WE DO</p>
+      <h2 class="h2 rv">作り直さなくても、<br>整えるだけで相談されやすくなります。</h2>
+      <p class="lead rv">写真が小さい・スマホで問い合わせしにくい・古く見える——それだけで損をしていることがあります。いまあるサイトやSNSを活かして、効くところから整えます。</p>
+      <div class="do3">
+        <article class="rv">
+          <span class="no">01 ／ PHOTO</span>
+          <h3>写真の見せ方</h3>
+          <p>手元の写真を活かし、トリミング・並べ方・Before/Afterで実物の良さを引き出します。足りない場合は追加撮影も相談できます。<b>写真がなくても、まず相談できます。</b></p>
+        </article>
+        <article class="rv">
+          <span class="no">02 ／ CONTACT</span>
+          <h3>スマホ問い合わせ導線</h3>
+          <p>電話・LINE・予約・フォームを、親指の届く位置へ。来てくれた方を取りこぼさず、相談・予約まで自然につなげます。</p>
+        </article>
+        <article class="rv">
+          <span class="no">03 ／ LAYOUT</span>
+          <h3>レイアウトとことば</h3>
+          <p>ファーストビュー、実績ページ、文章の整理まで。「何屋で、何が強みか」がひと目で伝わる構成に整えます。</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- DEMO（SS参考デモ）はユーザー要望でいったん撤去。CSS .demo-* は未使用で残置（無害）。
-     復元する場合は git(87026bb)/MISERU_index_未コミット差分_保存用.patch から、または非SSのデモ（例：初回見立てシートの見本）を用意してから。 -->
-
-<!-- RETURNS（初回見立てシートで返すもの／相談の不安を消す） -->
-<section class="sec bg-sand" id="returns">
-  <div class="wrap">
-    <span class="eyebrow">Sheet</span>
-    <h2 class="title">初回見立てシートでは、こんな整理をお返しします。</h2>
-    <p class="sub-lead"><b>具体的な整理は、初回見立てシートから。</b>申し込んだ後に何が起きるかも、最初にはっきりさせます。</p>
-    <div class="returns-grid">
-      <div class="ret reveal"><span class="rn">01</span><h4>伝わりにくい箇所の指摘</h4><p>今のページで「もったいない」点を、具体的にお伝えします。</p></div>
-      <div class="ret reveal"><span class="rn">02</span><h4>写真・文章・導線の改善案</h4><p>どこをどう変えると伝わるか、要点で整理。今ある写真で足りるか、撮ると伝わる写真は何かも確認します。</p></div>
-      <div class="ret reveal"><span class="rn">03</span><h4>「こう見せる」イメージ</h4><p>改善後の見せ方を、簡単なラフでお見せします。</p></div>
-      <div class="ret reveal"><span class="rn">04</span><h4>必要な範囲と費用の目安</h4><p>制作・改善が必要な場合だけ、範囲と目安を。押し売りはしません。</p></div>
+<!-- ============ 05 向いている仕事 ============ -->
+<section class="sec" id="industries" style="padding-top:0">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>向く仕事 — FOR</span></div>
+    <div>
+      <p class="kicker">FOR</p>
+      <h2 class="h2 rv">“実物で選ばれる仕事”に向いています。</h2>
+      <p class="lead rv">写真・実績・現場感・人柄が、そのまま信頼や売上につながる事業者に。</p>
+      <div class="chips">
+        <div class="chip rv"><b>建設・リフォーム</b><i>CONSTRUCTION</i><p>施工写真を、信頼につながる事例ページへ。</p></div>
+        <div class="chip rv"><b>外構・造園</b><i>EXTERIOR / GARDEN</i><p>施工前後を、依頼したくなる実績に。</p></div>
+        <div class="chip rv"><b>飲食店</b><i>RESTAURANT</i><p>料理写真と予約導線を、迷わず伝わる形へ。</p></div>
+        <div class="chip rv"><b>美容・整体・サロン</b><i>BEAUTY / SALON</i><p>雰囲気・メニュー・予約まで、スマホで見やすく。</p></div>
+        <div class="chip rv"><b>車・バイク</b><i>CAR / BIKE</i><p>在庫・カスタムを、問い合わせにつながる見せ方へ。</p></div>
+        <div class="chip rv"><b>宿・民泊</b><i>STAY</i><p>空間と体験を、予約まで迷わない導線で。</p></div>
+        <div class="chip rv"><b>工房・職人</b><i>CRAFT</i><p>作品や工程を、選ばれる理由として整理。</p></div>
+        <div class="chip rv"><b>ペット・サービス業</b><i>PET / SERVICE</i><p>安心感と料金を、相談しやすい形に。</p></div>
+      </div>
     </div>
-    <div class="smp-grid" style="margin-top:38px">
-      <div class="smp-doc reveal">
-        <div class="smp-thumb" aria-label="初回見立てシート 紙面サムネ（架空）">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 210" role="img" aria-hidden="true">
-            <rect width="280" height="210" fill="#fffdfa"/>
-            <rect x="20" y="18" width="50" height="5" rx="1" fill="#974b2f"/>
-            <text x="20" y="40" font-size="9" font-family="serif" fill="#1c1a17" font-weight="600">初回見立てシート サンプル（架空）</text>
-            <text x="20" y="52" font-size="6" font-family="sans-serif" fill="#9a9286">これは初回見立てシートでお返しする内容の見本です</text>
-            <rect x="20" y="62" width="240" height="26" rx="2" fill="#fbf8f1" stroke="#e4ded3"/>
-            <text x="26" y="73" font-size="6" font-family="sans-serif" fill="#974b2f" font-weight="700">対象</text>
-            <text x="26" y="83" font-size="5.5" font-family="sans-serif" fill="#2a2521">店舗・商品紹介ページ</text>
-            <text x="100" y="73" font-size="6" font-family="sans-serif" fill="#974b2f" font-weight="700">目的</text>
-            <text x="100" y="83" font-size="5.5" font-family="sans-serif" fill="#2a2521">何を頼める会社か分かりやすくする</text>
-            <text x="20" y="106" font-size="7" font-family="serif" fill="#974b2f" font-weight="600">01　今伝わりにくい3つの理由</text>
-            <g fill="#dad0bf">
-              <rect x="20" y="113" width="220" height="3" rx="1"/>
-              <rect x="20" y="120" width="190" height="3" rx="1"/>
-              <rect x="20" y="127" width="210" height="3" rx="1"/>
-            </g>
-            <text x="20" y="146" font-size="7" font-family="serif" fill="#974b2f" font-weight="600">02　整える3つの方向</text>
-            <g fill="#dad0bf">
-              <rect x="20" y="153" width="200" height="3" rx="1"/>
-              <rect x="20" y="160" width="220" height="3" rx="1"/>
-            </g>
-            <text x="20" y="180" font-size="7" font-family="serif" fill="#974b2f" font-weight="600">03　Before / After ラフ</text>
-            <rect x="20" y="186" width="116" height="18" rx="2" fill="#efe9df" stroke="#e4ded3"/>
-            <rect x="146" y="186" width="114" height="18" rx="2" fill="#1c1a17"/>
-            <text x="78" y="198" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#9a9286">Before</text>
-            <text x="203" y="198" text-anchor="middle" font-size="5" font-family="sans-serif" fill="#cf7b56" font-weight="700">After</text>
-          </svg>
+  </div>
+</section>
+
+<!-- ============ 06 初回見立てシート（墨に浮く紙） ============ -->
+<section class="sec sec--ink" id="returns">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>見立て — SHEET</span></div>
+    <div>
+      <p class="kicker">SHEET</p>
+      <h2 class="h2 rv">初回見立てシートでは、<br>こんな整理をお返しします。</h2>
+      <p class="lead rv"><b>具体的な整理は、初回見立てシートから。</b>申し込んだ後に何が起きるかも、最初にはっきりさせます。</p>
+
+      <div class="sheet-grid">
+        <div class="sheet-list">
+          <article class="rv"><span class="sq"></span><div><h3>伝わりにくい箇所の指摘</h3><p>今のページで「もったいない」点を、具体的にお伝えします。</p></div></article>
+          <article class="rv"><span class="sq"></span><div><h3>写真・文章・導線の改善案</h3><p>どこをどう変えると伝わるか、要点で整理。今ある写真で足りるか、撮ると伝わる写真は何かも確認します。</p></div></article>
+          <article class="rv"><span class="sq"></span><div><h3>「こう見せる」イメージ</h3><p>改善後の見せ方を、簡単なラフでお見せします。</p></div></article>
+          <article class="rv"><span class="sq"></span><div><h3>必要な範囲と費用の目安</h3><p>制作・改善が必要な場合だけ、範囲と目安を。押し売りはしません。</p></div></article>
         </div>
-        <span class="smp-thumb-tag">紙面サムネ（実物見本の縮小・架空）</span>
-        <span class="smp-stamp">MISERU 編集室</span>
-      </div>
-      <div class="smp-meta reveal">
-        <h3>まずは<span class="em">“見立て”</span>から。作り直しは、その先です。</h3>
-        <p>いきなり作り直すのではなく、初回見立てシート（¥9,800〜）で1ページ分だけ、写真の見せ方・見出し・問い合わせ導線を整理して紙面にまとめます。<b>無料相談は、方向性と合いそうなプラン目安まで。</b>具体的な改善案・ラフは、この初回見立てシートから対応します。</p>
-        <div class="smp-cta">
-          <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料で見せ方を相談する<span class="arw">→</span></a>
-          <a href="#industry-samples" class="textlink" data-cta="sample-gallery">完成HPサンプルを見る</a>
+
+        <div class="rv">
+          <div class="a4">
+            <span class="stamp">SAMPLE・架空</span>
+            <div class="mh"><span>MISERU 編集室</span><span>MITATE SHEET</span></div>
+            <h4>初回見立てシート（見本）</h4>
+            <dl>
+              <dt>対象</dt><dd>店舗・商品紹介ページ</dd>
+              <dt>目的</dt><dd>何を頼める会社か分かりやすくする</dd>
+            </dl>
+            <div class="rows">
+              <div><b>01</b>今伝わりにくい3つの理由</div>
+              <div><b>02</b>整える3つの方向</div>
+              <div><b>03</b>Before / After ラフ</div>
+            </div>
+            <div class="ba">
+              <figure><img src="img/home/demo-yakitori-before.jpg" alt="" loading="lazy"><figcaption>BEFORE</figcaption></figure>
+              <figure class="af"><img src="img/home/demo-yakitori.jpg" alt="" loading="lazy"><figcaption>AFTER</figcaption></figure>
+            </div>
+          </div>
+          <p class="a4-cap">紙面サムネ（実物見本の縮小・架空）</p>
         </div>
-        <p class="smp-annot">
-          ※これは初回見立てシートの見本です。実在するクライアント事例ではありません。
-        </p>
+      </div>
+
+      <div class="sheet-cta rv">
+        <h3>まずは“見立て”から。作り直しは、その先です。</h3>
+        <p>いきなり作り直すのではなく、初回見立てシートで1ページ分だけ、写真の見せ方・見出し・問い合わせ導線を整理して紙面にまとめます。<b>無料相談は、方向性と合いそうなプラン目安まで。</b>具体的な改善案・ラフは、この初回見立てシートから対応します。</p>
+        <p class="pr">¥9,800〜<small>所要 約1週間／A4数枚</small></p>
+        <p class="juto">ご依頼に進んだ場合、<b>¥9,800 は制作費から全額充当</b>します。見立てだけで終えても大丈夫です。</p>
+        <div class="fv-cta" style="margin-top:16px">
+          <a class="btn btn--shu" href="#contact" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
+          <a class="btn btn--ghost" href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る</a>
+        </div>
+        <p class="s-disc" style="margin-top:14px">※これは初回見立てシートの見本です。実在するクライアント事例ではありません。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 業種別サンプルHP は 2026-06 集客改善で FV直下（黒帯直後）へ移設（証明の先出し） -->
-
-<!-- PRICING -->
+<!-- ============ 07 料金 ============ -->
 <section class="sec" id="pricing">
-  <div class="wrap">
-    <span class="eyebrow">Price</span>
-    <h2 class="title">料金の目安。</h2>
-    <p class="sub-lead">写真がある方も、ない方も大丈夫です。まずは無料相談で方向性を確認し、必要な範囲だけ選べるようにしています。</p>
-    <div class="price-list">
-      <div class="price-group">まず相談・見立て <small>方向性は無料、具体整理は¥9,800〜</small></div>
-      <div class="price-row reveal">
-        <div class="pname">無料相談<small>方向性・合うプラン・概算の目安をお返しします。具体的な改善案・文章案・写真選定はお返ししません。</small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥0</span></div>
-        <div class="pcol"><span class="lab">所要</span><span class="normal">2〜3 営業日</span></div>
-      </div>
-      <div class="price-row reveal">
-        <div class="pname">初回見立てシート<small>1ページ分の改善案を A4 数枚に整理。<b>具体的な改善案はここから対応します。</b>ご依頼に進んだ場合、¥9,800 は制作費から全額充当します。</small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥9,800〜</span></div>
-        <div class="pcol"><span class="lab">所要</span><span class="normal">約 1 週間</span></div>
-      </div>
-      <div class="price-group">基本プラン <small>3つから選べる料金の軸</small></div>
-      <div class="price-row reveal">
-        <div class="pname">BASIC｜見せ方リペア<small>今あるHP・Instagram・写真を活かして整えます。<b>撮影なし。</b>　向いている方：今ある素材を活かしたい</small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥98,000〜</span></div>
-        <div class="pcol"><span class="lab">目安納期</span><span class="normal">2〜3 週間〜</span></div>
-      </div>
-      <div class="price-row feature reveal">
-        <div class="pname">STANDARD｜撮影込み・おまかせHP<small><b>おすすめ。</b>現地撮影＋トップ＋必要な2〜4ページ（料金・アクセス・FAQ・問い合わせ等）。　向いている方：写真ごと、ちゃんと整えたい</small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥298,000〜</span></div>
-        <div class="pcol"><span class="lab">目安納期</span><span class="normal">4〜6 週間〜</span></div>
-      </div>
-      <div class="price-row reveal">
-        <div class="pname">PREMIUM｜撮影込み・しっかりHP<small>撮影＋10ページ前後＋構成・文章の全面設計。　向いている方：事業の顔になるHPが欲しい</small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥498,000〜</span></div>
-        <div class="pcol"><span class="lab">目安納期</span><span class="normal">1.5〜2 ヶ月〜</span></div>
-      </div>
-      <p class="price-inline-note">※ 写真が揃っている方は、STANDARD / PREMIUM を<b>撮影分 −¥100,000</b> でご提案します。</p>
-      <div class="price-group">補足 <small>必要な方だけ</small></div>
-      <div class="price-row reveal">
-        <div class="pname">追加撮影<small>店舗・商品・施工・人物など、必要な写真を整理して撮影します。<b>単体撮影のみは要相談。</b></small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">+¥120,000〜</span></div>
-        <div class="pcol"><span class="lab">条件</span><span class="normal">制作プランに追加</span></div>
-      </div>
-      <div class="price-row reveal">
-        <div class="pname">継続更新・運用<small>公開後の写真差し替え・実績追加・文章更新。必要な月だけ相談できます。</small></div>
-        <div class="pcol"><span class="lab">料金</span><span class="first">¥9,800〜/月</span></div>
-        <div class="pcol"><span class="lab">条件</span><span class="normal">必要な月だけ</span></div>
-      </div>
-    </div>
-    <p class="price-foot">具体的な改善案・文章案・写真選定・レイアウト案は、<b>初回見立てシート（¥9,800〜）から対応しています。</b>無料相談は方向性のお返事のみです。<br>※ <b>写真がある方も、ない方も大丈夫です。</b>写真が揃っている方は BASIC、または撮影分 −¥100,000 の STANDARD / PREMIUM をご提案します。<br>※ <b>無料相談・初回見立てシートに撮影は含まれません。</b>撮影が必要な場合は STANDARD / PREMIUM、または追加撮影（+¥120,000〜）をご検討ください。<br>※ お支払いは着手時50%・公開時50%です。<br>※ 納期は撮影日程・素材状況により前後します。金額は内容により前後し、確定見積もりは初回見立てシート以降でお出しします。</p>
+  <div class="wrap sec-grid">
+    <div class="rail"><span>料金 — PRICE</span></div>
+    <div>
+      <p class="kicker">PRICE</p>
+      <h2 class="h2 rv">料金の目安。</h2>
+      <p class="lead rv">写真がある方も、ない方も大丈夫です。まずは無料相談で方向性を確認し、必要な範囲だけ選べるようにしています。</p>
 
-    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:26px">
-      <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料相談で目安を聞く <span class="arw">→</span></a>
-      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-line" data-cta="line-consult">LINEで相談する <span class="arw">→</span></a>
-    </div>
-    <p style="margin-top:10px;font-size:11.5px;color:var(--soft)">¥0・入力1分・しつこい営業はしません。</p>
-
-    <!-- G-6 モニター枠：有効 -->
-    <div class="monitor-band" style="margin-top:34px;padding:24px 26px;background:var(--white);border:1px solid var(--accent);border-radius:8px">
-      <p style="font-size:11px;font-weight:700;letter-spacing:.13em;color:var(--accent-d);text-transform:uppercase">Monitor — 先着3社</p>
-      <p style="font-size:14px;line-height:2;margin-top:8px">先着3社モニター枠｜掲載許可とご感想をいただける方に、STANDARD相当（通常 ¥298,000〜）を<b>¥238,400〜（20%OFF）</b>でご提供します。制作完了後、実績として Before / After を掲載させていただきます。</p>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT（2026-06 監査：料金直後=「で、誰がやるの？」に最短で答える位置へ移動）-->
-<section class="sec" id="about">
-  <div class="who-wrap">
-    <div class="who-card reveal">
-      <span class="who-tab" aria-hidden="true">見せ方を整える編集室</span>
-      <span class="eyebrow">Who</span>
-      <h2 class="title mincho" style="font-weight:600">ひとりで、一つひとつの商いに向き合います。</h2>
-      <p>大きな制作会社ではありません。だからこそ、写真の選び方からスマホの導線、ことばの一つひとつまで、あなたの「いい仕事」が伝わるように手を動かします。</p>
-      <p>一眼レフでの撮影と、建設・現場系Webの制作経験。あなたの仕事を撮って、整えて、伝わる形にします。</p>
-      <!-- TODO: 開業届後に名前・拠点エリアを記入し、hidden を外す（G-2） -->
-      <dl class="about-profile" hidden>
-        <div><dt>名前</dt><dd>【要記入】</dd></div>
-        <div><dt>拠点エリア</dt><dd>【要記入】</dd></div>
-      </dl>
-      <div class="look-card">
-        <span class="look-h">MISERUで見るところ</span>
-        <ul class="look-list">
-          <li>スマホで最初に、何が目に入るか</li>
-          <li>写真が小さく見えていないか</li>
-          <li>何を頼める会社か、3秒で分かるか</li>
-          <li>LINEや予約ボタンまで、迷わず届くか</li>
-          <li>料金や進め方で、不安が止まっていないか</li>
-          <li>実物の良さが、文章で薄まっていないか</li>
-        </ul>
+      <div class="p-entry">
+        <article class="rv">
+          <h3>無料相談</h3>
+          <p>方向性・合うプラン・概算の目安をお返しします。具体的な改善案・文章案・写真選定はお返ししません。</p>
+          <span class="p-price">¥0<small>所要 2〜3営業日</small></span>
+        </article>
+        <article class="rv">
+          <h3>初回見立てシート</h3>
+          <p>1ページ分の改善案をA4数枚に整理。<b>具体的な改善案はここから対応します。</b>ご依頼に進んだ場合、¥9,800 は制作費から全額充当します。</p>
+          <span class="p-price">¥9,800〜<small>所要 約1週間</small></span>
+        </article>
       </div>
-      <div class="sign">MISERU<small>実物が伝わるWeb改善</small></div>
+
+      <div class="plans">
+        <article class="plan rv">
+          <span class="nm">BASIC</span>
+          <h3>見せ方リペア</h3>
+          <p>今あるHP・Instagram・写真を活かして整えます。<b>撮影なし。</b>向いている方：今ある素材を活かしたい</p>
+          <span class="p-price">¥98,000〜</span>
+          <span class="dl">目安納期 2〜3週間〜</span>
+        </article>
+        <article class="plan plan--reco rv">
+          <span class="reco">★ おすすめ</span>
+          <span class="nm">STANDARD</span>
+          <h3><span class="maru-wrap">撮影込み・おまかせHP<svg class="maru" viewBox="0 0 200 80" aria-hidden="true"><ellipse cx="100" cy="40" rx="94" ry="33" pathLength="100"/></svg></span></h3>
+          <p>現地撮影＋トップ＋必要な2〜4ページ（料金・アクセス・FAQ・問い合わせ等）。向いている方：写真ごと、ちゃんと整えたい</p>
+          <span class="p-price">¥298,000〜</span>
+          <span class="dl">目安納期 4〜6週間〜</span>
+        </article>
+        <article class="plan rv">
+          <span class="nm">PREMIUM</span>
+          <h3>撮影込み・しっかりHP</h3>
+          <p>撮影＋10ページ前後＋構成・文章の全面設計。向いている方：事業の顔になるHPが欲しい</p>
+          <span class="p-price">¥498,000〜</span>
+          <span class="dl">目安納期 1.5〜2ヶ月〜</span>
+        </article>
+      </div>
+
+      <div class="p-add">
+        <article class="rv"><b>追加撮影</b>店舗・商品・施工・人物など、必要な写真を整理して撮影します。単体撮影のみは要相談。<div class="p-price">+¥120,000〜<small>制作プランに追加</small></div></article>
+        <article class="rv"><b>継続更新・運用</b>公開後の写真差し替え・実績追加・文章更新。必要な月だけ相談できます。<div class="p-price">¥9,800〜/月<small>必要な月だけ</small></div></article>
+      </div>
+
+      <div class="p-notes rv">
+        ※ 写真が揃っている方は、STANDARD / PREMIUM を<b>撮影分 −¥100,000</b> でご提案します。<br>
+        ※ 具体的な改善案・文章案・写真選定・レイアウト案は、<b>初回見立てシート（¥9,800〜）から対応しています。</b>無料相談は方向性のお返事のみです。<br>
+        ※ 無料相談・初回見立てシートに撮影は含まれません。撮影が必要な場合は STANDARD / PREMIUM、または追加撮影（+¥120,000〜）をご検討ください。<br>
+        ※ お支払いは着手時50%・公開時50%です。<br>
+        ※ 納期は撮影日程・素材状況により前後します。金額は内容により前後し、確定見積もりは初回見立てシート以降でお出しします。
+      </div>
+
+      <div class="monitor rv">
+        <p class="mtag">Monitor — 先着3社</p>
+        <p>先着3社モニター枠｜掲載許可とご感想をいただける方に、STANDARD相当（通常 ¥298,000〜）を<b>¥238,400〜（20%OFF）</b>でご提供します。制作完了後、実績として Before / After を掲載させていただきます。</p>
+      </div>
+
+      <div class="p-cta">
+        <a href="#contact" class="btn btn--shu" data-cta="free-consult">無料相談で目安を聞く <span class="arw">→</span></a>
+        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-cta="line-consult">LINEで相談する <span class="arw">→</span></a>
+      </div>
+      <p class="p-cta-note">¥0・入力1分・しつこい営業はしません。</p>
     </div>
   </div>
 </section>
 
-<!-- FLOW -->
+<!-- ============ 08 WHO（料金直後＝「で、誰がやるの？」に最短で回答） ============ -->
+<section class="sec sec--alt" id="about">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>ひと — WHO</span></div>
+    <div>
+      <p class="kicker">WHO</p>
+      <h2 class="h2 rv">ひとりで、一つひとつの<br>商いに向き合います。</h2>
+      <div class="who-grid">
+        <div class="who rv">
+          <p>大きな制作会社ではありません。だからこそ、写真の選び方からスマホの導線、ことばの一つひとつまで、あなたの「いい仕事」が伝わるように手を動かします。</p>
+          <p>一眼レフでの撮影と、建設・現場系Webの制作経験。あなたの仕事を撮って、整えて、伝わる形にします。</p>
+          <!-- TODO: 名前・拠点エリアはユーザー判断で非公開（2026-06-12確認済み） -->
+          <div class="who-sign">MISERU<small>実物が伝わるWEB改善</small></div>
+        </div>
+        <div class="who-look rv">
+          <h3>MISERUで見るところ</h3>
+          <ul>
+            <li>スマホで最初に、何が目に入るか</li>
+            <li>写真が小さく見えていないか</li>
+            <li>何を頼める会社か、3秒で分かるか</li>
+            <li>LINEや予約ボタンまで、迷わず届くか</li>
+            <li>料金や進め方で、不安が止まっていないか</li>
+            <li>実物の良さが、文章で薄まっていないか</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 進め方（お金の発生地点を明示） ============ -->
 <section class="sec" id="flow">
-  <div class="wrap">
-    <span class="eyebrow">Flow</span>
-    <h2 class="title">進め方。お金がかかるのは、納得してからです。</h2>
-    <p class="sub-lead">押し売りはしません。まずは改善点だけ見て、必要なときだけお手伝いします。</p>
-    <div class="flow-grid">
-      <div class="flow reveal"><h4>今あるものを送る<small style="display:block;color:var(--accent-d);font-weight:700;margin-top:4px">¥0</small></h4><p>HP・Instagram・Googleマップ・写真など、何でも大丈夫です。</p></div>
-      <div class="flow reveal"><h4>無料のお返事<small style="display:block;color:var(--accent-d);font-weight:700;margin-top:4px">¥0・2〜3営業日</small></h4><p>方向性と、合いそうなプラン・費用目安をお返しします。見るだけでもOK。</p></div>
-      <div class="flow reveal"><h4>初回見立てシート<small style="display:block;color:var(--accent-d);font-weight:700;margin-top:4px">¥9,800〜</small></h4><p>続ける場合だけ。1ページ分の具体的な改善案をA4数枚で。</p></div>
-      <div class="flow reveal"><h4>改善・制作<small style="display:block;color:var(--accent-d);font-weight:700;margin-top:4px">着手50%・公開50%</small></h4><p>納得いただいてから。小さな改善からでも。</p></div>
-      <div class="flow reveal"><h4>継続更新<small style="display:block;color:var(--accent-d);font-weight:700;margin-top:4px">必要な月だけ</small></h4><p>毎月の縛りはありません。</p></div>
+  <div class="wrap sec-grid">
+    <div class="rail"><span>進め方 — FLOW</span></div>
+    <div>
+      <p class="kicker">FLOW</p>
+      <h2 class="h2 rv">進め方。お金がかかるのは、納得してからです。</h2>
+      <p class="lead rv">押し売りはしません。まずは改善点だけ見て、必要なときだけお手伝いします。</p>
+      <ol class="flow">
+        <li class="rv"><span class="cn"></span><div><h3>今あるものを送る <span class="yen">¥0</span></h3><p>HP・Instagram・Googleマップ・写真など、何でも大丈夫です。</p></div></li>
+        <li class="rv"><span class="cn"></span><div><h3>無料のお返事 <span class="yen">¥0・2〜3営業日</span></h3><p>方向性と、合いそうなプラン・費用目安をお返しします。見るだけでもOK。</p></div></li>
+        <li class="rv"><span class="cn"></span><div><h3>初回見立てシート <span class="yen">¥9,800〜</span></h3><p>続ける場合だけ。1ページ分の具体的な改善案をA4数枚で。</p></div></li>
+        <li class="rv"><span class="cn"></span><div><h3>改善・制作 <span class="yen">着手50%・公開50%</span></h3><p>納得いただいてから。小さな改善からでも。</p></div></li>
+        <li class="rv"><span class="cn"></span><div><h3>継続更新 <span class="yen">必要な月だけ</span></h3><p>毎月の縛りはありません。</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section class="sec bg-sand" id="faq">
-  <div class="wrap">
-    <span class="eyebrow" style="display:block;text-align:center;margin-bottom:12px">FAQ</span>
-    <h2 class="title" style="text-align:center">よくあるご質問。</h2>
-    <div class="faq">
-      <details class="qa"><summary>相談すると、しつこく営業されませんか？</summary><div class="a">しません。まずは無料相談で、方向性と合いそうなプラン目安をお返しするだけです。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。</div></details>
-      <details class="qa"><summary>本当に無料ですか？</summary><div class="a">無料相談（方向性と合いそうなプラン目安まで）は無料です。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。費用が発生する作業は、必ず範囲と金額をお見せして、ご承諾いただいてからです。</div></details>
-      <details class="qa"><summary>なぜ無料相談を置いているんですか？</summary><div class="a">料金やお見積もりだけ先に見せられても、判断しづらいと思うからです。無料相談で方向性と合いそうなプラン目安をお伝えし、続けるかどうかをまず決めていただきます。具体的な整理（写真選定・文章・導線・ラフ）は、初回見立てシート（¥9,800〜）で1ページにまとめてお返しします。段階的に進めていただける入り口として用意しています。</div></details>
-      <details class="qa"><summary>制作会社に頼まなくて大丈夫ですか？</summary><div class="a">大きく作り直すなら、専門の制作会社がしっかりしています。MISERUは“その手前”で、今のページの見せ方だけを整える役割です。無料相談では方向性と合いそうなプラン目安まで確認できます。具体的な整理は、初回見立てシート（¥9,800〜）でご判断いただけます。</div></details>
-      <details class="qa"><summary>AIで作ったHPとの違いは何ですか？</summary><div class="a">AIツールは、安く早く“ページの形”を作るのが得意です。MISERUは、すでにある実物（写真・実績・現場）を、どう見せれば伝わるかを人が考えて整えます。作る前の「今の見え方を確かめたい」「実物の良さが伝わっていない」段階に向いています。</div></details>
-      <details class="qa"><summary>いきなり作り直しになりませんか？</summary><div class="a">なりません。今のサイトを活かして、写真・文章・スマホ導線を整えるところから始めます。作り直しが必要な場合も、範囲と費用の目安を先にお見せしてから判断いただけます。</div></details>
-      <details class="qa"><summary>まだ作り直すか決めていなくても大丈夫ですか？</summary><div class="a">大丈夫です。むしろ決める前の方が向いています。初回見立てシート（¥9,800〜）で「整えるだけで十分か」「作り直した方がよいか」の判断材料を整理します。急いで決めていただく必要はありません。</div></details>
-      <details class="qa"><summary>相談すると、具体的に何が返ってきますか？</summary><div class="a">無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「初回見立てシートで整理するもの」をご覧ください）。</div></details>
-      <details class="qa"><summary>HPが古くても大丈夫ですか？</summary><div class="a">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</div></details>
-      <details class="qa"><summary>写真がうまく撮れていません。</summary><div class="a">お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。</div></details>
-      <details class="qa"><summary>HPに使う写真も撮ってもらえますか？</summary><div class="a">はい、必要な場合はHPに掲載するための写真撮影も対応できます。ただし、無料相談・初回見立てシート・BASIC（見せ方リペア）に撮影は含まれません。写真が足りない場合は、STANDARD（撮影込み・おまかせHP ¥298,000〜）、PREMIUM（撮影込み・しっかりHP ¥498,000〜）、または追加撮影（+¥120,000〜）をご提案します。まずは今ある写真で足りるかを確認します。</div></details>
-      <details class="qa"><summary>写真がほとんどなくても相談できますか？</summary><div class="a">はい。写真が少ない場合でも相談できます。初回見立てシート（¥9,800〜）では、今ある素材で使えるものを整理し、足りない場合は「どんな写真を撮ると伝わりやすいか」までご提案します。</div></details>
-      <details class="qa"><summary>スマホだけ改善することもできますか？</summary><div class="a">できます。スマホでの見やすさ・問い合わせ導線だけを整えるご依頼にも対応しています。</div></details>
-      <details class="qa"><summary>LINEやフォームの導線も作れますか？</summary><div class="a">はい。LINE相談・予約・問い合わせフォームへの導線づくりも対応しています。</div></details>
-      <details class="qa"><summary>遠方でも依頼できますか？</summary><div class="a">HPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</div></details>
-      <details class="qa"><summary>小さなお店・個人事業でも相談できますか？</summary><div class="a">もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのために始めたサービスです。</div></details>
-      <details class="qa"><summary>LINEでも相談できますか？</summary><div class="a">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。</div></details>
-      <!-- G-7（要確認）：返信速度を約束できる場合のみ、上のLINE回答に「LINEなら原則翌営業日までに一次返信します（無料相談の正式なお返事は2〜3営業日）」を追記して有効化 -->
-      <details class="qa"><summary>補助金は使えますか？</summary><div class="a">小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。</div></details>
-      <p style="margin-top:30px">ここに無い疑問は、そのまま聞いてください。<a href="#contact" class="textlink" data-cta="free-consult">無料で相談する →</a></p>
+<!-- ============ 10 FAQ（全18問・確定文言） ============ -->
+<section class="sec" id="faq" style="padding-top:0">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>質問 — FAQ</span></div>
+    <div>
+      <p class="kicker">FAQ</p>
+      <h2 class="h2 rv">よくあるご質問。</h2>
+      <div class="faq rv">
+        <details class="qa">
+          <summary>相談すると、しつこく営業されませんか？</summary>
+          <p class="ans">しません。まずは無料相談で、方向性と合いそうなプラン目安をお返しするだけです。具体的な改善案・ラフは初回見立てシート（¥9,800〜）から。続けるかどうかは、ご覧になってから決めていただけます。不要ならそのままで大丈夫です。</p>
+        </details>
+        <details class="qa">
+          <summary>本当に無料ですか？</summary>
+          <p class="ans">無料相談（方向性と合いそうなプラン目安まで）は無料です。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。費用が発生する作業は、必ず範囲と金額をお見せして、ご承諾いただいてからです。</p>
+        </details>
+        <details class="qa">
+          <summary>なぜ無料相談を置いているんですか？</summary>
+          <p class="ans">料金やお見積もりだけ先に見せられても、判断しづらいと思うからです。無料相談で方向性と合いそうなプラン目安をお伝えし、続けるかどうかをまず決めていただきます。具体的な整理（写真選定・文章・導線・ラフ）は、初回見立てシート（¥9,800〜）で1ページにまとめてお返しします。段階的に進めていただける入り口として用意しています。</p>
+        </details>
+        <details class="qa">
+          <summary>制作会社に頼まなくて大丈夫ですか？</summary>
+          <p class="ans">大きく作り直すなら、専門の制作会社がしっかりしています。MISERUは“その手前”で、今のページの見せ方だけを整える役割です。無料相談では方向性と合いそうなプラン目安まで確認できます。具体的な整理は、初回見立てシート（¥9,800〜）でご判断いただけます。</p>
+        </details>
+        <details class="qa">
+          <summary>AIで作ったHPとの違いは何ですか？</summary>
+          <p class="ans">AIツールは、安く早く“ページの形”を作るのが得意です。MISERUは、すでにある実物（写真・実績・現場）を、どう見せれば伝わるかを人が考えて整えます。作る前の「今の見え方を確かめたい」「実物の良さが伝わっていない」段階に向いています。</p>
+        </details>
+        <details class="qa">
+          <summary>いきなり作り直しになりませんか？</summary>
+          <p class="ans">なりません。今のサイトを活かして、写真・文章・スマホ導線を整えるところから始めます。作り直しが必要な場合も、範囲と費用の目安を先にお見せしてから判断いただけます。</p>
+        </details>
+        <details class="qa">
+          <summary>まだ作り直すか決めていなくても大丈夫ですか？</summary>
+          <p class="ans">大丈夫です。むしろ決める前の方が向いています。初回見立てシート（¥9,800〜）で「整えるだけで十分か」「作り直した方がよいか」の判断材料を整理します。急いで決めていただく必要はありません。</p>
+        </details>
+        <details class="qa">
+          <summary>相談すると、具体的に何が返ってきますか？</summary>
+          <p class="ans">無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「初回見立てシートで整理するもの」をご覧ください）。</p>
+        </details>
+        <details class="qa">
+          <summary>HPが古くても大丈夫ですか？</summary>
+          <p class="ans">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</p>
+        </details>
+        <details class="qa">
+          <summary>写真がうまく撮れていません。</summary>
+          <p class="ans">お持ちの写真の選び方・並べ方・トリミングで印象は変わります。必要であれば一眼での撮影もご相談いただけます。</p>
+        </details>
+        <details class="qa">
+          <summary>HPに使う写真も撮ってもらえますか？</summary>
+          <p class="ans">はい、必要な場合はHPに掲載するための写真撮影も対応できます。ただし、無料相談・初回見立てシート・BASIC（見せ方リペア）に撮影は含まれません。写真が足りない場合は、STANDARD（撮影込み・おまかせHP ¥298,000〜）、PREMIUM（撮影込み・しっかりHP ¥498,000〜）、または追加撮影（+¥120,000〜）をご提案します。まずは今ある写真で足りるかを確認します。</p>
+        </details>
+        <details class="qa">
+          <summary>写真がほとんどなくても相談できますか？</summary>
+          <p class="ans">はい。写真が少ない場合でも相談できます。初回見立てシート（¥9,800〜）では、今ある素材で使えるものを整理し、足りない場合は「どんな写真を撮ると伝わりやすいか」までご提案します。</p>
+        </details>
+        <details class="qa">
+          <summary>スマホだけ改善することもできますか？</summary>
+          <p class="ans">できます。スマホでの見やすさ・問い合わせ導線だけを整えるご依頼にも対応しています。</p>
+        </details>
+        <details class="qa">
+          <summary>LINEやフォームの導線も作れますか？</summary>
+          <p class="ans">はい。LINE相談・予約・問い合わせフォームへの導線づくりも対応しています。</p>
+        </details>
+        <details class="qa">
+          <summary>遠方でも依頼できますか？</summary>
+          <p class="ans">HPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。</p>
+        </details>
+        <details class="qa">
+          <summary>小さなお店・個人事業でも相談できますか？</summary>
+          <p class="ans">もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのために始めたサービスです。</p>
+        </details>
+        <details class="qa">
+          <summary>LINEでも相談できますか？</summary>
+          <p class="ans">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。</p>
+        </details>
+        <!-- G-7（要確認）：返信速度を約束できる場合のみ、上のLINE回答に「LINEなら原則翌営業日までに一次返信します（無料相談の正式なお返事は2〜3営業日）」を追記して有効化 -->
+        <details class="qa">
+          <summary>補助金は使えますか？</summary>
+          <p class="ans">小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。</p>
+        </details>
+      </div>
+      <p class="faq-cta">ここに無い疑問は、そのまま聞いてください。<a href="#contact" data-cta="free-consult">無料で相談する →</a></p>
     </div>
   </div>
 </section>
@@ -1257,174 +1054,210 @@
 }
 </script>
 
-<!-- FINAL CTA -->
-<section class="sec bg-sand final">
-  <div class="wrap">
-    <h2>まずは、1ページから<br>見せ方を相談してみませんか。</h2>
-    <p>無料相談は¥0。HP・Instagram・Googleマップ・写真だけでも、相談だけでも大丈夫です。</p>
-    <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
-  </div>
-</section>
+<!-- ============ 11 FINAL + CONTACT（墨） ============ -->
+<section class="sec sec--ink" id="contact">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>相談 — CONTACT</span></div>
+    <div>
+      <p class="kicker">CONTACT</p>
+      <h2 class="final-h rv">まずは、1ページから<br>見せ方を相談してみませんか。</h2>
+      <p class="final-p rv">HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを教えていただければ、まずは無料でお返事します。しつこい営業はしません。</p>
 
-<!-- CONTACT -->
-<section class="sec" id="contact">
-  <div class="wrap contact-grid">
-    <div class="contact-info">
-      <span class="eyebrow">Contact</span>
-      <h2 class="title">ご相談・お問い合わせ。</h2>
-      <!-- G-7（要確認）：返信速度を約束できる場合のみ、下の文に「LINEなら原則翌営業日までに一次返信します。」を追記して有効化（正式なお返事=2〜3営業日 と区別） -->
-      <p>HP・Instagram・Googleマップ・写真・メニュー表など、今あるものを教えていただければ、まずは無料でお返事します。しつこい営業はしません。</p>
+      <div class="c-grid">
+        <div class="c-line rv">
+          <span class="ctag">LINE — 早い・写真も送れる</span>
+          <h3>LINEで気軽に相談できます</h3>
+          <p>サイトURL・Instagram・写真やスクショを送るだけでOK。フォームが面倒な方は、LINEからどうぞ。</p>
+          <a class="btn btn--shu" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINEで相談する <span class="arw">→</span></a>
+          <p class="sm">※ 別タブでLINEが開きます。友だち追加後、トーク画面でメッセージを送ってください。</p>
+          <p class="c-mail">直接のご連絡：<a href="mailto:megabranbran@gmail.com">megabranbran@gmail.com</a></p>
+          <p class="c-mail"><a href="sample.html" data-cta="sample-gallery">業種別サンプルを見る →</a></p>
+        </div>
 
-      <!-- LINE カード（主導線として強化）-->
-      <aside class="line-card" aria-label="公式LINEで相談">
-        <span class="line-card-tag">LINE</span>
-        <h3>LINEで気軽に相談できます</h3>
-        <p>サイトURL・Instagram・写真やスクショを送るだけでOK。フォームが面倒な方は、LINEからどうぞ。</p>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-ink line-card-btn" data-cta="line-consult">
-          公式LINEで相談する <span class="arw">→</span>
-        </a>
-        <p class="line-card-note">※ 別タブで LINE が開きます。友だち追加後、トーク画面でメッセージを送ってください。</p>
-      </aside>
-
-      <div class="mailrow">直接のご連絡：<a href="mailto:megabranbran@gmail.com">megabranbran@gmail.com</a></div>
-      <div class="mailrow"><a href="sample.html" data-cta="sample-gallery">業種別サンプルを見る →</a></div>
+        <form id="contact-form" class="c-form rv" action="https://formsubmit.co/megabranbran@gmail.com" method="POST">
+          <h3>フォームで相談する</h3>
+          <input type="hidden" name="_subject" value="ミセル：無料相談のお問い合わせ">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2〜3営業日を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
+          <div class="fld">
+            <label>お名前 / 事業者名<em>必須</em></label>
+            <input type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" autocomplete="name" required>
+          </div>
+          <div class="fld">
+            <label>ご連絡先（メール）<em>必須</em></label>
+            <input type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
+          </div>
+          <div class="fld">
+            <label>HP / Instagram / Googleマップ など<em>任意・あると具体的になります</em></label>
+            <input type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
+            <p class="hint">HPがなくても大丈夫です。写真やスクショを送りたい方は、LINEのほうが早いです（<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEを開く →</a>）。</p>
+          </div>
+          <div class="fld">
+            <label>ひとこと<em>任意</em></label>
+            <textarea name="message" rows="3" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
+          </div>
+          <button type="submit" class="btn btn--shu" data-cta="free-consult">無料相談を送信する <span class="arw">→</span></button>
+          <p class="fine">送信後、2〜3営業日でお返事します。しつこい営業はしません。送信内容は<a href="privacy.html">プライバシーポリシー</a>に基づき扱います。</p>
+        </form>
+        <div id="form-result" aria-live="polite"></div>
+      </div>
     </div>
-    <form id="contact-form" class="form" action="https://formsubmit.co/megabranbran@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="ミセル：無料相談のお問い合わせ">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-      <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2〜3営業日を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
-      <div class="row">
-        <label>お名前 / 事業者名</label>
-        <input type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" autocomplete="name" required>
-      </div>
-      <div class="row">
-        <label>ご連絡先（メール）</label>
-        <input type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
-      </div>
-      <div class="row">
-        <label>HP / Instagram / Googleマップ など <span class="opt">（任意・あると具体的になります）</span></label>
-        <input type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
-      </div>
-      <p style="margin:-6px 0 14px;font-size:12.5px;line-height:1.8;color:var(--soft)">HPがなくても大丈夫です。<b>写真やスクショを送りたい方は、LINEのほうが早いです</b>（<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" style="border-bottom:1px solid var(--accent)">公式LINEを開く →</a>）。</p>
-      <div class="row">
-        <label>ひとこと <span class="opt">（任意）</span></label>
-        <textarea name="message" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
-      </div>
-      <button type="submit" class="btn btn-ink" data-cta="free-consult">無料相談を送信する<span class="arw">→</span></button>
-      <p style="margin-top:10px;font-size:11.5px;color:var(--soft)">送信後、2〜3営業日でお返事します。しつこい営業はしません。送信内容は<a href="privacy.html" style="border-bottom:1px solid var(--line)">プライバシーポリシー</a>に基づき扱います。</p>
-    </form>
-    <div id="form-result" aria-live="polite" style="display:none"></div>
   </div>
 </section>
 
 <footer>
-  <div class="wrap foot-in">
-    <div>
-      <div class="mk">MISERU</div>
-      <p class="fnote">実物が伝わるWeb改善。写真・実績・現場感が大事な中小事業のために、スマホの問い合わせ導線、写真の見せ方、実績の信頼設計を、小さく始められる形で整えます。</p>
-      <nav class="foot-links" aria-label="フッターナビ">
-        <a href="sample.html" data-cta="sample-gallery">業種別サンプル</a>
-        <a href="#pricing">料金</a>
-        <a href="#faq">よくある質問</a>
-        <a href="#contact">お問い合わせ</a>
-        <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINE</a>
-        <a href="tokushoho.html">特定商取引法に基づく表記</a>
-        <a href="privacy.html">プライバシーポリシー</a>
-      </nav>
-      <!-- G-5 TODO: SNSアカウント開設後にURLを入れて display:none を外す -->
-      <nav class="foot-sns" aria-label="MISERU公式SNS" style="display:none">
-        <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="#" target="_blank" rel="noopener noreferrer">X</a>
-      </nav>
-    </div>
-    <div style="text-align:right">
-      <a href="#contact" class="textlink" data-cta="free-consult" style="color:#e0c2b2;border-color:var(--accent)">無料相談する →</a>
-    </div>
+  <div class="ft">
+    <div class="ft-logo">MISERU</div>
+    <p>実物が伝わるWeb改善。写真・実績・現場感が大事な中小事業のために、スマホの問い合わせ導線、写真の見せ方、実績の信頼設計を、小さく始められる形で整えます。</p>
+    <nav class="ft-nav">
+      <a href="sample.html" data-cta="sample-gallery">業種別サンプル</a>
+      <a href="#pricing">料金</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#contact">お問い合わせ</a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINE</a>
+      <a href="tokushoho.html">特定商取引法に基づく表記</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+    </nav>
+    <!-- G-5 TODO: SNSアカウント開設後にURLを入れて display:none を外す -->
+    <nav class="ft-nav" aria-label="MISERU公式SNS" style="display:none">
+      <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">X</a>
+    </nav>
+    <small>© MISERU（ミセル）</small>
   </div>
-  <div class="wrap foot-copy">© MISERU（ミセル）</div>
 </footer>
 
-<div class="mcta">
-  <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="m1" data-cta="line-consult">LINEで相談</a>
-  <a href="#contact" class="m2" data-cta="free-consult">無料相談する</a>
+<!-- スマホ固定CTA：LINE主導線（緑）＋無料相談（紙） -->
+<div class="sticky">
+  <a class="l1" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">LINEで相談</a>
+  <a class="l2" href="#contact" data-cta="free-consult">無料相談する</a>
 </div>
 
 <script>
-  var header=document.getElementById('header');
-  window.addEventListener('scroll',function(){header.classList.toggle('scrolled',window.scrollY>12);},{passive:true});
-  var drawer=document.getElementById('drawer');
-  document.getElementById('burger').addEventListener('click',function(){drawer.classList.add('open');});
-  document.getElementById('drawerX').addEventListener('click',function(){drawer.classList.remove('open');});
-  drawer.querySelectorAll('[data-close]').forEach(function(el){el.addEventListener('click',function(){drawer.classList.remove('open');});});
-  if('IntersectionObserver' in window){
-    var io=new IntersectionObserver(function(entries){
-      entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-    },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
-    document.querySelectorAll('.reveal,.stagger').forEach(function(el){io.observe(el);});
-  }else{document.querySelectorAll('.reveal,.stagger').forEach(function(el){el.classList.add('in');});}
-  // BA Slider
-  (function(){
-    var track=document.getElementById('bas-track');
-    if(!track)return;
-    var before=document.getElementById('bas-before');
-    var handle=document.getElementById('bas-handle');
-    var pct=50;
-    function set(p){pct=Math.max(2,Math.min(98,p));before.style.clipPath='inset(0 '+(100-pct)+'% 0 0)';handle.style.left=pct+'%';handle.setAttribute('aria-valuenow',Math.round(pct));}
-    function xPct(e){var r=track.getBoundingClientRect();return((e.touches?e.touches[0].clientX:e.clientX)-r.left)/r.width*100;}
-    var drag=false;
-    track.addEventListener('mousedown',function(e){drag=true;set(xPct(e));e.preventDefault();});
-    document.addEventListener('mousemove',function(e){if(drag)set(xPct(e));});
-    document.addEventListener('mouseup',function(){drag=false;});
-    track.addEventListener('touchstart',function(e){drag=true;set(xPct(e));},{passive:true});
-    track.addEventListener('touchmove',function(e){if(drag){set(xPct(e));e.preventDefault();}},{passive:false});
-    track.addEventListener('touchend',function(){drag=false;});
-    handle.addEventListener('keydown',function(e){if(e.key==='ArrowLeft')set(pct-2);if(e.key==='ArrowRight')set(pct+2);});
-    set(50);
-  })();
-  // FAQ exclusive accordion
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- モバイルドロワー --- */
+  var drawer = document.getElementById('drawer');
+  var burger = document.getElementById('burger');
+  if(drawer && burger){
+    burger.addEventListener('click', function(){ drawer.classList.add('open'); });
+    document.getElementById('drawerX').addEventListener('click', function(){ drawer.classList.remove('open'); });
+    drawer.querySelectorAll('[data-close]').forEach(function(el){
+      el.addEventListener('click', function(){ drawer.classList.remove('open'); });
+    });
+  }
+
+  /* --- 朱入れ：下書きへの取り消し線 --- */
+  var draft = document.getElementById('draft');
+  if(draft){
+    if(reduce){ draft.classList.add('on'); }
+    else { setTimeout(function(){ draft.classList.add('on'); }, 400); }
+  }
+
+  /* --- Before/After 比較スライダー --- */
+  var cmp = document.getElementById('cmp');
+  var handle = document.getElementById('handle');
+  var cap = document.getElementById('cap');
+  if(cmp && handle){
+    var dragging = false;
+    function setPos(clientX){
+      var r = cmp.getBoundingClientRect();
+      var p = (clientX - r.left) / r.width * 100;
+      p = Math.max(2, Math.min(98, p));
+      cmp.style.setProperty('--pos', p + '%');
+      handle.setAttribute('aria-valuenow', Math.round(p));
+      if(cap){
+        cap.textContent = p < 40 ? '炭の香りまで、伝わる一皿。— 光・寄り・余白で「主役」にする'
+                 : p > 60 ? 'スマホで、そのまま。— 記録には十分。でも、主役になれていない'
+                 : '同じ一皿。違いは、撮り方と見せ方だけ。';
+      }
+    }
+    cmp.addEventListener('pointerdown', function(e){
+      dragging = true;
+      cmp.setPointerCapture(e.pointerId);
+      setPos(e.clientX);
+    });
+    cmp.addEventListener('pointermove', function(e){ if(dragging) setPos(e.clientX); });
+    cmp.addEventListener('pointerup', function(){ dragging = false; });
+    cmp.addEventListener('pointercancel', function(){ dragging = false; });
+    handle.addEventListener('keydown', function(e){
+      var now = parseFloat(getComputedStyle(cmp).getPropertyValue('--pos')) || 50;
+      var r = cmp.getBoundingClientRect();
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); setPos(r.left + r.width * (now - 4) / 100); }
+      if(e.key === 'ArrowRight'){ e.preventDefault(); setPos(r.left + r.width * (now + 4) / 100); }
+    });
+    /* 初回だけ、つまみが軽く揺れて「動かせる」ことを伝える */
+    if(!reduce){
+      var demo = [50,42,58,50], i = 0;
+      var t = setInterval(function(){
+        if(dragging || i >= demo.length){ clearInterval(t); return; }
+        cmp.style.setProperty('--pos', demo[i] + '%'); i++;
+      }, 550);
+    }
+  }
+
+  /* --- スクロールリビール（kicker朱線・チェック・朱丸も共通IOで） --- */
+  var els = document.querySelectorAll('.rv, .checks li, .kicker, .plan--reco');
+  if(reduce){
+    els.forEach(function(el){ el.classList.add('in'); });
+  } else if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.18 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    els.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* --- FAQ 排他アコーディオン --- */
   document.querySelectorAll('.qa').forEach(function(d){
-    d.addEventListener('toggle',function(){
+    d.addEventListener('toggle', function(){
       if(this.open){
         document.querySelectorAll('.qa').forEach(function(other){
-          if(other!==d)other.removeAttribute('open');
+          if(other !== d) other.removeAttribute('open');
         });
       }
     });
   });
-  // Form async submit
-  var cf=document.getElementById('contact-form');
+
+  /* --- フォーム AJAX 送信 --- */
+  var cf = document.getElementById('contact-form');
   if(cf){
-    cf.addEventListener('submit',function(e){
+    cf.addEventListener('submit', function(e){
       e.preventDefault();
-      var btn=cf.querySelector('[type=submit]');
-      var res=document.getElementById('form-result');
-      btn.disabled=true;
-      btn.textContent='送信中…';
-      fetch('https://formsubmit.co/ajax/megabranbran@gmail.com',{
+      var btn = cf.querySelector('[type=submit]');
+      var res = document.getElementById('form-result');
+      btn.disabled = true;
+      btn.textContent = '送信中…';
+      fetch('https://formsubmit.co/ajax/megabranbran@gmail.com', {
         method:'POST',
         body:new FormData(cf),
         headers:{'Accept':'application/json'}
-      }).then(function(r){return r.json();}).then(function(data){
+      }).then(function(r){ return r.json(); }).then(function(data){
         if(data.success){
-          cf.style.display='none';
-          res.style.display='block';
-          res.innerHTML='<p style="padding:32px 0;font-family:var(--mincho);font-size:18px;color:var(--ink)">ありがとうございます。<br><span style="font-family:var(--gothic);font-size:14px;color:var(--soft);display:block;margin-top:10px">2〜3営業日以内にご連絡します。</span></p>';
+          cf.style.display = 'none';
+          res.style.display = 'block';
+          res.innerHTML = '<p class="ok">ありがとうございます。<small>2〜3営業日以内にご連絡します。</small></p>';
         }else{
-          btn.disabled=false;
-          btn.textContent='無料で見せ方を相談する →';
-          res.style.display='block';
-          res.innerHTML='<p style="color:#c0392b;font-size:13px;padding:8px 0">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
+          btn.disabled = false;
+          btn.innerHTML = '無料相談を送信する <span class="arw">→</span>';
+          res.style.display = 'block';
+          res.innerHTML = '<p class="ng">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
         }
       }).catch(function(){
-        btn.disabled=false;
-        btn.textContent='無料で見せ方を相談する →';
-        res.style.display='block';
-        res.innerHTML='<p style="color:#c0392b;font-size:13px;padding:8px 0">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
+        btn.disabled = false;
+        btn.innerHTML = '無料相談を送信する <span class="arw">→</span>';
+        res.style.display = 'block';
+        res.innerHTML = '<p class="ng">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
       });
     });
   }
+})();
 </script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "488a9cb636c342efa6f8796ad615bf1c"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
