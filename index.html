@@ -229,11 +229,11 @@
   /* faq */
   .faq{max-width:780px;margin:44px auto 0}
   .qa{border-bottom:1px solid var(--line)}
-  .qa summary{list-style:none;cursor:pointer;padding:22px 2px;font-weight:700;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;gap:16px;align-items:center}
+  .qa summary{list-style:none;cursor:pointer;padding:22px 2px;font-weight:700;font-size:16px;color:var(--ink);display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
   .qa summary::-webkit-details-marker{display:none}
-  .qa summary::after{content:"";width:10px;height:10px;border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);transform:rotate(45deg);transition:.3s;flex:none;margin-top:-4px}
-  .qa[open] summary::after{transform:rotate(-135deg);margin-top:2px}
-  .qa .a{padding:0 2px 22px;color:var(--soft);font-size:14.5px;line-height:1.95}
+  .qa summary::after{content:"";flex:none;width:18px;height:18px;margin-top:2px;border:1px solid var(--line);border-radius:50%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M9 4v10M4 9h10' stroke='%236c655b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center/14px no-repeat;transition:transform .35s cubic-bezier(.2,.7,.3,1),background-color .25s}
+  .qa[open] summary::after{transform:rotate(45deg);background-color:var(--accent);border-color:var(--accent);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M9 4v10M4 9h10' stroke='%23fff' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")}
+  .qa .a{overflow:hidden;padding:0 2px 22px;color:var(--soft);font-size:14.5px;line-height:1.95}
 
   /* about：2026-06 集客改善で人物プレースホルダー撤去→「編集室カード」型1カラム（who-card） */
   .who-wrap{max-width:880px;margin:0 auto;padding:0 28px}
@@ -787,7 +787,7 @@
     <nav class="nav">
       <a href="#do">整えること</a>
       <a href="#industry-samples">サンプル</a>
-      <a href="#ba">事例</a>
+      <a href="#ba">Before / After</a>
       <a href="#pricing">料金</a>
       <a href="#flow">進め方</a>
       <a href="#contact" class="nav-cta">相談する</a>
@@ -1335,10 +1335,11 @@
       <div class="mailrow">直接のご連絡：<a href="mailto:megabranbran@gmail.com">megabranbran@gmail.com</a></div>
       <div class="mailrow"><a href="sample.html" data-cta="sample-gallery">業種別サンプルを見る →</a></div>
     </div>
-    <form class="form" action="https://formsubmit.co/megabranbran@gmail.com" method="POST">
+    <form id="contact-form" class="form" action="https://formsubmit.co/megabranbran@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="ミセル：無料相談のお問い合わせ">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2営業日以内を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
       <div class="row">
         <label>HP / Instagram / Googleマップ / 写真など <span class="opt">（任意・あると具体的になります）</span></label>
@@ -1359,6 +1360,7 @@
       </div>
       <button type="submit" class="btn btn-ink" data-cta="free-consult">写真・URLで相談する<span class="arw">→</span></button>
     </form>
+    <div id="form-result" aria-live="polite" style="display:none"></div>
   </div>
 </section>
 
@@ -1407,6 +1409,48 @@
     },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.reveal,.stagger').forEach(function(el){io.observe(el);});
   }else{document.querySelectorAll('.reveal,.stagger').forEach(function(el){el.classList.add('in');});}
+  // FAQ exclusive accordion
+  document.querySelectorAll('.qa').forEach(function(d){
+    d.addEventListener('toggle',function(){
+      if(this.open){
+        document.querySelectorAll('.qa').forEach(function(other){
+          if(other!==d)other.removeAttribute('open');
+        });
+      }
+    });
+  });
+  // Form async submit
+  var cf=document.getElementById('contact-form');
+  if(cf){
+    cf.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=cf.querySelector('[type=submit]');
+      var res=document.getElementById('form-result');
+      btn.disabled=true;
+      btn.textContent='送信中…';
+      fetch('https://formsubmit.co/ajax/megabranbran@gmail.com',{
+        method:'POST',
+        body:new FormData(cf),
+        headers:{'Accept':'application/json'}
+      }).then(function(r){return r.json();}).then(function(data){
+        if(data.success){
+          cf.style.display='none';
+          res.style.display='block';
+          res.innerHTML='<p style="padding:32px 0;font-family:var(--mincho);font-size:18px;color:var(--ink)">ありがとうございます。<br><span style="font-family:var(--gothic);font-size:14px;color:var(--soft);display:block;margin-top:10px">2〜3営業日以内にご連絡します。</span></p>';
+        }else{
+          btn.disabled=false;
+          btn.textContent='写真・URLで相談する →';
+          res.style.display='block';
+          res.innerHTML='<p style="color:#c0392b;font-size:13px;padding:8px 0">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
+        }
+      }).catch(function(){
+        btn.disabled=false;
+        btn.textContent='写真・URLで相談する →';
+        res.style.display='block';
+        res.innerHTML='<p style="color:#c0392b;font-size:13px;padding:8px 0">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
+      });
+    });
+  }
 </script>
 </body>
 </html>
