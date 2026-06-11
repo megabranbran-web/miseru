@@ -204,7 +204,7 @@ details.miseru .d-body b{color:var(--headlight)}
 .mag-wrap{display:inline-block}
 .btn-line.cta-main{font-size:13px;letter-spacing:.14em;padding:20px 44px;background:var(--signal);border-color:var(--signal);font-weight:700;display:inline-block;border-radius:999px;box-shadow:0 0 60px rgba(255,30,45,.35)}
 .btn-line.cta-main:hover{background:#ff4450}
-.cta-sub{display:block;margin-top:22px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--smoke)}
+.cta-sub{display:block;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--smoke)}
 
 /* ============ FOOTER ============ */
 footer{border-top:1px solid var(--line);padding:54px 0 110px;font-size:11.5px;line-height:2.2;color:var(--smoke);position:relative;z-index:2;background:rgba(6,5,9,.7)}
@@ -365,9 +365,12 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
   <div class="wrap">
     <p class="disc"><b>これは MISERU が制作した架空の演出強めサンプルHPです。</b>掲載されている店舗設定・所在地表現・料金はすべて見せ方の表示例（架空）で、実在店舗・実在事例ではありません。※ 無料相談・初回見立てシートに、実際の写真撮影は含まれません。まずは今ある写真で、何をどう見せるかを整理します。</p>
     <p class="disc" style="margin-top:18px">この「見せ方の型」は、建設・美容・飲食・ペット・工房などにも応用できます。MISERU は中小事業のWebを整える編集室。無料相談では、今のHP・Instagramを見て、方向性と合いそうな進め方・プラン目安までお返しします。</p>
+    <p class="disc" style="margin-top:18px">このサンプルでMISERUがやったこと：<b style="color:var(--headlight)">構成の設計／写真の選定とトリミング／全文章の執筆／WebGL粒子演出の実装／スマホ最適化／LINE相談までの導線設計</b>。演出を含む同等の範囲なら PREMIUM（¥498,000〜）相当、演出なしの整えなら BASIC（¥98,000〜）からです。</p>
     <div class="links">
-      <a href="index.html#contact" data-hover>MISERUに無料相談する →</a>
-      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover>MISERU公式LINE →</a>
+      <a href="index.html#contact" data-hover data-cta="free-consult">MISERUに無料相談する →</a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover data-cta="line-consult">MISERU公式LINE →</a>
+      <a href="sample-pet.html" data-hover data-cta="sample-pet">ペットのサンプル →</a>
+      <a href="sample-food.html" data-hover data-cta="sample-food">飲食のサンプル →</a>
       <a href="index.html" data-hover>MISERUトップへ</a>
       <a href="tokushoho.html" data-hover>特商法表記</a>
       <a href="privacy.html" data-hover>プライバシー</a>
@@ -396,7 +399,7 @@ imgs.forEach(function(im){
     im.addEventListener("error", function(){ loadedImgs++; });
   }
 });
-var minTime = reduced ? 200 : 1400, t0 = performance.now();
+var minTime = reduced ? 200 : 700, t0 = performance.now();
 (function tickLoad(){
   var timeP = Math.min(1, (performance.now()-t0)/minTime);
   var imgP = loadedImgs/totalImgs;
