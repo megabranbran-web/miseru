@@ -135,8 +135,7 @@ body.ready .hero-sub{opacity:1;transform:none}
 .gal:active{cursor:grabbing}
 .gal-track{display:flex;gap:18px;width:max-content;will-change:transform;padding:0 20px}
 .card{position:relative;width:min(66vw,520px);flex:none;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#1B1726,#0C0A13);border-radius:4px;border:1px solid var(--line)}
-.card img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);filter:grayscale(.35) contrast(1.05);transition:filter .6s;will-change:transform;pointer-events:none}
-.card:hover img{filter:grayscale(0)}
+.card img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);will-change:transform;pointer-events:none}
 .card .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(245,242,236,.25)}
 .card .tag{position:absolute;left:14px;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.25em;background:rgba(7,6,10,.72);padding:8px 12px;border-radius:3px;backdrop-filter:blur(4px);color:var(--headlight)}
 .card .num{position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:11px;color:var(--smoke)}
@@ -274,10 +273,10 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
   <div class="gal" id="gal" data-cursor="drag">
     <div class="gal-track" id="galTrack">
       <figure class="card"><span class="ph">PHOTO 01 — LOADING</span><img src="img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 02 — LOADING</span><img src="img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 03 — LOADING</span><img src="img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
+      <figure class="card"><span class="ph">PHOTO 02 — LOADING</span><img src="img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー" style="object-position:60% center"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
+      <figure class="card"><span class="ph">PHOTO 03 — LOADING</span><img src="img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）" style="object-position:45% center"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
       <figure class="card"><span class="ph">PHOTO 04 — LOADING</span><img src="img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 05 — LOADING</span><img src="img/samples/car/optimized/car-owner-a.jpg" alt="運転席に座るオーナーの後ろ姿"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
+      <figure class="card"><span class="ph">PHOTO 05 — LOADING</span><img src="img/samples/car/optimized/car-owner-a.jpg" alt="運転席に座るオーナーの後ろ姿" style="object-position:38% center"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
     </div>
     <div class="wrap gal-foot"><span>DRAG / SWIPE</span><div class="gal-prog"><i id="galProg"></i></div><span id="galIdx">01 / 05</span></div>
   </div>
