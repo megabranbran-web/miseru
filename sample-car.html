@@ -132,18 +132,14 @@ body.ready .hero-sub{opacity:1;transform:none}
 
 /* ============ GALLERY ============ */
 #styles{padding:120px 0 100px}
-.gal{margin-top:48px;overflow:hidden;cursor:grab}
-.gal:active{cursor:grabbing}
-.gal-track{display:flex;gap:18px;width:max-content;will-change:transform;padding:0 20px}
-.card{position:relative;width:min(66vw,520px);flex:none;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(160deg,#1B1726,#0C0A13);border-radius:4px;border:1px solid var(--line)}
-.card img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);will-change:transform;pointer-events:none}
-.card .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:rgba(245,242,236,.25)}
+.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+.card{position:relative;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(160deg,#1B1726,#0C0A13);border-radius:4px;border:1px solid var(--line)}
+.card.hero{grid-column:1 / -1;aspect-ratio:16/9}
+.card img{width:100%;height:100%;object-fit:cover;will-change:transform;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.card:hover img{transform:scale(1.04)}
 .card .tag{position:absolute;left:14px;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.25em;background:rgba(7,6,10,.72);padding:8px 12px;border-radius:3px;backdrop-filter:blur(4px);color:var(--headlight)}
 .card .num{position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:11px;color:var(--smoke)}
-.gal-foot{display:flex;justify-content:space-between;align-items:center;margin-top:22px;font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--smoke)}
-.gal-prog{flex:1;height:1px;background:var(--line);margin:0 22px;position:relative}
-.gal-prog i{position:absolute;top:-1px;left:0;height:3px;width:12%;background:var(--signal)}
-@media (hover:none){.gal{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.card{scroll-snap-align:center}}
+@media (max-width:560px){.gal-grid{grid-template-columns:1fr}.card.hero{aspect-ratio:3/2}}
 
 /* ============ STATEMENT ============ */
 #statement{padding:140px 0}
@@ -267,19 +263,16 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
 <!-- ================= STYLES / GALLERY ================= -->
 <section id="styles">
   <div class="wrap">
-    <div class="eyebrow rev">005 / STYLES — DRAG ／ FORM 02 — STREAM</div>
+    <div class="eyebrow rev">005 / STYLES — GRID ／ FORM 02 — STREAM</div>
     <h2 class="sec rev">同じ一台を、<br>5つの見せ方で。</h2>
-    <p class="muted rev" style="margin-top:18px;font-size:13px;line-height:2;max-width:52ch">販売前に映える型、SNSで伸びる型、街での日常の型。どの写真をどう見せるかで、伝わるものが変わります。横にドラッグしてご覧ください。背後の粒子は、走行光のストリームに姿を変えています。</p>
+    <p class="muted rev" style="margin-top:18px;font-size:13px;line-height:2;max-width:52ch">販売前に映える型、SNSで伸びる型、街での日常の型。どの写真をどう見せるかで、伝わるものが変わります。背後の粒子は、走行光のストリームに姿を変えています。</p>
   </div>
-  <div class="gal" id="gal" data-cursor="drag">
-    <div class="gal-track" id="galTrack">
-      <figure class="card"><span class="ph">PHOTO 01 — LOADING</span><img src="img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 02 — LOADING</span><img src="img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー" style="object-position:60% center"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 03 — LOADING</span><img src="img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）" style="object-position:45% center"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 04 — LOADING</span><img src="img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
-      <figure class="card"><span class="ph">PHOTO 05 — LOADING</span><img src="img/samples/car/optimized/car-owner-a.jpg" alt="運転席に座るオーナーの後ろ姿" style="object-position:38% center"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
-    </div>
-    <div class="wrap gal-foot"><span>DRAG / SWIPE</span><div class="gal-prog"><i id="galProg"></i></div><span id="galIdx">01 / 05</span></div>
+  <div class="wrap gal-grid">
+    <figure class="card hero"><img src="img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
+    <figure class="card"><img src="img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
+    <figure class="card"><img src="img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
+    <figure class="card"><img src="img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
+    <figure class="card"><img src="img/samples/car/optimized/car-owner-a.jpg" alt="ドアを上げた赤いスポーツカーの脇に座る人物" style="object-position:50% 100%"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
   </div>
 </section>
 
@@ -426,10 +419,8 @@ var mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my;
 if(!isTouch){
   document.addEventListener("mousemove", function(e){ mx = e.clientX; my = e.clientY; });
   document.addEventListener("mouseover", function(e){
-    var t = e.target.closest("[data-cursor='drag']");
     var h = e.target.closest("a,button,[data-hover],summary");
-    if(t){ c2.classList.add("big"); c2.textContent = "DRAG"; }
-    else if(h){ c2.classList.add("big"); c2.textContent = ""; }
+    if(h){ c2.classList.add("big"); c2.textContent = ""; }
     else { c2.classList.remove("big"); c2.textContent = ""; }
   });
 }
@@ -455,28 +446,7 @@ function startCount(el){
   })();
 }
 
-/* ---------- DRAG GALLERY ---------- */
-var gal = document.getElementById("gal"), track = document.getElementById("galTrack");
-var gx = 0, gxT = 0, gv = 0, dragging = false, sx = 0, sgx = 0, lastX = 0;
-var galProg = document.getElementById("galProg"), galIdx = document.getElementById("galIdx");
-function maxScroll(){ return Math.max(0, track.scrollWidth - gal.clientWidth); }
-if(!isTouch){
-  gal.addEventListener("pointerdown", function(e){ dragging = true; sx = e.clientX; sgx = gxT; lastX = e.clientX; gal.setPointerCapture(e.pointerId); });
-  gal.addEventListener("pointermove", function(e){
-    if(!dragging) return;
-    gv = e.clientX - lastX; lastX = e.clientX;
-    gxT = Math.min(0, Math.max(-maxScroll(), sgx + (e.clientX - sx)));
-  });
-  function endDrag(){ dragging = false; gxT = Math.min(0, Math.max(-maxScroll(), gxT + gv*8)); }
-  gal.addEventListener("pointerup", endDrag);
-  gal.addEventListener("pointercancel", endDrag);
-  gal.addEventListener("wheel", function(e){
-    if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){
-      e.preventDefault();
-      gxT = Math.min(0, Math.max(-maxScroll(), gxT - e.deltaX));
-    }
-  }, {passive:false});
-}
+/* ---------- GALLERY: 静的グリッド（ドラッグ廃止） ---------- */
 
 /* ---------- MAGNETIC ---------- */
 var mag = document.getElementById("mag");
@@ -696,22 +666,6 @@ function frame(){
     cx += (mx - cx) * 0.55; cy += (my - cy) * 0.55;
     c1.style.transform = "translate(" + mx + "px," + my + "px) translate(-50%,-50%)";
     c2.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
-  }
-
-  if(!isTouch){
-    if(!dragging){ gv *= 0.92; }
-    gx += (gxT - gx) * 0.1;
-    var skew = Math.max(-6, Math.min(6, (gxT - gx) * 0.06));
-    track.style.transform = "translateX(" + gx + "px) skewX(" + skew + "deg)";
-    var mp = maxScroll();
-    var pr = mp ? (-gx / mp) : 0;
-    galProg.style.left = (pr * 88) + "%";
-    galIdx.textContent = "0" + Math.min(5, 1 + Math.round(pr * 4)) + " / 05";
-  } else {
-    var mp2 = Math.max(1, gal.scrollWidth - gal.clientWidth);
-    var pr2 = gal.scrollLeft / mp2;
-    galProg.style.left = (pr2 * 88) + "%";
-    galIdx.textContent = "0" + Math.min(5, 1 + Math.round(pr2 * 4)) + " / 05";
   }
 
   var sp = document.getElementById("stmtPhoto");
