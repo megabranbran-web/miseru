@@ -190,7 +190,8 @@ details.miseru .d-body b{color:var(--headlight)}
 @media (max-width:860px){.case-grid{grid-template-columns:1fr}}
 
 /* ============ CTA ============ */
-#contact{padding:170px 0 150px;text-align:center}
+#contact{position:relative;isolation:isolate;padding:170px 0 150px;text-align:center;overflow:hidden}
+#contact::before{content:"";position:absolute;inset:-2%;z-index:-1;background:linear-gradient(180deg,rgba(6,5,9,.9),rgba(6,5,9,.58) 50%,rgba(6,5,9,.94)),radial-gradient(80% 60% at 66% 54%,rgba(255,30,45,.12),transparent 62%),url("img/sample-car.jpg") center/cover no-repeat;filter:blur(3px) saturate(1.08);transform:scale(1.04)}
 #contact .giant{font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:-.03em;font-size:clamp(44px,9vw,128px);color:var(--headlight)}
 #contact .giant em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--headlight)}
 #contact .steps{display:flex;justify-content:center;gap:34px;margin:40px 0 50px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--smoke);flex-wrap:wrap}
