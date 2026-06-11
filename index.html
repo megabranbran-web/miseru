@@ -235,21 +235,20 @@
   .qa[open] summary::after{transform:rotate(-135deg);margin-top:2px}
   .qa .a{padding:0 2px 22px;color:var(--soft);font-size:14.5px;line-height:1.95}
 
-  /* about (warm, was black) */
-  .about-grid{display:grid;grid-template-columns:280px 1fr;gap:50px;max-width:920px;margin-left:auto;margin-right:auto;align-items:start}
-  .about-photo{margin:0;display:block}
-  .about-photo svg,.about-photo img{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
-  .about-photo figcaption{font-size:10.5px;color:var(--soft2);letter-spacing:.14em;margin-top:10px;text-transform:uppercase;text-align:center}
+  /* about：2026-06 集客改善で人物プレースホルダー撤去→「編集室カード」型1カラム（who-card） */
+  .who-wrap{max-width:880px;margin:0 auto;padding:0 28px}
+  .who-card{position:relative;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:clamp(30px,5vw,56px);box-shadow:0 30px 60px -40px rgba(28,26,23,.3)}
+  .who-card::before{content:"";position:absolute;top:0;left:clamp(30px,5vw,56px);width:46px;height:3px;background:var(--accent);border-radius:2px}
+  .who-tab{position:absolute;top:-13px;right:clamp(24px,5vw,48px);font-family:var(--mincho);font-style:italic;font-size:12px;color:var(--soft);background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:4px 14px;letter-spacing:.06em}
+  .who-card h2.title{margin-bottom:22px}
+  .who-card>p{font-size:15.5px;color:var(--ink2);line-height:2.05;margin-bottom:16px;max-width:36em}
+  .who-card .sign{font-family:var(--mincho);font-weight:600;font-size:17px;color:var(--ink);margin-top:8px;letter-spacing:.05em}
+  .who-card .sign small{font-family:var(--gothic);font-weight:400;font-size:12px;color:var(--soft);letter-spacing:.08em;margin-left:10px}
   .about-profile{display:grid;gap:8px;margin:18px 0 4px;padding:16px 20px;background:var(--white);border:1px solid var(--line);border-radius:6px}
   .about-profile[hidden]{display:none}
   .about-profile div{display:flex;gap:14px;font-size:13.5px}
   .about-profile dt{color:var(--soft2);font-weight:700;min-width:6em}
   .about-profile dd{margin:0;color:var(--ink)}
-  /* （旧 .about-photo プレースホルダールールは G-2 で新実装に置換済み） */
-  .about h2.title{margin-bottom:22px}
-  .about p{font-size:15.5px;color:var(--ink2);line-height:2.05;margin-bottom:16px}
-  .about .sign{font-family:var(--mincho);font-weight:600;font-size:17px;color:var(--ink);margin-top:8px;letter-spacing:.05em}
-  .about .sign small{font-family:var(--gothic);font-weight:400;font-size:12px;color:var(--soft);letter-spacing:.08em;margin-left:10px}
   /* look-card（MISERUで見るところ・信頼補強） */
   .look-card{background:var(--white);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:22px 24px;margin:22px 0}
   .look-card .look-h{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-d);margin-bottom:14px}
@@ -444,7 +443,7 @@
     .hero-board{order:2;max-width:440px;margin:0 auto}
     .do-grid{grid-template-columns:1fr;gap:30px}
     .demo-grid{grid-template-columns:1fr;gap:26px}
-    .about-grid{grid-template-columns:1fr;gap:30px}.about-photo{max-width:340px}
+    .who-wrap{padding:0 20px}.who-card{padding:26px 22px}.who-tab{right:18px}
     .contact-grid{grid-template-columns:1fr;gap:32px}
     .ind-grid{grid-template-columns:repeat(2,1fr)}
     .cmp3{grid-template-columns:1fr;gap:14px}
@@ -616,7 +615,7 @@
   .fh-d3-teaser a:hover{background:rgba(241,236,227,.04)}
   .fh-d3-teaser a:hover .fh-d3-ta{transform:translateX(4px)}
 
-  .fh-d3-bridge{height:32px;background:linear-gradient(180deg, var(--ink) 0%, var(--paper) 100%)}
+  .fh-d3-bridge{height:32px;background:linear-gradient(180deg, var(--ink) 0%, var(--sand-d) 100%)} /* 終端＝直下の業種別サンプル節(sand-d)に合わせる */
 
   @media(max-width:880px){
     .fh-d3{padding:120px 0 80px;align-items:start}
@@ -679,9 +678,52 @@
   }
 
   .cfv-hero{min-height:auto;padding:120px 0 60px}
-  .cfv-grid{position:relative;z-index:2;max-width:820px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:1fr;row-gap:0;align-content:center;grid-template-areas:"intro" "aside"}
+  /* 2026-06 集客改善：FVを「コピー｜編集デモカード」の2カラムへ（文字だけFVの解消） */
+  .cfv-grid{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 28px;width:100%;display:grid;grid-template-columns:1fr .96fr;column-gap:clamp(34px,4.5vw,62px);align-items:center;grid-template-areas:"intro aside"}
   .cfv-intro{grid-area:intro}
-  .cfv-aside{grid-area:aside;margin-top:30px}
+  .cfv-aside{grid-area:aside;margin-top:0}
+  /* FV入場アニメ（reduced-motion時は animation:none で即・最終状態） */
+  @keyframes cfvUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes edmFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes edmLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  .cfv-intro .fh-d3-eyebrow,.cfv-h1,.cfv-sub,.cfv-sample-link,.cfv-acts,.cfv-trust,.cfv-fine{animation:cfvUp .6s var(--easing,cubic-bezier(.2,.7,.3,1)) both}
+  .cfv-h1{animation-delay:.05s}.cfv-sub{animation-delay:.12s}.cfv-sample-link{animation-delay:.18s}
+  .cfv-acts{animation-delay:.24s}.cfv-trust{animation-delay:.3s}.cfv-fine{animation-delay:.34s}
+  /* 編集デモカード（同じ写真でも、見せ方でこう変わる）—— モックB由来 */
+  .edm{position:relative;background:var(--white);border:1px solid var(--line);border-radius:6px;padding:24px 24px 20px;box-shadow:0 30px 60px -34px rgba(28,26,23,.36);animation:edmFloat 6s ease-in-out infinite,cfvUp .7s var(--easing,cubic-bezier(.2,.7,.3,1)) .1s both}
+  .edm-annot{position:absolute;top:-11px;right:28px;z-index:6;font-family:var(--mincho);font-style:italic;font-size:11.5px;color:var(--accent);letter-spacing:.02em;background:var(--paper);padding:2px 9px;border:1px solid var(--accent);border-radius:14px;transform:rotate(-2deg)}
+  .edm-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+  .edm-bar .dt{font-family:var(--mincho);font-weight:600;font-size:14.5px;color:var(--ink);letter-spacing:.04em}
+  .edm-bar .dtag{font-size:10.5px;letter-spacing:.14em;color:var(--accent);font-weight:700;border:1px solid var(--accent);border-radius:2px;padding:3px 9px;white-space:nowrap}
+  .edm-rule{height:2px;background:var(--accent);border-radius:2px;transform-origin:left;animation:edmLine .9s var(--easing,cubic-bezier(.2,.7,.3,1)) .35s both;margin-bottom:15px}
+  .edm-cols{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:stretch}
+  .edm-panel{position:relative;border-radius:4px;overflow:hidden}
+  .edm-panel .plab{position:absolute;top:8px;left:8px;z-index:3;font-size:10px;font-weight:700;letter-spacing:.12em;padding:3px 8px;border-radius:2px}
+  .edm-before{background:#efeae1;border:1px solid #ddd4c4;padding:10px;display:flex;flex-direction:column}
+  .edm-before .plab{background:#cabfa9;color:#5c5443}
+  .edm-before .bshot{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/3;margin-bottom:9px}
+  .edm-before .bshot img{width:100%;height:100%;object-fit:cover}
+  .edm-before .bcap{font-family:var(--gothic);font-weight:700;font-size:12px;color:#6c655b;line-height:1.5;margin-bottom:3px}
+  .edm-before .bcapsub{font-size:10.5px;color:var(--soft2);letter-spacing:.02em}
+  .edm-after{background:var(--white);border:1px solid var(--line);padding:10px;display:flex;flex-direction:column}
+  .edm-after .plab{background:var(--accent);color:#fff}
+  .edm-after .big{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:4/3;margin-bottom:9px}
+  .edm-after .big img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--easing,cubic-bezier(.2,.7,.3,1))}
+  .edm:hover .edm-after .big img{transform:scale(1.04)}
+  .edm-after .cap{font-family:var(--mincho);font-weight:600;font-size:12.5px;color:var(--ink);line-height:1.5;margin-bottom:3px}
+  .edm-after .capsub{font-size:10.5px;color:var(--soft);letter-spacing:.02em}
+  .edm-cmk{position:absolute;width:13px;height:13px;z-index:4;pointer-events:none}
+  .edm-cmk::before,.edm-cmk::after{content:"";position:absolute;background:var(--accent)}
+  .edm-cmk::before{width:13px;height:1.5px}.edm-cmk::after{height:13px;width:1.5px}
+  .edm-cmk.tl{top:5px;left:5px}.edm-cmk.tl::before{top:0;left:0}.edm-cmk.tl::after{top:0;left:0}
+  .edm-cmk.tr{top:5px;right:5px}.edm-cmk.tr::before{top:0;right:0}.edm-cmk.tr::after{top:0;right:0}
+  .edm-cmk.bl{bottom:5px;left:5px}.edm-cmk.bl::before{bottom:0;left:0}.edm-cmk.bl::after{bottom:0;left:0}
+  .edm-cmk.br{bottom:5px;right:5px}.edm-cmk.br::before{bottom:0;right:0}.edm-cmk.br::after{bottom:0;right:0}
+  .edm-mid{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 6px 16px -6px rgba(28,26,23,.6)}
+  .edm-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+  .edm-foot .fl{font-size:11px;color:var(--soft);letter-spacing:.02em}
+  .edm-foot .fl b{color:var(--accent);font-weight:700}
+  .edm-note{font-size:10.5px;color:var(--soft2);text-align:center;margin-top:11px;letter-spacing:.04em}
   .cfv-sample-link{margin-top:22px;font-size:14px}
   .cfv-sample-link a{font-weight:700;color:var(--accent-d);border-bottom:1px solid var(--accent);padding-bottom:2px;transition:color .25s}
   .cfv-sample-link a:hover{color:var(--ink)}
@@ -711,11 +753,15 @@
     .cfv-hero{padding:96px 0 32px}
     .cfv-grid{display:flex;flex-direction:column;gap:0;grid-template-areas:none}
     .cfv-intro{order:1}
-    .cfv-aside{order:2;margin-top:20px}
+    .cfv-aside{order:2;margin-top:26px}
+    .edm{padding:18px 16px 16px}
+    .edm-cols{gap:10px}
+    .edm-bar .dt{font-size:13px}
+    .edm-annot{right:14px}
     .cfv-h1{font-size:clamp(26px,7vw,36px);line-height:1.32}
     .cfv-sub{font-size:13.5px;line-height:1.75;margin-top:14px;max-width:none}
-    /* ②修正：SPはCTA縦積み・折返し禁止 */
-    .cfv-acts{flex-direction:column;align-items:stretch;gap:10px;margin-top:0}
+    /* ②修正：SPはCTA縦積み・折返し禁止（intro内に移動したため上余白を確保） */
+    .cfv-acts{flex-direction:column;align-items:stretch;gap:10px;margin-top:20px}
     .cfv-acts .fh-d3-btn,.cfv-acts .cfv-line{width:100%;justify-content:center;white-space:nowrap}
   }
   @media(max-width:380px){
@@ -775,8 +821,6 @@
       <h1 class="cfv-h1">いい仕事は、<span class="em">見せ方</span>で伝わる。<br>作り直す前に、見せ方だけ整える。</h1>
       <p class="cfv-sub">中小事業のための「見せ方を整える編集室」。HP・Instagram・Googleマップ・写真から、実物の良さが伝わる1ページへ。HPがなくても、まずは<b>無料相談</b>で方向性と合いそうなプラン目安までお返しします。</p>
       <p class="cfv-sample-link"><a href="sample.html" data-cta="sample-gallery">完成HPサンプルを見る <span class="arw">→</span></a><span class="nt">3業種・すべて架空サンプルです</span></p>
-    </div>
-    <div class="cfv-aside">
       <div class="cfv-acts">
         <a href="#contact" class="fh-d3-btn" data-cta="free-consult">写真・URLで相談する <span class="arw">→</span></a>
         <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="cfv-line" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
@@ -788,6 +832,50 @@
       </div>
       <p class="cfv-fine">— 無料相談は方向性とプラン目安まで。見るだけでも大丈夫です。（<a href="#pricing" class="textlink">料金へ →</a>）</p>
     </div>
+    <div class="cfv-aside">
+      <!-- 編集デモカード：同じ一皿を「スマホでそのまま」と「一眼＋見せ方」で対比（どちらも自社撮影の表現サンプル。店名は出さない） -->
+      <div class="edm" aria-label="同じ一皿でも、撮り方でこう変わる（実演デモ）">
+        <span class="edm-annot" aria-hidden="true">同じ一皿です</span>
+        <div class="edm-bar">
+          <span class="dt">同じ一皿でも、撮り方でこう変わる。</span>
+          <span class="dtag">編集 / EDIT</span>
+        </div>
+        <div class="edm-rule" aria-hidden="true"></div>
+        <div class="edm-cols">
+          <div class="edm-panel edm-before" aria-label="ビフォー：スマホでそのまま撮った焼き鳥の写真">
+            <span class="plab">BEFORE</span>
+            <div class="bshot">
+              <picture>
+                <source srcset="img/home/demo-yakitori-before.webp" type="image/webp">
+                <img src="img/home/demo-yakitori-before.jpg" alt="スマホでそのまま撮った焼き鳥の写真">
+              </picture>
+            </div>
+            <p class="bcap">スマホで、そのまま。</p>
+            <span class="bcapsub">— 記録には十分。でも、主役になれていない</span>
+          </div>
+          <div class="edm-panel edm-after" aria-label="アフター：一眼で撮って見せ方を整えた同じ焼き鳥">
+            <span class="plab">AFTER</span>
+            <div class="big">
+              <span class="edm-cmk tl" aria-hidden="true"></span>
+              <span class="edm-cmk tr" aria-hidden="true"></span>
+              <span class="edm-cmk bl" aria-hidden="true"></span>
+              <span class="edm-cmk br" aria-hidden="true"></span>
+              <picture>
+                <source srcset="img/home/demo-yakitori.webp" type="image/webp">
+                <img src="img/home/demo-yakitori.jpg" alt="一眼で撮り、余白とトリミングで主役にした同じ焼き鳥">
+              </picture>
+            </div>
+            <p class="cap">炭の香りまで、伝わる一皿。</p>
+            <span class="capsub">— 光・寄り・余白で「主役」にする</span>
+          </div>
+          <div class="edm-mid" aria-hidden="true">→</div>
+        </div>
+        <div class="edm-foot">
+          <span class="fl">どちらも自社撮影。違いは<b>撮り方と見せ方</b>だけ。</span>
+        </div>
+        <p class="edm-note">表現サンプル（自社撮影）／実在クライアント・実在店舗ではありません<br>※ 撮影は STANDARD / PREMIUM プランに含まれます（BASIC は撮影なし）</p>
+      </div>
+    </div>
   </div>
 </section>
 <nav class="fh-d3-teaser" aria-label="ページ内ガイド">
@@ -798,6 +886,52 @@
   </div>
 </nav>
 <div class="fh-d3-bridge" aria-hidden="true"></div>
+
+<!-- 業種別サンプルHP（pet/food/car）— 大カード型。2026-06 集客改善でFV直下へ移設（クリック前にサンプルをチラ見せ＝証明の先出し）-->
+<section class="sec" id="industry-samples" style="background:var(--sand-d);padding-top:72px;padding-bottom:88px">
+  <div class="wrap">
+    <span class="eyebrow">Industry samples</span>
+    <h2 class="title">作れる幅を、先に見てください。</h2>
+    <p class="sub-lead">ペット・飲食・車関連の3業種で、実際に動く完成HPサンプルを用意しました。世界観が違っても、軸は「実物の良さを、写真と余白で伝える」こと。スマホでもPCでも、本物のHPと同じように動きます。</p>
+    <div class="samples-note" style="margin:18px 0 26px;text-align:left;background:rgba(255,255,255,.58);border:1px solid var(--line);padding:16px 18px;border-radius:8px">
+      <b style="color:var(--ink)">どれを見るか迷ったら：</b>
+      相談しやすさ・不安解消は「ペット」、品と写真・予約導線は「飲食」、技術表現・強い写真表現は「車」をご覧ください。
+    </div>
+    <div class="is-grid">
+      <article class="is-card reveal">
+        <div class="is-photo"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）"></div>
+        <div class="is-meta">
+          <div class="is-num">01 — Pet Service</div>
+          <h3 class="is-title"><small>うちのこ通い帳 SAMPLE</small>お預かりの一日を通い帳でお返しするサンプル。</h3>
+          <p class="is-desc">やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプル HP です。</p>
+          <a href="sample-pet.html" class="is-link" data-cta="sample-pet">完成HPを開く →</a>
+        </div>
+      </article>
+      <article class="is-card reveal">
+        <div class="is-photo"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）"></div>
+        <div class="is-meta">
+          <div class="is-num">02 — Restaurant</div>
+          <h3 class="is-title"><small>夜小路 SAMPLE</small>七席だけの季節のおまかせサンプル。</h3>
+          <p class="is-desc">明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプル HP です。</p>
+          <a href="sample-food.html" class="is-link" data-cta="sample-food">完成HPを開く →</a>
+        </div>
+      </article>
+      <article class="is-card reveal">
+        <div class="is-photo"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）"></div>
+        <div class="is-meta">
+          <div class="is-num">03 — Car & Bike</div>
+          <h3 class="is-title"><small>GRAPHIC EDITION SAMPLE</small>一台のこだわりを相談につなげるサンプル。</h3>
+          <p class="is-desc">黒×赤・大型欧文・スクロールで姿を変える粒子演出。「え、こんなことできるの」を作る方向。架空サンプル HP です。</p>
+          <a href="sample-car.html" class="is-link" data-cta="sample-car">完成HPを開く →</a>
+        </div>
+      </article>
+    </div>
+    <p class="samples-note">※ 3つとも架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。ナンバープレートはサンプル制作上、塗りつぶし処理しています。</p>
+  </div>
+</section>
+
+<!-- #sample-detail 後方互換アンカー（旧リンク/LINEリッチメニュー対応・業種別サンプルへ誘導）-->
+<section id="sample-detail" style="height:0;overflow:hidden;scroll-margin-top:80px" aria-hidden="true"></section>
 
 <!-- COMPARE：1行に縮小（詳しい比較はFAQへ吸収）。旧「無料の改善案から」の不整合を除去 -->
 <section class="sec cand-compare" id="compare">
@@ -992,51 +1126,7 @@
   </div>
 </section>
 
-<!-- 業種別サンプルHP（pet/food/car）— 大カード型（mock-d 由来）-->
-<section class="sec" id="industry-samples" style="background:var(--sand-d);padding-top:80px;padding-bottom:96px">
-  <div class="wrap">
-    <span class="eyebrow">Industry samples</span>
-    <h2 class="title">業種別の、完成HPサンプル。</h2>
-    <p class="sub-lead">ペット・飲食・車関連の3業種で、実際に動く完成HPサンプルを用意しました。スマホでもPCでも、本物のHPと同じように動きます。気になる業種を選んでご覧ください。</p>
-    <div class="samples-note" style="margin:18px 0 26px;text-align:left;background:rgba(255,255,255,.58);border:1px solid var(--line);padding:16px 18px;border-radius:8px">
-      <b style="color:var(--ink)">どれを見るか迷ったら：</b>
-      相談しやすさ・不安解消は「ペット」、品と写真・予約導線は「飲食」、技術表現・強い写真表現は「車」をご覧ください。
-    </div>
-    <div class="is-grid">
-      <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）"></div>
-        <div class="is-meta">
-          <div class="is-num">01 — Pet Service</div>
-          <h3 class="is-title"><small>うちのこ通い帳 SAMPLE</small>お預かりの一日を通い帳でお返しするサンプル。</h3>
-          <p class="is-desc">やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプル HP です。</p>
-          <a href="sample-pet.html" class="is-link" data-cta="sample-pet">完成HPを開く →</a>
-        </div>
-      </article>
-      <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）"></div>
-        <div class="is-meta">
-          <div class="is-num">02 — Restaurant</div>
-          <h3 class="is-title"><small>夜小路 SAMPLE</small>七席だけの季節のおまかせサンプル。</h3>
-          <p class="is-desc">明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプル HP です。</p>
-          <a href="sample-food.html" class="is-link" data-cta="sample-food">完成HPを開く →</a>
-        </div>
-      </article>
-      <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）"></div>
-        <div class="is-meta">
-          <div class="is-num">03 — Car & Bike</div>
-          <h3 class="is-title"><small>RED HORSE TOKYO SAMPLE</small>一台のこだわりを相談につなげるサンプル。</h3>
-          <p class="is-desc">黒×赤・大型欧文・実車写真で「迫力と編集感」を作る方向。架空サンプル HP です。</p>
-          <a href="sample-car.html" class="is-link" data-cta="sample-car">完成HPを開く →</a>
-        </div>
-      </article>
-    </div>
-    <p class="samples-note">※ 3つとも架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。ナンバープレートはサンプル制作上、塗りつぶし処理しています。</p>
-  </div>
-</section>
-
-<!-- #sample-detail 後方互換アンカー（旧リンク/LINEリッチメニュー対応・業種別サンプルへ誘導）-->
-<section id="sample-detail" style="height:0;overflow:hidden;scroll-margin-top:80px" aria-hidden="true"></section>
+<!-- 業種別サンプルHP は 2026-06 集客改善で FV直下（黒帯直後）へ移設（証明の先出し） -->
 
 <!-- PRICING -->
 <section class="sec" id="pricing">
@@ -1185,18 +1275,10 @@
 
 <!-- ABOUT -->
 <section class="sec" id="about">
-  <div class="wrap about-grid">
-    <figure class="about-photo">
-      <!-- TODO: 一眼ポートレートに差し替え（4:5推奨・現場感のある実写） -->
-      <svg viewBox="0 0 400 500" role="img" aria-label="ポートレート写真（準備中）">
-        <rect width="400" height="500" fill="#ece6dc"/>
-        <circle cx="200" cy="190" r="80" fill="#d9cfbf"/>
-        <path d="M58 500 C58 372 122 330 200 330 C278 330 342 372 342 500 Z" fill="#d9cfbf"/>
-        <text x="200" y="468" text-anchor="middle" font-family="sans-serif" font-size="15" letter-spacing="3" fill="#a89b86">PORTRAIT</text>
-      </svg>
-      <figcaption>撮影準備中</figcaption>
-    </figure>
-    <div>
+  <!-- 2026-06 集客改善：人物写真の仮枠を撤去（本人写真は掲載しない方針）。文章主役の「編集室カード」型へ -->
+  <div class="who-wrap">
+    <div class="who-card reveal">
+      <span class="who-tab" aria-hidden="true">The Editorial Room</span>
       <span class="eyebrow">Who</span>
       <h2 class="title mincho" style="font-weight:600">ひとりで、一つひとつの商いに向き合います。</h2>
       <p>大きな制作会社ではありません。だからこそ、写真の選び方からスマホの導線、ことばの一つひとつまで、あなたの「いい仕事」が伝わるように手を動かします。</p>
@@ -1221,7 +1303,6 @@
     </div>
   </div>
 </section>
-
 <!-- FINAL CTA -->
 <section class="sec bg-sand final">
   <div class="wrap">
