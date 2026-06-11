@@ -52,7 +52,7 @@
     --maxw:1180px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:84px}
   body{font-family:var(--gothic);color:var(--ink2);background:var(--paper);line-height:1.85;-webkit-font-smoothing:antialiased;font-size:16px;overflow-x:hidden}
   img{max-width:100%;display:block}
   a{color:inherit;text-decoration:none}
@@ -281,7 +281,7 @@
   .form .row{margin-bottom:17px}
   .form label{display:block;font-size:12.5px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;color:var(--ink2)}
   .form label .opt{color:var(--soft2);font-weight:400;font-size:11.5px}
-  .form input,.form textarea{width:100%;border:1px solid var(--line);background:var(--white);border-radius:3px;padding:14px 15px;font-size:15px;font-family:inherit;color:var(--ink);transition:.2s}
+  .form input,.form textarea{width:100%;border:1px solid var(--line);background:var(--white);border-radius:3px;padding:14px 15px;font-size:16px;font-family:inherit;color:var(--ink);transition:.2s}
   .form input:focus,.form textarea:focus{outline:none;border-color:var(--accent)}
   .form textarea{min-height:100px;resize:vertical}
   .form .btn-ink{width:100%;margin-top:4px;justify-content:center}
@@ -450,6 +450,10 @@
     .smp-grid{grid-template-columns:1fr;gap:22px}
     .sd-ba{grid-template-columns:1fr;gap:18px}
     .flow-grid{grid-template-columns:1fr 1fr;gap:28px 16px}.flow::after{display:none}
+  }
+  @media(max-width:880px){
+    body{padding-bottom:64px}
+    .mcta{display:flex}
   }
   @media(max-width:600px){
     body{padding-bottom:64px}
@@ -656,6 +660,7 @@
   .is-desc{font-family:var(--gothic);font-size:14px;color:var(--ink2);line-height:2;margin-top:18px}
   .is-link{margin-top:26px;font-family:var(--mincho);font-weight:500;font-size:14.5px;letter-spacing:.04em;color:var(--accent-d);display:inline-flex;align-items:center;gap:11px;border-bottom:1px solid var(--accent);padding-bottom:5px;align-self:flex-start;transition:gap .25s cubic-bezier(.16,1,.3,1),color .25s}
   .is-card:hover .is-link{gap:16px;color:var(--ink)}
+  .is-link::after{content:"";position:absolute;inset:0}
   @media(max-width:880px){
     .is-card{grid-template-columns:1fr}
     .is-meta{padding:30px 26px}
@@ -797,7 +802,7 @@
       <span class="logo-dot" aria-hidden="true"></span>
       <span class="logo-wrap">
         <span class="mk">MISERU</span>
-        <span class="sb">— The Editorial Room</span>
+        <span class="sb">ミセル｜見せ方を整える編集室</span>
       </span>
     </a>
     <nav class="nav">
@@ -831,12 +836,12 @@
   <div class="fh-d3-grid-bg" aria-hidden="true"></div>
   <div class="cfv-grid">
     <div class="cfv-intro">
-      <span class="fh-d3-eyebrow">MISERU — Editorial Room</span>
-      <h1 class="cfv-h1">いい仕事は、<span class="em">見せ方</span>で伝わる。<br>作り直す前に、見せ方だけ整える。</h1>
-      <p class="cfv-sub">中小事業のための「見せ方を整える編集室」。HP・Instagram・Googleマップ・写真から、実物の良さが伝わる1ページへ。HPがなくても、まずは<b>無料相談</b>で方向性と合いそうなプラン目安までお返しします。</p>
-      <p class="cfv-sample-link"><a href="sample.html" data-cta="sample-gallery">完成HPサンプルを見る <span class="arw">→</span></a><span class="nt">3業種・すべて架空サンプルです</span></p>
+      <span class="fh-d3-eyebrow">中小事業のための、見せ方を整える編集室</span>
+      <h1 class="cfv-h1">いい仕事は、<span class="em">見せ方</span>で伝わる。<br>作り直す前に、“相談されるHP”へ。</h1>
+      <p class="cfv-sub">HP・Instagram・Googleマップ・写真の“見せ方”を直して、問い合わせにつなげます。HPがなくても大丈夫。まずは<b>無料相談</b>で、どこを直すと良くなりそうかと、費用のだいたいの目安をお返しします。</p>
+      <p class="cfv-sample-link"><a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る <span class="arw">→</span></a><span class="nt">3業種・すべて架空サンプルです</span></p>
       <div class="cfv-acts">
-        <a href="#contact" class="fh-d3-btn" data-cta="free-consult">写真・URLで相談する <span class="arw">→</span></a>
+        <a href="#contact" class="fh-d3-btn" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
         <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="cfv-line" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
       </div>
       <div class="cfv-trust">
@@ -889,8 +894,8 @@
 <nav class="fh-d3-teaser" aria-label="ページ内ガイド">
   <div class="fh-d3-teaser-row">
     <a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る <span class="fh-d3-ta">→</span></a>
-    <a href="#industry-samples" data-cta="sample-guide">どれを見るか迷ったら <span class="fh-d3-ta">→</span></a>
-    <a href="#contact" data-cta="free-consult">写真・URLで相談する <span class="fh-d3-ta">→</span></a>
+    <a href="#pricing" data-cta="pricing-teaser">料金を先に見る <span class="fh-d3-ta">→</span></a>
+    <a href="#contact" data-cta="free-consult">無料で相談する <span class="fh-d3-ta">→</span></a>
   </div>
 </nav>
 <div class="fh-d3-bridge" aria-hidden="true"></div>
@@ -899,7 +904,7 @@
 <section class="sec" id="industry-samples" style="background:var(--sand-d);padding-top:72px;padding-bottom:88px">
   <div class="wrap">
     <span class="eyebrow">Industry samples</span>
-    <h2 class="title">作れる幅を、先に見てください。</h2>
+    <h2 class="title">あなたの業種が、どう見えるようになるか。</h2>
     <p class="sub-lead">ペット・飲食・車関連の3業種で、実際に動く完成HPサンプルを用意しました。世界観が違っても、軸は「実物の良さを、写真と余白で伝える」こと。スマホでもPCでも、本物のHPと同じように動きます。</p>
     <div class="samples-note" style="margin:18px 0 26px;text-align:left;background:rgba(255,255,255,.58);border:1px solid var(--line);padding:16px 18px;border-radius:8px">
       <b style="color:var(--ink)">どれを見るか迷ったら：</b>
@@ -907,7 +912,7 @@
     </div>
     <div class="is-grid">
       <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/pet/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）"></div>
+        <div class="is-photo"><img src="img/samples/pet/optimized/pet-hero.jpg" alt="ペットサービス業向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></div>
         <div class="is-meta">
           <div class="is-num">01 — Pet Service</div>
           <h3 class="is-title"><small>うちのこ通い帳 SAMPLE</small>お預かりの一日を通い帳でお返しするサンプル。</h3>
@@ -916,7 +921,7 @@
         </div>
       </article>
       <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/food/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）"></div>
+        <div class="is-photo"><picture><source srcset="img/samples/food/optimized/food-hero.webp" type="image/webp"><img src="img/samples/food/optimized/food-hero.jpg" alt="飲食店向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></picture></div>
         <div class="is-meta">
           <div class="is-num">02 — Restaurant</div>
           <h3 class="is-title"><small>夜小路 SAMPLE</small>七席だけの季節のおまかせサンプル。</h3>
@@ -925,7 +930,7 @@
         </div>
       </article>
       <article class="is-card reveal">
-        <div class="is-photo"><img src="img/samples/car/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）"></div>
+        <div class="is-photo"><picture><source srcset="img/samples/car/optimized/car-hero.webp" type="image/webp"><img src="img/samples/car/optimized/car-hero.jpg" alt="車関連業向け完成HPサンプル（架空サンプル）" loading="lazy" decoding="async"></picture></div>
         <div class="is-meta">
           <div class="is-num">03 — Car & Bike</div>
           <h3 class="is-title"><small>GRAPHIC EDITION SAMPLE</small>一台のこだわりを相談につなげるサンプル。</h3>
@@ -934,7 +939,7 @@
         </div>
       </article>
     </div>
-    <p class="samples-note">※ 3つとも架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。ナンバープレートはサンプル制作上、塗りつぶし処理しています。</p>
+    <p class="samples-note">※ 3つとも架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。ナンバープレートはサンプル制作上、塗りつぶし処理しています。<br>※ MISERUは開業準備中で、お客様の実績はまだありません。だからこそ実在のお客様を一切装わず、架空と明記した3業種ぶんのサンプルを本気で作りました。<b>仕事の質は、ここで確かめてください。</b>このサイト自体も、MISERUの“見せ方”の実物です。</p>
   </div>
 </section>
 
@@ -944,8 +949,8 @@
 <!-- MISS：見られているのに相談されていない（痛みチェック→前向き着地。煽りにしない）-->
 <section class="sec" id="miss">
   <div class="wrap">
-    <span class="eyebrow">Maybe</span>
-    <h2 class="title">見られているのに、<br>相談されていないHPへ。</h2>
+    <span class="eyebrow">Check</span>
+    <h2 class="title">見られているのに、<br>相談が来ない。心当たりは？</h2>
     <p class="sub-lead">実力の問題ではなく、“見え方”で問い合わせを逃していることがあります。あてはまる項目があれば、その1ページから一緒に整えられます。</p>
     <div class="miss-grid stagger">
       <div class="miss-item reveal"><span class="mk">01</span><p>写真が小さく、実物の良さが伝わっていない</p></div>
@@ -1057,7 +1062,7 @@
         <h3>まずは<span class="em">“見立て”</span>から。作り直しは、その先です。</h3>
         <p>いきなり作り直すのではなく、初回見立てシート（¥9,800〜）で1ページ分だけ、写真の見せ方・見出し・問い合わせ導線を整理して紙面にまとめます。<b>無料相談は、方向性と合いそうなプラン目安まで。</b>具体的な改善案・ラフは、この初回見立てシートから対応します。</p>
         <div class="smp-cta">
-          <a href="#contact" class="btn btn-ink" data-cta="free-consult">写真・URLで相談する<span class="arw">→</span></a>
+          <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料で見せ方を相談する<span class="arw">→</span></a>
           <a href="#industry-samples" class="textlink" data-cta="sample-gallery">完成HPサンプルを見る</a>
         </div>
         <p class="smp-annot">
@@ -1119,6 +1124,12 @@
     </div>
     <p class="price-foot">具体的な改善案・文章案・写真選定・レイアウト案は、<b>初回見立てシート（¥9,800〜）から対応しています。</b>無料相談は方向性のお返事のみです。<br>※ <b>写真がある方も、ない方も大丈夫です。</b>写真が揃っている方は BASIC、または撮影分 −¥100,000 の STANDARD / PREMIUM をご提案します。<br>※ <b>無料相談・初回見立てシートに撮影は含まれません。</b>撮影が必要な場合は STANDARD / PREMIUM、または追加撮影（+¥120,000〜）をご検討ください。<br>※ お支払いは着手時50%・公開時50%です。<br>※ 納期は撮影日程・素材状況により前後します。金額は内容により前後し、確定見積もりは初回見立てシート以降でお出しします。</p>
 
+    <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:26px">
+      <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料相談で目安を聞く <span class="arw">→</span></a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-line" data-cta="line-consult">LINEで相談する <span class="arw">→</span></a>
+    </div>
+    <p style="margin-top:10px;font-size:11.5px;color:var(--soft)">¥0・入力1分・しつこい営業はしません。</p>
+
     <!-- G-6 モニター枠（要記入）：価格が決まったら hidden を外して有効化 -->
     <div class="monitor-band" hidden aria-hidden="true" style="margin-top:34px;padding:24px 26px;background:var(--white);border:1px solid var(--accent);border-radius:8px">
       <p style="font-size:11px;font-weight:700;letter-spacing:.13em;color:var(--accent-d);text-transform:uppercase">Monitor — 先着3社</p>
@@ -1168,6 +1179,7 @@
       <details class="qa"><summary>LINEでも相談できますか？</summary><div class="a">はい、公式LINEで相談できます。<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer"><strong>こちらから友だち追加</strong></a>して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。</div></details>
       <!-- G-7（要確認）：返信速度を約束できる場合のみ、上のLINE回答に「LINEなら原則翌営業日までに一次返信します（無料相談の正式なお返事は2〜3営業日）」を追記して有効化 -->
       <details class="qa"><summary>補助金は使えますか？</summary><div class="a">小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。</div></details>
+      <p style="margin-top:30px">ここに無い疑問は、そのまま聞いてください。<a href="#contact" class="textlink" data-cta="free-consult">無料で相談する →</a></p>
     </div>
   </div>
 </section>
@@ -1250,7 +1262,7 @@
   <div class="wrap">
     <h2>まずは、1ページから<br>見せ方を相談してみませんか。</h2>
     <p>無料相談で、方向性と合いそうなプラン目安をお返しします。HP・Instagram・Googleマップ・写真だけでも、相談だけでも大丈夫です。</p>
-    <a href="#contact" class="btn btn-ink" data-cta="free-consult">写真・URLで相談する <span class="arw">→</span></a>
+    <a href="#contact" class="btn btn-ink" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
   </div>
 </section>
 
@@ -1284,23 +1296,24 @@
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2〜3営業日を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
       <div class="row">
-        <label>HP / Instagram / Googleマップ / 写真など <span class="opt">（任意・あると具体的になります）</span></label>
-        <input type="text" name="url" placeholder="https:// / Instagram URL / GoogleマップURL / 写真だけでもOK">
+        <label>お名前 / 事業者名</label>
+        <input type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" autocomplete="name" required>
       </div>
-      <p style="margin:-6px 0 14px;font-size:12.5px;line-height:1.8;color:var(--soft)">HPがない場合は、Instagram・Googleマップ・写真・メニュー表など、今あるものを教えてください。写真だけの場合はLINEでも大丈夫です。</p>
+      <div class="row">
+        <label>ご連絡先（メール）</label>
+        <input type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
+      </div>
+      <div class="row">
+        <label>HP / Instagram / Googleマップ など <span class="opt">（任意・あると具体的になります）</span></label>
+        <input type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
+      </div>
+      <p style="margin:-6px 0 14px;font-size:12.5px;line-height:1.8;color:var(--soft)">HPがなくても大丈夫です。<b>写真やスクショを送りたい方は、LINEのほうが早いです</b>（<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" style="border-bottom:1px solid var(--accent)">公式LINEを開く →</a>）。</p>
       <div class="row">
         <label>ひとこと <span class="opt">（任意）</span></label>
         <textarea name="message" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
       </div>
-      <div class="row">
-        <label>ご連絡先（メール）</label>
-        <input type="email" name="email" placeholder="example@email.com" required>
-      </div>
-      <div class="row">
-        <label>お名前 / 事業者名</label>
-        <input type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" required>
-      </div>
-      <button type="submit" class="btn btn-ink" data-cta="free-consult">写真・URLで相談する<span class="arw">→</span></button>
+      <button type="submit" class="btn btn-ink" data-cta="free-consult">無料相談を送信する<span class="arw">→</span></button>
+      <p style="margin-top:10px;font-size:11.5px;color:var(--soft)">送信後、2〜3営業日でお返事します。しつこい営業はしません。送信内容は<a href="privacy.html" style="border-bottom:1px solid var(--line)">プライバシーポリシー</a>に基づき扱います。</p>
     </form>
     <div id="form-result" aria-live="polite" style="display:none"></div>
   </div>
@@ -1400,13 +1413,13 @@
           res.innerHTML='<p style="padding:32px 0;font-family:var(--mincho);font-size:18px;color:var(--ink)">ありがとうございます。<br><span style="font-family:var(--gothic);font-size:14px;color:var(--soft);display:block;margin-top:10px">2〜3営業日以内にご連絡します。</span></p>';
         }else{
           btn.disabled=false;
-          btn.textContent='写真・URLで相談する →';
+          btn.textContent='無料で見せ方を相談する →';
           res.style.display='block';
           res.innerHTML='<p style="color:#c0392b;font-size:13px;padding:8px 0">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
         }
       }).catch(function(){
         btn.disabled=false;
-        btn.textContent='写真・URLで相談する →';
+        btn.textContent='無料で見せ方を相談する →';
         res.style.display='block';
         res.innerHTML='<p style="color:#c0392b;font-size:13px;padding:8px 0">送信に失敗しました。LINEまたは megabranbran@gmail.com に直接ご連絡ください。</p>';
       });
