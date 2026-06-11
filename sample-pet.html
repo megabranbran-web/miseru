@@ -457,6 +457,18 @@
     .hd-cta{padding:8px 12px;font-size:10.5px}
     .hd-cta::before{width:11px;height:11px}
   }
+
+  /* === 解説モード === */
+  .explain-toggle{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--ink);color:#fff;border:none;border-radius:99px;padding:12px 22px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(40,54,72,.28);transition:background .25s,transform .2s;font-family:var(--gothic);letter-spacing:0}
+  .explain-toggle:hover{transform:translateY(-2px)}
+  body.explain-on .explain-toggle{background:var(--coral-d)}
+  @media(max-width:640px){.explain-toggle{bottom:80px;right:12px;padding:10px 16px;font-size:12px}}
+  .ann-band{display:none}
+  body.explain-on .ann-band{display:block;background:#fff5f3;border-top:2px solid var(--coral);border-bottom:2px solid var(--coral);padding:18px 0}
+  .ann-in{display:flex;align-items:flex-start;gap:14px;max-width:880px;margin:0 auto;padding:0 24px}
+  .ann-circle{flex-shrink:0;width:34px;height:34px;background:var(--coral-d);color:#fff;border-radius:50%;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+  .ann-body{font-size:13px;line-height:1.8;color:var(--ink)}
+  .ann-body strong{display:block;color:var(--coral-d);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -514,6 +526,8 @@
     </div>
   </div>
 </section>
+
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>写真で第一印象を設計する</strong>テキストより先に大きな写真を届けて、「ここに預けたい」と感じてもらう。MISERUが最初に整えるのは"写真の見せ方"です。</div></div></div>
 
 <!-- === DIARY === -->
 <section class="sec diary" id="diary">
@@ -583,6 +597,8 @@
     </div>
   </div>
 </section>
+
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">02</div><div class="ann-body"><strong>現場感が「信頼」に変わる</strong>スタッフの一言メモと写真で「何をしているか」を見せる。実物の様子が伝わることが、問い合わせへの安心につながります。</div></div></div>
 
 <!-- === CHECK === -->
 <section class="sec check" id="check">
@@ -699,6 +715,8 @@
     <p class="price-foot">送迎は <b>+¥1,000 / 片道</b>（武蔵野市内）／投薬対応は <b>追加なし</b>。<br>連泊割引・多頭割引もあります。詳しくは LINE でお気軽にどうぞ。</p>
   </div>
 </section>
+
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">03</div><div class="ann-body"><strong>料金は「段階」と「根拠」で見せる</strong>コース別に並べることで「自分に合うもの」を選びやすくする。「1日4頭まで」という根拠が、料金の納得感を後押しします。</div></div></div>
 
 <!-- === FAQ === -->
 <section class="sec faq" id="faq">
@@ -830,6 +848,8 @@
   </div>
 </section>
 
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">04</div><div class="ann-body"><strong>LINEで1行が、相談のハードルを下げる</strong>「電話はいりません」のコピーと、LINE写真送信の手順。相談を始めることを極限まで簡単にする設計が、問い合わせ数を左右します。</div></div></div>
+
 <!-- === MISERU 帯 === -->
 <section class="miseru-band">
   <div class="wrap">
@@ -885,6 +905,18 @@
       if(icon){icon.textContent=isOpen?'＋':'−';}
     });
   });
+</script>
+<button class="explain-toggle" aria-pressed="false">解説モード</button>
+<script>
+(function(){
+  var btn=document.querySelector('.explain-toggle');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    var on=document.body.classList.toggle('explain-on');
+    btn.textContent=on?'解説 OFF':'解説モード';
+    btn.setAttribute('aria-pressed',String(on));
+  });
+})();
 </script>
 </body>
 </html>
