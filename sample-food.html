@@ -379,6 +379,18 @@
     .hd-cta{padding:9px 16px;font-size:10.5px;letter-spacing:.12em}
     .seats-q{font-size:18px}
   }
+
+  /* === 解説モード === */
+  .explain-toggle{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--gold);color:var(--bg);border:none;border-radius:99px;padding:12px 22px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:background .25s,transform .2s;font-family:var(--gothic);letter-spacing:.04em}
+  .explain-toggle:hover{transform:translateY(-2px);background:var(--gold-l)}
+  body.explain-on .explain-toggle{background:var(--gold-d);color:#fff}
+  @media(max-width:640px){.explain-toggle{bottom:84px;right:12px;padding:10px 16px;font-size:12px}}
+  .ann-band{display:none}
+  body.explain-on .ann-band{display:block;background:rgba(184,144,96,.10);border-top:1px solid var(--gold-d);border-bottom:1px solid var(--gold-d);padding:20px 0}
+  .ann-in{display:flex;align-items:flex-start;gap:14px;max-width:880px;margin:0 auto;padding:0 24px}
+  .ann-circle{flex-shrink:0;width:34px;height:34px;background:var(--gold);color:var(--bg);border-radius:50%;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px;font-family:var(--gothic)}
+  .ann-body{font-size:13px;line-height:1.85;color:var(--ink-soft)}
+  .ann-body strong{display:block;color:var(--gold-l);font-size:11px;font-weight:700;letter-spacing:.08em;margin-bottom:5px}
 </style>
 </head>
 <body>
@@ -421,6 +433,7 @@
     </div>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>写真で「無言の予約」を作る</strong>暗い背景に料理を一枚だけ浮かせ、文字を最小に。説明より先に「行きたい」と感じてもらうのが、飲食の見せ方の核です。</div></div></div>
 
 <!-- === QUICK INFO（早見表） === -->
 <div class="quick-info" aria-label="お店の早見表">
@@ -515,6 +528,7 @@
     </div>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">02</div><div class="ann-body"><strong>お品書きは、読ませず眺めさせる</strong>季節の小皿を縦に流し、価格は控えめに。高級店ほど値段を急がない見せ方で、敷居の高さを和らげます。</div></div></div>
 
 <!-- === RECENT (お料理の一例) === -->
 <section class="sec recent" id="recent">
@@ -543,6 +557,7 @@
     <p class="recent-foot">— これらは <b>見せ方サンプル用の献立例</b>です。実在店舗の提供実績ではありません。</p>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">03</div><div class="ann-body"><strong>「今日の様子」が信頼になる</strong>仕入れや一品の近況を一枚見せるだけで、生きている店だと伝わる。更新の気配が、予約の安心に変わります。</div></div></div>
 
 <!-- === SEATS (カウンター七席) === -->
 <section class="sec seats" id="seats">
@@ -579,6 +594,7 @@
     </div>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">04</div><div class="ann-body"><strong>席数の少なさを、価値に変える</strong>「七席だけ」を弱みでなく特別感として出す。数の根拠があると、予約のハードルがむしろ下がります。</div></div></div>
 
 <!-- === BOOK (料金と予約案内) === -->
 <section class="book" id="book">
@@ -614,6 +630,7 @@
     <p style="text-align:center;margin-top:24px;font-family:var(--italic);font-style:italic;font-size:11.5px;color:var(--ink-mute);letter-spacing:.06em">※ LINE ボタンはすべて MISERU 公式 LINE につながります（架空店舗の連絡先ではありません）。</p>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">05</div><div class="ann-body"><strong>電話より、LINEで一言</strong>「何名・何時」だけで始められる導線。予約の心理的ハードルを限界まで下げる設計が、取りこぼしを減らします。</div></div></div>
 
 <!-- === INFO (店舗情報) === -->
 <section class="info" id="info">
@@ -675,6 +692,18 @@
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
     document.querySelectorAll('.r,.stg').forEach(function(e){io.observe(e)});
   })();
+</script>
+<button class="explain-toggle" aria-pressed="false">解説モード</button>
+<script>
+(function(){
+  var btn=document.querySelector('.explain-toggle');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    var on=document.body.classList.toggle('explain-on');
+    btn.textContent=on?'解説 OFF':'解説モード';
+    btn.setAttribute('aria-pressed',String(on));
+  });
+})();
 </script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "488a9cb636c342efa6f8796ad615bf1c"}'></script><!-- End Cloudflare Web Analytics -->
 </body>

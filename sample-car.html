@@ -282,6 +282,18 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
   .card img{object-position:50% 35%}
   .card.hero img{object-position:50% 50%}
 }
+
+/* === 解説モード === */
+.explain-toggle{position:fixed;bottom:18px;left:14px;z-index:150;background:rgba(6,5,9,.6);color:var(--headlight);border:1px solid var(--line);border-radius:99px;padding:11px 20px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px);transition:background .25s,transform .2s,border-color .25s;font-family:var(--mono);letter-spacing:.12em}
+.explain-toggle:hover{transform:translateY(-2px);border-color:var(--signal)}
+body.explain-on .explain-toggle{background:var(--signal);border-color:var(--signal);color:#fff}
+@media(min-width:769px){.explain-toggle{bottom:62px;left:20px}}
+.ann-band{display:none}
+body.explain-on .ann-band{display:block;position:relative;z-index:3;background:rgba(255,30,45,.07);border-top:1px solid rgba(255,30,45,.3);border-bottom:1px solid rgba(255,30,45,.3);padding:20px 0;backdrop-filter:blur(4px)}
+.ann-in{display:flex;align-items:flex-start;gap:14px;max-width:880px;margin:0 auto;padding:0 24px}
+.ann-circle{flex-shrink:0;width:34px;height:34px;background:var(--signal);color:#fff;border-radius:50%;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px;font-family:var(--mono)}
+.ann-body{font-size:13px;line-height:1.85;color:var(--smoke)}
+.ann-body strong{display:block;color:var(--headlight);font-size:10px;font-weight:700;letter-spacing:.18em;margin-bottom:5px;font-family:var(--mono);text-transform:uppercase}
 </style>
 </head>
 <body>
@@ -348,6 +360,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
     <figure class="card"><img src="img/samples/car/optimized/car-owner-a.jpg" alt="ドアを上げた赤いスポーツカーの脇に座る人物" style="object-position:50% 100%"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>一台を「5つの見せ方」で</strong>同じ車でも、街・場所・ドアを開けた瞬間で伝わる物語が変わる。どの写真をどう並べるかが、問い合わせの質を決めます。</div></div></div>
 
 <!-- ================= STATEMENT ================= -->
 <section id="statement">
@@ -365,6 +378,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
     </div>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">02</div><div class="ann-body"><strong>引き算で、技術を語る</strong>全部盛らない提案こそ信頼。「やらないことを決める」姿勢を、ページ構成そのもので体現しています。</div></div></div>
 
 <!-- ================= PRICE ================= -->
 <section id="price">
@@ -395,6 +409,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
     <p class="muted rev" style="margin-top:20px;font-size:11.5px;line-height:2">※ 出張対応・特殊塗装・パーツ持込はご相談ください（架空例）。記載のない仕様も、まずはLINEでお話しさせていただきます。</p>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">03</div><div class="ann-body"><strong>料金は「例」を正直に分ける</strong>架空の料金表とMISERU自身の料金を明確に分離。誤認させない設計が、そのまま誠実さの証明になります。</div></div></div>
 
 <!-- ================= CASES ================= -->
 <section id="cases">
@@ -408,6 +423,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
     </div>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">04</div><div class="ann-body"><strong>相談例で「頼み方」を教える</strong>「何でもやります」より、3つの具体例。自分の状況を重ねられると、相談が生まれます。</div></div></div>
 
 <!-- ================= FILM SHOT ================= -->
 <section id="filmshot">
@@ -419,6 +435,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
     </figure>
   </div>
 </section>
+<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">05</div><div class="ann-body"><strong>一枚が、店の格を決める</strong>夜・ライトの構図に絞った一枚。演出の振り幅を見せることが「この人に任せたい」を作ります。</div></div></div>
 
 <!-- ================= CTA ================= -->
 <section id="contact">
@@ -861,6 +878,18 @@ if(canRun){
 }
 
 frame();
+})();
+</script>
+<button class="explain-toggle" aria-pressed="false">解説モード</button>
+<script>
+(function(){
+  var btn=document.querySelector('.explain-toggle');
+  if(!btn)return;
+  btn.addEventListener('click',function(){
+    var on=document.body.classList.toggle('explain-on');
+    btn.textContent=on?'解説 OFF':'解説モード';
+    btn.setAttribute('aria-pressed',String(on));
+  });
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "488a9cb636c342efa6f8796ad615bf1c"}'></script><!-- End Cloudflare Web Analytics -->
