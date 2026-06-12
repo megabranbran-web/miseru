@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -8,107 +8,173 @@
 <meta name="robots" content="noindex,follow">
 <!-- DOMAIN-MIGRATION: 独自ドメイン移行時に要書き換え（canonical） -->
 <link rel="canonical" href="https://miseru-web.pages.dev/tokushoho.html">
-<meta name="theme-color" content="#1c1a17">
+<meta name="theme-color" content="#1B1916">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#f6f3ee;--bg:#f6f3ee;--ink:#1c1a17;--ink2:#2f2a24;--soft:#6c655b;--soft2:#9a9286;--line:#dcd3c4;--accent:#b15c3c;--accent-d:#974b2f;--white:#fff;
---mincho:"Shippori Mincho",serif;--gothic:"Zen Kaku Gothic New",sans-serif}
+:root{
+  --ink:#1B1916;
+  --ink-2:#242019;
+  --paper:#F6F3ED;
+  --paper-2:#FBF9F4;
+  --shu:#D8321E;
+  --shu-deep:#B0260F;
+  --grey:#877F73;
+  --line:#DDD5C8;
+  --line-ink:rgba(246,243,237,.16);
+  --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif;
+  --sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--gothic);background:var(--bg);color:var(--ink);line-height:2;font-size:14.5px;-webkit-font-smoothing:antialiased}
-a{color:var(--accent-d);text-decoration:none}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ink);color:var(--ink);line-height:1.95;font-size:14.5px;-webkit-font-smoothing:antialiased}
+a{color:var(--shu-deep);text-decoration:none}
 a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);background:rgba(246,243,238,.94);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
-.hdr{max-width:880px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
-.hdr .mk{font-weight:700;letter-spacing:.18em;font-size:15px;color:var(--ink);display:flex;flex-direction:column;line-height:1.2}
-.hdr .mk small{font-weight:400;font-size:10.5px;letter-spacing:.06em;color:var(--soft);margin-top:3px}
-.hdr .bk{font-size:12.5px;font-weight:500}
-main{max-width:880px;margin:0 auto;padding:64px 24px 80px}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--accent-d);text-transform:uppercase}
-h1{font-family:var(--mincho);font-weight:600;font-size:clamp(22px,3.4vw,30px);letter-spacing:.04em;margin-top:14px;line-height:1.7}
-.lead{color:var(--soft);font-size:13.5px;margin-top:18px}
-table{width:100%;border-collapse:collapse;margin-top:40px;background:var(--white);border:1px solid var(--line);font-size:13.5px}
-th,td{padding:18px 20px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left;line-height:1.95}
-th{width:32%;background:#f1ece3;font-weight:700;font-size:13px;color:var(--ink)}
-tr:last-child th,tr:last-child td{border-bottom:0}
-.pending{color:var(--soft);font-size:12.5px}
-.note{margin-top:26px;font-size:12.5px;color:var(--soft);line-height:2}
-footer{border-top:1px solid var(--line);margin-top:40px}
-.ftr{max-width:880px;margin:0 auto;padding:26px 24px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;font-size:12px;color:var(--soft)}
+:focus-visible{outline:2px solid var(--shu);outline-offset:3px;border-radius:2px}
+
+/* ===== HEADER ===== */
+header{
+  background:rgba(27,25,22,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-ink);
+  position:sticky;top:0;z-index:50;
+}
+.hdr{max-width:880px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo{
+  font-family:var(--serif);font-weight:700;font-size:17px;color:var(--paper);
+  text-decoration:none;letter-spacing:.08em;display:flex;align-items:baseline;gap:9px;
+}
+.hdr-logo small{font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.16em;color:var(--grey)}
+.hdr-back{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--grey);
+  text-decoration:none;display:flex;align-items:center;gap:6px;
+}
+.hdr-back:hover{color:var(--paper);text-decoration:none}
+
+/* ===== MAIN ===== */
+main{background:var(--paper);padding:64px 24px 80px;min-height:calc(100vh - 60px - 72px)}
+.inner{max-width:840px;margin:0 auto}
+
+/* eyebrow / kicker */
+.kicker{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+  color:var(--shu);text-transform:uppercase;display:flex;align-items:center;gap:10px;
+}
+.kicker::before{content:"";width:24px;height:1px;background:var(--shu);flex-shrink:0}
+
+h1{
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(22px,3.2vw,29px);letter-spacing:.04em;
+  margin-top:14px;line-height:1.65;color:var(--ink);
+}
+.lead{color:var(--grey);font-size:13.5px;margin-top:16px;line-height:2}
+
+/* ===== TABLE ===== */
+.legal-table{width:100%;border-collapse:collapse;margin-top:44px;font-size:13.5px;border:1px solid var(--line)}
+.legal-table th,.legal-table td{
+  padding:18px 22px;border-bottom:1px solid var(--line);
+  vertical-align:top;text-align:left;line-height:1.95;
+}
+.legal-table th{
+  width:30%;background:var(--paper-2);
+  font-weight:700;font-size:12.5px;color:var(--ink-2);
+  border-left:3px solid var(--shu);
+}
+.legal-table td{background:#fff}
+.legal-table tr:last-child th,
+.legal-table tr:last-child td{border-bottom:0}
+.pending{color:var(--grey);font-size:12.5px}
+.pending::before{content:"▷ ";font-family:var(--mono);font-size:10px}
+
+.table-note{margin-top:26px;font-size:12.5px;color:var(--grey);line-height:2;padding-left:2px}
+
+@media(max-width:600px){
+  .legal-table th,.legal-table td{padding:14px 14px}
+  .legal-table th{width:36%}
+}
+
+/* ===== FOOTER ===== */
+footer{background:var(--ink);border-top:1px solid var(--line-ink)}
+.ftr{max-width:880px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;font-size:12px;color:var(--grey)}
 .ftr nav{display:flex;flex-wrap:wrap;gap:8px 18px}
-@media(max-width:640px){th{width:38%;padding:14px 12px}td{padding:14px 12px}}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.ftr a{color:var(--grey);text-decoration:none}
+.ftr a:hover{color:var(--paper)}
+.ftr a[aria-current="page"]{color:var(--paper);font-weight:700}
 </style>
 </head>
 <body>
 <header>
   <div class="hdr">
-    <a href="index.html" class="mk">MISERU<small>ミセル｜見せ方を整える編集室</small></a>
-    <a href="index.html" class="bk">← トップへ戻る</a>
+    <a href="index.html" class="hdr-logo">MISERU<small>見せ方を整える編集室</small></a>
+    <a href="index.html" class="hdr-back">← トップへ</a>
   </div>
 </header>
+
 <main>
-  <span class="eyebrow">Legal</span>
-  <h1>特定商取引法に基づく表記</h1>
-  <p class="lead">MISERU（ミセル）のサービス提供に関する、特定商取引法に基づく表記です。</p>
+  <div class="inner">
+    <p class="kicker">Legal</p>
+    <h1>特定商取引法に基づく表記</h1>
+    <p class="lead">MISERU（ミセル）のサービス提供に関する、特定商取引法に基づく表記です。</p>
 
-  <table>
-    <tr>
-      <th>事業者名</th>
-      <!-- 【開業届後に記入】事業者名（屋号） -->
-      <td><span class="pending">開業届提出後に記載します。</span></td>
-    </tr>
-    <tr>
-      <th>運営責任者</th>
-      <!-- 【開業届後に記入】運営責任者氏名 -->
-      <td><span class="pending">開業届提出後に記載します。</span></td>
-    </tr>
-    <tr>
-      <th>所在地</th>
-      <!-- 【開業届後に記入】所在地（請求があった場合は遅滞なく開示します、の形式も可） -->
-      <td><span class="pending">開業届提出後に記載します。ご請求があった場合は、遅滞なく開示します。</span></td>
-    </tr>
-    <tr>
-      <th>連絡先</th>
-      <!-- 【開業届後に記入】電話番号・メールアドレス -->
-      <td>メール：megabranbran@gmail.com<br>お問い合わせは<a href="index.html#contact">お問い合わせフォーム</a>または<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINE</a>からも受け付けています。<br><span class="pending">電話番号は、ご請求があった場合に遅滞なく開示します。</span></td>
-    </tr>
-    <tr>
-      <th>販売価格</th>
-      <td>各サービスの料金は<a href="index.html#pricing">料金ページ</a>に表示しています。<br>初回見立てシート ¥9,800〜／BASIC ¥98,000〜／STANDARD ¥298,000〜／PREMIUM ¥498,000〜／追加撮影 +¥120,000〜／継続更新 ¥9,800〜/月。<br>表示価格のほかに消費税がかかる場合は、お見積もり時に明示します。</td>
-    </tr>
-    <tr>
-      <th>販売価格以外の必要料金</th>
-      <td>撮影に伴う交通費・宿泊費が必要な場合は、事前にお見積もりでお伝えします。フォーム・LINEでのご相談に通信費以外の費用はかかりません。</td>
-    </tr>
-    <tr>
-      <th>お支払い方法・時期</th>
-      <!-- 要確認：支払い条件（着手時50%・公開時50%）は変更可 -->
-      <td>銀行振込。制作プランは着手時に50%、公開時に残り50%をお支払いいただきます。初回見立てシートは着手前のお支払いです。</td>
-    </tr>
-    <tr>
-      <th>役務の提供時期</th>
-      <td>目安納期：BASIC 2〜3週間〜／STANDARD 4〜6週間〜／PREMIUM 1.5〜2ヶ月〜／初回見立てシート 約1週間。撮影日程・素材状況により前後します。確定スケジュールはお見積もり時にお伝えします。</td>
-    </tr>
-    <tr>
-      <th>キャンセル・返金</th>
-      <td>役務の性質上、<b>着手後の返金はお受けできません</b>（初回見立てシートを含みます）。着手前のキャンセルは費用をいただきません。制作途中での中止をご希望の場合は、進行済みの工程分を精算のうえ終了します。納品物に当方起因の不備がある場合は、無償で修正します。</td>
-    </tr>
-    <tr>
-      <th>動作環境</th>
-      <td>納品するWebページは、主要ブラウザ（Chrome / Safari / Edge / Firefox）の最新版、およびiOS / Androidの標準ブラウザでの表示を確認します。著しく古い環境での表示は保証しかねます。</td>
-    </tr>
-  </table>
+    <table class="legal-table">
+      <tr>
+        <th scope="row">事業者名</th>
+        <!-- 【開業届後に記入】事業者名（屋号） -->
+        <td><span class="pending">開業届提出後に記載します。</span></td>
+      </tr>
+      <tr>
+        <th scope="row">運営責任者</th>
+        <!-- 【開業届後に記入】運営責任者氏名 -->
+        <td><span class="pending">開業届提出後に記載します。</span></td>
+      </tr>
+      <tr>
+        <th scope="row">所在地</th>
+        <!-- 【開業届後に記入】所在地（請求があった場合は遅滞なく開示します、の形式も可） -->
+        <td><span class="pending">開業届提出後に記載します。ご請求があった場合は、遅滞なく開示します。</span></td>
+      </tr>
+      <tr>
+        <th scope="row">連絡先</th>
+        <!-- 【開業届後に記入】電話番号・メールアドレス -->
+        <td>メール：<a href="mailto:megabranbran@gmail.com">megabranbran@gmail.com</a><br>お問い合わせは<a href="index.html#contact">お問い合わせフォーム</a>または<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINE</a>からも受け付けています。<br><span class="pending">電話番号は、ご請求があった場合に遅滞なく開示します。</span></td>
+      </tr>
+      <tr>
+        <th scope="row">販売価格</th>
+        <td>各サービスの料金は<a href="index.html#pricing">料金ページ</a>に表示しています。<br>初回見立てシート ¥9,800〜／BASIC ¥98,000〜／STANDARD ¥298,000〜／PREMIUM ¥498,000〜／追加撮影 +¥120,000〜／継続更新 ¥9,800〜/月。<br>表示価格のほかに消費税がかかる場合は、お見積もり時に明示します。</td>
+      </tr>
+      <tr>
+        <th scope="row">販売価格以外の必要料金</th>
+        <td>撮影に伴う交通費・宿泊費が必要な場合は、事前にお見積もりでお伝えします。フォーム・LINEでのご相談に通信費以外の費用はかかりません。</td>
+      </tr>
+      <tr>
+        <th scope="row">お支払い方法・時期</th>
+        <!-- 要確認：支払い条件（着手時50%・公開時50%）は変更可 -->
+        <td>銀行振込。制作プランは着手時に50%、公開時に残り50%をお支払いいただきます。初回見立てシートは着手前のお支払いです。</td>
+      </tr>
+      <tr>
+        <th scope="row">役務の提供時期</th>
+        <td>目安納期：BASIC 2〜3週間〜／STANDARD 4〜6週間〜／PREMIUM 1.5〜2ヶ月〜／初回見立てシート 約1週間。撮影日程・素材状況により前後します。確定スケジュールはお見積もり時にお伝えします。</td>
+      </tr>
+      <tr>
+        <th scope="row">キャンセル・返金</th>
+        <td>役務の性質上、<b>着手後の返金はお受けできません</b>（初回見立てシートを含みます）。着手前のキャンセルは費用をいただきません。制作途中での中止をご希望の場合は、進行済みの工程分を精算のうえ終了します。納品物に当方起因の不備がある場合は、無償で修正します。</td>
+      </tr>
+      <tr>
+        <th scope="row">動作環境</th>
+        <td>納品するWebページは、主要ブラウザ（Chrome / Safari / Edge / Firefox）の最新版、およびiOS / Androidの標準ブラウザでの表示を確認します。著しく古い環境での表示は保証しかねます。</td>
+      </tr>
+    </table>
 
-  <p class="note">※ 本表記のうち「開業届提出後に記載します」とある項目は、開業手続きの完了後すみやかに更新します。</p>
+    <p class="table-note">※ 本表記のうち「開業届提出後に記載します」とある項目は、開業手続きの完了後すみやかに更新します。</p>
+  </div>
 </main>
+
 <footer>
   <div class="ftr">
     <span>© MISERU（ミセル）</span>
     <nav>
       <a href="index.html">トップ</a>
-      <a href="tokushoho.html">特定商取引法に基づく表記</a>
+      <a href="tokushoho.html" aria-current="page">特定商取引法に基づく表記</a>
       <a href="privacy.html">プライバシーポリシー</a>
     </nav>
   </div>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -8,101 +8,171 @@
 <meta name="robots" content="noindex,follow">
 <!-- DOMAIN-MIGRATION: 独自ドメイン移行時に要書き換え（canonical） -->
 <link rel="canonical" href="https://miseru-web.pages.dev/privacy.html">
-<meta name="theme-color" content="#1c1a17">
+<meta name="theme-color" content="#1B1916">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#f6f3ee;--bg:#f6f3ee;--ink:#1c1a17;--ink2:#2f2a24;--soft:#6c655b;--soft2:#9a9286;--line:#dcd3c4;--accent:#b15c3c;--accent-d:#974b2f;--white:#fff;
---mincho:"Shippori Mincho",serif;--gothic:"Zen Kaku Gothic New",sans-serif}
+:root{
+  --ink:#1B1916;
+  --ink-2:#242019;
+  --paper:#F6F3ED;
+  --paper-2:#FBF9F4;
+  --shu:#D8321E;
+  --shu-deep:#B0260F;
+  --grey:#877F73;
+  --line:#DDD5C8;
+  --line-ink:rgba(246,243,237,.16);
+  --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho','Noto Serif JP',serif;
+  --sans:'Zen Kaku Gothic New','Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--gothic);background:var(--bg);color:var(--ink);line-height:2;font-size:14.5px;-webkit-font-smoothing:antialiased}
-a{color:var(--accent-d);text-decoration:none}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--ink);color:var(--ink);line-height:1.95;font-size:14.5px;-webkit-font-smoothing:antialiased}
+a{color:var(--shu-deep);text-decoration:none}
 a:hover{text-decoration:underline}
-header{border-bottom:1px solid var(--line);background:rgba(246,243,238,.94);backdrop-filter:blur(10px);position:sticky;top:0;z-index:50}
-.hdr{max-width:880px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
-.hdr .mk{font-weight:700;letter-spacing:.18em;font-size:15px;color:var(--ink);display:flex;flex-direction:column;line-height:1.2}
-.hdr .mk small{font-weight:400;font-size:10.5px;letter-spacing:.06em;color:var(--soft);margin-top:3px}
-.hdr .bk{font-size:12.5px;font-weight:500}
-main{max-width:880px;margin:0 auto;padding:64px 24px 80px}
-.eyebrow{font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--accent-d);text-transform:uppercase}
-h1{font-family:var(--mincho);font-weight:600;font-size:clamp(22px,3.4vw,30px);letter-spacing:.04em;margin-top:14px;line-height:1.7}
-.lead{color:var(--soft);font-size:13.5px;margin-top:18px}
-section{background:var(--white);border:1px solid var(--line);border-radius:6px;padding:28px 30px;margin-top:26px}
-section:first-of-type{margin-top:42px}
-h2{font-family:var(--mincho);font-weight:600;font-size:17px;letter-spacing:.04em;line-height:1.7}
-section p,section ul{margin-top:12px;font-size:13.5px;line-height:2.05}
-section ul{padding-left:1.4em}
-.note{margin-top:26px;font-size:12.5px;color:var(--soft);line-height:2}
-footer{border-top:1px solid var(--line);margin-top:40px}
-.ftr{max-width:880px;margin:0 auto;padding:26px 24px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;font-size:12px;color:var(--soft)}
+:focus-visible{outline:2px solid var(--shu);outline-offset:3px;border-radius:2px}
+
+/* ===== HEADER ===== */
+header{
+  background:rgba(27,25,22,.96);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-ink);
+  position:sticky;top:0;z-index:50;
+}
+.hdr{max-width:880px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.hdr-logo{
+  font-family:var(--serif);font-weight:700;font-size:17px;color:var(--paper);
+  text-decoration:none;letter-spacing:.08em;display:flex;align-items:baseline;gap:9px;
+}
+.hdr-logo small{font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.16em;color:var(--grey)}
+.hdr-back{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--grey);
+  text-decoration:none;display:flex;align-items:center;gap:6px;
+}
+.hdr-back:hover{color:var(--paper);text-decoration:none}
+
+/* ===== MAIN ===== */
+main{background:var(--paper);padding:64px 24px 80px;min-height:calc(100vh - 60px - 72px)}
+.inner{max-width:840px;margin:0 auto}
+
+/* eyebrow / kicker */
+.kicker{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+  color:var(--shu);text-transform:uppercase;display:flex;align-items:center;gap:10px;
+}
+.kicker::before{content:"";width:24px;height:1px;background:var(--shu);flex-shrink:0}
+
+h1{
+  font-family:var(--serif);font-weight:700;
+  font-size:clamp(22px,3.2vw,29px);letter-spacing:.04em;
+  margin-top:14px;line-height:1.65;color:var(--ink);
+}
+.lead{color:var(--grey);font-size:13.5px;margin-top:16px;line-height:2}
+
+/* ===== SECTIONS ===== */
+.pp-sec{
+  background:#fff;border:1px solid var(--line);border-left:3px solid var(--shu);
+  border-radius:0 4px 4px 0;padding:26px 28px;margin-top:24px;
+}
+.pp-sec:first-of-type{margin-top:44px}
+h2{
+  font-family:var(--serif);font-weight:700;font-size:16.5px;
+  letter-spacing:.04em;line-height:1.65;color:var(--ink);
+  display:flex;align-items:baseline;gap:10px;
+}
+h2 .sec-num{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  color:var(--shu);font-weight:400;flex-shrink:0;
+}
+.pp-sec p,.pp-sec ul{margin-top:12px;font-size:13.5px;line-height:2.05;color:var(--ink-2)}
+.pp-sec ul{padding-left:1.4em}
+.pp-sec li{margin-top:4px}
+
+.page-note{margin-top:26px;font-size:12.5px;color:var(--grey);line-height:2}
+
+@media(max-width:600px){.pp-sec{padding:20px 18px}}
+
+/* ===== FOOTER ===== */
+footer{background:var(--ink);border-top:1px solid var(--line-ink)}
+.ftr{max-width:880px;margin:0 auto;padding:22px 24px;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:space-between;font-size:12px;color:var(--grey)}
 .ftr nav{display:flex;flex-wrap:wrap;gap:8px 18px}
-@media(max-width:640px){section{padding:22px 18px}}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.ftr a{color:var(--grey);text-decoration:none}
+.ftr a:hover{color:var(--paper)}
+.ftr a[aria-current="page"]{color:var(--paper);font-weight:700}
 </style>
 </head>
 <body>
 <header>
   <div class="hdr">
-    <a href="index.html" class="mk">MISERU<small>ミセル｜見せ方を整える編集室</small></a>
-    <a href="index.html" class="bk">← トップへ戻る</a>
+    <a href="index.html" class="hdr-logo">MISERU<small>見せ方を整える編集室</small></a>
+    <a href="index.html" class="hdr-back">← トップへ</a>
   </div>
 </header>
+
 <main>
-  <span class="eyebrow">Privacy</span>
-  <h1>プライバシーポリシー</h1>
-  <p class="lead">MISERU（ミセル）は、ご相談・お見積もりにあたってお預かりする情報を、以下の方針で取り扱います。</p>
+  <div class="inner">
+    <p class="kicker">Privacy</p>
+    <h1>プライバシーポリシー</h1>
+    <p class="lead">MISERU（ミセル）は、ご相談・お見積もりにあたってお預かりする情報を、以下の方針で取り扱います。</p>
 
-  <section>
-    <h2>1. 取得する情報</h2>
-    <ul>
-      <li>お名前（屋号・店舗名を含みます）</li>
-      <li>メールアドレス</li>
-      <li>お問い合わせフォームに入力いただいた内容（HPのURL・写真・ご相談内容など）</li>
-      <li>公式LINEのトークで送っていただいた内容</li>
-    </ul>
-  </section>
+    <section class="pp-sec">
+      <h2><span class="sec-num">01.</span>取得する情報</h2>
+      <ul>
+        <li>お名前（屋号・店舗名を含みます）</li>
+        <li>メールアドレス</li>
+        <li>お問い合わせフォームに入力いただいた内容（HPのURL・写真・ご相談内容など）</li>
+        <li>公式LINEのトークで送っていただいた内容</li>
+      </ul>
+    </section>
 
-  <section>
-    <h2>2. 利用目的</h2>
-    <p>取得した情報は、次の目的にのみ利用します。</p>
-    <ul>
-      <li>ご相談への返信・やり取りのため</li>
-      <li>お見積もり・改善案の作成のため</li>
-      <li>サービス提供に必要な連絡のため</li>
-    </ul>
-  </section>
+    <section class="pp-sec">
+      <h2><span class="sec-num">02.</span>利用目的</h2>
+      <p>取得した情報は、次の目的にのみ利用します。</p>
+      <ul>
+        <li>ご相談への返信・やり取りのため</li>
+        <li>お見積もり・改善案の作成のため</li>
+        <li>サービス提供に必要な連絡のため</li>
+      </ul>
+    </section>
 
-  <section>
-    <h2>3. 第三者への提供</h2>
-    <p>法令に基づく場合を除き、ご本人の同意なく第三者に提供することはありません。</p>
-  </section>
+    <section class="pp-sec">
+      <h2><span class="sec-num">03.</span>第三者への提供</h2>
+      <p>法令に基づく場合を除き、ご本人の同意なく第三者に提供することはありません。</p>
+    </section>
 
-  <section>
-    <h2>4. 情報の保管</h2>
-    <p>お預かりした情報は、不正アクセス・紛失・漏えいを防ぐよう適切に管理します。利用目的を終えた情報は、合理的な期間ののち削除します。</p>
-  </section>
+    <section class="pp-sec">
+      <h2><span class="sec-num">04.</span>情報の保管</h2>
+      <p>お預かりした情報は、不正アクセス・紛失・漏えいを防ぐよう適切に管理します。利用目的を終えた情報は、合理的な期間ののち削除します。</p>
+    </section>
 
-  <section>
-    <h2>5. 外部サービスの利用</h2>
-    <p>お問い合わせフォームの送信には FormSubmit（海外事業者のサービス）を、LINEでのご相談には LINEヤフー株式会社のサービスを利用しています。各サービスにおける情報の取り扱いは、各社のプライバシーポリシーに従います。</p>
-    <p>当サイトでは、アクセス状況の把握のために Cloudflare Web Analytics を利用しています。Cookie を使用せず、個人を特定する情報は取得しません。</p>
-  </section>
+    <section class="pp-sec">
+      <h2><span class="sec-num">05.</span>外部サービスの利用</h2>
+      <p>お問い合わせフォームの送信には FormSubmit（海外事業者のサービス）を、LINEでのご相談には LINEヤフー株式会社のサービスを利用しています。各サービスにおける情報の取り扱いは、各社のプライバシーポリシーに従います。</p>
+      <p>フォントの読み込みに Google Fonts（Google LLC）を、サイトのホスティングおよびアクセス解析に Cloudflare, Inc. のサービス（Cloudflare Pages・Cloudflare Web Analytics）を利用しています。Cloudflare Web Analytics は Cookie を使用せず、個人を特定する情報は取得しません。</p>
+    </section>
 
-  <section>
-    <h2>6. 開示・訂正・削除のお求め</h2>
-    <p>ご自身の情報の開示・訂正・削除をご希望の場合は、<a href="index.html#contact">お問い合わせフォーム</a>または<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINE</a>からご連絡ください。すみやかに対応します。</p>
-  </section>
+    <section class="pp-sec">
+      <h2><span class="sec-num">06.</span>開示・訂正・削除のお求め</h2>
+      <p>ご自身の情報の開示・訂正・削除をご希望の場合は、<a href="index.html#contact">お問い合わせフォーム</a>または<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINE</a>からご連絡ください。すみやかに対応します。</p>
+    </section>
 
-  <p class="note">制定日：2026年6月10日<br>事業者名・運営責任者は<a href="tokushoho.html">特定商取引法に基づく表記</a>に記載します（開業届提出後に更新）。</p>
+    <section class="pp-sec">
+      <h2><span class="sec-num">07.</span>ポリシーの改訂</h2>
+      <p>本ポリシーは、法令の改正やサービス内容の変更に応じて予告なく改訂することがあります。改訂後は本ページに最新版を掲載します。重要な変更がある場合は、サイト上でお知らせします。</p>
+    </section>
+
+    <p class="page-note">制定日：2026年6月10日<br>事業者名・運営責任者は<a href="tokushoho.html">特定商取引法に基づく表記</a>に記載します（開業届提出後に更新）。</p>
+  </div>
 </main>
+
 <footer>
   <div class="ftr">
     <span>© MISERU（ミセル）</span>
     <nav>
       <a href="index.html">トップ</a>
       <a href="tokushoho.html">特定商取引法に基づく表記</a>
-      <a href="privacy.html">プライバシーポリシー</a>
+      <a href="privacy.html" aria-current="page">プライバシーポリシー</a>
     </nav>
   </div>
 </footer>
