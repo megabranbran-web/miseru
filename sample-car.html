@@ -214,6 +214,17 @@ footer .links{margin-top:30px;display:flex;gap:26px;font-family:var(--mono);font
 footer .links a{color:var(--headlight);border-bottom:1px solid var(--line);padding-bottom:3px}
 footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing:.3em}
 
+/* ============ heroReveal: モバイル粒子の「答え合わせ」用 実写背景 ============ */
+#heroReveal{
+  position:fixed;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 50%;
+  opacity:0;transition:opacity .8s ease;
+  pointer-events:none;z-index:0;
+  filter:brightness(.55) contrast(1.05) saturate(.9);
+}
+/* デスクトップでは粒子ショーが成立しているので heroReveal は無効 */
+@media (min-width:769px){#heroReveal{display:none}}
+
 /* ============ MOBILE: 実機診断に基づく一括修正 (Phase 1) ============ */
 @media (max-width:768px){
   /* 固定ヘッダー(HUD)が見出しに被る対策 */
@@ -224,19 +235,28 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
      FICTIONAL · 架空サンプル(.hud-br)は必ず維持 */
   .hud-bl{display:none}
 
-  /* HERO: 黒だけの空白画面を解消（下寄せ→中央配置、画面の50%以上をコンテンツに） */
+  /* HERO: ファーストビューでバッジ＋見出しまで見える / 上の黒空白を圧縮 */
   #hero{
     height:auto;min-height:100svh;
-    justify-content:center;
-    padding:88px 20px 96px;
+    justify-content:flex-start;
+    padding:64px 20px 96px;
   }
   /* バッジが2行折返しを起こさないよう詰める（文言は不変） */
   .badge{font-size:9px;letter-spacing:.18em;padding:6px 11px;gap:6px;margin-bottom:18px}
   .hero-sub{margin-top:16px;font-size:12.5px;line-height:1.95}
 
-  /* SCROLLインジケータ：本文と被らない最下部に */
-  .scroll-cue{bottom:24px;font-size:8.5px}
-  .scroll-cue::after{height:30px}
+  /* SCROLLインジケータ: 粒子に埋もれないようスクリム＋位置調整 */
+  .scroll-cue{
+    bottom:20px;font-size:8.5px;
+    background:rgba(6,5,9,.55);padding:8px 12px;border-radius:4px;
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  }
+  .scroll-cue::after{height:26px}
+  /* FICTIONAL · 架空サンプル ラベルが粒子に埋もれないようスクリム */
+  .hud-br{
+    background:rgba(6,5,9,.6);padding:6px 10px;border-radius:3px;
+    backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+  }
 
   /* スクラブ距離短縮：各FORMの上下paddingをモバイルで圧縮（黒だけ帯を作らない） */
   #styles{padding:72px 0 56px}
@@ -267,6 +287,8 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
 <body>
 
 <div id="bgfill" aria-hidden="true"></div>
+<!-- モバイル時の「答え合わせ」用: SILHOUETTE完成時に粒子と重なって car-hero を薄く表示 -->
+<img id="heroReveal" src="img/samples/car/optimized/car-hero.jpg" alt="" aria-hidden="true">
 <canvas id="stage" aria-hidden="true"></canvas>
 
 <div id="loader" aria-hidden="true">
@@ -535,7 +557,8 @@ function webglOK(){
   catch(e){ return false; }
 }
 var canRun = !!window.THREE && webglOK() && !reduced;
-var COUNT = isTouch ? 4200 : 9000;
+/* モバイル(<768px)は粒子数を半減 → 1粒あたりサイズUPで「車の形」が読みやすくなる */
+var COUNT = IS_MOBILE_NARROW ? 2400 : (isTouch ? 4200 : 9000);
 
 function fit(pts, n){
   var out = new Float32Array(n*3);
@@ -545,16 +568,23 @@ function fit(pts, n){
   }
   return out;
 }
-function sampleCanvas(draw, zJit){
+var IS_MOBILE_NARROW = isTouch && innerWidth < 768;
+/* SILHOUETTE系のスケール: モバイルは縦長画面で車が横にはみ出るため 0.55→0.38 に縮める */
+var SCALE_FIT = IS_MOBILE_NARROW ? 0.38 : 0.55;
+function sampleCanvas(draw, zJit, scale){
+  var s = scale || SCALE_FIT;
   var cw = 760, ch = 320;
   var oc = document.createElement("canvas"); oc.width = cw; oc.height = ch;
   var g = oc.getContext("2d");
   draw(g, cw, ch);
   var data = g.getImageData(0,0,cw,ch).data, pts = [];
-  for(var y = 0; y < ch; y += 2){
-    for(var x = 0; x < cw; x += 2){
-      if(data[(y*cw+x)*4+3] > 128 && Math.random() < 0.6){
-        pts.push([(x-cw/2)*0.55, (ch/2-y)*0.55, (Math.random()-0.5)*zJit]);
+  /* モバイルは画素間引きを増やして1粒を大きく見せる */
+  var step = IS_MOBILE_NARROW ? 3 : 2;
+  var prob = IS_MOBILE_NARROW ? 0.45 : 0.6;
+  for(var y = 0; y < ch; y += step){
+    for(var x = 0; x < cw; x += step){
+      if(data[(y*cw+x)*4+3] > 128 && Math.random() < prob){
+        pts.push([(x-cw/2)*s, (ch/2-y)*s, (Math.random()-0.5)*zJit]);
       }
     }
   }
@@ -659,7 +689,8 @@ function initGL(){
   var geo = new THREE.BufferGeometry();
   geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
   geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
-  var mat = new THREE.PointsMaterial({size: isTouch ? 2.6 : 2.1, vertexColors:true, transparent:true, opacity:0.95, blending:THREE.AdditiveBlending, depthWrite:false, sizeAttenuation:true});
+  /* モバイルは1粒を1.8倍に大きく → 「車のシルエット」が認識しやすい */
+  var mat = new THREE.PointsMaterial({size: IS_MOBILE_NARROW ? 4.2 : (isTouch ? 2.6 : 2.1), vertexColors:true, transparent:true, opacity:0.95, blending:THREE.AdditiveBlending, depthWrite:false, sizeAttenuation:true});
   points = new THREE.Points(geo, mat);
   scene.add(points);
   P = {pos:pos, vel:vel, rnd:rnd, geo:geo, t:0};
@@ -717,6 +748,9 @@ function formationF(y){
 function lerp(a, b, f){ return a + (b - a) * f; }
 
 var zoneLabel = document.getElementById("zoneLabel");
+var heroReveal = document.getElementById("heroReveal");
+/* reduced-motion: 実写を常時表示してポスター化（粒子は無効、車だけ見える） */
+if(reduced && heroReveal){ heroReveal.style.opacity = "0.55"; }
 var lastZone = -1;
 
 /* ---------- MAIN LOOP ---------- */
@@ -746,6 +780,15 @@ function frame(){
     var ease = document.body.classList.contains("ready") ? 0.05 : 0.002;
     if(reduced) ease = 1;
     var wob = reduced ? 0 : 1.6;
+    /* SILHOUETTE(FORM 01)中はノイズを大幅減衰 → 車の輪郭が溶けない */
+    if(i0 === 0){ wob *= 0.15; }
+    /* 実写クロスフェード: SILHOUETTE完成時(f→1)に薄く car-hero を覗かせる */
+    if(heroReveal){
+      var revOp = 0;
+      if(i0 === 0 && f > 0.6){ revOp = (f - 0.6) / 0.4 * 0.38; }
+      else if(i0 === 1 && f < 0.25){ revOp = 0.38 * (1 - f / 0.25); }
+      heroReveal.style.opacity = revOp;
+    }
     var gridWave = (i0 >= 2) ? f : (i0 >= 3 ? 1 : 0);
     for(var i = 0; i < COUNT; i++){
       var ix = i*3, iy = ix+1, iz = ix+2;
