@@ -213,6 +213,55 @@ footer .disc b{color:var(--headlight)}
 footer .links{margin-top:30px;display:flex;gap:26px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;flex-wrap:wrap}
 footer .links a{color:var(--headlight);border-bottom:1px solid var(--line);padding-bottom:3px}
 footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing:.3em}
+
+/* ============ MOBILE: 実機診断に基づく一括修正 (Phase 1) ============ */
+@media (max-width:768px){
+  /* 固定ヘッダー(HUD)が見出しに被る対策 */
+  html{scroll-padding-top:72px}
+  section[id]{scroll-margin-top:72px}
+
+  /* TOKYO時計を非表示（STATEMENT見出し「引き算から、はじめる。」と衝突するため）
+     FICTIONAL · 架空サンプル(.hud-br)は必ず維持 */
+  .hud-bl{display:none}
+
+  /* HERO: 黒だけの空白画面を解消（下寄せ→中央配置、画面の50%以上をコンテンツに） */
+  #hero{
+    height:auto;min-height:100svh;
+    justify-content:center;
+    padding:88px 20px 96px;
+  }
+  /* バッジが2行折返しを起こさないよう詰める（文言は不変） */
+  .badge{font-size:9px;letter-spacing:.18em;padding:6px 11px;gap:6px;margin-bottom:18px}
+  .hero-sub{margin-top:16px;font-size:12.5px;line-height:1.95}
+
+  /* SCROLLインジケータ：本文と被らない最下部に */
+  .scroll-cue{bottom:24px;font-size:8.5px}
+  .scroll-cue::after{height:30px}
+
+  /* スクラブ距離短縮：各FORMの上下paddingをモバイルで圧縮（黒だけ帯を作らない） */
+  #styles{padding:72px 0 56px}
+  #statement{padding:72px 0}
+  #price{padding:72px 0}
+  #cases{padding:72px 0}
+  #filmshot{padding:24px 0 56px}
+  #contact{padding:96px 0 110px}
+
+  /* テキスト保護：粒子の上で本文を読みやすくする薄いスクリム */
+  #statement, #price, #cases{
+    background:linear-gradient(rgba(6,5,9,.62),rgba(6,5,9,.86))
+  }
+
+  /* FORM 03 — TYPE の「ブランドの文字を組んでいます」一文は
+     モバイル粒子では文字組みが判読不能なため、デスクトップ限定で表示する */
+  .dt-only{display:none}
+
+  /* マーキー文字をモバイルでも崩れない大きさに */
+  .marquee .track{font-size:10px;letter-spacing:.22em;gap:32px}
+
+  /* ギャラリー：DOORS等の上切れ対策（car-streetはドア跳ね上げで上に被写体が伸びる） */
+  .card img{object-position:50% 35%}
+  .card.hero img{object-position:50% 50%}
+}
 </style>
 </head>
 <body>
@@ -285,7 +334,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
       <div class="eyebrow rev">NIGHT / STATEMENT ／ FORM 03 — TYPE</div>
       <h2 class="sec rev">引き算から、<br>はじめる。</h2>
       <p class="rev">「全部盛る」提案はしません。<strong>やらないことを決めるのも、仕事のうち。</strong>一台ずつ状態と目的を見て、足回りだけ、下地だけ、写真だけ——半歩ずつ進める選択肢からお出しします。</p>
-      <p class="rev">このページ自体が、MISERUの技術見本です。粒子は今、背後で<strong>ブランドの文字</strong>を組んでいます。「え、こんなことできるの」を、あなたの業種でも。</p>
+      <p class="rev">このページ自体が、MISERUの技術見本です。<span class="dt-only">粒子は今、背後で<strong>ブランドの文字</strong>を組んでいます。</span>「え、こんなことできるの」を、あなたの業種でも。</p>
       <div class="kpi rev">
         <div><b data-count="5">0</b><span>FORMS</span></div>
         <div><b data-count="9000">0</b><span>PARTICLES</span></div>
