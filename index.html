@@ -465,6 +465,10 @@ header{
 .faq .ans a{color:var(--shu-deep)}
 .faq-cta{margin-top:30px;font-size:14px}
 .faq-cta a{font-weight:700;color:var(--ink);border-bottom:2px solid var(--shu);text-decoration:none;padding-bottom:2px}
+.faq-more-btn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 4px;border:0;border-bottom:1px solid var(--line);background:transparent;cursor:pointer;font-size:13.5px;color:var(--grey);font-family:var(--sans);letter-spacing:.03em}
+.faq-more-btn:hover{color:var(--ink)}
+.faq-more-btn .ico{color:var(--shu);font-size:16px;transition:transform .25s;flex:none}
+.faq-more-btn[aria-expanded="true"] .ico{transform:rotate(45deg)}
 
 /* ============ FINAL + CONTACT（墨） ============ */
 .final-h{font-size:clamp(24px,3.6vw,32px);color:var(--paper);margin-bottom:14px}
@@ -522,8 +526,8 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
 }
 .sticky .l1{background:#06C755;color:#fff}
 .sticky .l2{background:var(--paper);color:var(--ink)}
-@media(min-width:768px){.sticky{display:none}}
-@media(max-width:767px){#contact{padding-bottom:calc(90px + env(safe-area-inset-bottom))}}
+@media(min-width:880px){.sticky{display:none}}
+@media(max-width:879px){#contact{padding-bottom:calc(90px + env(safe-area-inset-bottom))}}
 
 /* ============ REVEAL & MOTION ============ */
 /* NN/g: フェードは短く(〜400ms級)・一度だけ・本文を長く隠さない */
@@ -994,6 +998,8 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <summary>相談すると、具体的に何が返ってきますか？</summary>
           <p class="ans">無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「初回見立てシートで整理するもの」をご覧ください）。</p>
         </details>
+        <button class="faq-more-btn" aria-expanded="false" aria-controls="faq-rest"><span class="txt">もっと見る（10問）</span><span class="ico">＋</span></button>
+        <div id="faq-rest" hidden>
         <details class="qa">
           <summary>HPが古くても大丈夫ですか？</summary>
           <p class="ans">はい。多くの場合、今のサイトを活かして写真の見せ方やスマホ導線を整えるだけで十分です。いきなりの作り直しは勧めません。</p>
@@ -1035,6 +1041,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <summary>補助金は使えますか？</summary>
           <p class="ans">小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。</p>
         </details>
+        </div><!-- /faq-rest -->
       </div>
       <p class="faq-cta">ここに無い疑問は、そのまま聞いてください。<a href="#contact" data-cta="free-consult">無料で相談する →</a></p>
     </div>
@@ -1254,6 +1261,26 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
       }
     });
   });
+
+  /* --- FAQ fold-more --- */
+  var faqBtn = document.querySelector('.faq-more-btn');
+  var faqRest = document.getElementById('faq-rest');
+  if(faqBtn && faqRest){
+    faqBtn.addEventListener('click', function(){
+      var isHidden = faqRest.hasAttribute('hidden');
+      if(isHidden){
+        faqRest.removeAttribute('hidden');
+        faqBtn.setAttribute('aria-expanded','true');
+        faqBtn.querySelector('.txt').textContent = '折りたたむ';
+        faqBtn.querySelector('.ico').textContent = '－';
+      } else {
+        faqRest.setAttribute('hidden','');
+        faqBtn.setAttribute('aria-expanded','false');
+        faqBtn.querySelector('.txt').textContent = 'もっと見る（10問）';
+        faqBtn.querySelector('.ico').textContent = '＋';
+      }
+    });
+  }
 
   /* --- フォーム AJAX 送信 --- */
   var cf = document.getElementById('contact-form');
