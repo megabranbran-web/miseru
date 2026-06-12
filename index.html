@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script>document.documentElement.classList.add('js')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ミセル｜いい仕事は、見せ方で伝わる。 — 中小事業のHP・見せ方改善</title>
@@ -526,8 +527,8 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
 
 /* ============ REVEAL & MOTION ============ */
 /* NN/g: フェードは短く(〜400ms級)・一度だけ・本文を長く隠さない */
-.rv{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .55s var(--ease)}
-.rv.in{opacity:1;transform:none}
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .55s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none!important;animation:none!important}
   .rv{opacity:1;transform:none}
@@ -1111,21 +1112,21 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2〜3営業日を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
           <div class="fld">
-            <label>お名前 / 事業者名<em>必須</em></label>
-            <input type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" autocomplete="name" required>
+            <label for="f-name">お名前 / 事業者名<em>必須</em></label>
+            <input id="f-name" type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" autocomplete="name" required>
           </div>
           <div class="fld">
-            <label>ご連絡先（メール）<em>必須</em></label>
-            <input type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
+            <label for="f-email">ご連絡先（メール）<em>必須</em></label>
+            <input id="f-email" type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
           </div>
           <div class="fld">
-            <label>HP / Instagram / Googleマップ など<em>任意・あると具体的になります</em></label>
-            <input type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
+            <label for="f-url">HP / Instagram / Googleマップ など<em>任意・あると具体的になります</em></label>
+            <input id="f-url" type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
             <p class="hint">HPがなくても大丈夫です。写真やスクショを送りたい方は、LINEのほうが早いです（<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEを開く →</a>）。</p>
           </div>
           <div class="fld">
-            <label>ひとこと<em>任意</em></label>
-            <textarea name="message" rows="3" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
+            <label for="f-msg">ひとこと<em>任意</em></label>
+            <textarea id="f-msg" name="message" rows="3" placeholder="気になっていること、増やしたい問い合わせ・予約など"></textarea>
           </div>
           <button type="submit" class="btn btn--shu" data-cta="free-consult">無料相談を送信する <span class="arw">→</span></button>
           <p class="fine">送信後、2〜3営業日でお返事します。しつこい営業はしません。送信内容は<a href="privacy.html">プライバシーポリシー</a>に基づき扱います。</p>

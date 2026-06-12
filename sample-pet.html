@@ -176,15 +176,15 @@
   .diary-tab .lab{color:var(--ink);font-weight:700;font-size:12.5px}
 
   .diary-notes{position:relative;z-index:2;margin-top:54px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
-  .note{background:#fff;border-radius:24px;padding:0;overflow:hidden;box-shadow:0 18px 38px -22px rgba(40,54,72,.22);transition:transform .5s var(--ease),box-shadow .5s var(--ease);position:relative}
-  .note:hover{transform:translateY(-8px) rotate(.5deg);box-shadow:0 28px 55px -22px rgba(40,54,72,.3)}
-  .note:nth-child(odd){transform:rotate(-.5deg)}
-  .note:nth-child(odd):hover{transform:translateY(-8px) rotate(-1deg)}
+  .diary-notes .note{background:#fff;border-radius:24px;padding:0;overflow:hidden;box-shadow:0 18px 38px -22px rgba(40,54,72,.22);transition:transform .5s var(--ease),box-shadow .5s var(--ease);position:relative}
+  .diary-notes .note:hover{transform:translateY(-8px) rotate(.5deg);box-shadow:0 28px 55px -22px rgba(40,54,72,.3)}
+  .diary-notes .note:nth-child(odd){transform:rotate(-.5deg)}
+  .diary-notes .note:nth-child(odd):hover{transform:translateY(-8px) rotate(-1deg)}
   .note-tape{position:absolute;top:-9px;left:50%;transform:translateX(-50%);width:64px;height:18px;background:rgba(122,195,166,.5);border-radius:3px;z-index:2}
   .note-photo{aspect-ratio:5/4;overflow:hidden;background:var(--bg-mint);position:relative}
   .note-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;transition:transform 1.4s var(--ease)}
-  .note:nth-child(4) .note-photo img{object-position:50% 22%}
-  .note:hover .note-photo img{transform:scale(1.05)}
+  .diary-notes .note:nth-child(4) .note-photo img{object-position:50% 22%}
+  .diary-notes .note:hover .note-photo img{transform:scale(1.05)}
   .note-photo .t{position:absolute;bottom:14px;right:14px;background:rgba(255,255,255,.94);padding:5px 12px;border-radius:999px;font-family:var(--quick);font-size:12px;color:var(--coral-d);font-weight:700;letter-spacing:.05em;box-shadow:0 4px 12px -6px rgba(40,54,72,.18)}
   .note-body{padding:22px 22px 24px}
   .note-h{font-family:var(--gothic);font-weight:800;font-size:16.5px;color:var(--ink);line-height:1.6;letter-spacing:.005em}
@@ -265,8 +265,8 @@
   @media(max-width:880px){.check-grid{grid-template-columns:1fr;gap:30px}}
 
   /* === PRICE (ノート風) === */
-  .price{background:var(--bg-sky);position:relative;overflow:hidden}
-  .price::before{content:"";position:absolute;right:-8%;top:8%;width:300px;height:300px;border-radius:50%;background:#fff;opacity:.5;filter:blur(40px)}
+  section.price{background:var(--bg-sky);position:relative;overflow:hidden}
+  section.price::before{content:"";position:absolute;right:-8%;top:8%;width:300px;height:300px;border-radius:50%;background:#fff;opacity:.5;filter:blur(40px)}
   .price-table{margin-top:60px;background:#fff;border-radius:22px;padding:0;overflow:hidden;box-shadow:0 22px 50px -28px rgba(40,54,72,.18);max-width:780px;margin-left:auto;margin-right:auto;position:relative;z-index:2}
   .price-row{display:grid;grid-template-columns:48px 1.4fr .8fr .8fr;gap:18px;align-items:center;padding:22px 28px;border-bottom:1px dotted var(--ink-line);transition:background .3s}
   .price-row:last-child{border-bottom:0}
@@ -365,7 +365,7 @@
   .msg.out .bubble{background:#85d57f;color:#2a2820;border-radius:18px 4px 18px 18px}
   .msg.in .bubble{border-radius:4px 18px 18px 18px}
   .msg .t{font-family:var(--quick);font-size:10.5px;color:var(--ink-soft);font-weight:600;letter-spacing:.04em;padding:0 8px}
-  .msg .bubble .photo{margin:6px -4px 0;border-radius:10px;overflow:hidden;aspect-ratio:5/3}
+  .msg .bubble .photo{display:block;margin:6px -4px 0;border-radius:10px;overflow:hidden;aspect-ratio:5/3}
   .msg .bubble .photo img{width:100%;height:100%;object-fit:cover}
 
   @keyframes msg-pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -462,7 +462,7 @@
   .explain-toggle{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--ink);color:#fff;border:none;border-radius:99px;padding:12px 22px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(40,54,72,.28);transition:background .25s,transform .2s;font-family:var(--gothic);letter-spacing:0}
   .explain-toggle:hover{transform:translateY(-2px)}
   body.explain-on .explain-toggle{background:var(--coral-d)}
-  @media(max-width:640px){.explain-toggle{bottom:80px;right:12px;padding:10px 16px;font-size:12px}}
+  @media(max-width:880px){.explain-toggle{bottom:80px;right:12px;padding:10px 16px;font-size:12px}}
   .ann-band{display:none}
   body.explain-on .ann-band{display:block;background:#fff5f3;border-top:2px solid var(--coral);border-bottom:2px solid var(--coral);padding:18px 0}
   .ann-in{display:flex;align-items:flex-start;gap:14px;max-width:880px;margin:0 auto;padding:0 24px}

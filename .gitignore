@@ -34,3 +34,17 @@ gpt_review.md
 *_old*
 # 注1：*.md は上で除外済み → MISERU_*.md もこれに含まれる（重複追加しない）。
 # 注2：img/（本番画像）は「あえて」追跡対象。ignoreせず、実装時に明示 add する。
+
+# --- 監査・ローカルツール（2026-06-13 追加）---
+# モックHTML・旧バージョン試作
+mock-*.html
+_mock-*.html
+*-v2.html
+# ローカルスクリプト・サーバー
+node_modules/
+server.log
+scripts/
+# 監査スクショ（数百MB・本番不要）
+mock-screenshots/
+# セットアップパック（本番外）
+miseru_setup_pack/
