@@ -218,9 +218,9 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
 #heroReveal{
   position:fixed;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:50% 50%;
-  opacity:0;transition:opacity .8s ease;
+  opacity:0;transition:opacity .3s ease;
   pointer-events:none;z-index:0;
-  filter:brightness(.55) contrast(1.05) saturate(.9);
+  filter:brightness(.72) contrast(1.06) saturate(.95);
 }
 /* デスクトップでは粒子ショーが成立しているので heroReveal は無効 */
 @media (min-width:769px){#heroReveal{display:none}}
@@ -434,7 +434,7 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
 <!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap">
-    <p class="disc"><b>これは MISERU が制作した架空の演出強めサンプルHPです。</b>掲載されている店舗設定・所在地表現・料金はすべて見せ方の表示例（架空）で、実在店舗・実在事例ではありません。※ 無料相談・初回見立てシートに、実際の写真撮影は含まれません。まずは今ある写真で、何をどう見せるかを整理します。</p>
+    <p class="disc"><b>これは MISERU が制作した架空の演出強めサンプルHPです。</b>掲載されている店舗設定・所在地表現・料金はすべて見せ方の表示例（架空）で、実在店舗・実在事例ではありません。掲載写真のナンバープレートは、サンプル制作上すべて塗りつぶし処理しています。※ 無料相談・初回見立てシートに、実際の写真撮影は含まれません。まずは今ある写真で、何をどう見せるかを整理します。</p>
     <p class="disc" style="margin-top:18px">この「見せ方の型」は、建設・美容・飲食・ペット・工房などにも応用できます。MISERU は中小事業のWebを整える編集室。無料相談では、今のHP・Instagramを見て、方向性と合いそうな進め方・プラン目安までお返しします。</p>
     <p class="disc" style="margin-top:18px">このサンプルでMISERUがやったこと：<b style="color:var(--headlight)">構成の設計／写真の選定とトリミング／全文章の執筆／WebGL粒子演出の実装／スマホ最適化／LINE相談までの導線設計</b>。演出を含む同等の範囲なら PREMIUM（¥498,000〜）相当、演出なしの整えなら BASIC（¥98,000〜）からです。</p>
     <div class="links">
@@ -557,7 +557,9 @@ function webglOK(){
   catch(e){ return false; }
 }
 var canRun = !!window.THREE && webglOK() && !reduced;
-/* モバイル(<768px)は粒子数を半減 → 1粒あたりサイズUPで「車の形」が読みやすくなる */
+/* モバイル判定はCOUNTより前で宣言（旧コードはvar巻き上げでundefined扱いになり、モバイル粒子数が2400でなく4200のままだったバグの修正） */
+var IS_MOBILE_NARROW = isTouch && innerWidth < 768;
+/* モバイル(<768px)は粒子数を減らす（渦演出を軽く・1粒を大きく） */
 var COUNT = IS_MOBILE_NARROW ? 2400 : (isTouch ? 4200 : 9000);
 
 function fit(pts, n){
@@ -568,8 +570,7 @@ function fit(pts, n){
   }
   return out;
 }
-var IS_MOBILE_NARROW = isTouch && innerWidth < 768;
-/* SILHOUETTE系のスケール: モバイルは縦長画面で車が横にはみ出るため 0.55→0.38 に縮める */
+/* SILHOUETTE系スケール（PC車シルエット用。モバイルは formVortex を使う） */
 var SCALE_FIT = IS_MOBILE_NARROW ? 0.38 : 0.55;
 function sampleCanvas(draw, zJit, scale){
   var s = scale || SCALE_FIT;
@@ -617,6 +618,26 @@ function formCar(){
     g.beginPath(); g.arc(556,240,14,0,Math.PI*2); g.stroke();
   }, 14), COUNT);
 }
+/* FORM 01（モバイル専用）— 赤い光の渦。
+   車シルエットは3.33:1の横長で、縦長375px画面に収めると車高が画面の14%＝赤い帯に潰れて
+   認識不能（幾何学的天井）。モバイルでは渦（解像度非依存・パラメトリック）で見せ、
+   完成時に実写 car-hero へクロスフェードして「本物の車」で答え合わせする。 */
+function formVortex(){
+  var pts = [], N = 6000;
+  for(var i = 0; i < N; i++){
+    var arm = (i % 3) * (Math.PI * 2 / 3);            // 3本腕の渦
+    var t = Math.pow(Math.random(), 0.7);            // 0..1（外側を厚く）
+    var a = arm + t * 5.2 + (Math.random() - 0.5) * 0.5;
+    var R = 22 + t * 72;                             // 半径22..94（縦長画面に概ね収まる）
+    var jit = (1 - t) * 14 + 4;
+    pts.push([
+      Math.cos(a) * R + (Math.random() - 0.5) * jit,
+      Math.sin(a) * R * 0.96 + (Math.random() - 0.5) * jit,
+      (Math.random() - 0.5) * 70
+    ]);
+  }
+  return fit(pts, COUNT);
+}
 /* FORM 02 — 走行光ストリーム */
 function formStream(){
   var pts = [];
@@ -658,6 +679,8 @@ function formRing(){
 
 var FORMS = [], ROTX = [0, 0, 0, -0.85, 0], OPAC = [0.95, 0.5, 0.55, 0.45, 0.8];
 var ZONE_NAMES = ["FORM 01 — SILHOUETTE","FORM 02 — STREAM","FORM 03 — TYPE","FORM 04 — GRID","FORM 05 — IGNITION RING"];
+/* モバイルは FORM 01 が渦なのでラベルを実態に合わせる */
+if(IS_MOBILE_NARROW){ ZONE_NAMES[0] = "FORM 01 — IGNITION"; }
 
 function initGL(){
   var cv = document.getElementById("stage");
@@ -671,7 +694,8 @@ function initGL(){
   camera.position.z = 430;
   camera.updateProjectionMatrix();
 
-  FORMS = [formCar(), formStream(), formType(), formGrid(), formRing()];
+  /* モバイルは FORM 01 を渦に差し替え（PCは車シルエット維持） */
+  FORMS = [IS_MOBILE_NARROW ? formVortex() : formCar(), formStream(), formType(), formGrid(), formRing()];
 
   var pos = new Float32Array(COUNT*3), col = new Float32Array(COUNT*3),
       vel = new Float32Array(COUNT*3), rnd = new Float32Array(COUNT);
@@ -750,7 +774,7 @@ function lerp(a, b, f){ return a + (b - a) * f; }
 var zoneLabel = document.getElementById("zoneLabel");
 var heroReveal = document.getElementById("heroReveal");
 /* reduced-motion: 実写を常時表示してポスター化（粒子は無効、車だけ見える） */
-if(reduced && heroReveal){ heroReveal.style.opacity = "0.55"; }
+if(reduced && heroReveal){ heroReveal.style.opacity = "0.85"; }
 var lastZone = -1;
 
 /* ---------- MAIN LOOP ---------- */
@@ -780,13 +804,19 @@ function frame(){
     var ease = document.body.classList.contains("ready") ? 0.05 : 0.002;
     if(reduced) ease = 1;
     var wob = reduced ? 0 : 1.6;
+    /* タッチ反発の穴: モバイルは可視幅が狭く半径70wuだと画面の42%に穴が開くため縮小 */
+    var repelR2 = IS_MOBILE_NARROW ? 1100 : 4900;
+    var repelStr = IS_MOBILE_NARROW ? 1.1 : 2.4;
     /* SILHOUETTE(FORM 01)中はノイズを大幅減衰 → 車の輪郭が溶けない */
     if(i0 === 0){ wob *= 0.15; }
-    /* 実写クロスフェード: SILHOUETTE完成時(f→1)に薄く car-hero を覗かせる */
+    /* 実写クロスフェード（モバイルの主役演出）: 渦が決まる(f→1)につれ car-hero が立ち上がり、
+       STREAMへ移ると写真は退場。形を当てさせず「ノイズ→本物の車」の変化で魅せる。
+       モバイルはピーク0.92まで上げて答え合わせを明確に／PCは従来通り薄く重ねる */
     if(heroReveal){
+      var peak = IS_MOBILE_NARROW ? 0.92 : 0.34;
       var revOp = 0;
-      if(i0 === 0 && f > 0.6){ revOp = (f - 0.6) / 0.4 * 0.38; }
-      else if(i0 === 1 && f < 0.25){ revOp = 0.38 * (1 - f / 0.25); }
+      if(i0 === 0 && f > 0.45){ revOp = (f - 0.45) / 0.55 * peak; }
+      else if(i0 === 1 && f < 0.3){ revOp = peak * (1 - f / 0.3); }
       heroReveal.style.opacity = revOp;
     }
     var gridWave = (i0 >= 2) ? f : (i0 >= 3 ? 1 : 0);
@@ -804,8 +834,8 @@ function frame(){
         vel[iz] += (tzp - pos[iz]) * ease;
         var dx = pos[ix] - hx, dy = pos[iy] - hy;
         var d2 = dx*dx + dy*dy;
-        if(d2 < 4900 && d2 > 0.01){
-          var ff = (1 - d2/4900) * 2.4 / Math.sqrt(d2);
+        if(d2 < repelR2 && d2 > 0.01){
+          var ff = (1 - d2/repelR2) * repelStr / Math.sqrt(d2);
           vel[ix] += dx * ff; vel[iy] += dy * ff;
         }
         vel[ix] *= 0.9; vel[iy] *= 0.9; vel[iz] *= 0.9;

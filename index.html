@@ -520,6 +520,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
 .sticky .l1{background:#06C755;color:#fff}
 .sticky .l2{background:var(--paper);color:var(--ink)}
 @media(min-width:768px){.sticky{display:none}}
+@media(max-width:767px){#contact{padding-bottom:calc(90px + env(safe-area-inset-bottom))}}
 
 /* ============ REVEAL & MOTION ============ */
 /* NN/g: フェードは短く(〜400ms級)・一度だけ・本文を長く隠さない */
@@ -1268,6 +1269,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           cf.style.display = 'none';
           res.style.display = 'block';
           res.innerHTML = '<p class="ok">ありがとうございます。<small>2〜3営業日以内にご連絡します。</small></p>';
+          res.scrollIntoView({behavior:'smooth',block:'center'});
         }else{
           btn.disabled = false;
           btn.innerHTML = '無料相談を送信する <span class="arw">→</span>';
