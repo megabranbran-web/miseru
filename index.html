@@ -153,7 +153,8 @@ header{
   .sec--ink .rail span{color:#7A7468}
 }
 @media(max-width:999px){
-  .rail span{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;color:var(--grey)}
+  /* モバイルではrail（縦書きラベル）は装飾過多なので非表示にして本文に集中 */
+  .rail{display:none}
 }
 .h2{font-size:clamp(24px,4vw,34px);margin:14px 0 18px}
 .lead{max-width:640px;color:#4A443B}
@@ -332,7 +333,9 @@ header{
   padding:30px 26px;transform:rotate(-1.2deg);
   box-shadow:0 30px 70px -20px rgba(0,0,0,.6),0 4px 16px rgba(0,0,0,.3);
   font-size:12px;line-height:1.8;position:relative;max-width:430px;margin:0 auto;
+  overflow:hidden; /* 回転で右上スタンプ等が画面外へ流れるのを防止 */
 }
+@media(max-width:480px){.a4{transform:rotate(-0.6deg);padding:24px 20px}.a4 .stamp{font-size:8.5px;padding:3px 6px;top:14px;right:14px}}
 .a4 .mh{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--grey);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:14px}
 .a4 h4{font-family:var(--serif);font-size:15px;margin-bottom:10px}
 .a4 dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin-bottom:14px}
@@ -344,6 +347,7 @@ header{
 .a4 .ba{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .a4 .ba figure{position:relative;aspect-ratio:16/10;border-radius:2px;overflow:hidden;border:1px solid var(--line)}
 .a4 .ba img{width:100%;height:100%;object-fit:cover}
+.a4 .ba svg{width:100%;height:100%;display:block}
 .a4 .ba figcaption{
   position:absolute;left:0;bottom:0;right:0;
   font-family:var(--mono);font-size:8px;letter-spacing:.18em;color:#fff;
@@ -439,7 +443,7 @@ header{
   font-family:var(--mono);font-size:12px;color:var(--shu);margin-top:3px;
 }
 .flow .cn::before{content:counter(fl)}
-.flow h3{font-size:16px;margin-bottom:2px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.flow h3{font-size:16px;margin-bottom:6px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;line-height:1.6}
 .flow h3 .yen{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--shu-deep);background:rgba(216,50,30,.08);border:1px solid rgba(216,50,30,.3);border-radius:2px;padding:1px 8px}
 .flow p{font-size:13px;color:#5A5346}
 
@@ -778,8 +782,29 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
               <div><b>03</b>Before / After ラフ</div>
             </div>
             <div class="ba">
-              <figure><img src="img/home/demo-yakitori-before.jpg" alt="" loading="lazy"><figcaption>BEFORE</figcaption></figure>
-              <figure class="af"><img src="img/home/demo-yakitori.jpg" alt="" loading="lazy"><figcaption>AFTER</figcaption></figure>
+              <figure aria-label="今のページの配置（ラフ）">
+                <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+                  <rect width="160" height="100" fill="#fff"/>
+                  <rect x="10" y="12" width="42" height="30" rx="2" fill="#E4DDD0"/>
+                  <g fill="#CFC6B6">
+                    <rect x="58" y="15" width="84" height="4" rx="2"/><rect x="58" y="23" width="74" height="4" rx="2"/><rect x="58" y="31" width="80" height="4" rx="2"/>
+                    <rect x="10" y="50" width="132" height="4" rx="2"/><rect x="10" y="58" width="120" height="4" rx="2"/><rect x="10" y="66" width="128" height="4" rx="2"/><rect x="10" y="74" width="96" height="4" rx="2"/>
+                  </g>
+                  <rect x="10" y="84" width="34" height="9" rx="2" fill="none" stroke="#CFC6B6" stroke-width="1.5"/>
+                </svg>
+                <figcaption>BEFORE 今</figcaption>
+              </figure>
+              <figure class="af" aria-label="整えた配置のラフ案">
+                <svg viewBox="0 0 160 100" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+                  <rect width="160" height="100" fill="#fff"/>
+                  <rect x="10" y="10" width="140" height="40" rx="2" fill="#EFE7D8"/>
+                  <line x1="10" y1="10" x2="150" y2="50" stroke="#E0D6C4" stroke-width="1"/><line x1="150" y1="10" x2="10" y2="50" stroke="#E0D6C4" stroke-width="1"/>
+                  <rect x="10" y="58" width="92" height="6" rx="2" fill="#1B1916"/>
+                  <g fill="#CFC6B6"><rect x="10" y="70" width="120" height="4" rx="2"/><rect x="10" y="77" width="104" height="4" rx="2"/></g>
+                  <rect x="10" y="86" width="46" height="10" rx="2" fill="#D8321E"/>
+                </svg>
+                <figcaption>AFTER ラフ</figcaption>
+              </figure>
             </div>
           </div>
           <p class="a4-cap">紙面サムネ（実物見本の縮小・架空）</p>
