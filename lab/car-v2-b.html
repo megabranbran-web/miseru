@@ -1,510 +1,331 @@
 <!DOCTYPE html>
-<!-- lab/car-v2-b.html — TRACK B PROTOTYPE B: シネマティック版 (2026-06-13)
-     WebGLを一切使わず、実写フォトシーケンスで演出するアプローチ。
-     【コンセプト】"IGNITION — 一台が語る"
-       粒子の「分かりにくさ」を排除し、車の写真そのものを主役に。
-       スクロールごとにフルスクリーン写真が映画的に切り替わる。
-       Three.js依存なし → 全デバイスで確実に動作。
-     【不変】content / prices / disclaimers / LINEリンク / 構成順序
+<!-- lab/car-v2-b.html — TRACK B PROTOTYPE B: ピントが合う瞬間 (2026-06-13)
+     スクロールするとボケた車にピントが合う。カメラのファインダー体験。
+     【不変】prices / disclaimers / LINEリンク
 -->
-<html lang="ja" style="background:#060509">
+<html lang="ja" style="background:#050709">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#060509">
+<meta name="theme-color" content="#050709">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="MISERUが制作した、車・バイク系サービス向けの見せ方サンプル（架空）。実在店舗・実在事例ではありません。">
-<title>【v2-b シネマ版】車・バイク見せ方サンプル｜MISERU SAMPLE</title>
+<title>【v2-b ピント版】車・バイク見せ方サンプル｜MISERU SAMPLE</title>
+<meta name="description" content="スクロールでピントが合い車が現れる、MISERUの車・バイク向け見せ方サンプル（架空）。実在事例ではありません。">
 <style>
 :root{
-  --asphalt:#060509;
+  --bg:#050709;
+  --ink:#F5F2EC;
   --signal:#FF1E2D;
-  --headlight:#F5F2EC;
-  --smoke:#9591A0;
-  --line:rgba(245,242,236,.13);
-  --line-solid:#2a2535;
+  --green:#00E87A;
+  --smoke:#8A8699;
+  --line:rgba(245,242,236,.12);
   --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --sans:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{background:#060509;scroll-behavior:smooth}
-body{background:#060509;color:var(--headlight);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;opacity:0;transition:opacity .6s ease}
-body.ready{opacity:1}
+html,body{background:var(--bg);color-scheme:dark}
+body{color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-button{font-family:inherit;background:none;border:0;color:inherit;cursor:pointer}
-::selection{background:var(--signal);color:#fff}
+button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
 
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.35;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 700ms steps(4) infinite}
-@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-2%,1.5%)}50%{transform:translate(1.5%,-2%)}75%{transform:translate(-1%,-1%)}100%{transform:translate(2%,2%)}}
-@media(prefers-reduced-motion:reduce){.grain{animation:none}}
-
-/* NAV */
-.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(rgba(6,5,9,.8),transparent)}
-.nav-logo{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--headlight)}
-.nav-logo em{font-style:normal;color:var(--signal)}
-.nav-links{display:flex;gap:24px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--smoke)}
-.nav-links a{color:var(--smoke);transition:color .25s}
-.nav-links a:hover{color:var(--headlight)}
-.nav-cta{border:1px solid var(--line);padding:8px 16px;border-radius:999px;color:var(--headlight);background:rgba(6,5,9,.5);backdrop-filter:blur(6px);transition:background .3s,border-color .3s;font-family:var(--mono);font-size:10px;letter-spacing:.18em}
-.nav-cta:hover{background:var(--signal);border-color:var(--signal)}
-.nav-badge{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--smoke);background:rgba(6,5,9,.6);padding:5px 10px;border-radius:3px}
-@media(max-width:680px){.nav-links a:not(.nav-cta){display:none}}
-
-/* PROGRESS LINE */
-.nav-line{position:fixed;top:0;left:0;height:2px;background:var(--signal);z-index:101;width:0%;transition:none}
-
-/* ============ HERO ============ */
-#hero{
-  height:100svh;min-height:600px;position:relative;overflow:hidden;
-  display:flex;align-items:flex-end;
+/* ===== FOCUS CONTAINER (scroll driver) ===== */
+#focusContainer{
+  position:relative;
+  height:260svh;
 }
-.hero-bg{
+#heroSticky{
+  position:sticky;
+  top:0;
+  height:100svh;min-height:560px;
+  overflow:hidden;
+}
+#carPhoto{
   position:absolute;inset:0;
-  background:url("../img/samples/car/optimized/car-hero.jpg") 50% 50%/cover no-repeat;
-  will-change:transform;
-  transition:transform 0s linear;
-}
-.hero-scrim{
-  position:absolute;inset:0;
-  background:linear-gradient(
-    to bottom,
-    rgba(6,5,9,.35) 0%,
-    rgba(6,5,9,.1) 30%,
-    rgba(6,5,9,.05) 55%,
-    rgba(6,5,9,.65) 80%,
-    rgba(6,5,9,.92) 100%
-  );
-}
-.hero-content{position:relative;z-index:2;width:100%;padding:0 24px calc(env(safe-area-inset-bottom) + 64px)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--smoke);border:1px solid var(--line);padding:6px 12px;border-radius:999px;margin-bottom:20px;background:rgba(6,5,9,.45);backdrop-filter:blur(4px)}
-.hero-badge i{width:5px;height:5px;border-radius:50%;background:var(--signal);animation:blink 1.6s infinite}
-@keyframes blink{50%{opacity:.2}}
-h1.hero-h{
-  font-size:clamp(44px,10vw,128px);font-weight:800;
-  text-transform:uppercase;letter-spacing:-.03em;line-height:.9;
-  color:var(--headlight);
-}
-h1.hero-h .accent{color:transparent;-webkit-text-stroke:1.5px var(--signal)}
-h1.hero-h .row{display:block;overflow:hidden}
-h1.hero-h .ch{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.16,1,.3,1)}
-h1.hero-h .row:nth-child(2) .ch{transition-delay:.06s}
-body.ready h1.hero-h .ch{transform:translateY(0)}
-.hero-sub{margin-top:18px;max-width:540px;color:var(--smoke);font-size:13px;line-height:2;opacity:0;transform:translateY(14px);transition:opacity .8s .4s,transform .8s .4s}
-body.ready .hero-sub{opacity:1;transform:none}
-.hero-sub strong{color:var(--headlight);font-weight:600}
-.scroll-cue{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.35em;color:var(--smoke);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
-.scroll-cue::after{content:"";width:1px;height:38px;background:linear-gradient(var(--signal),transparent);animation:drop 1.8s infinite}
-@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-@media(prefers-reduced-motion:reduce){.scroll-cue::after,.hero-badge i{animation:none}}
-
-/* ============ MARQUEE ============ */
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:14px 0;background:rgba(10,8,16,.66);backdrop-filter:blur(3px);position:relative;z-index:2}
-.marquee .track{display:flex;gap:48px;width:max-content;animation:mq 26s linear infinite;font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--smoke);white-space:nowrap}
-.marquee .track b{color:var(--signal);font-weight:400}
-@keyframes mq{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.marquee .track{animation:none}}
-
-/* ============ CINEMATIC FILM SEQUENCE ============ */
-.film-seq{position:relative;z-index:2}
-.film-frame{
-  position:relative;height:100svh;min-height:500px;overflow:hidden;
-  display:flex;align-items:center;
-}
-.film-frame .photo{
-  position:absolute;inset:0;
-  background-size:cover;background-position:50% 50%;
+  width:100%;height:100%;
+  object-fit:cover;object-position:50% 55%;
+  will-change:filter;
+  filter:blur(22px) brightness(0.72);
   transform:scale(1.08);
-  transition:transform 1.6s cubic-bezier(.16,1,.3,1),opacity .9s ease;
-  opacity:0;
-  will-change:transform,opacity;
+  transition:filter .05s linear;
 }
-.film-frame.in .photo{transform:scale(1);opacity:1}
-.film-frame .scrim{position:absolute;inset:0}
-.film-frame .txt{position:relative;z-index:2;padding:0 40px;max-width:760px}
-@media(max-width:680px){.film-frame .txt{padding:0 24px}}
 
-/* frame layouts */
-.film-frame.layout-right .txt{margin-left:auto;text-align:right}
-.film-frame.layout-center{justify-content:center;text-align:center}
-.film-frame.layout-center .txt{text-align:center}
+/* ===== VIEWFINDER OVERLAY ===== */
+#vf{position:absolute;inset:0;z-index:10;pointer-events:none}
+.vf-corner{
+  position:absolute;width:26px;height:26px;
+  border-color:rgba(245,242,236,.55);border-style:solid;
+  transition:border-color .4s,width .4s,height .4s;
+}
+.vf-corner.locked{border-color:var(--green)}
+.vf-tl{top:18px;left:18px;border-width:2px 0 0 2px}
+.vf-tr{top:18px;right:18px;border-width:2px 2px 0 0}
+.vf-bl{bottom:18px;left:18px;border-width:0 0 2px 2px}
+.vf-br{bottom:18px;right:18px;border-width:0 2px 2px 0}
+.vf-corner.wide{width:36px;height:36px}
+@media(min-width:600px){
+  .vf-corner{width:34px;height:34px}
+  .vf-corner.wide{width:48px;height:48px}
+  .vf-tl{top:28px;left:28px}.vf-tr{top:28px;right:28px}
+  .vf-bl{bottom:28px;left:28px}.vf-br{bottom:28px;right:28px}
+}
+#afBox{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:52px;height:36px;
+  border:1px solid rgba(245,242,236,.28);
+  transition:border-color .3s,width .3s,height .3s;
+}
+#afBox.locked{border-color:var(--green);width:42px;height:28px}
+#afStatus{
+  position:absolute;
+  bottom:calc(50% - 38px);left:50%;
+  transform:translateX(-50%);
+  font-family:var(--mono);font-size:9px;letter-spacing:.35em;
+  color:rgba(245,242,236,.45);text-transform:uppercase;white-space:nowrap;
+  transition:color .3s;
+}
+#afStatus.locked{color:var(--green)}
+.vf-expo{
+  position:absolute;bottom:22px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:rgba(245,242,236,.3);
+}
+.vf-expo-l{left:20px}.vf-expo-r{right:20px;text-align:right}
+@media(min-width:600px){.vf-expo{bottom:32px;font-size:10px}}
 
-.film-label{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--signal);margin-bottom:18px;display:flex;align-items:center;gap:10px}
-.layout-right .film-label,.layout-center .film-label{justify-content:flex-end}
-.layout-center .film-label{justify-content:center}
-.film-label::before{content:"";width:30px;height:1px;background:var(--signal)}
-.layout-right .film-label::before,.layout-center .film-label::before{display:none}
-.layout-right .film-label::after,.layout-center .film-label::after{content:"";width:30px;height:1px;background:var(--signal)}
-h2.film-h{font-size:clamp(28px,5vw,68px);font-weight:800;letter-spacing:-.025em;line-height:1.06;color:var(--headlight)}
-.film-copy{margin-top:16px;font-size:13.5px;line-height:2;color:var(--smoke);max-width:44ch}
-.layout-right .film-copy{margin-left:auto}
-.layout-center .film-copy{margin:16px auto 0}
-.film-num{position:absolute;bottom:24px;right:28px;font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:rgba(245,242,236,.3)}
+#scrollHint{
+  position:absolute;
+  bottom:calc(env(safe-area-inset-bottom)+56px);
+  left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:10px;letter-spacing:.28em;
+  color:rgba(245,242,236,.38);white-space:nowrap;
+  animation:pulse 2.4s ease-in-out infinite;
+  transition:opacity .6s;
+}
+#scrollHint.hidden{opacity:0}
+@keyframes pulse{0%,100%{opacity:.38}50%{opacity:.65}}
 
-/* scrim variants */
-.scrim-left{background:linear-gradient(to right,rgba(6,5,9,.85) 0%,rgba(6,5,9,.55) 50%,transparent 100%)}
-.scrim-right{background:linear-gradient(to left,rgba(6,5,9,.85) 0%,rgba(6,5,9,.55) 50%,transparent 100%)}
-.scrim-center{background:radial-gradient(ellipse at 50% 60%,rgba(6,5,9,.7) 0%,rgba(6,5,9,.3) 60%,transparent 100%)}
-.scrim-bottom{background:linear-gradient(to bottom,transparent 0%,rgba(6,5,9,.85) 80%)}
+.hud{position:absolute;z-index:20;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--smoke)}
+.hud-tl{top:20px;left:20px;pointer-events:auto}
+.hud-tr{top:18px;right:20px;pointer-events:auto}
+.brand{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ink)}
+.brand em{font-style:normal;color:var(--signal)}
+.nav-cta{
+  display:inline-block;pointer-events:auto;
+  border:1px solid var(--line);padding:7px 14px;border-radius:999px;
+  color:var(--ink);letter-spacing:.14em;font-size:10px;font-family:var(--mono);
+  backdrop-filter:blur(6px);background:rgba(5,7,9,.5);
+  transition:background .3s,border-color .3s;
+}
+.nav-cta:hover{background:var(--signal);border-color:var(--signal)}
 
-/* ============ GALLERY ============ */
-#styles{padding:100px 0 80px;position:relative;z-index:2}
-.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
-.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--signal);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+#carReveal{
+  position:absolute;
+  bottom:calc(env(safe-area-inset-bottom)+48px);
+  left:0;right:0;padding:0 24px;text-align:center;
+  opacity:0;transform:translateY(12px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);
+  pointer-events:none;z-index:15;
+}
+#carReveal.visible{opacity:1;transform:none}
+#carReveal .cr-tag{font-family:var(--mono);font-size:9.5px;letter-spacing:.35em;color:var(--green);margin-bottom:10px;display:block}
+#carReveal .cr-name{font-weight:800;font-size:clamp(26px,5vw,52px);letter-spacing:-.03em;color:var(--ink);line-height:1.05}
+#carReveal .cr-sub{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--smoke);margin-top:10px;display:block}
+
+#focusBar{position:absolute;bottom:0;left:0;height:2px;background:var(--signal);width:0%;z-index:15}
+
+/* ===== CONTENT ===== */
+.sec{padding:88px 0;background:var(--bg)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--signal);display:flex;align-items:center;gap:12px;margin-bottom:24px}
 .eyebrow::after{content:"";height:1px;flex:1;background:var(--line)}
-h2.sec{font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(28px,5vw,64px);color:var(--headlight)}
-.rv{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-.rv.in{opacity:1;transform:none}
-.muted{color:var(--smoke)}
-.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:44px}
-.card{position:relative;aspect-ratio:3/2;overflow:hidden;background:#0d0b12;border-radius:4px;border:1px solid var(--line)}
-.card.card-hero{grid-column:1/-1;aspect-ratio:16/9}
-.card img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
-.card:hover img{transform:scale(1.04)}
-.card .tag{position:absolute;left:14px;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.22em;background:rgba(7,6,10,.72);padding:8px 12px;border-radius:3px;backdrop-filter:blur(4px);color:var(--headlight)}
-.card .num{position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:11px;color:var(--smoke)}
-@media(max-width:560px){.gal-grid{grid-template-columns:1fr}.card.card-hero{aspect-ratio:3/2}}
-
-/* ============ STATEMENT ============ */
-#statement{padding:120px 0;position:relative;z-index:2}
-.stmt-inner{max-width:700px;margin:0 auto;text-align:center}
-.stmt-inner .eyebrow{justify-content:center}
-.stmt-inner .eyebrow::after{display:none}
-.kpi{display:flex;gap:36px;margin-top:44px;font-family:var(--mono);justify-content:center}
-.kpi div b{display:block;font-size:26px;font-weight:800;color:var(--headlight);letter-spacing:0;font-variant-numeric:tabular-nums}
-.kpi div span{font-size:9px;letter-spacing:.25em;color:var(--smoke)}
-
-/* ============ PRICE ============ */
-#price{padding:100px 0;background:linear-gradient(rgba(10,8,16,.55),rgba(6,5,9,.8));position:relative;z-index:2}
-.notice{border:1px solid rgba(255,30,45,.35);background:rgba(255,30,45,.07);border-radius:6px;padding:18px 20px;font-size:12px;line-height:2;color:var(--smoke);margin:34px 0}
-.notice b{color:var(--headlight)}
-details.miseru{border:1px solid var(--line);border-radius:6px;margin-top:14px;overflow:hidden;background:rgba(6,5,9,.5)}
-details.miseru summary{cursor:pointer;list-style:none;padding:14px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--smoke);display:flex;justify-content:space-between;align-items:center}
-details.miseru summary::-webkit-details-marker{display:none}
-details.miseru summary::after{content:"+";color:var(--signal);font-size:16px}
-details.miseru[open] summary::after{content:"−"}
-details.miseru .d-body{padding:4px 20px 18px;font-size:12.5px;line-height:2.1;color:var(--smoke)}
-details.miseru .d-body b{color:var(--headlight)}
-.rows{margin-top:46px;border-top:1px solid var(--line)}
-.row-item{display:grid;grid-template-columns:60px 100px 1fr auto auto;gap:20px;align-items:center;padding:24px 6px;border-bottom:1px solid var(--line);transition:padding .35s,background .35s;position:relative}
-.row-item::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--signal);transition:width .5s cubic-bezier(.16,1,.3,1)}
-.row-item:hover::before{width:100%}
-.row-item:hover{padding-left:18px;background:rgba(255,30,45,.04)}
-.row-item .no{font-family:var(--mono);font-size:11px;color:var(--smoke)}
-.row-item .cat{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--signal)}
-.row-item .ttl{font-size:14.5px;font-weight:600;color:var(--headlight)}
-.row-item .ttl span{display:block;font-weight:400;font-size:11.5px;color:var(--smoke);margin-top:5px;line-height:1.8}
-.row-item .yen{font-weight:800;font-size:clamp(15px,2vw,20px);letter-spacing:-.02em;white-space:nowrap;color:var(--headlight)}
-.row-item .yen i{font-style:normal;font-family:var(--mono);font-size:9px;display:block;color:var(--smoke);letter-spacing:.2em;text-align:right;margin-top:4px}
-.row-item .go{font-family:var(--mono);font-size:10px;letter-spacing:.2em;border:1px solid var(--line);border-radius:999px;padding:9px 16px;transition:background .3s,border-color .3s;white-space:nowrap;color:var(--headlight)}
-.row-item .go:hover{background:var(--signal);border-color:var(--signal)}
-@media(max-width:760px){.row-item{grid-template-columns:1fr auto;grid-template-areas:"cat cat" "ttl yen" "go go"}.row-item .no{display:none}.row-item .cat{grid-area:cat}.row-item .ttl{grid-area:ttl}.row-item .yen{grid-area:yen}.row-item .go{grid-area:go;text-align:center}}
-
-/* ============ CASES ============ */
-#cases{padding:100px 0;position:relative;z-index:2}
-.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
-.case{border:1px solid var(--line);border-radius:6px;padding:28px 24px;background:linear-gradient(170deg,rgba(20,16,28,.82),rgba(9,7,14,.82));backdrop-filter:blur(3px);transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .4s}
-.case:hover{transform:translateY(-8px);border-color:rgba(255,30,45,.5)}
-.case .cn{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--signal)}
-.case h3{margin:14px 0 5px;font-size:19px;font-weight:700;color:var(--headlight)}
-.case .en{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--smoke)}
-.case p{margin-top:14px;font-size:12.5px;line-height:2.1;color:var(--smoke)}
-.case .meta{margin-top:18px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--headlight);border-top:1px solid var(--line);padding-top:12px}
-@media(max-width:860px){.case-grid{grid-template-columns:1fr}}
-
-/* ============ CTA ============ */
-#contact{padding:140px 0 120px;text-align:center;position:relative;z-index:2}
-#contact .giant{font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:-.03em;font-size:clamp(44px,9vw,128px);color:var(--headlight)}
-#contact .giant em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--headlight)}
-#contact .steps{display:flex;justify-content:center;gap:30px;margin:36px 0 46px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--smoke);flex-wrap:wrap}
-.btn-cta{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.14em;padding:20px 44px;background:var(--signal);border:1px solid var(--signal);color:#fff;font-weight:700;border-radius:999px;box-shadow:0 0 60px rgba(255,30,45,.35);transition:background .3s}
-.btn-cta:hover{background:#ff4450}
-.cta-sub{display:block;margin-top:20px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--smoke)}
-
-/* ============ FOOTER ============ */
-footer{border-top:1px solid var(--line);padding:54px 0 100px;font-size:11.5px;line-height:2.2;color:var(--smoke);position:relative;z-index:2;background:rgba(6,5,9,.8)}
-footer .disc{max-width:760px}
-footer .disc b{color:var(--headlight)}
-footer .links{margin-top:28px;display:flex;gap:24px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;flex-wrap:wrap}
-footer .links a{color:var(--headlight);border-bottom:1px solid var(--line);padding-bottom:3px}
-footer .fin{margin-top:36px;font-family:var(--mono);font-size:9px;letter-spacing:.3em}
-
-/* ============ ANN BAND ============ */
-.ann-band{display:none}
-body.explain-on .ann-band{display:block;position:relative;z-index:3;background:rgba(255,30,45,.07);border-top:1px solid rgba(255,30,45,.3);border-bottom:1px solid rgba(255,30,45,.3);padding:18px 0}
-.ann-in{display:flex;align-items:flex-start;gap:14px;max-width:880px;margin:0 auto;padding:0 24px}
-.ann-circle{flex-shrink:0;width:34px;height:34px;background:var(--signal);color:#fff;border-radius:50%;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
-.ann-body{font-size:13px;line-height:1.85;color:var(--smoke)}
-.ann-body strong{display:block;color:var(--headlight);font-size:10px;font-weight:700;letter-spacing:.18em;margin-bottom:4px;font-family:var(--mono);text-transform:uppercase}
-
-.explain-toggle{position:fixed;bottom:18px;left:14px;z-index:150;background:rgba(6,5,9,.7);color:var(--headlight);border:1px solid var(--line);border-radius:99px;padding:10px 18px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px);transition:background .25s,border-color .25s;font-family:var(--mono);letter-spacing:.1em}
-body.explain-on .explain-toggle{background:var(--signal);border-color:var(--signal)}
-@media(min-width:769px){.explain-toggle{bottom:24px;left:24px}}
+.sec-h{font-weight:800;letter-spacing:-.02em;line-height:1.08;font-size:clamp(30px,5vw,62px);color:var(--ink)}
+.sec-lead{color:var(--smoke);line-height:2;font-size:14px;max-width:50ch;margin-top:16px}
+#statement{background:linear-gradient(180deg,#050709 0%,#090c14 100%);padding:100px 0}
+#statement .big{font-weight:800;font-size:clamp(34px,6vw,80px);letter-spacing:-.03em;line-height:1.1;color:var(--ink)}
+#statement .big em{font-style:normal;color:var(--signal)}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:44px}
+@media(max-width:680px){.gal{grid-template-columns:1fr}}
+.gal figure{position:relative;overflow:hidden;border-radius:3px}
+.gal figure img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .9s cubic-bezier(.16,1,.3,1);display:block}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;background:linear-gradient(transparent,rgba(0,0,0,.65));font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--ink)}
+.disclaimer{margin-top:36px;padding:16px 20px;border:1px dashed rgba(245,242,236,.12);border-radius:4px;font-size:12.5px;color:var(--smoke);line-height:2}
+.disclaimer b{color:rgba(245,242,236,.65)}
+#price{background:#090c14;padding:100px 0}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:44px}
+@media(max-width:580px){.price-grid{grid-template-columns:1fr}}
+.price-card{border:1px solid var(--line);padding:30px 26px;border-radius:5px;background:rgba(255,255,255,.025)}
+.price-card.star{border-color:rgba(255,30,45,.5);background:rgba(255,30,45,.05)}
+.price-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;color:var(--smoke);margin-bottom:8px}
+.price-num{font-size:clamp(22px,3.5vw,34px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.price-num small{font-size:.52em;font-weight:400;color:var(--smoke);letter-spacing:0}
+.price-desc{color:var(--smoke);font-size:13px;line-height:1.85;margin-top:10px}
+#cta{padding:100px 0;text-align:center}
+#cta .cta-h{font-weight:800;font-size:clamp(24px,4vw,50px);letter-spacing:-.02em;line-height:1.2}
+#cta .cta-lead{color:var(--smoke);font-size:14px;line-height:2;margin:18px auto 0;max-width:44ch}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.btn{display:inline-block;padding:13px 26px;border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;border:1px solid var(--line);transition:background .3s,border-color .3s,color .3s}
+.btn-primary{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn-primary:hover{background:#e01020;border-color:#e01020}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--ink)}
+.btn-ghost:hover{background:var(--signal);border-color:var(--signal)}
+footer{border-top:1px solid var(--line);padding:26px 24px;font-family:var(--mono);display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;font-size:11px;color:var(--smoke)}
+footer a{color:var(--smoke);transition:color .2s}
+footer a:hover{color:var(--ink)}
+.fin{color:rgba(245,242,236,.18);font-size:9.5px;letter-spacing:.18em;margin-top:8px;width:100%;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms!important;animation:none!important}}
 </style>
 </head>
 <body>
 
-<div class="grain" aria-hidden="true"></div>
-<div class="nav-line" id="navLine"></div>
+<div id="focusContainer">
+  <div id="heroSticky">
+    <img id="carPhoto" src="../img/samples/car/optimized/car-hero.jpg" alt="">
 
-<!-- NAV -->
-<nav class="nav" aria-label="メインナビ">
-  <a href="../index.html" class="nav-logo">MISERU <em>/ SAMPLE</em></a>
-  <div class="nav-links">
-    <a href="#styles">STYLES</a>
-    <a href="#price">PRICE</a>
-    <a href="#contact" class="nav-cta">LINEで相談 ⏎</a>
-  </div>
-  <span class="nav-badge">v2-b · FICTIONAL</span>
-</nav>
+    <div id="vf" aria-hidden="true">
+      <div class="vf-corner vf-tl"></div>
+      <div class="vf-corner vf-tr"></div>
+      <div class="vf-corner vf-bl"></div>
+      <div class="vf-corner vf-br"></div>
+      <div id="afBox"></div>
+      <div id="afStatus">SCROLL TO FOCUS</div>
+      <div class="vf-expo vf-expo-l">1/500&nbsp;&nbsp;f2.8&nbsp;&nbsp;ISO 400</div>
+      <div class="vf-expo vf-expo-r">MISERU · PHOTO</div>
+    </div>
 
-<!-- ============ HERO ============ -->
-<section id="hero">
-  <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-scrim"></div>
-  <div class="hero-content">
-    <div class="hero-badge"><i></i>MISERU SAMPLE · FICTIONAL · 架空サンプル</div>
-    <h1 class="hero-h" aria-label="CREATIVE CAR EXPERIENCES">
-      <span class="row"><span class="ch">C</span><span class="ch">R</span><span class="ch">E</span><span class="ch">A</span><span class="ch">T</span><span class="ch">I</span><span class="ch">V</span><span class="ch">E</span><span class="ch">&nbsp;</span><span class="ch accent">C</span><span class="ch accent">A</span><span class="ch accent">R</span></span>
-      <span class="row"><span class="ch">E</span><span class="ch">X</span><span class="ch">P</span><span class="ch">E</span><span class="ch">R</span><span class="ch">I</span><span class="ch">E</span><span class="ch">N</span><span class="ch">C</span><span class="ch">E</span><span class="ch">S</span></span>
-    </h1>
-    <p class="hero-sub">一台のこだわりを、相談につなげる。これは <strong>MISERU が制作した演出強めの車・バイク見せ方サンプル</strong>です。実在店舗・実在事例ではありません。</p>
-  </div>
-  <div class="scroll-cue" aria-hidden="true">SCROLL</div>
-</section>
+    <div class="hud hud-tl"><a href="../index.html" class="brand">MISERU <em>·</em> SAMPLE</a></div>
+    <div class="hud hud-tr"><a href="../index.html#contact" class="nav-cta">無料相談</a></div>
 
-<!-- MARQUEE -->
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>CREATIVE CAR EXPERIENCES <b>—</b> MISERU SAMPLE <b>—</b> FICTIONAL SHOWROOM <b>—</b> PHOTO DIRECTION <b>—</b> LINE FIRST <b>—</b>&nbsp;</span>
-    <span>CREATIVE CAR EXPERIENCES <b>—</b> MISERU SAMPLE <b>—</b> FICTIONAL SHOWROOM <b>—</b> PHOTO DIRECTION <b>—</b> LINE FIRST <b>—</b>&nbsp;</span>
+    <div id="scrollHint">↓ SCROLL</div>
+    <div id="focusBar"></div>
+
+    <div id="carReveal">
+      <span class="cr-tag">FOCUS LOCKED</span>
+      <p class="cr-name">撮影込みで<br>整えるHP</p>
+      <span class="cr-sub">STANDARD ¥298,000〜 · 撮影込みおまかせ</span>
+    </div>
   </div>
 </div>
 
-<!-- ============ CINEMATIC FILM SEQUENCE ============ -->
-<div class="film-seq" aria-label="フォトシーケンス">
-
-  <!-- FRAME A: URBAN (car-westin) -->
-  <div class="film-frame">
-    <div class="photo" style="background-image:url('../img/samples/car/optimized/car-westin.jpg')"></div>
-    <div class="scrim scrim-left"></div>
-    <div class="txt">
-      <div class="film-label">01 — URBAN</div>
-      <h2 class="film-h">場所が、<br>格を語る。</h2>
-      <p class="film-copy">どこで撮るかが、その一台の文脈を作る。ホテルの車寄せ、夜のビル群——背景を選ぶだけで、同じ車が別の存在になります。</p>
-    </div>
-    <span class="film-num">001 / 003</span>
-  </div>
-
-  <!-- FRAME B: DOORS (car-street) right-aligned -->
-  <div class="film-frame layout-right">
-    <div class="photo" style="background-image:url('../img/samples/car/optimized/car-street.jpg');background-position:50% 30%"></div>
-    <div class="scrim scrim-right"></div>
-    <div class="txt">
-      <div class="film-label">02 — DOORS</div>
-      <h2 class="film-h">開けた<br>瞬間が、主役。</h2>
-      <p class="film-copy">ガルウィングが跳ね上がる瞬間。そのドラマを写真に残す。「開いた状態」だけで問い合わせが変わることがあります。</p>
-    </div>
-    <span class="film-num">002 / 003</span>
-  </div>
-
-  <!-- FRAME C: OWNER (car-owner-a) center -->
-  <div class="film-frame layout-center">
-    <div class="photo" style="background-image:url('../img/samples/car/optimized/car-owner-a.jpg');background-position:50% 80%"></div>
-    <div class="scrim scrim-center"></div>
-    <div class="txt">
-      <div class="film-label">03 — OWNER</div>
-      <h2 class="film-h">乗る人ごと、<br>撮る。</h2>
-      <p class="film-copy">車だけでなく、オーナーを入れることで物語が生まれる。「誰が乗っているか」が、共感と信頼の入口になります。</p>
-    </div>
-    <span class="film-num">003 / 003</span>
-  </div>
-
-</div>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>フォトシーケンスの設計意図</strong>WebGLなしでも「スクロールして発見する体験」を作れる。写真一枚ずつに物語を与えることで、スペック列挙より深く伝わります。</div></div></div>
-
-<!-- ============ GALLERY ============ -->
-<section id="styles">
+<section class="sec" id="statement">
   <div class="wrap">
-    <div class="eyebrow rv">005 / STYLES — ALL SHOTS</div>
-    <h2 class="sec rv">同じ一台を、<br>5つの見せ方で。</h2>
-    <p class="muted rv" style="margin-top:16px;font-size:13px;line-height:2;max-width:52ch">販売前に映える型、SNSで伸びる型、街での日常の型。どの写真をどう見せるかで、伝わるものが変わります。</p>
-  </div>
-  <div class="wrap gal-grid">
-    <figure class="card card-hero rv"><img src="../img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー" loading="lazy"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
-    <figure class="card rv"><img src="../img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー" loading="lazy"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
-    <figure class="card rv"><img src="../img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）" loading="lazy"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
-    <figure class="card rv"><img src="../img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー" loading="lazy"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
-    <figure class="card rv"><img src="../img/samples/car/optimized/car-owner-a.jpg" alt="ドアを上げた赤いスポーツカーの脇に座る人物" style="object-position:50% 100%" loading="lazy"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">02</div><div class="ann-body"><strong>一台を「5つの見せ方」で</strong>同じ車でも、街・場所・ドアを開けた瞬間で伝わる物語が変わる。どの写真をどう並べるかが、問い合わせの質を決めます。</div></div></div>
-
-<!-- ============ STATEMENT ============ -->
-<section id="statement">
-  <div class="wrap">
-    <div class="stmt-inner">
-      <div class="eyebrow rv">STATEMENT</div>
-      <h2 class="sec rv">引き算から、<br>はじめる。</h2>
-      <p class="muted rv" style="margin-top:20px;font-size:13.5px;line-height:2.2;max-width:44ch;margin-left:auto;margin-right:auto">「全部盛る」提案はしません。<strong style="color:var(--headlight);font-weight:600">やらないことを決めるのも、仕事のうち。</strong>一台ずつ状態と目的を見て、半歩ずつ進める選択肢からお出しします。</p>
-      <div class="kpi rv">
-        <div><b data-count="5">0</b><span>SHOTS</span></div>
-        <div><b data-count="3">0</b><span>CINEMATIC FRAMES</span></div>
-        <div><b data-count="1">0</b><span>LINEから</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">03</div><div class="ann-body"><strong>引き算で、技術を語る</strong>全部盛らない提案こそ信頼。WebGLなしでもこれだけの体験が作れることを実証します。</div></div></div>
-
-<!-- ============ PRICE ============ -->
-<section id="price">
-  <div class="wrap">
-    <div class="eyebrow rv">PRICE — SAMPLE ONLY</div>
-    <h2 class="sec rv">仕事と料金の早見表<span class="muted">（架空例）。</span></h2>
-    <div class="notice rv"><b>※ 以下は架空の車関連サービスサイトとしての料金表示例です。</b><br>これは MISERU が制作した架空サンプルHPの表示パターンであり、MISERU の料金ではありません。実在店舗の料金でもありません。</div>
-    <details class="miseru rv">
-      <summary>MISERU 自身の料金はこちら</summary>
-      <div class="d-body">
-        無料相談 <b>¥0</b>（方向性・合うプラン・概算目安）／初回見立てシート <b>¥9,800〜</b><br>
-        BASIC <b>¥98,000〜</b>｜見せ方リペア（撮影なし）<br>
-        STANDARD <b>¥298,000〜</b> ★おすすめ｜撮影込み・おまかせHP<br>
-        PREMIUM <b>¥498,000〜</b>｜撮影込み・しっかりHP<br>
-        ※写真が揃っている方は、撮影分 −¥100,000 でご提案します。詳細は <a href="../index.html" style="color:var(--signal)">MISERU トップ</a> へ。
-      </div>
-    </details>
-    <div class="rows rv">
-      <div class="row-item"><span class="no">01</span><span class="cat">CUSTOM</span><div class="ttl">仕様相談 / ホイール / 車高 / エアロ<span>一台ずつ図面。最低受注額あり。</span></div><div class="yen">¥80,000〜<i>PER PROJECT</i></div><a class="go" href="#contact">相談する →</a></div>
-      <div class="row-item"><span class="no">02</span><span class="cat">COATING</span><div class="ttl">スタンダード（ガラス系）<span>下地洗浄 + 1層 / 2日。</span></div><div class="yen">¥58,000<i>STANDARD</i></div><a class="go" href="#contact">相談する →</a></div>
-      <div class="row-item"><span class="no">03</span><span class="cat">COATING</span><div class="ttl">プレミアム（多層ガラス）<span>下地補修 + 多層 / 3日。</span></div><div class="yen">¥128,000<i>PREMIUM</i></div><a class="go" href="#contact">相談する →</a></div>
-      <div class="row-item"><span class="no">04</span><span class="cat">PHOTO</span><div class="ttl">仕上がり撮影 / 5カット<span>仕様の見え方を残す目的の撮影。</span></div><div class="yen">¥38,000<i>5 CUTS</i></div><a class="go" href="#contact">相談する →</a></div>
-      <div class="row-item"><span class="no">05</span><span class="cat">SALES</span><div class="ttl">販売前の見せ方相談<span>写真の選び方・文章・出品ページの整え方。</span></div><div class="yen">¥48,000〜<i>PER PROJECT</i></div><a class="go" href="#contact">相談する →</a></div>
-    </div>
-    <p class="muted rv" style="margin-top:18px;font-size:11.5px;line-height:2">※ 出張対応・特殊塗装・パーツ持込はご相談ください（架空例）。</p>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">04</div><div class="ann-body"><strong>料金は「例」を正直に分ける</strong>架空の料金表とMISERU自身の料金を明確に分離。誤認させない設計が、そのまま誠実さの証明になります。</div></div></div>
-
-<!-- ============ CASES ============ -->
-<section id="cases">
-  <div class="wrap">
-    <div class="eyebrow rv">003 / CASES</div>
-    <h2 class="sec rv">三つの相談例。</h2>
-    <div class="case-grid">
-      <article class="case rv"><span class="cn">N°01</span><h3>足回りだけ、半歩。</h3><span class="en">WHEEL &amp; RIDE HEIGHT</span><p>「もっと盛りたい」というご相談には、まずホイールだけ変えて1ヶ月乗っていただく形を提案することも。</p><div class="meta">輸入セダン想定 / WHEEL / RIDE-HEIGHT</div></article>
-      <article class="case rv"><span class="cn">N°02</span><h3>艶を出す前に、下地。</h3><span class="en">SURFACE &amp; COATING</span><p>「とりあえずコーティングだけ」には、塗装の状態を見て下地補修からお勧めすることも。深い艶は、下地が8割。</p><div class="meta">国産クーペ想定 / POLISH / PREMIUM COAT</div></article>
-      <article class="case rv"><span class="cn">N°03</span><h3>売却用に、夜の撮影で。</h3><span class="en">PHOTOSHOOT</span><p>売却サイトの写真として、夜・室内灯下で7カットといった見せ方も。ヘッドライトと塗装の艶が映る構図に絞ると、訴求が変わります。</p><div class="meta">輸入スポーツ想定 / PHOTO ONLY / 7 CUTS</div></article>
-    </div>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">05</div><div class="ann-body"><strong>相談例で「頼み方」を教える</strong>「何でもやります」より、3つの具体例。自分の状況を重ねられると、相談が生まれます。</div></div></div>
-
-<!-- ============ CTA ============ -->
-<section id="contact">
-  <div class="wrap">
-    <h2 class="giant rv">LINE.<br><em>FIRST.</em></h2>
-    <div class="steps rv"><span>01 — 車両写真と、ご希望を一言</span><span>02 — 方向の希望を共有</span><span>03 — 概算の例をLINEでお返し</span></div>
-    <a class="btn-cta rv" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">LINEで仕様を相談する →</a>
-    <span class="cta-sub">※ LINEボタンはすべて MISERU 公式LINE につながります（架空店舗の連絡先ではありません）</span>
+    <p class="eyebrow">Photography × Web</p>
+    <p class="big">ピントが合うと、<br><em>見え方が変わる。</em></p>
+    <p class="sec-lead">写真の見せ方ひとつで、「問い合わせたい」が生まれます。MISERUは撮影から見せ方まで一貫して整えます。</p>
   </div>
 </section>
 
-<!-- ============ FOOTER ============ -->
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2 class="sec-h">1台を、最高の瞬間で。</h2>
+    <p class="sec-lead">販売前・納車前・保管中。どの瞬間もMISERUが記録します。</p>
+    <div class="gal">
+      <figure><img src="../img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー（架空サンプル）"><figcaption>STREET — 街の中で、存在感を。</figcaption></figure>
+      <figure><img src="../img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー（架空サンプル）"><figcaption>URBAN — 場所が、格を語る。</figcaption></figure>
+      <figure><img src="../img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（架空サンプル）"><figcaption>DAY — 日常の中の非日常。</figcaption></figure>
+    </div>
+    <p class="disclaimer"><b>※ 架空サンプルです。</b>実在の店舗・実在の販売車両ではありません。掲載写真はMISERUの見せ方サンプルであり、制作実績ではありません。</p>
+  </div>
+</section>
+
+<section class="sec" id="price">
+  <div class="wrap">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="sec-h">料金・プラン。</h2>
+    <p class="sec-lead">初回相談無料。まず方向性を確認してから進めます。</p>
+    <div class="price-grid">
+      <div class="price-card"><p class="price-label">INITIAL SHEET</p><p class="price-num">¥9,800<small>〜</small></p><p class="price-desc">改善案・写真選定・文章案・ラフをA4数枚に。約1週間。制作費から全額充当。</p></div>
+      <div class="price-card"><p class="price-label">BASIC</p><p class="price-num">¥98,000<small>〜</small></p><p class="price-desc">撮影なし・写真あり向け。見せ方リペア。2〜3週間〜。</p></div>
+      <div class="price-card star"><p class="price-label">STANDARD ★ おすすめ</p><p class="price-num">¥298,000<small>〜</small></p><p class="price-desc">撮影込みおまかせHP。トップ+2〜4ページ。4〜6週間〜。写真持参で−¥100,000。</p></div>
+      <div class="price-card"><p class="price-label">PREMIUM</p><p class="price-num">¥498,000<small>〜</small></p><p class="price-desc">撮影込み10ページ前後。1.5〜2ヶ月〜。写真持参で−¥100,000。</p></div>
+    </div>
+    <p class="disclaimer" style="margin-top:24px">支払い：着手時50%・公開時50%。無料相談=方向性とプラン概算のみ（具体案は初回見立てシートから）。</p>
+  </div>
+</section>
+
+<section class="sec" id="cta">
+  <div class="wrap" style="text-align:center">
+    <p class="eyebrow" style="justify-content:center">Contact</p>
+    <h2 class="cta-h">あなたの1台も、<br>こんな風に。</h2>
+    <p class="cta-lead">まず写真とURLを送ってください。方向性と合いそうなプランをお返しします（無料）。</p>
+    <div class="cta-btns">
+      <a href="../index.html#contact" class="btn btn-primary">無料相談・写真を送る</a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">公式LINEで相談</a>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="wrap">
-    <p class="disc"><b>これは MISERU が制作した架空の演出強めサンプルHPです。</b>掲載されている店舗設定・所在地表現・料金はすべて見せ方の表示例（架空）で、実在店舗・実在事例ではありません。掲載写真のナンバープレートは、サンプル制作上すべて塗りつぶし処理しています。</p>
-    <p class="disc" style="margin-top:16px">この「見せ方の型」は、建設・美容・飲食・ペット・工房などにも応用できます。MISERU は中小事業のWebを整える編集室。</p>
-    <div class="links">
-      <a href="../index.html#contact">MISERUに無料相談する →</a>
-      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">MISERU公式LINE →</a>
-      <a href="../sample-pet.html">ペットのサンプル →</a>
-      <a href="../sample-food.html">飲食のサンプル →</a>
-      <a href="../index.html">MISERUトップへ</a>
-      <a href="../tokushoho.html">特商法表記</a>
-      <a href="../privacy.html">プライバシー</a>
-    </div>
-    <div class="fin">MISERU SAMPLE — CINEMATIC EDITION [v2-b] · FICTIONAL WEBSITE · 実在事例ではありません</div>
-  </div>
+  <span class="brand">MISERU <em style="font-style:normal;color:var(--signal)">·</em> 見せ方を整える編集室</span>
+  <nav style="display:flex;gap:18px;flex-wrap:wrap">
+    <a href="../index.html">公式サイト</a>
+    <a href="../tokushoho.html">特定商取引法</a>
+    <a href="../privacy.html">プライバシーポリシー</a>
+  </nav>
+  <span class="fin">MISERU SAMPLE — FOCUS PULL EDITION [v2-b] · FICTIONAL WEBSITE · 実在事例ではありません © MISERU</span>
 </footer>
-
-<button class="explain-toggle" aria-pressed="false" id="expBtn">解説モード</button>
 
 <script>
 (function(){
-"use strict";
-var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+'use strict';
+var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var carPhoto   = document.getElementById('carPhoto');
+var afBox      = document.getElementById('afBox');
+var afStatus   = document.getElementById('afStatus');
+var focusBar   = document.getElementById('focusBar');
+var corners    = document.querySelectorAll('.vf-corner');
+var carReveal  = document.getElementById('carReveal');
+var scrollHint = document.getElementById('scrollHint');
+var container  = document.getElementById('focusContainer');
+var MAX_BLUR = 22, LOCK_THRESH = 0.88;
+var locked = false, hintHidden = false;
 
-/* ---- body fade-in ---- */
-window.addEventListener("load", function(){
-  document.body.classList.add("ready");
-});
+function setFocus(p){
+  var blur   = (1 - p) * MAX_BLUR;
+  var bright = 0.72 + p * 0.38;
+  var scale  = 1.08 - p * 0.08;
+  carPhoto.style.filter    = 'blur('+blur.toFixed(2)+'px) brightness('+bright.toFixed(3)+')';
+  carPhoto.style.transform = 'scale('+scale.toFixed(4)+')';
+  focusBar.style.width     = (p * 100).toFixed(1)+'%';
 
-/* ---- nav progress line ---- */
-var navLine = document.getElementById("navLine");
-window.addEventListener("scroll", function(){
-  var docH = Math.max(1, document.body.scrollHeight - innerHeight);
-  navLine.style.width = (window.pageYOffset / docH * 100) + "%";
-}, {passive:true});
-
-/* ---- hero parallax ---- */
-var heroBg = document.getElementById("heroBg");
-if(!reduced && heroBg){
-  window.addEventListener("scroll", function(){
-    var y = window.pageYOffset;
-    heroBg.style.transform = "translateY(" + (y * 0.28) + "px) scale(1.08)";
-  }, {passive:true});
+  if(p >= LOCK_THRESH && !locked){
+    locked = true;
+    afBox.classList.add('locked');
+    afStatus.classList.add('locked');
+    afStatus.textContent = 'FOCUS LOCKED';
+    corners.forEach(function(c){ c.classList.add('locked'); c.classList.remove('wide'); });
+    carReveal.classList.add('visible');
+  } else if(p < LOCK_THRESH && locked){
+    locked = false;
+    afBox.classList.remove('locked');
+    afStatus.classList.remove('locked');
+    afStatus.textContent = p < 0.05 ? 'SCROLL TO FOCUS' : 'FOCUSING···';
+    corners.forEach(function(c){ c.classList.remove('locked'); });
+    carReveal.classList.remove('visible');
+  } else if(!locked){
+    afStatus.textContent = p < 0.05 ? 'SCROLL TO FOCUS' : 'FOCUSING···';
+    var wide = p > 0.1 && p < LOCK_THRESH;
+    corners.forEach(function(c){ wide ? c.classList.add('wide') : c.classList.remove('wide'); });
+  }
+  if(p > 0.06 && !hintHidden){ hintHidden = true; scrollHint.classList.add('hidden'); }
 }
 
-/* ---- cinematic film frames ---- */
-var frameIO = new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(en.isIntersecting){ en.target.classList.add("in"); }
-    else { en.target.classList.remove("in"); }
-  });
-}, {threshold: 0.2});
-document.querySelectorAll(".film-frame").forEach(function(el){ frameIO.observe(el); });
+if(reduced){ setFocus(1); return; }
 
-/* ---- scroll reveals + counters ---- */
-var io = new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(en.isIntersecting){
-      en.target.classList.add("in");
-      en.target.querySelectorAll("[data-count]").forEach(startCount);
-      io.unobserve(en.target);
-    }
-  });
-}, {threshold: 0.15});
-document.querySelectorAll(".rv").forEach(function(el){ io.observe(el); });
-
-function startCount(el){
-  var end = parseInt(el.getAttribute("data-count"), 10), t0 = performance.now(), dur = 1200;
-  (function step(){
-    var p = Math.min(1, (performance.now()-t0)/dur);
-    var e = 1 - Math.pow(1-p, 3);
-    el.textContent = Math.floor(end * e).toLocaleString();
-    if(p < 1) requestAnimationFrame(step);
-  })();
+function onScroll(){
+  var rect = container.getBoundingClientRect();
+  var range = container.offsetHeight - window.innerHeight;
+  var p = Math.max(0, Math.min(1, -rect.top / Math.max(1, range)));
+  setFocus(p);
 }
-
-/* ---- reduced-motion: show all ---- */
-if(reduced){
-  document.querySelectorAll(".rv,.film-frame").forEach(function(el){
-    el.classList.add("in");
-  });
-}
-
-/* ---- explain toggle ---- */
-var expBtn = document.getElementById("expBtn");
-if(expBtn){
-  expBtn.addEventListener("click", function(){
-    var on = document.body.classList.toggle("explain-on");
-    expBtn.setAttribute("aria-pressed", on ? "true" : "false");
-  });
-}
-})();
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+}());
 </script>
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"488a9cb636c342efa6f8796ad615bf1c"}'></script>
 </body>
 </html>
