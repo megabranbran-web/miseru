@@ -293,11 +293,11 @@ body.explain-on .ann-band{display:block;position:relative;z-index:3;background:r
     <p class="muted rev" style="margin-top:18px;font-size:13px;line-height:2;max-width:52ch">販売前に映える型、SNSで伸びる型、街での日常の型。どの写真をどう見せるかで、伝わるものが変わります。</p>
   </div>
   <div class="wrap gal-grid">
-    <figure class="card hero"><img src="../img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー" loading="lazy"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー" loading="lazy"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）" loading="lazy"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー" loading="lazy"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-owner-a.jpg" alt="ドアを上げた赤いスポーツカーの脇に座る人物" style="object-position:50% 100%" loading="lazy"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
+    <figure class="card hero"><img src="../img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
+    <figure class="card"><img src="../img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
+    <figure class="card"><img src="../img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
+    <figure class="card"><img src="../img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
+    <figure class="card"><img src="../img/samples/car/optimized/car-owner-a.jpg" alt="ドアを上げた赤いスポーツカーの脇に座る人物" style="object-position:50% 100%"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
   </div>
 </section>
 <div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>一台を「5つの見せ方」で</strong>同じ車でも、街・場所・ドアを開けた瞬間で伝わる物語が変わる。</div></div></div>
@@ -418,11 +418,13 @@ imgs.forEach(function(im){
     im.addEventListener("error", function(){ loadedImgs++; });
   }
 });
-var minTime = reduced ? 200 : 700, t0 = performance.now();
+var minTime = reduced ? 200 : 700, maxTime = 5000, t0 = performance.now();
 (function tickLoad(){
-  var timeP = Math.min(1, (performance.now()-t0)/minTime);
-  var imgP = loadedImgs/totalImgs;
-  target = Math.min(timeP, imgP*0.4 + timeP*0.6) * 100;
+  var elapsed = performance.now() - t0;
+  var timeP = Math.min(1, elapsed / minTime);
+  var imgP = loadedImgs / totalImgs;
+  var forceDone = elapsed > maxTime;
+  target = forceDone ? 100 : Math.min(timeP, imgP*0.4 + timeP*0.6) * 100;
   if(target > 99.5) target = 100;
   prog += (target - prog) * 0.12;
   if(prog > 99.4) prog = 100;
