@@ -1,830 +1,482 @@
 <!DOCTYPE html>
-<!-- lab/car-v2-a.html — TRACK B PROTOTYPE A: 粒子改善版 (2026-06-13)
-     現行sample-car.htmlの粒子システムをベースに5点の確認済みバグを修正。
-     修正箇所は // v2-a: コメントで明示。
-     【変更点】
-     1. 丸グロースプライト → 赤い四角ノイズを解消
-     2. パーティクル数表示を実機値に正直化 (2,400 on mobile, 9,000 on PC)
-     3. heroReveal をZONE 0のみに限定 (ZONE 1へのブリードを排除)
-     4. モバイルスクリムを #styles にも適用
-     5. モバイルHUD左上に背景を追加 (テキスト衝突対策)
-     【不変】content / prices / disclaimers / LINEリンク / 構成順序
+<!-- lab/car-v2-a.html — TRACK B PROTOTYPE A: 雨のガラスを指で拭う (2026-06-13)
+     霧がかったガラス越しの車。指でなぞるとガラスが拭かれ、車が現れる。
+     【不変】prices / disclaimers / LINEリンク
 -->
-<html lang="ja" style="background:#060509">
+<html lang="ja" style="background:#050709">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#060509">
+<meta name="theme-color" content="#050709">
 <meta name="color-scheme" content="dark">
 <meta name="robots" content="noindex,nofollow">
-<meta name="description" content="MISERUが制作した、車・バイク系サービス向けの演出強め見せ方サンプル（架空）。実在店舗・実在事例ではありません。">
-<title>【v2-a 粒子改善版】演出強めの車・バイク見せ方サンプル｜MISERU SAMPLE</title>
+<title>【v2-a 雨拭き版】車・バイク見せ方サンプル｜MISERU SAMPLE</title>
+<meta name="description" content="雨のガラスを指で拭うと車が現れる、車・バイク系サービス向けMISERU見せ方サンプル（架空）。実在事例ではありません。">
 <style>
 :root{
-  --asphalt:#060509;
-  --garage:#15121C;
+  --bg:#050709;
+  --ink:#F5F2EC;
   --signal:#FF1E2D;
-  --headlight:#F5F2EC;
-  --smoke:#9591A0;
-  --line:rgba(245,242,236,.13);
+  --smoke:#8A8699;
+  --line:rgba(245,242,236,.12);
   --mono:"SF Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   --sans:"Helvetica Neue",Helvetica,Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#060509;color-scheme:dark}
-body{color:var(--headlight);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-html{background:#060509}
-body{background:transparent;color-scheme:dark}
-#bgfill{position:fixed;inset:0;z-index:0;pointer-events:none;background:
-  radial-gradient(70% 50% at 75% 8%,rgba(255,30,45,.10),transparent 60%),
-  radial-gradient(60% 50% at 15% 95%,rgba(70,30,110,.14),transparent 65%),
-  #060509}
-#stage{position:fixed;inset:0;z-index:1;pointer-events:none}
-::selection{background:var(--signal);color:#fff}
+html,body{background:var(--bg);color-scheme:dark}
+body{color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-button{font-family:inherit;background:none;border:0;color:inherit;cursor:pointer}
+button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
 
-.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.42;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation:grain 700ms steps(4) infinite}
-@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-2%,1.5%)}50%{transform:translate(1.5%,-2%)}75%{transform:translate(-1%,-1%)}100%{transform:translate(2%,2%)}}
-.vignette{position:fixed;inset:0;pointer-events:none;z-index:89;
-  background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.6) 100%)}
+/* ===== HERO ===== */
+#hero{
+  position:relative;
+  height:100svh;min-height:560px;
+  overflow:hidden;
+  user-select:none;-webkit-user-select:none;
+  background:#050709;
+}
+#carPhoto{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;object-position:50% 55%;
+  filter:brightness(1.1) contrast(1.05) saturate(1.1);
+}
+#fogCanvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  touch-action:none;
+  cursor:crosshair;
+}
 
-#loader{position:fixed;inset:0;background:#040308;z-index:200;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:clip-path .9s cubic-bezier(.83,0,.17,1);clip-path:inset(0 0 0 0)}
-#loader.done{clip-path:inset(0 0 100% 0)}
-#loader .l-brand{font-family:var(--mono);font-size:11px;letter-spacing:.4em;color:var(--smoke)}
-#loader .l-count{font-size:clamp(64px,14vw,140px);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;color:var(--headlight)}
-#loader .l-bar{width:min(360px,60vw);height:1px;background:var(--line);position:relative;overflow:hidden}
-#loader .l-bar i{position:absolute;inset:0;background:var(--signal);transform:scaleX(0);transform-origin:left}
-#loader .l-note{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--smoke)}
+/* HUD */
+.hud{
+  position:absolute;z-index:20;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  color:var(--smoke);pointer-events:none;
+}
+.hud-tl{top:20px;left:20px;pointer-events:auto}
+.hud-tr{top:18px;right:20px;pointer-events:auto;display:flex;align-items:center;gap:14px}
+.brand{font-size:12px;font-weight:700;letter-spacing:.12em;color:var(--ink)}
+.brand em{font-style:normal;color:var(--signal)}
+.nav-cta{
+  pointer-events:auto;display:inline-block;
+  border:1px solid var(--line);padding:7px 14px;border-radius:999px;
+  color:var(--ink);letter-spacing:.14em;font-size:10px;font-family:var(--mono);
+  backdrop-filter:blur(6px);background:rgba(5,7,9,.5);
+  transition:background .3s,border-color .3s;
+}
+.nav-cta:hover{background:var(--signal);border-color:var(--signal)}
 
-#cursor,#cursor2{position:fixed;top:0;left:0;pointer-events:none;z-index:300;border-radius:50%;will-change:transform}
-#cursor{width:6px;height:6px;background:var(--signal);transform:translate(-50%,-50%)}
-#cursor2{width:36px;height:36px;border:1px solid rgba(245,242,236,.4);transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s,border-color .3s;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:#fff}
-#cursor2.big{width:84px;height:84px;background:rgba(255,30,45,.9);border-color:transparent}
-@media (hover:none){#cursor,#cursor2{display:none}}
+/* Hint */
+#hint{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  text-align:center;pointer-events:none;z-index:15;
+  transition:opacity .7s;
+}
+#hint.hidden{opacity:0;pointer-events:none}
+.hint-icon{
+  font-size:42px;display:block;margin-bottom:14px;
+  animation:bob 1.6s ease-in-out infinite;
+}
+@keyframes bob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+#hint p{
+  font-family:var(--mono);font-size:11px;letter-spacing:.3em;
+  color:rgba(245,242,236,.65);text-transform:uppercase;
+}
+@media(max-width:480px){
+  #hint p{font-size:10px;letter-spacing:.2em}
+}
 
-.hud{position:fixed;z-index:100;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--smoke);pointer-events:none;mix-blend-mode:normal}
-.hud-tl{top:18px;left:20px;pointer-events:auto}
-.hud-tr{top:18px;right:20px;display:flex;gap:26px;align-items:center;pointer-events:auto}
-.hud-bl{bottom:18px;left:20px}
-.hud-br{bottom:18px;right:20px}
-.hud a{color:var(--headlight)}
-.hud .brand{font-weight:800;letter-spacing:.1em;font-size:12px;color:var(--headlight)}
-.hud .brand em{font-style:normal;color:var(--signal)}
-.nav-line{position:fixed;top:0;left:0;height:2px;background:var(--signal);z-index:101;width:0%}
-.zone-label{position:fixed;left:20px;top:50%;transform:rotate(180deg);writing-mode:vertical-rl;font-family:var(--mono);font-size:9px;letter-spacing:.5em;color:rgba(245,242,236,.3);z-index:100;pointer-events:none;transition:opacity .5s}
-.btn-line{pointer-events:auto;display:inline-block;border:1px solid var(--line);padding:9px 16px;border-radius:999px;color:var(--headlight);letter-spacing:.18em;transition:background .3s,border-color .3s;background:rgba(6,5,9,.5);backdrop-filter:blur(6px)}
-.btn-line:hover{background:var(--signal);border-color:var(--signal)}
-@media (max-width:680px){.hud-tr a:not(.btn-line){display:none}.zone-label{display:none}}
+/* Wipe % */
+#wipeCount{
+  position:absolute;bottom:26px;right:22px;z-index:20;
+  font-family:var(--mono);font-size:9px;letter-spacing:.35em;
+  color:rgba(245,242,236,.25);pointer-events:none;
+}
 
-section{position:relative;z-index:2}
-.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
-.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--signal);display:flex;align-items:center;gap:12px;margin-bottom:22px}
+/* Skip button */
+#skipBtn{
+  position:absolute;
+  bottom:calc(env(safe-area-inset-bottom)+22px);
+  left:50%;transform:translateX(-50%);
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  color:rgba(245,242,236,.45);
+  border:1px solid rgba(245,242,236,.18);padding:9px 20px;border-radius:999px;
+  backdrop-filter:blur(4px);z-index:20;
+  transition:color .3s,border-color .3s,opacity .5s;
+}
+#skipBtn:hover{color:var(--ink);border-color:rgba(245,242,236,.45)}
+#skipBtn.hidden{opacity:0;pointer-events:none}
+
+/* ===== CONTENT ===== */
+.sec{padding:88px 0;background:var(--bg)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+.eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.32em;
+  color:var(--signal);display:flex;align-items:center;gap:12px;margin-bottom:24px;
+}
 .eyebrow::after{content:"";height:1px;flex:1;background:var(--line)}
-h2.sec{font-weight:800;letter-spacing:-.02em;line-height:1.06;font-size:clamp(32px,5.4vw,72px);color:var(--headlight)}
-.rev{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rev.in{opacity:1;transform:none}
-.muted{color:var(--smoke)}
-
-#hero{height:100svh;min-height:560px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 20px calc(env(safe-area-inset-bottom) + 64px);position:relative}
-.badge{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.28em;color:var(--smoke);border:1px solid var(--line);padding:7px 14px;border-radius:999px;max-width:100%;margin-bottom:22px;background:rgba(6,5,9,.45);backdrop-filter:blur(4px)}
-.badge i{width:6px;height:6px;border-radius:50%;background:var(--signal);animation:blink 1.6s infinite}
-@keyframes blink{50%{opacity:.2}}
-h1.display{font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.92;font-size:clamp(52px,11.5vw,168px);color:var(--headlight)}
-@media (max-width:480px){h1.display{font-size:clamp(32px,10.4vw,48px);letter-spacing:-.035em}}
-h1.display .row{display:block;overflow:hidden;white-space:nowrap}
-h1.display .ch{display:inline-block;transform:translateY(110%);transition:transform .9s cubic-bezier(.16,1,.3,1)}
-h1.display .row:nth-child(2) .ch{transition-delay:.06s}
-body.ready h1.display .ch{transform:translateY(0)}
-h1.display .accent{color:transparent;-webkit-text-stroke:1.5px var(--signal)}
-.hero-sub{margin-top:20px;max-width:560px;color:var(--smoke);font-size:13px;line-height:2;opacity:0;transform:translateY(14px);transition:opacity .8s .5s,transform .8s .5s}
-body.ready .hero-sub{opacity:1;transform:none}
-.hero-sub strong{color:var(--headlight);font-weight:600}
-.scroll-cue{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:9px;letter-spacing:.35em;color:var(--smoke);display:flex;flex-direction:column;align-items:center;gap:8px}
-.scroll-cue::after{content:"";width:1px;height:38px;background:linear-gradient(var(--signal),transparent);animation:drop 1.8s infinite}
-@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:14px 0;background:rgba(10,8,16,.66);backdrop-filter:blur(3px);position:relative;z-index:2}
-.marquee .track{display:flex;gap:48px;width:max-content;animation:mq 26s linear infinite;font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--smoke);white-space:nowrap}
-.marquee .track b{color:var(--signal);font-weight:400}
-@keyframes mq{to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.marquee .track{animation:none}.grain{animation:none}}
-
-#styles{padding:120px 0 100px}
-.gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
-.card{position:relative;aspect-ratio:3/2;overflow:hidden;background:linear-gradient(160deg,#1B1726,#0C0A13);border-radius:4px;border:1px solid var(--line)}
-.card.hero{grid-column:1 / -1;aspect-ratio:16/9}
-.card img{width:100%;height:100%;object-fit:cover;will-change:transform;transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
-.card:hover img{transform:scale(1.04)}
-.card .tag{position:absolute;left:14px;bottom:14px;font-family:var(--mono);font-size:10px;letter-spacing:.25em;background:rgba(7,6,10,.72);padding:8px 12px;border-radius:3px;backdrop-filter:blur(4px);color:var(--headlight)}
-.card .num{position:absolute;top:12px;right:14px;font-family:var(--mono);font-size:11px;color:var(--smoke)}
-@media (max-width:560px){.gal-grid{grid-template-columns:1fr}.card.hero{aspect-ratio:3/2}}
-
-#statement{padding:140px 0}
-.stmt-grid{max-width:720px;margin:0 auto}
-.stmt-copy p{margin-top:26px;color:var(--smoke);font-size:13.5px;line-height:2.2;max-width:46ch}
-.stmt-copy p strong{color:var(--headlight);font-weight:600}
-.kpi{display:flex;gap:36px;margin-top:40px;font-family:var(--mono)}
-.kpi div b{display:block;font-size:26px;font-weight:800;color:var(--headlight);letter-spacing:0;font-variant-numeric:tabular-nums}
-.kpi div span{font-size:9px;letter-spacing:.25em;color:var(--smoke)}
-
-#price{padding:120px 0;background:linear-gradient(rgba(10,8,16,.55),rgba(6,5,9,.8))}
-.notice{border:1px solid rgba(255,30,45,.35);background:rgba(255,30,45,.07);border-radius:6px;padding:18px 20px;font-size:12px;line-height:2;color:var(--smoke);margin:34px 0;backdrop-filter:blur(3px)}
-.notice b{color:var(--headlight)}
-details.miseru{border:1px solid var(--line);border-radius:6px;margin-top:14px;overflow:hidden;background:rgba(6,5,9,.5)}
-details.miseru summary{cursor:pointer;list-style:none;padding:14px 20px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--smoke);display:flex;justify-content:space-between;align-items:center}
-details.miseru summary::-webkit-details-marker{display:none}
-details.miseru summary::after{content:"+";color:var(--signal);font-size:16px}
-details.miseru[open] summary::after{content:"−"}
-details.miseru .d-body{padding:4px 20px 18px;font-size:12.5px;line-height:2.1;color:var(--smoke)}
-details.miseru .d-body b{color:var(--headlight)}
-.rows{margin-top:46px;border-top:1px solid var(--line)}
-.row-item{display:grid;grid-template-columns:64px 110px 1fr auto auto;gap:22px;align-items:center;padding:26px 6px;border-bottom:1px solid var(--line);position:relative;transition:padding .35s,background .35s}
-.row-item::before{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:0;background:var(--signal);transition:width .5s cubic-bezier(.16,1,.3,1)}
-.row-item:hover::before{width:100%}
-.row-item:hover{padding-left:18px;background:rgba(255,30,45,.04)}
-.row-item .no{font-family:var(--mono);font-size:11px;color:var(--smoke)}
-.row-item .cat{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--signal)}
-.row-item .ttl{font-size:15px;font-weight:600;color:var(--headlight)}
-.row-item .ttl span{display:block;font-weight:400;font-size:11.5px;color:var(--smoke);margin-top:6px;line-height:1.8}
-.row-item .yen{font-weight:800;font-size:clamp(16px,2.2vw,22px);letter-spacing:-.02em;white-space:nowrap;color:var(--headlight)}
-.row-item .yen i{font-style:normal;font-family:var(--mono);font-size:9px;display:block;color:var(--smoke);letter-spacing:.2em;text-align:right;margin-top:4px}
-.row-item .go{font-family:var(--mono);font-size:10px;letter-spacing:.2em;border:1px solid var(--line);border-radius:999px;padding:9px 16px;transition:background .3s,border-color .3s;white-space:nowrap;color:var(--headlight)}
-.row-item .go:hover{background:var(--signal);border-color:var(--signal)}
-@media (max-width:760px){.row-item{grid-template-columns:1fr auto;grid-template-areas:"cat cat" "ttl yen" "go go"}
-.row-item .no{display:none}.row-item .cat{grid-area:cat}.row-item .ttl{grid-area:ttl}.row-item .yen{grid-area:yen}.row-item .go{grid-area:go;text-align:center}}
-
-#cases{padding:120px 0}
-.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
-.case{border:1px solid var(--line);border-radius:6px;padding:30px 26px 28px;background:linear-gradient(170deg,rgba(20,16,28,.82),rgba(9,7,14,.82));backdrop-filter:blur(3px);position:relative;overflow:hidden;transition:transform .5s cubic-bezier(.16,1,.3,1),border-color .4s}
-.case:hover{transform:translateY(-8px);border-color:rgba(255,30,45,.5)}
-.case .cn{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--signal)}
-.case h3{margin:16px 0 6px;font-size:20px;font-weight:700;letter-spacing:-.01em;color:var(--headlight)}
-.case .en{font-family:var(--mono);font-size:9px;letter-spacing:.25em;color:var(--smoke)}
-.case p{margin-top:16px;font-size:12.5px;line-height:2.1;color:var(--smoke)}
-.case .meta{margin-top:20px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--headlight);border-top:1px solid var(--line);padding-top:14px}
-@media (max-width:860px){.case-grid{grid-template-columns:1fr}}
-
-#filmshot{padding:30px 0 80px}
-.filmshot-photo{position:relative;max-width:1080px;margin:30px auto 0;aspect-ratio:3/2;overflow:hidden;border-radius:6px;border:1px solid var(--line);box-shadow:0 60px 130px -70px rgba(255,30,45,.45)}
-.filmshot-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;transition:transform 1.4s cubic-bezier(.16,1,.3,1)}
-.filmshot-photo:hover img{transform:scale(1.04)}
-.filmshot-photo figcaption{position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;background:rgba(7,6,10,.72);padding:9px 14px;border-radius:3px;backdrop-filter:blur(4px);color:var(--headlight)}
-
-#contact{padding:170px 0 150px;text-align:center}
-#contact .giant{font-weight:800;text-transform:uppercase;line-height:.95;letter-spacing:-.03em;font-size:clamp(44px,9vw,128px);color:var(--headlight)}
-#contact .giant em{font-style:normal;color:transparent;-webkit-text-stroke:1.5px var(--headlight)}
-#contact .steps{display:flex;justify-content:center;gap:34px;margin:40px 0 50px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--smoke);flex-wrap:wrap}
-.mag-wrap{display:inline-block}
-.btn-line.cta-main{font-size:13px;letter-spacing:.14em;padding:20px 44px;background:var(--signal);border-color:var(--signal);font-weight:700;display:inline-block;border-radius:999px;box-shadow:0 0 60px rgba(255,30,45,.35)}
-.btn-line.cta-main:hover{background:#ff4450}
-.cta-sub{display:block;margin-top:22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--smoke)}
-
-footer{border-top:1px solid var(--line);padding:54px 0 110px;font-size:11.5px;line-height:2.2;color:var(--smoke);position:relative;z-index:2;background:rgba(6,5,9,.7)}
-footer .disc{max-width:780px}
-footer .disc b{color:var(--headlight)}
-footer .links{margin-top:30px;display:flex;gap:26px;font-family:var(--mono);font-size:10px;letter-spacing:.2em;flex-wrap:wrap}
-footer .links a{color:var(--headlight);border-bottom:1px solid var(--line);padding-bottom:3px}
-footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing:.3em}
-
-#heroReveal{
-  position:fixed;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:50% 50%;
-  opacity:0;transition:opacity .3s ease;
-  pointer-events:none;z-index:0;
-  filter:brightness(.72) contrast(1.06) saturate(.95);
+.sec-h{
+  font-weight:800;letter-spacing:-.02em;line-height:1.08;
+  font-size:clamp(30px,5vw,62px);color:var(--ink);
 }
-@media (min-width:769px){#heroReveal{display:none}}
+.sec-lead{color:var(--smoke);line-height:2;font-size:14px;max-width:50ch;margin-top:16px}
 
-/* ===== MOBILE FIXES ===== */
-@media (max-width:768px){
-  html{scroll-padding-top:72px}
-  section[id]{scroll-margin-top:72px}
-  .hud-bl{display:none}
-  /* v2-a fix 5: HUD左上に背景スクリム */
-  .hud-tl{background:rgba(6,5,9,.6);padding:7px 10px;border-radius:3px;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
-  #hero{height:auto;min-height:100svh;justify-content:flex-start;padding:64px 20px 96px}
-  .badge{font-size:9px;letter-spacing:.18em;padding:6px 11px;gap:6px;margin-bottom:18px}
-  .hero-sub{margin-top:16px;font-size:12.5px;line-height:1.95}
-  .scroll-cue{bottom:20px;font-size:8.5px;background:rgba(6,5,9,.55);padding:8px 12px;border-radius:4px;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
-  .scroll-cue::after{height:26px}
-  .hud-br{background:rgba(6,5,9,.6);padding:6px 10px;border-radius:3px;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
-  /* v2-a fix 4: #styles をスクリムに追加 */
-  #styles{padding:72px 0 56px}
-  #statement{padding:72px 0}
-  #price{padding:72px 0}
-  #cases{padding:72px 0}
-  #filmshot{padding:24px 0 56px}
-  #contact{padding:96px 0 110px}
-  #styles, #statement, #price, #cases{
-    background:linear-gradient(rgba(6,5,9,.62),rgba(6,5,9,.86))
-  }
-  .dt-only{display:none}
-  .marquee .track{font-size:10px;letter-spacing:.22em;gap:32px}
-  .card img{object-position:50% 35%}
-  .card.hero img{object-position:50% 50%}
+/* Statement */
+#statement{background:linear-gradient(180deg,#050709 0%,#090c14 100%);padding:100px 0}
+#statement .big{
+  font-weight:800;font-size:clamp(34px,6vw,80px);
+  letter-spacing:-.03em;line-height:1.1;color:var(--ink);
+}
+#statement .big em{font-style:normal;color:var(--signal)}
+
+/* Gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:44px}
+@media(max-width:680px){.gal{grid-template-columns:1fr}}
+.gal figure{position:relative;overflow:hidden;border-radius:3px}
+.gal figure img{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  transition:transform .9s cubic-bezier(.16,1,.3,1);display:block;
+}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 14px;
+  background:linear-gradient(transparent,rgba(0,0,0,.65));
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;color:var(--ink);
 }
 
-.explain-toggle{position:fixed;bottom:18px;left:14px;z-index:150;background:rgba(6,5,9,.6);color:var(--headlight);border:1px solid var(--line);border-radius:99px;padding:11px 20px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px);transition:background .25s,transform .2s,border-color .25s;font-family:var(--mono);letter-spacing:.12em}
-.explain-toggle:hover{transform:translateY(-2px);border-color:var(--signal)}
-body.explain-on .explain-toggle{background:var(--signal);border-color:var(--signal);color:#fff}
-@media(min-width:769px){.explain-toggle{bottom:62px;left:20px}}
-.ann-band{display:none}
-body.explain-on .ann-band{display:block;position:relative;z-index:3;background:rgba(255,30,45,.07);border-top:1px solid rgba(255,30,45,.3);border-bottom:1px solid rgba(255,30,45,.3);padding:20px 0;backdrop-filter:blur(4px)}
-.ann-in{display:flex;align-items:flex-start;gap:14px;max-width:880px;margin:0 auto;padding:0 24px}
-.ann-circle{flex-shrink:0;width:34px;height:34px;background:var(--signal);color:#fff;border-radius:50%;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px;font-family:var(--mono)}
-.ann-body{font-size:13px;line-height:1.85;color:var(--smoke)}
-.ann-body strong{display:block;color:var(--headlight);font-size:10px;font-weight:700;letter-spacing:.18em;margin-bottom:5px;font-family:var(--mono);text-transform:uppercase}
+/* Disclaimer */
+.disclaimer{
+  margin-top:36px;padding:16px 20px;
+  border:1px dashed rgba(245,242,236,.12);border-radius:4px;
+  font-size:12.5px;color:var(--smoke);line-height:2;
+}
+.disclaimer b{color:rgba(245,242,236,.65)}
+
+/* Pricing */
+#price{background:#090c14;padding:100px 0}
+.price-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:44px}
+@media(max-width:580px){.price-grid{grid-template-columns:1fr}}
+.price-card{
+  border:1px solid var(--line);padding:30px 26px;border-radius:5px;
+  background:rgba(255,255,255,.025);
+}
+.price-card.star{border-color:rgba(255,30,45,.5);background:rgba(255,30,45,.05)}
+.price-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;color:var(--smoke);margin-bottom:8px}
+.price-num{font-size:clamp(22px,3.5vw,34px);font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.price-num small{font-size:.52em;font-weight:400;color:var(--smoke);letter-spacing:0}
+.price-desc{color:var(--smoke);font-size:13px;line-height:1.85;margin-top:10px}
+
+/* CTA */
+#cta{padding:100px 0;text-align:center}
+#cta .cta-h{font-weight:800;font-size:clamp(24px,4vw,50px);letter-spacing:-.02em;line-height:1.2}
+#cta .cta-lead{color:var(--smoke);font-size:14px;line-height:2;margin:18px auto 0;max-width:44ch}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:36px}
+.btn{
+  display:inline-block;padding:13px 26px;border-radius:999px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.2em;
+  border:1px solid var(--line);
+  transition:background .3s,border-color .3s,color .3s;
+}
+.btn-primary{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn-primary:hover{background:#e01020;border-color:#e01020}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--ink)}
+.btn-ghost:hover{background:var(--signal);border-color:var(--signal)}
+
+/* Footer */
+footer{
+  border-top:1px solid var(--line);
+  padding:26px 24px;font-family:var(--mono);
+  display:flex;flex-wrap:wrap;gap:10px 24px;
+  align-items:center;justify-content:space-between;
+  font-size:11px;color:var(--smoke);
+}
+footer a{color:var(--smoke);transition:color .2s}
+footer a:hover{color:var(--ink)}
+.fin{
+  color:rgba(245,242,236,.18);font-size:9.5px;letter-spacing:.18em;
+  margin-top:8px;width:100%;text-align:center;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hint-icon{animation:none}
+  *{transition-duration:.01ms!important}
+}
 </style>
 </head>
 <body>
 
-<div id="bgfill" aria-hidden="true"></div>
-<img id="heroReveal" src="../img/samples/car/optimized/car-hero.jpg" alt="" aria-hidden="true">
-<canvas id="stage" aria-hidden="true"></canvas>
-
-<div id="loader" aria-hidden="true">
-  <div class="l-brand">MISERU SAMPLE — GRAPHIC EDITION [v2-a]</div>
-  <div class="l-count" id="lCount">00</div>
-  <div class="l-bar"><i id="lBar"></i></div>
-  <div class="l-note">FICTIONAL SHOWROOM · 架空サンプル</div>
-</div>
-
-<div class="grain" aria-hidden="true"></div>
-<div class="vignette" aria-hidden="true"></div>
-<div id="cursor" aria-hidden="true"></div>
-<div id="cursor2" aria-hidden="true"></div>
-<div class="nav-line" id="navLine"></div>
-<div class="zone-label" id="zoneLabel">FORM 01 — SILHOUETTE</div>
-
-<div class="hud hud-tl"><a href="../index.html" class="brand">MISERU <em>/ v2-a</em></a></div>
-<div class="hud hud-tr">
-  <a href="#styles" data-hover>STYLES</a>
-  <a href="#price" data-hover>PRICE</a>
-  <a class="btn-line" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover>LINEで相談 ⏎</a>
-</div>
-<div class="hud hud-bl">TOKYO <span id="clock">--:--:--</span></div>
-<div class="hud hud-br">FICTIONAL · 架空サンプル</div>
-
 <section id="hero">
-  <span class="badge"><i></i>MISERU SAMPLE · FICTIONAL · 演出強め版 [v2-a 粒子改善]</span>
-  <h1 class="display" aria-label="CREATIVE CAR EXPERIENCES">
-    <span class="row"><span class="ch">C</span><span class="ch">R</span><span class="ch">E</span><span class="ch">A</span><span class="ch">T</span><span class="ch">I</span><span class="ch">V</span><span class="ch">E</span><span class="ch">&nbsp;</span><span class="ch accent">C</span><span class="ch accent">A</span><span class="ch accent">R</span></span>
-    <span class="row"><span class="ch">E</span><span class="ch">X</span><span class="ch">P</span><span class="ch">E</span><span class="ch">R</span><span class="ch">I</span><span class="ch">E</span><span class="ch">N</span><span class="ch">C</span><span class="ch">E</span><span class="ch">S</span></span>
-  </h1>
-  <p class="hero-sub">一台のこだわりを、相談につなげる。これは <strong>MISERU が制作した演出強めの車・バイク見せ方サンプル</strong>です。実在店舗・実在事例ではありません。粒子はこの先、スクロールに合わせて<strong>5つの姿</strong>に変わります。</p>
-  <div class="scroll-cue">SCROLL</div>
+  <img id="carPhoto" src="../img/samples/car/optimized/car-hero.jpg" alt="">
+
+  <canvas id="fogCanvas"></canvas>
+
+  <div class="hud hud-tl">
+    <a href="../index.html" class="brand">MISERU <em>·</em> SAMPLE</a>
+  </div>
+  <div class="hud hud-tr">
+    <a href="../index.html#contact" class="nav-cta">無料相談</a>
+  </div>
+
+  <div id="hint">
+    <span class="hint-icon">☂</span>
+    <p>ガラスを指でなぞってください</p>
+  </div>
+
+  <div id="wipeCount">WIPE 0%</div>
+
+  <button id="skipBtn">↓ スクロール</button>
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>CREATIVE CAR EXPERIENCES <b>—</b> MISERU SAMPLE <b>—</b> FICTIONAL SHOWROOM <b>—</b> SCROLL-MORPHING PARTICLES <b>—</b> PHOTO DIRECTION <b>—</b> LINE FIRST <b>—</b>&nbsp;</span>
-    <span>CREATIVE CAR EXPERIENCES <b>—</b> MISERU SAMPLE <b>—</b> FICTIONAL SHOWROOM <b>—</b> SCROLL-MORPHING PARTICLES <b>—</b> PHOTO DIRECTION <b>—</b> LINE FIRST <b>—</b>&nbsp;</span>
-  </div>
-</div>
-
-<section id="styles">
+<section class="sec" id="statement">
   <div class="wrap">
-    <div class="eyebrow rev">005 / STYLES — GRID ／ FORM 02 — STREAM</div>
-    <h2 class="sec rev">同じ一台を、<br>5つの見せ方で。</h2>
-    <p class="muted rev" style="margin-top:18px;font-size:13px;line-height:2;max-width:52ch">販売前に映える型、SNSで伸びる型、街での日常の型。どの写真をどう見せるかで、伝わるものが変わります。</p>
-  </div>
-  <div class="wrap gal-grid">
-    <figure class="card hero"><img src="../img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー"><span class="num">01</span><figcaption class="tag">STREET — 街の中で、存在感を。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー"><span class="num">02</span><figcaption class="tag">URBAN — 場所が、格を語る。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（昼）"><span class="num">03</span><figcaption class="tag">DAY — 日常の中の非日常。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-street.jpg" alt="ドアを開けた赤いスポーツカー"><span class="num">04</span><figcaption class="tag">DOORS — 開けた瞬間が、主役。</figcaption></figure>
-    <figure class="card"><img src="../img/samples/car/optimized/car-owner-a.jpg" alt="ドアを上げた赤いスポーツカーの脇に座る人物" style="object-position:50% 100%"><span class="num">05</span><figcaption class="tag">OWNER — 乗る人ごと、撮る。</figcaption></figure>
+    <p class="eyebrow">Photography × Web</p>
+    <p class="big">写真が、<em>触れる</em><br>場所に。</p>
+    <p class="sec-lead">いい写真は「見せ方」で伝わる。MISERUは撮影から見せ方まで一貫して整えます。</p>
   </div>
 </section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>一台を「5つの見せ方」で</strong>同じ車でも、街・場所・ドアを開けた瞬間で伝わる物語が変わる。</div></div></div>
 
-<section id="statement">
-  <div class="wrap stmt-grid">
-    <div class="stmt-copy">
-      <div class="eyebrow rev">NIGHT / STATEMENT ／ FORM 03 — TYPE</div>
-      <h2 class="sec rev">引き算から、<br>はじめる。</h2>
-      <p class="rev">「全部盛る」提案はしません。<strong>やらないことを決めるのも、仕事のうち。</strong>一台ずつ状態と目的を見て、足回りだけ、下地だけ、写真だけ——半歩ずつ進める選択肢からお出しします。</p>
-      <p class="rev">このページ自体が、MISERUの技術見本です。<span class="dt-only">粒子は今、背後で<strong>ブランドの文字</strong>を組んでいます。</span>「え、こんなことできるの」を、あなたの業種でも。</p>
-      <div class="kpi rev">
-        <div><b data-count="5">0</b><span>FORMS</span></div>
-        <!-- v2-a fix 2: 実機の粒子数をJSで設定 (#pCount) -->
-        <div><b id="pCount">0</b><span>PARTICLES</span></div>
-        <div><b data-count="1">0</b><span>LINEから</span></div>
+<section class="sec" id="gallery">
+  <div class="wrap">
+    <p class="eyebrow">Gallery</p>
+    <h2 class="sec-h">1台を、最高の瞬間で。</h2>
+    <p class="sec-lead">販売前・納車前・保管中。どの瞬間もMISERUが記録します。</p>
+    <div class="gal">
+      <figure>
+        <img src="../img/samples/car/optimized/car-hero.jpg" alt="建物前の赤いスポーツカー（架空サンプル）">
+        <figcaption>STREET — 街の中で、存在感を。</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/samples/car/optimized/car-westin.jpg" alt="ホテル前の赤いスポーツカー（架空サンプル）">
+        <figcaption>URBAN — 場所が、格を語る。</figcaption>
+      </figure>
+      <figure>
+        <img src="../img/samples/car/optimized/car-rolex.jpg" alt="街中の赤いスポーツカー（架空サンプル）">
+        <figcaption>DAY — 日常の中の非日常。</figcaption>
+      </figure>
+    </div>
+    <p class="disclaimer">
+      <b>※ 架空サンプルです。</b>実在の店舗・実在の販売車両ではありません。掲載写真はMISERUの見せ方サンプルであり、制作実績ではありません。
+    </p>
+  </div>
+</section>
+
+<section class="sec" id="price">
+  <div class="wrap">
+    <p class="eyebrow">Pricing</p>
+    <h2 class="sec-h">料金・プラン。</h2>
+    <p class="sec-lead">初回相談無料。まず方向性を確認してから進めます。</p>
+    <div class="price-grid">
+      <div class="price-card">
+        <p class="price-label">INITIAL SHEET</p>
+        <p class="price-num">¥9,800<small>〜</small></p>
+        <p class="price-desc">改善案・写真選定・文章案・ラフをA4数枚に。約1週間。制作費から全額充当。</p>
+      </div>
+      <div class="price-card">
+        <p class="price-label">BASIC</p>
+        <p class="price-num">¥98,000<small>〜</small></p>
+        <p class="price-desc">撮影なし・写真あり向け。見せ方リペア。2〜3週間〜。</p>
+      </div>
+      <div class="price-card star">
+        <p class="price-label">STANDARD ★ おすすめ</p>
+        <p class="price-num">¥298,000<small>〜</small></p>
+        <p class="price-desc">撮影込みおまかせHP。トップ+2〜4ページ。4〜6週間〜。写真持参で−¥100,000。</p>
+      </div>
+      <div class="price-card">
+        <p class="price-label">PREMIUM</p>
+        <p class="price-num">¥498,000<small>〜</small></p>
+        <p class="price-desc">撮影込み10ページ前後。1.5〜2ヶ月〜。写真持参で−¥100,000。</p>
       </div>
     </div>
+    <p class="disclaimer" style="margin-top:24px">
+      支払い：着手時50%・公開時50%。無料相談=方向性とプラン概算のみ（具体案は初回見立てシートから）。
+    </p>
   </div>
 </section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">02</div><div class="ann-body"><strong>引き算で、技術を語る</strong>全部盛らない提案こそ信頼。</div></div></div>
 
-<section id="price">
-  <div class="wrap">
-    <div class="eyebrow rev">PRICE — SAMPLE ONLY ／ FORM 04 — GRID</div>
-    <h2 class="sec rev">仕事と料金の早見表<span class="muted">（架空例）。</span></h2>
-    <div class="notice rev"><b>※ 以下は架空の車関連サービスサイトとしての料金表示例です。</b><br>これは MISERU が制作した架空サンプルHPの表示パターンであり、MISERU の料金ではありません。実在店舗の料金でもありません。</div>
-    <details class="miseru rev">
-      <summary>MISERU 自身の料金はこちら</summary>
-      <div class="d-body">
-        無料相談 <b>¥0</b>（方向性・合うプラン・概算目安）／初回見立てシート <b>¥9,800〜</b><br>
-        BASIC <b>¥98,000〜</b>｜見せ方リペア（撮影なし）<br>
-        STANDARD <b>¥298,000〜</b> ★おすすめ｜撮影込み・おまかせHP<br>
-        PREMIUM <b>¥498,000〜</b>｜撮影込み・しっかりHP<br>
-        ※写真が揃っている方は、撮影分 −¥100,000 でご提案します。詳細は <a href="../index.html" style="color:var(--signal)">MISERU トップ</a> へ。
-      </div>
-    </details>
-    <div class="rows rev">
-      <div class="row-item"><span class="no">01</span><span class="cat">CUSTOM</span><div class="ttl">仕様相談 / ホイール / 車高 / エアロ<span>一台ずつ図面。最低受注額あり。</span></div><div class="yen">¥80,000〜<i>PER PROJECT</i></div><a class="go" href="#contact" data-hover>相談する →</a></div>
-      <div class="row-item"><span class="no">02</span><span class="cat">COATING</span><div class="ttl">スタンダード（ガラス系）<span>下地洗浄 + 1層 / 2日。</span></div><div class="yen">¥58,000<i>STANDARD</i></div><a class="go" href="#contact" data-hover>相談する →</a></div>
-      <div class="row-item"><span class="no">03</span><span class="cat">COATING</span><div class="ttl">プレミアム（多層ガラス）<span>下地補修 + 多層 / 3日。</span></div><div class="yen">¥128,000<i>PREMIUM</i></div><a class="go" href="#contact" data-hover>相談する →</a></div>
-      <div class="row-item"><span class="no">04</span><span class="cat">PHOTO</span><div class="ttl">仕上がり撮影 / 5カット<span>仕様の見え方を残す目的の撮影。</span></div><div class="yen">¥38,000<i>5 CUTS</i></div><a class="go" href="#contact" data-hover>相談する →</a></div>
-      <div class="row-item"><span class="no">05</span><span class="cat">SALES</span><div class="ttl">販売前の見せ方相談<span>写真の選び方・文章・出品ページの整え方。</span></div><div class="yen">¥48,000〜<i>PER PROJECT</i></div><a class="go" href="#contact" data-hover>相談する →</a></div>
+<section class="sec" id="cta">
+  <div class="wrap" style="text-align:center">
+    <p class="eyebrow" style="justify-content:center">Contact</p>
+    <h2 class="cta-h">あなたの1台も、<br>こんな風に。</h2>
+    <p class="cta-lead">まず写真とURLを送ってください。方向性と合いそうなプランをお返しします（無料）。</p>
+    <div class="cta-btns">
+      <a href="../index.html#contact" class="btn btn-primary">無料相談・写真を送る</a>
+      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">公式LINEで相談</a>
     </div>
-    <p class="muted rev" style="margin-top:20px;font-size:11.5px;line-height:2">※ 出張対応・特殊塗装・パーツ持込はご相談ください（架空例）。</p>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">03</div><div class="ann-body"><strong>料金は「例」を正直に分ける</strong>架空の料金表とMISERU自身の料金を明確に分離。</div></div></div>
-
-<section id="cases">
-  <div class="wrap">
-    <div class="eyebrow rev">003 / CASES</div>
-    <h2 class="sec rev">三つの相談例。</h2>
-    <div class="case-grid">
-      <article class="case rev"><span class="cn">N°01</span><h3>足回りだけ、半歩。</h3><span class="en">WHEEL &amp; RIDE HEIGHT</span><p>「もっと盛りたい」というご相談には、まずホイールだけ変えて1ヶ月乗っていただく形を提案することも。やらないことを決めるのも、仕事のうち。</p><div class="meta">輸入セダン想定 / WHEEL / RIDE-HEIGHT</div></article>
-      <article class="case rev"><span class="cn">N°02</span><h3>艶を出す前に、下地。</h3><span class="en">SURFACE &amp; COATING</span><p>「とりあえずコーティングだけ」には、塗装の状態を見て下地補修からお勧めすることも。深い艶は、下地が8割。</p><div class="meta">国産クーペ想定 / POLISH / PREMIUM COAT</div></article>
-      <article class="case rev"><span class="cn">N°03</span><h3>売却用に、夜の撮影で。</h3><span class="en">PHOTOSHOOT</span><p>売却サイトの写真として、夜・室内灯下で7カットといった見せ方も。ヘッドライトと塗装の艶が映る構図に絞ると、訴求が変わります。</p><div class="meta">輸入スポーツ想定 / PHOTO ONLY / 7 CUTS</div></article>
-    </div>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">04</div><div class="ann-body"><strong>相談例で「頼み方」を教える</strong>「何でもやります」より、3つの具体例。</div></div></div>
-
-<section id="filmshot">
-  <div class="wrap">
-    <div class="eyebrow rev" style="justify-content:center">PHOTO DIRECTION — ONE FRAME</div>
-    <figure class="filmshot-photo rev">
-      <img src="../img/sample-car.jpg" alt="夜の街でライトアップされた赤いスポーツカー">
-      <figcaption>NIGHT — その一台が、主役になる時間。</figcaption>
-    </figure>
-  </div>
-</section>
-<div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">05</div><div class="ann-body"><strong>一枚が、店の格を決める</strong>夜・ライトの構図に絞った一枚。</div></div></div>
-
-<section id="contact">
-  <div class="wrap">
-    <div class="eyebrow rev" style="justify-content:center">FORM 05 — IGNITION RING</div>
-    <h2 class="giant rev">LINE.<br><em>FIRST.</em></h2>
-    <div class="steps rev"><span>01 — 車両写真と、ご希望を一言</span><span>02 — 方向の希望を共有</span><span>03 — 概算の例をLINEでお返し</span></div>
-    <div class="mag-wrap" id="mag"><a class="btn-line cta-main" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover>LINEで仕様を相談する →</a></div>
-    <span class="cta-sub">※ LINEボタンはすべて MISERU 公式LINE につながります（架空店舗の連絡先ではありません）</span>
   </div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <p class="disc"><b>これは MISERU が制作した架空の演出強めサンプルHPです。</b>掲載されている店舗設定・所在地表現・料金はすべて見せ方の表示例（架空）で、実在店舗・実在事例ではありません。掲載写真のナンバープレートは、サンプル制作上すべて塗りつぶし処理しています。</p>
-    <div class="links">
-      <a href="../index.html#contact" data-hover>MISERUに無料相談する →</a>
-      <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover>MISERU公式LINE →</a>
-      <a href="../sample-pet.html" data-hover>ペットのサンプル →</a>
-      <a href="../sample-food.html" data-hover>飲食のサンプル →</a>
-      <a href="../index.html" data-hover>MISERUトップへ</a>
-      <a href="../tokushoho.html" data-hover>特商法表記</a>
-      <a href="../privacy.html" data-hover>プライバシー</a>
-    </div>
-    <div class="fin">MISERU SAMPLE — GRAPHIC EDITION [v2-a] · FICTIONAL WEBSITE · 実在事例ではありません</div>
-  </div>
+  <span class="brand">MISERU <em style="font-style:normal;color:var(--signal)">·</em> 見せ方を整える編集室</span>
+  <nav style="display:flex;gap:18px;flex-wrap:wrap">
+    <a href="../index.html">公式サイト</a>
+    <a href="../tokushoho.html">特定商取引法</a>
+    <a href="../privacy.html">プライバシーポリシー</a>
+  </nav>
+  <span class="fin">MISERU SAMPLE — RAIN WIPE EDITION [v2-a] · FICTIONAL WEBSITE · 実在事例ではありません © MISERU</span>
 </footer>
 
-<button class="explain-toggle" aria-pressed="false" id="expBtn">解説モード</button>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 (function(){
-"use strict";
-var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-var isTouch = window.matchMedia("(hover: none)").matches;
+'use strict';
 
-var lCount = document.getElementById("lCount"),
-    lBar = document.getElementById("lBar"),
-    loader = document.getElementById("loader");
-var prog = 0, target = 0, loadedImgs = 0;
-var imgs = Array.prototype.slice.call(document.images);
-var totalImgs = imgs.length || 1;
-imgs.forEach(function(im){
-  if(im.complete){ loadedImgs++; } else {
-    im.addEventListener("load", function(){ loadedImgs++; });
-    im.addEventListener("error", function(){ loadedImgs++; });
+var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+var isTouch = 'ontouchstart' in window;
+
+/* ============================================================
+   RAIN + FOG + WIPE
+============================================================ */
+var fogC   = document.getElementById('fogCanvas');
+var ctx    = fogC.getContext('2d');
+
+/* offscreen mask: white = wiped (clear), black = fog */
+var maskC  = document.createElement('canvas');
+var mctx   = maskC.getContext('2d');
+
+var W = 0, H = 0;
+function resize(){
+  W = window.innerWidth;
+  H = window.innerHeight;
+  fogC.width  = maskC.width  = W;
+  fogC.height = maskC.height = H;
+}
+resize();
+window.addEventListener('resize', resize, {passive:true});
+
+/* --- rain drops --- */
+var DROP_N = isTouch ? 50 : 80;
+var drops = [];
+(function initDrops(){
+  for(var i = 0; i < DROP_N; i++){
+    drops.push({
+      x: Math.random(),
+      y: Math.random(),
+      len: 9 + Math.random()*14,
+      spd: 0.003 + Math.random()*0.005,
+      opa: 0.18 + Math.random()*0.3,
+      lw:  0.7 + Math.random()*0.8
+    });
   }
-});
-var minTime = reduced ? 200 : 700, maxTime = 5000, t0 = performance.now();
-(function tickLoad(){
-  var elapsed = performance.now() - t0;
-  var timeP = Math.min(1, elapsed / minTime);
-  var imgP = loadedImgs / totalImgs;
-  var forceDone = elapsed > maxTime;
-  target = forceDone ? 100 : Math.min(timeP, imgP*0.4 + timeP*0.6) * 100;
-  if(target > 99.5) target = 100;
-  prog += (target - prog) * 0.12;
-  if(prog > 99.4) prog = 100;
-  lCount.textContent = (prog<10?"0":"") + Math.floor(prog);
-  lBar.style.transform = "scaleX(" + (prog/100) + ")";
-  if(prog >= 100){
-    loader.classList.add("done");
-    document.body.classList.add("ready");
-    setTimeout(function(){ loader.style.display = "none"; }, 1000);
-  } else { requestAnimationFrame(tickLoad); }
-})();
+}());
 
-var clock = document.getElementById("clock");
-setInterval(function(){
-  var d = new Date();
-  clock.textContent = ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)+":"+("0"+d.getSeconds()).slice(-2);
-}, 1000);
+/* --- wipe brush --- */
+var BRUSH = isTouch ? 58 : 72;
+var wipedApproxPx = 0;
+var wipedPct = 0;
+var hintEl     = document.getElementById('hint');
+var wipeCountEl= document.getElementById('wipeCount');
+var skipBtn    = document.getElementById('skipBtn');
+var revealed   = false;
 
-var navLine = document.getElementById("navLine");
-var scrollY = 0, smoothY = 0;
-window.addEventListener("scroll", function(){ scrollY = window.pageYOffset; }, {passive:true});
+function addWipe(x, y){
+  var r = BRUSH;
+  mctx.globalCompositeOperation = 'source-over';
+  var g = mctx.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0,   'rgba(255,255,255,1)');
+  g.addColorStop(0.55,'rgba(255,255,255,0.88)');
+  g.addColorStop(1,   'rgba(255,255,255,0)');
+  mctx.fillStyle = g;
+  mctx.beginPath(); mctx.arc(x, y, r, 0, Math.PI*2); mctx.fill();
 
-var c1 = document.getElementById("cursor"), c2 = document.getElementById("cursor2");
-var mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my;
-if(!isTouch){
-  document.addEventListener("mousemove", function(e){ mx = e.clientX; my = e.clientY; });
-  document.addEventListener("mouseover", function(e){
-    var h = e.target.closest("a,button,[data-hover],summary");
-    if(h){ c2.classList.add("big"); c2.textContent = ""; }
-    else { c2.classList.remove("big"); c2.textContent = ""; }
-  });
-}
+  wipedApproxPx += Math.PI * r * r * 0.65;
+  wipedPct = Math.min(100, (wipedApproxPx / (W * H)) * 100) | 0;
+  wipeCountEl.textContent = 'WIPE ' + wipedPct + '%';
 
-var io = new IntersectionObserver(function(es){
-  es.forEach(function(en){
-    if(en.isIntersecting){
-      en.target.classList.add("in");
-      en.target.querySelectorAll("[data-count]").forEach(startCount);
-      io.unobserve(en.target);
-    }
-  });
-}, {threshold:0.18});
-document.querySelectorAll(".rev").forEach(function(el){ io.observe(el); });
-function startCount(el){
-  var end = parseInt(el.getAttribute("data-count"), 10), t0 = performance.now(), dur = 1400;
-  (function step(){
-    var p = Math.min(1, (performance.now()-t0)/dur);
-    var e = 1 - Math.pow(1-p, 3);
-    el.textContent = Math.floor(end * e).toLocaleString();
-    if(p < 1) requestAnimationFrame(step);
-  })();
-}
-
-var mag = document.getElementById("mag");
-if(mag && !isTouch && !reduced){
-  var btn = mag.firstElementChild;
-  mag.addEventListener("mousemove", function(e){
-    var r = mag.getBoundingClientRect();
-    var dx = e.clientX - (r.left + r.width/2), dy = e.clientY - (r.top + r.height/2);
-    btn.style.transform = "translate(" + dx*0.28 + "px," + dy*0.28 + "px)";
-  });
-  mag.addEventListener("mouseleave", function(){ btn.style.transform = "translate(0,0)"; btn.style.transition = "transform .5s cubic-bezier(.16,1,.3,1)"; setTimeout(function(){ btn.style.transition = ""; }, 500); });
-}
-
-var expBtn = document.getElementById("expBtn");
-if(expBtn){
-  expBtn.addEventListener("click", function(){
-    var on = document.body.classList.toggle("explain-on");
-    expBtn.setAttribute("aria-pressed", on ? "true" : "false");
-  });
-}
-
-/* ===================================================================
-   WEBGL — SCROLL-MORPHING PARTICLES
-   v2-a fix 1: 丸グロースプライトテクスチャ（赤い四角ノイズを解消）
-=================================================================== */
-var renderer, scene, camera, points, P = null;
-var W = innerWidth, H = innerHeight;
-function webglOK(){
-  try{ var c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl"))); }
-  catch(e){ return false; }
-}
-var canRun = !!window.THREE && webglOK() && !reduced;
-var IS_MOBILE_NARROW = isTouch && innerWidth < 768;
-var COUNT = IS_MOBILE_NARROW ? 2400 : (isTouch ? 4200 : 9000);
-
-/* v2-a fix 2: 実機の粒子数を表示 */
-var pCountEl = document.getElementById("pCount");
-if(pCountEl){
-  pCountEl.setAttribute("data-count", COUNT);
-  /* kpi.rev が in になった時に startCount が呼ばれる — data-count が揃っていれば OK */
-}
-
-/* v2-a fix 1: 丸いグロースプライトを Canvas で生成 */
-function makeGlowSprite(){
-  var cv = document.createElement("canvas");
-  cv.width = 64; cv.height = 64;
-  var ctx = cv.getContext("2d");
-  var grd = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-  grd.addColorStop(0,   "rgba(255,255,255,1)");
-  grd.addColorStop(0.35,"rgba(255,255,255,0.85)");
-  grd.addColorStop(0.7, "rgba(255,255,255,0.35)");
-  grd.addColorStop(1,   "rgba(255,255,255,0)");
-  ctx.fillStyle = grd;
-  ctx.beginPath(); ctx.arc(32, 32, 32, 0, Math.PI * 2); ctx.fill();
-  return new THREE.CanvasTexture(cv);
-}
-
-function fit(pts, n){
-  var out = new Float32Array(n*3);
-  for(var i = 0; i < n; i++){
-    var s = pts[(Math.random()*pts.length)|0];
-    out[i*3] = s[0]; out[i*3+1] = s[1]; out[i*3+2] = s[2];
+  if(wipedPct > 4 && !hintEl.classList.contains('hidden')){
+    hintEl.classList.add('hidden');
   }
-  return out;
-}
-var SCALE_FIT = IS_MOBILE_NARROW ? 0.38 : 0.55;
-function sampleCanvas(draw, zJit, scale){
-  var s = scale || SCALE_FIT;
-  var cw = 760, ch = 320;
-  var oc = document.createElement("canvas"); oc.width = cw; oc.height = ch;
-  var g = oc.getContext("2d");
-  draw(g, cw, ch);
-  var data = g.getImageData(0,0,cw,ch).data, pts = [];
-  var step = IS_MOBILE_NARROW ? 3 : 2;
-  var prob = IS_MOBILE_NARROW ? 0.45 : 0.6;
-  for(var y = 0; y < ch; y += step){
-    for(var x = 0; x < cw; x += step){
-      if(data[(y*cw+x)*4+3] > 128 && Math.random() < prob){
-        pts.push([(x-cw/2)*s, (ch/2-y)*s, (Math.random()-0.5)*zJit]);
-      }
-    }
-  }
-  return pts;
+  if(wipedPct >= 38 && !revealed){ doReveal(); }
 }
 
-function formCar(){
-  return fit(sampleCanvas(function(g){
-    g.fillStyle = "#fff";
-    g.beginPath();
-    g.moveTo(74,238); g.lineTo(64,206);
-    g.quadraticCurveTo(60,178,92,168);
-    g.quadraticCurveTo(120,158,170,150);
-    g.quadraticCurveTo(232,96,332,92);
-    g.quadraticCurveTo(372,92,430,122);
-    g.quadraticCurveTo(520,154,612,172);
-    g.quadraticCurveTo(688,188,700,212);
-    g.lineTo(706,238); g.closePath(); g.fill();
-    g.fillRect(74,226,632,14);
-    g.globalCompositeOperation = "destination-out";
-    g.beginPath(); g.arc(196,240,52,0,Math.PI*2); g.fill();
-    g.beginPath(); g.arc(556,240,52,0,Math.PI*2); g.fill();
-    g.globalCompositeOperation = "source-over";
-    g.lineWidth = 17; g.strokeStyle = "#fff";
-    g.beginPath(); g.arc(196,240,36,0,Math.PI*2); g.stroke();
-    g.beginPath(); g.arc(556,240,36,0,Math.PI*2); g.stroke();
-    g.lineWidth = 7;
-    g.beginPath(); g.arc(196,240,14,0,Math.PI*2); g.stroke();
-    g.beginPath(); g.arc(556,240,14,0,Math.PI*2); g.stroke();
-  }, 14), COUNT);
-}
-function formVortex(){
-  var pts = [], N = 6000;
-  for(var i = 0; i < N; i++){
-    var arm = (i % 3) * (Math.PI * 2 / 3);
-    var t = Math.pow(Math.random(), 0.7);
-    var a = arm + t * 5.2 + (Math.random() - 0.5) * 0.5;
-    var R = 22 + t * 72;
-    var jit = (1 - t) * 14 + 4;
-    pts.push([
-      Math.cos(a) * R + (Math.random() - 0.5) * jit,
-      Math.sin(a) * R * 0.96 + (Math.random() - 0.5) * jit,
-      (Math.random() - 0.5) * 70
-    ]);
-  }
-  return fit(pts, COUNT);
-}
-function formStream(){
-  var pts = [];
-  for(var i = 0; i < 6000; i++){
-    var band = ((Math.random()*16)|0) - 8;
-    pts.push([(Math.random()-0.5)*860, band*22 + (Math.random()-0.5)*4, (Math.random()-0.5)*260]);
-  }
-  return fit(pts, COUNT);
-}
-function formType(){
-  return fit(sampleCanvas(function(g, cw, ch){
-    g.fillStyle = "#fff";
-    g.font = "900 148px Helvetica, Arial, sans-serif";
-    g.textAlign = "center"; g.textBaseline = "middle";
-    g.fillText("MISERU", cw/2, ch/2 + 8);
-  }, 18), COUNT);
-}
-function formGrid(){
-  var pts = [];
-  for(var ix = 0; ix < 64; ix++){
-    for(var iy = 0; iy < 26; iy++){
-      pts.push([(ix/63 - 0.5)*880, (iy/25 - 0.5)*340, 0]);
-    }
-  }
-  return fit(pts, COUNT);
-}
-function formRing(){
-  var pts = [];
-  for(var i = 0; i < 7000; i++){
-    var a = Math.random()*Math.PI*2;
-    var R = (Math.random() < 0.8) ? 170 + Math.random()*22 : 90 + Math.random()*10;
-    pts.push([Math.cos(a)*R, Math.sin(a)*R, (Math.random()-0.5)*36]);
-  }
-  return fit(pts, COUNT);
+function doReveal(){
+  if(revealed) return;
+  revealed = true;
+  /* fade out canvas, unlock scroll */
+  fogC.style.transition = 'opacity 1.4s ease';
+  fogC.style.opacity = '0';
+  fogC.style.pointerEvents = 'none';
+  skipBtn.classList.add('hidden');
+  setTimeout(function(){
+    window.scrollBy({top: Math.round(window.innerHeight * 0.28), behavior:'smooth'});
+  }, 900);
 }
 
-var FORMS = [], ROTX = [0, 0, 0, -0.85, 0], OPAC = [0.95, 0.5, 0.55, 0.45, 0.8];
-var ZONE_NAMES = ["FORM 01 — SILHOUETTE","FORM 02 — STREAM","FORM 03 — TYPE","FORM 04 — GRID","FORM 05 — IGNITION RING"];
-if(IS_MOBILE_NARROW){ ZONE_NAMES[0] = "FORM 01 — IGNITION"; }
+skipBtn.addEventListener('click', doReveal);
 
-function initGL(){
-  var cv = document.getElementById("stage");
-  renderer = new THREE.WebGLRenderer({canvas: cv, alpha:true, antialias:false});
-  var dpr = Math.min(devicePixelRatio || 1, 2);
-  renderer.setPixelRatio(dpr);
-  W = innerWidth; H = innerHeight;
-  renderer.setSize(W, H, false);
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, W/H, 1, 2000);
-  camera.position.z = 430;
-  camera.updateProjectionMatrix();
+/* --- touch --- */
+fogC.addEventListener('touchstart', function(e){
+  e.preventDefault();
+  var t = e.touches[0];
+  addWipe(t.clientX, t.clientY);
+},{passive:false});
+fogC.addEventListener('touchmove', function(e){
+  e.preventDefault();
+  var t = e.touches[0];
+  addWipe(t.clientX, t.clientY);
+},{passive:false});
 
-  FORMS = [IS_MOBILE_NARROW ? formVortex() : formCar(), formStream(), formType(), formGrid(), formRing()];
+/* --- mouse (desktop: drag to wipe) --- */
+var mdown = false;
+fogC.addEventListener('mousedown', function(e){ mdown = true; addWipe(e.clientX, e.clientY); });
+fogC.addEventListener('mousemove', function(e){ if(mdown) addWipe(e.clientX, e.clientY); });
+window.addEventListener('mouseup', function(){ mdown = false; });
 
-  var pos = new Float32Array(COUNT*3), col = new Float32Array(COUNT*3),
-      vel = new Float32Array(COUNT*3), rnd = new Float32Array(COUNT);
-  var cR = new THREE.Color("#FF1E2D"), cW = new THREE.Color("#F5F2EC"), cD = new THREE.Color("#7A2030");
-  for(var i = 0; i < COUNT; i++){
-    var th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1), R = 600 + Math.random()*500;
-    pos[i*3]   = Math.sin(ph)*Math.cos(th)*R;
-    pos[i*3+1] = Math.sin(ph)*Math.sin(th)*R;
-    pos[i*3+2] = Math.cos(ph)*R - 300;
-    var c = Math.random();
-    var cc = c < 0.72 ? cR : (c < 0.9 ? cD : cW);
-    col[i*3] = cc.r; col[i*3+1] = cc.g; col[i*3+2] = cc.b;
-    rnd[i] = Math.random()*Math.PI*2;
-  }
-  var geo = new THREE.BufferGeometry();
-  geo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  geo.setAttribute("color", new THREE.BufferAttribute(col, 3));
-  /* v2-a fix 1: グロースプライトをmapに指定 + alphaTest で縁を透明に */
-  var sprite = makeGlowSprite();
-  var mat = new THREE.PointsMaterial({
-    size: IS_MOBILE_NARROW ? 5.0 : (isTouch ? 3.2 : 2.6),
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.95,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    sizeAttenuation: true,
-    map: sprite,
-    alphaTest: 0.01
-  });
-  points = new THREE.Points(geo, mat);
-  scene.add(points);
-  P = {pos:pos, vel:vel, rnd:rnd, geo:geo, t:0};
-
-  window.addEventListener("resize", function(){
-    W = innerWidth; H = innerHeight;
-    camera.aspect = W/H; camera.updateProjectionMatrix();
-    renderer.setSize(W, H, false);
-  });
+/* ---- render loop ---- */
+if(reduced){
+  /* skip animation, just show light fog */
+  ctx.fillStyle = 'rgba(7,10,18,0.55)';
+  ctx.fillRect(0,0,window.innerWidth,window.innerHeight);
+  return;
 }
-
-var mouse3, ray, plane, hitPt;
-if(canRun){
-  mouse3 = new THREE.Vector2(9999,9999);
-  ray = new THREE.Raycaster();
-  plane = new THREE.Plane(new THREE.Vector3(0,0,1), 0);
-  hitPt = new THREE.Vector3(9999,9999,0);
-  var updateHit = function(cxp, cyp){
-    mouse3.x = (cxp / W) * 2 - 1;
-    mouse3.y = -(cyp / H) * 2 + 1;
-    ray.setFromCamera(mouse3, camera);
-    ray.ray.intersectPlane(plane, hitPt);
-  };
-  if(!isTouch){
-    document.addEventListener("mousemove", function(e){ if(camera) updateHit(e.clientX, e.clientY); });
-  } else {
-    document.addEventListener("touchmove", function(e){ if(camera) updateHit(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
-  }
-}
-
-var anchors = [];
-function computeAnchors(){
-  var vh = innerHeight;
-  anchors = [
-    0,
-    Math.max(1, document.getElementById("styles").offsetTop - vh*0.55),
-    Math.max(2, document.getElementById("statement").offsetTop - vh*0.55),
-    Math.max(3, document.getElementById("price").offsetTop - vh*0.55),
-    Math.max(4, document.getElementById("contact").offsetTop - vh*0.55)
-  ];
-}
-window.addEventListener("resize", computeAnchors);
-window.addEventListener("load", computeAnchors);
-computeAnchors();
-
-function formationF(y){
-  if(y <= anchors[1]) return Math.min(1, Math.max(0, (y - anchors[0]) / Math.max(1, anchors[1]-anchors[0])));
-  for(var i = 1; i < 4; i++){
-    if(y <= anchors[i+1]) return i + (y - anchors[i]) / Math.max(1, anchors[i+1]-anchors[i]);
-  }
-  return 4;
-}
-function lerp(a, b, f){ return a + (b - a) * f; }
-
-var zoneLabel = document.getElementById("zoneLabel");
-var heroReveal = document.getElementById("heroReveal");
-if(reduced && heroReveal){ heroReveal.style.opacity = "0.85"; }
-var lastZone = -1;
 
 function frame(){
   requestAnimationFrame(frame);
-  smoothY += (scrollY - smoothY) * 0.08;
-  var docH = Math.max(1, document.body.scrollHeight - innerHeight);
-  navLine.style.width = (smoothY / docH * 100) + "%";
+  if(revealed) return;
 
-  if(!isTouch){
-    cx += (mx - cx) * 0.55; cy += (my - cy) * 0.55;
-    c1.style.transform = "translate(" + mx + "px," + my + "px) translate(-50%,-50%)";
-    c2.style.transform = "translate(" + cx + "px," + cy + "px) translate(-50%,-50%)";
+  /* fog base */
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = 'rgba(7,9,16,0.92)';
+  ctx.fillRect(0,0,W,H);
+
+  /* subtle vignette-glow at centre (water on glass feel) */
+  var vg = ctx.createRadialGradient(W*.5,H*.42,0,W*.5,H*.42,W*.6);
+  vg.addColorStop(0,'rgba(30,45,70,0.14)');
+  vg.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle = vg; ctx.fillRect(0,0,W,H);
+
+  /* rain streaks */
+  ctx.save();
+  for(var i=0;i<drops.length;i++){
+    var d = drops[i];
+    var px = d.x*W, py = d.y*H;
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px - d.len*0.15, py + d.len);
+    ctx.strokeStyle = 'rgba(180,210,255,'+d.opa+')';
+    ctx.lineWidth = d.lw;
+    ctx.stroke();
+    d.y += d.spd;
+    if(d.y > 1.04){ d.y = -0.06; d.x = Math.random(); }
   }
+  ctx.restore();
 
-  if(canRun && P){
-    P.t += 0.016;
-    var F = formationF(smoothY);
-    var i0 = Math.min(3, Math.floor(F)), f = Math.min(1, F - i0);
-    var A = FORMS[i0], B = FORMS[i0+1];
-    var zone = Math.round(F);
-    if(zone !== lastZone){ lastZone = zone; zoneLabel.textContent = ZONE_NAMES[zone]; }
-
-    var pos = P.pos, vel = P.vel, rnd = P.rnd;
-    var hx = hitPt.x, hy = hitPt.y;
-    var ease = document.body.classList.contains("ready") ? 0.05 : 0.002;
-    if(reduced) ease = 1;
-    var wob = reduced ? 0 : 1.6;
-    var repelR2 = IS_MOBILE_NARROW ? 1100 : 4900;
-    var repelStr = IS_MOBILE_NARROW ? 1.1 : 2.4;
-    if(i0 === 0){ wob *= 0.15; }
-
-    /* v2-a fix 3: heroReveal を ZONE 0 のみに限定（ZONE 1 へのブリードを排除）
-       ピーク到達をf>0.45→f>0.3に早め、ゾーン移行後は即座にフェードアウト */
-    if(heroReveal){
-      var peak = IS_MOBILE_NARROW ? 0.92 : 0.34;
-      var revOp = 0;
-      if(i0 === 0){
-        if(f > 0.3){ revOp = Math.min(peak, (f - 0.3) / 0.7 * peak); }
-      }
-      /* i0 >= 1 の場合は revOp = 0（ZONE 1 以降は写真を出さない） */
-      heroReveal.style.opacity = revOp;
-    }
-
-    for(var i = 0; i < COUNT; i++){
-      var ix = i*3, iy = ix+1, iz = ix+2;
-      var txp = lerp(A[ix], B[ix], f) + Math.sin(P.t*1.4 + rnd[i]) * wob;
-      var typ = lerp(A[iy], B[iy], f) + Math.cos(P.t*1.2 + rnd[i]) * wob;
-      var tzp = lerp(A[iz], B[iz], f);
-      if(i0 === 3){ tzp += Math.sin(P.t*1.1 + A[ix]*0.012) * 26 * (1-f); }
-      if(reduced){
-        pos[ix] = txp; pos[iy] = typ; pos[iz] = tzp;
-      } else {
-        vel[ix] += (txp - pos[ix]) * ease;
-        vel[iy] += (typ - pos[iy]) * ease;
-        vel[iz] += (tzp - pos[iz]) * ease;
-        var dx = pos[ix] - hx, dy = pos[iy] - hy;
-        var d2 = dx*dx + dy*dy;
-        if(d2 < repelR2 && d2 > 0.01){
-          var ff = (1 - d2/repelR2) * repelStr / Math.sqrt(d2);
-          vel[ix] += dx * ff; vel[iy] += dy * ff;
-        }
-        vel[ix] *= 0.9; vel[iy] *= 0.9; vel[iz] *= 0.9;
-        pos[ix] += vel[ix]; pos[iy] += vel[iy]; pos[iz] += vel[iz];
-      }
-    }
-    P.geo.attributes.position.needsUpdate = true;
-
-    var rotX = lerp(ROTX[i0], ROTX[i0+1], f);
-    var op = lerp(OPAC[i0], OPAC[i0+1], f);
-    points.rotation.y = Math.sin(P.t*0.18) * 0.07 + (mx/W - 0.5) * 0.1;
-    points.rotation.x = rotX + (my/H - 0.5) * 0.06;
-    points.rotation.z = (i0 === 4 || (i0 === 3 && f > 0.5)) ? P.t * 0.12 * f : 0;
-    points.position.y = 10;
-    points.material.opacity = op;
-    renderer.render(scene, camera);
-  }
+  /* punch holes from wipe mask */
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.drawImage(maskC, 0, 0);
+  ctx.globalCompositeOperation = 'source-over';
 }
+frame();
 
-if(canRun){
-  try{ initGL(); }
-  catch(err){ canRun = false; }
-}
-if(canRun){ frame(); }
-})();
+}());
 </script>
+<!-- Cloudflare Web Analytics -->
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token":"488a9cb636c342efa6f8796ad615bf1c"}'></script>
 </body>
 </html>
