@@ -289,6 +289,13 @@ footer .fin{margin-top:40px;font-family:var(--mono);font-size:9px;letter-spacing
 }
 
 /* === 解説モード === */
+/* ============ BRIDGE — MISERUへの転換（種明かし＋自分ごと化） ============ */
+#bridge{padding:130px 0;text-align:center;position:relative;z-index:2;background:linear-gradient(rgba(12,9,18,.5),rgba(6,5,9,.82))}
+#bridge .muted{max-width:54ch;margin:26px auto 0;font-size:14px;line-height:2.15}
+#bridge .muted strong{color:var(--headlight);font-weight:600}
+.bridge-cta{display:flex;gap:14px;justify-content:center;margin-top:46px;flex-wrap:wrap}
+.bridge-note{display:block;margin-top:24px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--smoke)}
+
 .explain-toggle{position:fixed;bottom:18px;left:14px;z-index:150;background:rgba(6,5,9,.6);color:var(--headlight);border:1px solid var(--line);border-radius:99px;padding:11px 20px;font-size:12px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px);transition:background .25s,transform .2s,border-color .25s;font-family:var(--mono);letter-spacing:.12em}
 .explain-toggle:hover{transform:translateY(-2px);border-color:var(--signal)}
 body.explain-on .explain-toggle{background:var(--signal);border-color:var(--signal);color:#fff}
@@ -450,6 +457,20 @@ body.explain-on .ann-band{display:block;position:relative;z-index:3;background:r
     <div class="steps rev"><span>01 — 車両写真と、ご希望を一言</span><span>02 — 方向の希望を共有</span><span>03 — 概算の例をLINEでお返し</span></div>
     <div class="mag-wrap" id="mag"><a class="btn-line cta-main" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover>LINEで仕様を相談する →</a></div>
     <span class="cta-sub">※ LINEボタンはすべて MISERU 公式LINE につながります（架空店舗の連絡先ではありません）</span>
+  </div>
+</section>
+
+<!-- ================= BRIDGE: MISERUへの転換 ================= -->
+<section id="bridge">
+  <div class="wrap">
+    <div class="eyebrow rev" style="justify-content:center">FROM MISERU — 種明かし</div>
+    <h2 class="sec rev">これ、車屋さんの<br>話だけじゃない。</h2>
+    <p class="muted rev">ここまでの見せ方は、<strong>MISERUが「写真と現場感で伝わる」を狙って組んだ型</strong>です。建設・リフォーム・飲食・美容・宿・工房——いい仕事を見せ方で伝えたい業種なら、同じ考え方で整えられます。</p>
+    <div class="bridge-cta">
+      <a class="btn-line cta-main rev" href="index.html#contact" data-hover data-cta="bridge-free">MISERUに無料相談する（¥0）→</a>
+      <a class="btn-line rev" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-hover data-cta="bridge-line">公式LINEで話す →</a>
+    </div>
+    <span class="bridge-note">無料相談では、今のHP・Instagramを見て、方向性とプラン目安までお返しします。</span>
   </div>
 </section>
 
@@ -901,7 +922,7 @@ if(canRun){
 frame();
 })();
 </script>
-<button class="explain-toggle" aria-pressed="false">解説モード</button>
+<button class="explain-toggle" aria-pressed="false">▸ 解説モード：なぜこの作りか</button>
 <script>
 (function(){
   var btn=document.querySelector('.explain-toggle');
