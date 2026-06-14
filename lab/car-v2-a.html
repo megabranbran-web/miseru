@@ -572,7 +572,7 @@ if(mag && !isTouch && !reduced){
    WEBGL — SCROLL-MORPHING PARTICLES（5つの隊形）
    FORM 01 CAR → 02 STREAM → 03 TYPE → 04 GRID → 05 RING
 ============================================================ */
-var renderer, scene, camera, points, P = null, P_hlIdx = [], P_origCol = null, _hlLast = -1;
+var renderer, scene, camera, points, P = null;
 var W = innerWidth, H = innerHeight;
 function webglOK(){
   try{ var c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl") || c.getContext("experimental-webgl"))); }
@@ -742,17 +742,6 @@ function initGL(){
   points = new THREE.Points(geo, mat);
   scene.add(points);
   P = {pos:pos, vel:vel, rnd:rnd, geo:geo, t:0};
-  /* ヘッドライト粒子＝車シルエット(FORM01)のフロント先端・中段を抽出（PCのみ） */
-  P_origCol = col.slice();
-  if(!IS_MOBILE_NARROW){
-    var cf = FORMS[0], mnX = Infinity, mxX = -Infinity;
-    for(var hi = 0; hi < COUNT; hi++){ var xv = cf[hi*3]; if(xv<mnX)mnX=xv; if(xv>mxX)mxX=xv; }
-    var frTh = mnX + (mxX - mnX) * 0.17;
-    for(var hj = 0; hj < COUNT; hj++){
-      var xv2 = cf[hj*3], yv = cf[hj*3+1];
-      if(xv2 < frTh && yv > -36 && yv < 16){ P_hlIdx.push(hj); }
-    }
-  }
 
   window.addEventListener("resize", function(){
     W = innerWidth; H = innerHeight;
@@ -888,20 +877,6 @@ function frame(ts){
       }
     }
     P.geo.attributes.position.needsUpdate = true;
-
-    /* ヘッドライト点灯：SILHOUETTE収束後にフロント粒子を白く灯す（スクロールで消灯） */
-    var hlOn = (!IS_MOBILE_NARROW && i0 === 0) ? cl((tin - 0.9)/0.6) * (1 - f) : 0;
-    if(P_hlIdx.length && Math.abs(hlOn - _hlLast) > 0.02){
-      var colArr = P.geo.attributes.color.array;
-      for(var hk = 0; hk < P_hlIdx.length; hk++){
-        var hidx = P_hlIdx[hk]*3;
-        colArr[hidx]   = lerp(P_origCol[hidx],   1, hlOn);
-        colArr[hidx+1] = lerp(P_origCol[hidx+1], 1, hlOn);
-        colArr[hidx+2] = lerp(P_origCol[hidx+2], 1, hlOn);
-      }
-      P.geo.attributes.color.needsUpdate = true;
-      _hlLast = hlOn;
-    }
 
     var rotX = lerp(ROTX[i0], ROTX[i0+1], f);
     var op = lerp(OPAC[i0], OPAC[i0+1], f);
