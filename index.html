@@ -478,6 +478,27 @@ header{
 .fit-box--no li::before{content:"—";color:var(--grey);flex:none;font-size:12px;margin-top:2px}
 .fit-box--no li{color:#6B655A}
 
+/* ============ 見立てシート具体例 ============ */
+.sheet-example{background:var(--ink-2);border:1px dashed rgba(246,243,237,.2);border-radius:4px;padding:24px 24px 20px;margin-top:24px}
+.sheet-example-hd{font-size:15px;font-weight:700;color:var(--paper);margin-bottom:4px}
+.sheet-example-sub{font-size:11.5px;color:#9A9184;margin-bottom:18px;font-family:var(--mono);letter-spacing:.04em}
+.sheet-example-dl{display:grid;gap:0}
+.sheet-example-dl dt{font-size:12px;font-weight:700;color:var(--shu-soft);font-family:var(--mono);letter-spacing:.08em;padding-top:14px;border-top:1px dashed rgba(246,243,237,.08)}
+.sheet-example-dl dd{font-size:13px;color:#B5AC9D;line-height:1.9;padding-bottom:14px;margin:4px 0 0}
+.sheet-example-dl dt:first-of-type{border-top:none;padding-top:0}
+.sheet-example-note{font-size:11px;color:#6B655A;margin-top:12px;border-top:1px dashed rgba(246,243,237,.08);padding-top:10px}
+
+/* ============ Before/After改善例 ============ */
+.ba-grid{display:grid;gap:20px;margin-top:30px}
+@media(min-width:820px){.ba-grid{grid-template-columns:repeat(3,1fr)}}
+.ba-card{border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.ba-before,.ba-after{padding:16px 18px}
+.ba-before{background:#FBF9F4}
+.ba-after{background:#fff;border-top:1px dashed var(--line)}
+.ba-label{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--grey);margin-bottom:6px}
+.ba-label--af{color:var(--shu)}
+.ba-card p{font-size:12.8px;color:#4A443B;line-height:1.85}
+
 /* ============ WHO（料金直後） ============ */
 .who-grid{display:grid;gap:36px;margin-top:34px}
 @media(min-width:920px){.who-grid{grid-template-columns:1.1fr .9fr}}
@@ -788,6 +809,51 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
   </div>
 </section>
 
+<!-- ============ 04b よくある改善例 ============ -->
+<section class="sec sec--alt" id="examples" style="padding-top:0">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>改善例 — EXAMPLE</span></div>
+    <div>
+      <p class="kicker">EXAMPLE</p>
+      <h2 class="h2 rv">よくある「もったいない」と、<br>整えた後のイメージ。</h2>
+      <p class="lead rv">大きな作り直しではなく、見せ方を変えるだけで印象が変わる例です。</p>
+      <div class="ba-grid">
+        <article class="ba-card rv">
+          <div class="ba-before">
+            <span class="ba-label">BEFORE</span>
+            <p>トップを開いても、何屋か分からない。ロゴと電話番号だけが並んでいる。</p>
+          </div>
+          <div class="ba-after">
+            <span class="ba-label ba-label--af">AFTER</span>
+            <p>ファーストビューに施工写真と「〇〇市の外壁リフォーム」。3秒で何屋か伝わる。</p>
+          </div>
+        </article>
+        <article class="ba-card rv">
+          <div class="ba-before">
+            <span class="ba-label">BEFORE</span>
+            <p>料金表が大きく、メニュー名と金額だけ目立つ。お店の雰囲気が伝わらない。</p>
+          </div>
+          <div class="ba-after">
+            <span class="ba-label ba-label--af">AFTER</span>
+            <p>料理写真を上に、料金は補足へ。「この店で食べたい」が先に来る構成に。</p>
+          </div>
+        </article>
+        <article class="ba-card rv">
+          <div class="ba-before">
+            <span class="ba-label">BEFORE</span>
+            <p>施工実績の写真が小さくタイル状に並ぶだけ。どれも同じに見える。</p>
+          </div>
+          <div class="ba-after">
+            <span class="ba-label ba-label--af">AFTER</span>
+            <p>Before/After写真を大きく並べ、「何がどう変わったか」が一目で伝わる。</p>
+          </div>
+        </article>
+      </div>
+      <p class="s-disc" style="margin-top:18px">※これらは架空の改善例です。実在するクライアント事例ではありません。</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 05 向いている仕事 ============ -->
 <section class="sec" id="industries" style="padding-top:0">
   <div class="wrap sec-grid">
@@ -836,6 +902,24 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
             <li><b>問い合わせ導線</b>LINE・電話・フォームまでの動線に詰まりがないか</li>
             <li><b>次にやるべきこと</b>いま手をつけるべき順番と、その理由</li>
           </ul>
+        </div>
+
+        <div class="sheet-example rv">
+          <p class="sheet-example-hd">たとえば、こんなふうにお返しします。</p>
+          <p class="sheet-example-sub">架空例：外壁リフォーム工務店のHPを見た場合</p>
+          <dl class="sheet-example-dl">
+            <dt>第一印象</dt>
+            <dd>スマホで開くと、最初に見えるのはロゴと電話番号だけ。施工写真は画面2つ分スクロールしないと出てきません。「何を頼める会社か」が3秒では伝わりにくい状態です。</dd>
+            <dt>もったいない点</dt>
+            <dd>施工事例が20件以上あるのに、サムネイルが小さく一覧表示。写真の迫力がスマホでは伝わっていません。お客様の声も文字だけで、現場の空気が薄れています。</dd>
+            <dt>優先して直す場所</dt>
+            <dd>ファーストビューに施工写真を大きく1枚。「外壁リフォーム 〇〇市」と何屋か分かる見出しを添えるだけで、第一印象が変わります。</dd>
+            <dt>改善の方向</dt>
+            <dd>施工Before/Afterを横並びで見せる。スマホ下部に「LINEで相談」の固定ボタン。実績ページを写真主役のカード型に変更。</dd>
+            <dt>次にやるべきこと</dt>
+            <dd>まずはトップページのファーストビューだけ整えて、問い合わせ導線を1本通す。全ページの作り直しは、その反応を見てからで十分です。</dd>
+          </dl>
+          <p class="sheet-example-note">※これは架空の工務店を例にした見本です。実在する会社ではありません。</p>
         </div>
 
         <div class="rv">
@@ -1234,6 +1318,26 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <summary>補助金は使えますか？</summary>
           <p class="ans">小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。</p>
         </details>
+        <details class="qa">
+          <summary>原稿やテキストがなくても大丈夫ですか？</summary>
+          <p class="ans">大丈夫です。見出し・紹介文・料金説明など、ヒアリングをもとにこちらで整えます。「うまく書けない」という方がほとんどなので、お気軽にご相談ください。</p>
+        </details>
+        <details class="qa">
+          <summary>写真が少なくても、見栄えのするHPになりますか？</summary>
+          <p class="ans">なります。手持ちの写真でも、トリミング・配置・見せ方の工夫で印象は大きく変わります。足りない場合は撮影込みのプラン（STANDARD ¥298,000〜）もご提案できます。</p>
+        </details>
+        <details class="qa">
+          <summary>修正は何回までできますか？</summary>
+          <p class="ans">初回見立てシートは1回の修正確認を含んでいます。制作プラン（BASIC〜PREMIUM）では、各工程ごとに確認と修正のやりとりを行い、納得いただいてから次へ進めます。「修正3回まで」のような機械的な制限は設けていません。</p>
+        </details>
+        <details class="qa">
+          <summary>あとから追加費用が発生しませんか？</summary>
+          <p class="ans">最初にお見せする範囲と金額から、勝手に増えることはありません。途中で「ページを追加したい」「撮影も頼みたい」など範囲が変わる場合は、必ず追加分の金額をお見せして、承諾いただいてからです。</p>
+        </details>
+        <details class="qa">
+          <summary>公開（納品）までどのくらいかかりますか？</summary>
+          <p class="ans">初回見立てシートは約1週間。制作プランはBASIC 2〜3週間、STANDARD 4〜6週間、PREMIUM 1.5〜2ヶ月が目安です。素材のご準備状況や修正回数で前後しますが、目安は最初にお伝えします。</p>
+        </details>
         </div><!-- /faq-rest -->
       </div>
       <p class="faq-cta">ここに無い疑問は、そのまま聞いてください。<a href="#contact" data-cta="free-consult">無料で相談する →</a></p>
@@ -1265,7 +1369,12 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
     {"@type":"Question","name":"遠方でも依頼できますか？","acceptedAnswer":{"@type":"Answer","text":"HPの改善や制作はオンラインで全国対応できます。撮影が必要な場合のみエリアをご相談ください。"}},
     {"@type":"Question","name":"小さなお店・個人事業でも相談できますか？","acceptedAnswer":{"@type":"Answer","text":"もちろんです。実力はあるのにWebで伝わっていない、小さな事業者さまのために始めたサービスです。"}},
     {"@type":"Question","name":"LINEでも相談できますか？","acceptedAnswer":{"@type":"Answer","text":"はい、公式LINEで相談できます。こちらから友だち追加して、トーク画面でメッセージを送ってください。今のHPや1ページ分のスクショを送っていただければ、無料相談として方向性と合いそうなプラン目安をお返しします。具体的な改善案・写真選定・文章案・レイアウト案は、初回見立てシート（¥9,800〜）から対応しています。フォームやメールでのご相談も大丈夫です。"}},
-    {"@type":"Question","name":"補助金は使えますか？","acceptedAnswer":{"@type":"Answer","text":"小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。"}}
+    {"@type":"Question","name":"補助金は使えますか？","acceptedAnswer":{"@type":"Answer","text":"小規模事業者持続化補助金では、HP制作費を「ウェブサイト関連費」として補助対象にできます。ただし、補助金交付申請額の1/4（最大50万円）まで・ウェブサイト関連費単独では申請できない、という条件があります。申請されるのはお客様ご自身で、地域の商工会議所・商工会で相談できます。MISERUは見積書など、申請に必要な書類の発行に対応します。"}},
+    {"@type":"Question","name":"原稿やテキストがなくても大丈夫ですか？","acceptedAnswer":{"@type":"Answer","text":"大丈夫です。見出し・紹介文・料金説明など、ヒアリングをもとにこちらで整えます。「うまく書けない」という方がほとんどなので、お気軽にご相談ください。"}},
+    {"@type":"Question","name":"写真が少なくても、見栄えのするHPになりますか？","acceptedAnswer":{"@type":"Answer","text":"なります。手持ちの写真でも、トリミング・配置・見せ方の工夫で印象は大きく変わります。足りない場合は撮影込みのプラン（STANDARD ¥298,000〜）もご提案できます。"}},
+    {"@type":"Question","name":"修正は何回までできますか？","acceptedAnswer":{"@type":"Answer","text":"初回見立てシートは1回の修正確認を含んでいます。制作プラン（BASIC〜PREMIUM）では、各工程ごとに確認と修正のやりとりを行い、納得いただいてから次へ進めます。「修正3回まで」のような機械的な制限は設けていません。"}},
+    {"@type":"Question","name":"あとから追加費用が発生しませんか？","acceptedAnswer":{"@type":"Answer","text":"最初にお見せする範囲と金額から、勝手に増えることはありません。途中で「ページを追加したい」「撮影も頼みたい」など範囲が変わる場合は、必ず追加分の金額をお見せして、承諾いただいてからです。"}},
+    {"@type":"Question","name":"公開（納品）までどのくらいかかりますか？","acceptedAnswer":{"@type":"Answer","text":"初回見立てシートは約1週間。制作プランはBASIC 2〜3週間、STANDARD 4〜6週間、PREMIUM 1.5〜2ヶ月が目安です。素材のご準備状況や修正回数で前後しますが、目安は最初にお伝えします。"}}
   ]
 }
 </script>
