@@ -4,11 +4,11 @@
 <script>document.documentElement.classList.add('js')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ミセル｜いい仕事は、見せ方で伝わる。 — 中小事業のHP・見せ方改善</title>
+<title>MISERU｜問い合わせにつながるHP改善・Web制作サービス</title>
 <meta name="description" content="HP・Instagram・Googleマップ・写真から、実物の魅力が伝わる1ページへ。中小事業の見せ方を整える編集室、ミセル。HPがなくても、まずは無料相談で方向性とプラン目安をお返しします。">
 <!-- DOMAIN-MIGRATION: 独自ドメイン移行時に要書き換え（canonical / og:url / og:image / twitter:image / JSON-LD内URL） -->
 <link rel="canonical" href="https://miseru-web.pages.dev/">
-<meta property="og:title" content="ミセル｜いい仕事は、見せ方で伝わる。">
+<meta property="og:title" content="MISERU｜問い合わせにつながるHP改善・Web制作サービス">
 <meta property="og:description" content="写真・文章・スマホ導線を整えて、実物の魅力が伝わるHPへ。中小事業のHPを「相談されるページ」に整えます。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://miseru-web.pages.dev/">
@@ -279,6 +279,7 @@ header{
 .scard h3 small{font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.16em;color:#9A9184;margin-left:8px;vertical-align:2px}
 .scard p{font-size:13px;color:#B5AC9D;line-height:1.85;flex:1}
 .scard .go{font-size:13px;font-weight:700;color:#FF6B55}
+.s-intent{font-size:11.5px;color:#9A9184;line-height:1.75;border-top:1px dashed rgba(246,243,237,.12);padding-top:8px;margin-top:auto}
 .s-guide{margin-top:26px;font-size:13.5px;color:#BBB3A4;border-left:2px solid var(--shu);padding-left:14px;line-height:2}
 .s-guide b{color:var(--paper)}
 /* 編集後記（正直宣言） */
@@ -330,6 +331,12 @@ header{
 .sheet-list .sq{flex:none;width:10px;height:10px;background:var(--shu);margin-top:11px}
 .sheet-list h3{font-size:16.5px;color:var(--paper);margin-bottom:4px}
 .sheet-list p{font-size:13px;color:#B5AC9D;line-height:1.85}
+.sheet-preview{background:var(--ink-2);border:1px dashed rgba(246,243,237,.2);border-radius:4px;padding:22px 24px;margin-top:18px}
+.sheet-preview-hd{font-size:14px;font-weight:700;color:var(--paper);margin-bottom:14px}
+.sheet-preview-list{list-style:none}
+.sheet-preview-list li{font-size:12.8px;color:#B5AC9D;padding:6px 0;border-bottom:1px dashed rgba(246,243,237,.1);display:flex;gap:8px;line-height:1.8}
+.sheet-preview-list li:last-child{border-bottom:none}
+.sheet-preview-list b{color:var(--paper);flex:none;min-width:7em}
 .a4{
   background:#FCFAF5;color:var(--ink);border-radius:2px;
   padding:30px 26px;transform:rotate(-1.2deg);
@@ -449,6 +456,27 @@ header{
 /* 料金直下CTA */
 .p-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
 .p-cta-note{margin-top:10px;font-size:11.5px;color:var(--grey)}
+
+/* ============ WHY（安くない理由） ============ */
+.why-grid{display:grid;gap:24px;margin-top:30px}
+@media(min-width:820px){.why-grid{grid-template-columns:repeat(3,1fr)}}
+.why-card{border:1px solid var(--line);border-radius:4px;padding:22px 20px;background:#FBF9F4}
+.why-card .wt{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--shu);margin-bottom:8px}
+.why-card h3{font-size:15px;margin-bottom:8px}
+.why-card p{font-size:12.8px;color:#4A443B;line-height:1.9}
+
+/* ============ FIT（向いている人） ============ */
+.fit-grid{display:grid;gap:24px;margin-top:30px}
+@media(min-width:820px){.fit-grid{grid-template-columns:1fr 1fr}}
+.fit-box{border-radius:4px;padding:24px 22px}
+.fit-box--yes{border:1.5px solid var(--shu);background:#fff}
+.fit-box--no{border:1px solid var(--line);background:#FBF9F4}
+.fit-box h3{font-size:15px;margin-bottom:14px}
+.fit-box ul{list-style:none}
+.fit-box li{font-size:13px;color:#4A443B;padding:5px 0;display:flex;gap:8px;line-height:1.8}
+.fit-box--yes li::before{content:"○";color:var(--shu);flex:none;font-size:12px;margin-top:2px}
+.fit-box--no li::before{content:"—";color:var(--grey);flex:none;font-size:12px;margin-top:2px}
+.fit-box--no li{color:#6B655A}
 
 /* ============ WHO（料金直後） ============ */
 .who-grid{display:grid;gap:36px;margin-top:34px}
@@ -613,7 +641,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
       <p class="fv-lead">HP・Instagram・Googleマップ・写真の“見せ方”を直して、問い合わせにつなげます。HPがなくても大丈夫。まずは<b>無料相談</b>で、どこを直すと良くなりそうかと、費用のだいたいの目安をお返しします。</p>
       <p class="fv-sample-link"><a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る →</a><span class="nt">3業種・すべて架空サンプルです</span></p>
       <div class="fv-cta">
-        <a class="btn btn--shu" href="#contact" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
+        <a class="btn btn--shu" href="#contact" data-cta="free-consult">URLを送って改善点を見てもらう <span class="arw">→</span></a>
         <a class="btn btn--ghost" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
       </div>
       <div class="badges">
@@ -671,6 +699,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
             <span class="no">01 — PET SERVICE</span>
             <h3>うちのこ通い帳 <small>SAMPLE</small></h3>
             <p>お預かりの一日を通い帳でお返しするサンプル。やわらかい色・丸ゴシック・写真の表情で「安心して預けたい」を作る方向。架空サンプルHPです。</p>
+            <p class="s-intent">ファーストビューで「何屋か」を即伝え、やわらかい写真で安心感を。お預かり記録でリピートにつなげる構成。</p>
             <span class="go">完成HPを開く →</span>
           </span>
         </a>
@@ -680,6 +709,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
             <span class="no">02 — RESTAURANT</span>
             <h3>夜小路 <small>SAMPLE</small></h3>
             <p>七席だけの季節のおまかせサンプル。明朝・暗背景・金茶で「品と余韻」を作る方向。日本酒と季節の小皿。架空サンプルHPです。</p>
+            <p class="s-intent">品と余韻を暗色で演出し、料理写真を主役に。席数の少なさを「特別感」に変え、予約導線へ自然に流す構成。</p>
             <span class="go">完成HPを開く →</span>
           </span>
         </a>
@@ -689,6 +719,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
             <span class="no">03 — CAR &amp; BIKE</span>
             <h3>GRAPHIC EDITION <small>SAMPLE</small></h3>
             <p>一台のこだわりを相談につなげるサンプル。黒×赤・大型欧文・スクロールで姿を変える粒子演出。同じ演出をあなたの業種でも。架空サンプルHPです。</p>
+            <p class="s-intent">大型写真で実物の迫力を見せ、黒×赤でプロ感を演出。スクロールで姿を変える演出で「こだわり」を伝える構成。</p>
             <span class="go">完成HPを開く →</span>
           </span>
         </a>
@@ -796,6 +827,17 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <article class="rv"><span class="sq"></span><div><h3>必要な範囲と費用の目安</h3><p>制作・改善が必要な場合だけ、範囲と目安を。押し売りはしません。</p></div></article>
         </div>
 
+        <div class="sheet-preview rv">
+          <p class="sheet-preview-hd">URLを送ると、こんな形で返します。</p>
+          <ul class="sheet-preview-list">
+            <li><b>第一印象</b>スマホで見たとき、最初の3秒で何が伝わるか</li>
+            <li><b>もったいない点</b>今ある写真・文章で、活かしきれていないところ</li>
+            <li><b>優先して直す場所</b>一番効果が出る1〜2箇所の具体案</li>
+            <li><b>問い合わせ導線</b>LINE・電話・フォームまでの動線に詰まりがないか</li>
+            <li><b>次にやるべきこと</b>いま手をつけるべき順番と、その理由</li>
+          </ul>
+        </div>
+
         <div class="rv">
           <div class="a4">
             <span class="stamp">SAMPLE・架空</span>
@@ -846,7 +888,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
         <p class="pr">¥9,800〜<small>所要 約1週間／A4数枚</small></p>
         <p class="juto">ご依頼に進んだ場合、<b>¥9,800 は制作費から全額充当</b>します。見立てだけで終えても大丈夫です。</p>
         <div class="fv-cta" style="margin-top:16px">
-          <a class="btn btn--shu" href="#contact" data-cta="free-consult">無料で見せ方を相談する <span class="arw">→</span></a>
+          <a class="btn btn--shu" href="#contact" data-cta="free-consult">URLを送って改善点を見てもらう <span class="arw">→</span></a>
           <a class="btn btn--ghost" href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る</a>
         </div>
         <p class="s-disc" style="margin-top:14px">※これは初回見立てシートの見本です。実在するクライアント事例ではありません。</p>
@@ -991,6 +1033,70 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
         <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn--ghost" data-cta="line-consult">LINEで相談する <span class="arw">→</span></a>
       </div>
       <p class="p-cta-note">¥0・入力1分・しつこい営業はしません。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07b なぜ安くないか ============ -->
+<section class="sec sec--alt" id="why-not-cheap">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>理由 — WHY</span></div>
+    <div>
+      <p class="kicker">WHY NOT CHEAP</p>
+      <h2 class="h2 rv">安く作るだけなら、<br>今は誰でもできます。</h2>
+      <p class="lead rv">Wix・ペライチ・CanvaでHPは作れます。ココナラで数万円の制作も頼めます。AIに任せれば、それっぽいページは数分でできます。——それでも「問い合わせが来ない」なら、足りないのは"ページ"ではなく"見せ方の設計"です。</p>
+
+      <div class="why-grid">
+        <article class="why-card rv">
+          <p class="wt">01</p>
+          <h3>「何屋か」が3秒で伝わるか</h3>
+          <p>テンプレートは形を整えてくれますが、「あなたの仕事の強み」は入っていません。初めてページを開いた人が3秒で理解できる見出し・写真・配置を、事業ごとに設計します。</p>
+        </article>
+        <article class="why-card rv">
+          <p class="wt">02</p>
+          <h3>写真が「証拠」になっているか</h3>
+          <p>いい写真があっても、小さく並べるだけでは伝わりません。どの写真を・どの大きさで・どの順番で見せるかで、同じ素材でも印象はまったく変わります。</p>
+        </article>
+        <article class="why-card rv">
+          <p class="wt">03</p>
+          <h3>見た人が「次に何をすればいいか」迷わないか</h3>
+          <p>LINE・電話・フォーム——どれでもいいから、スマホで迷わず届くこと。ボタンの位置・色・言葉ひとつで、問い合わせ率は変わります。</p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07c 向いている人 ============ -->
+<section class="sec" id="fit">
+  <div class="wrap sec-grid">
+    <div class="rail"><span>相性 — FIT</span></div>
+    <div>
+      <p class="kicker">FIT</p>
+      <h2 class="h2 rv">こんな方に向いています。</h2>
+      <p class="lead rv">合わない方に無理にすすめるつもりはありません。「自分のことだ」と思えたら、気軽に相談してください。</p>
+
+      <div class="fit-grid">
+        <div class="fit-box fit-box--yes rv">
+          <h3>向いている方</h3>
+          <ul>
+            <li>HPはあるけど、問い合わせにつながっていない</li>
+            <li>写真や実績はあるのに、見せ方がわからない</li>
+            <li>Instagram・Googleマップはやっているが、HPが古いまま</li>
+            <li>Web制作会社に頼むほどではないが、自分では直せない</li>
+            <li>「ちゃんと見えるHP」が欲しいが、何から手をつけるかわからない</li>
+          </ul>
+        </div>
+        <div class="fit-box fit-box--no rv">
+          <h3>向いていない方</h3>
+          <ul>
+            <li>SEOで検索上位を獲りたい（SEO専門ではありません）</li>
+            <li>ECサイト・会員機能・予約システムの開発が必要</li>
+            <li>とにかく安く、最低限のページがあればいい</li>
+            <li>SNS運用代行・広告運用をまとめて任せたい</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
