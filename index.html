@@ -371,6 +371,30 @@ header{
 .sheet-cta .juto b{color:var(--shu-soft)}
 .s-disc{margin-top:26px;font-size:11.5px;color:#8B8376;line-height:1.9}
 
+/* 比較カード（無料相談 vs 見立てシート） */
+.vs{margin-top:40px;padding:34px 0 0;border-top:1px solid var(--line-ink)}
+.vs-title{font-size:18px;color:var(--paper);margin-bottom:8px}
+.vs-lead{font-size:13.5px;color:#B5AC9D;line-height:1.95;margin-bottom:22px}
+.vs-grid{display:grid;gap:14px}
+@media(min-width:760px){.vs-grid{grid-template-columns:1fr 1fr}}
+.vs-card{border:1px solid var(--line-ink);border-radius:4px;padding:22px;background:var(--ink-2)}
+.vs-card--reco{border-color:var(--shu);background:rgba(216,50,30,.06)}
+.vs-hd{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line-ink)}
+.vs-card--reco .vs-hd{border-bottom-color:rgba(216,50,30,.3)}
+.vs-name{display:block;font-family:var(--serif);font-weight:700;font-size:16px;color:var(--paper)}
+.vs-price{display:block;font-family:var(--serif);font-weight:800;font-size:22px;color:var(--paper);margin-bottom:2px}
+.vs-card--reco .vs-price{color:var(--shu-soft)}
+.vs-term{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:#9A9184}
+.vs-list{list-style:none}
+.vs-list li{font-size:13px;color:#B5AC9D;padding:6px 0;display:flex;gap:10px;align-items:baseline}
+.vs-list li::before{flex:none;width:18px;text-align:center;font-weight:700;font-size:13px}
+.vs-list .yes::before{content:"○";color:var(--shu-soft)}
+.vs-list .no::before{content:"—";color:#6B655A}
+.vs-list .no{color:#6B655A}
+.vs-cta{margin-top:18px;font-size:13px}
+.vs-cta a{color:#B5AC9D;font-weight:500;transition:color .2s}
+.vs-cta a:hover{color:var(--paper)}
+
 /* ============ 料金 ============ */
 .p-entry{display:grid;gap:14px;margin:32px 0 26px}
 @media(min-width:760px){.p-entry{grid-template-columns:1fr 1fr}}
@@ -391,6 +415,11 @@ header{
 .plan h3{font-size:18px}
 .plan p{font-size:12.8px;color:#4A443B;line-height:1.9;flex:1}
 .plan .dl{font-size:11.5px;color:var(--grey)}
+/* 納品物リスト */
+.plan-inc{list-style:none;margin:6px 0 14px;padding:12px 0 0;border-top:1px dashed var(--line)}
+.plan-inc li{font-size:11.5px;color:#5A5346;padding:2px 0;display:flex;gap:7px;line-height:1.65}
+.plan-inc li::before{content:"·";color:var(--shu);flex:none;font-weight:700;font-size:14px;line-height:1.3}
+.plan-note{font-size:10.5px;color:var(--grey);margin-top:6px;line-height:1.7}
 /* 手書き風の朱丸（編集者が選んだ印） */
 .maru-wrap{position:relative;display:inline-block}
 .maru{
@@ -822,6 +851,46 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
         </div>
         <p class="s-disc" style="margin-top:14px">※これは初回見立てシートの見本です。実在するクライアント事例ではありません。</p>
       </div>
+
+      <div class="vs rv">
+        <h3 class="vs-title">「無料相談」と「初回見立てシート」の違い。</h3>
+        <p class="vs-lead">まずは無料で方向性を確認できます。具体的な改善案やラフが必要な場合だけ、見立てシートへ進めます。</p>
+        <div class="vs-grid">
+          <div class="vs-card">
+            <div class="vs-hd">
+              <span class="vs-price">¥0</span>
+              <span class="vs-name">無料相談</span>
+              <span class="vs-term">2〜3営業日</span>
+            </div>
+            <ul class="vs-list">
+              <li class="yes">今のHP・SNSの確認</li>
+              <li class="yes">合いそうな進め方の目安</li>
+              <li class="yes">費用感・プラン目安</li>
+              <li class="no">伝わりにくい箇所の具体指摘</li>
+              <li class="no">写真・文章・導線の改善案</li>
+              <li class="no">簡単なラフ・見せ方イメージ</li>
+            </ul>
+          </div>
+          <div class="vs-card vs-card--reco">
+            <div class="vs-hd">
+              <span class="vs-price">¥9,800〜</span>
+              <span class="vs-name">初回見立てシート</span>
+              <span class="vs-term">約1週間</span>
+            </div>
+            <ul class="vs-list">
+              <li class="yes">今のHP・SNSの確認</li>
+              <li class="yes">合いそうな進め方の目安</li>
+              <li class="yes">費用感・プラン目安</li>
+              <li class="yes">伝わりにくい箇所の具体指摘</li>
+              <li class="yes">写真・文章・導線の改善案</li>
+              <li class="yes">簡単なラフ・見せ方イメージ</li>
+            </ul>
+          </div>
+        </div>
+        <div class="vs-cta">
+          <a href="#contact" data-cta="free-consult">まずは無料で方向性を聞く →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -853,6 +922,14 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <span class="nm">BASIC</span>
           <h3>見せ方リペア</h3>
           <p>今あるHP・Instagram・写真を活かして整えます。<b>撮影なし。</b>向いている方：今ある素材を活かしたい</p>
+          <ul class="plan-inc">
+            <li>既存HP・写真の見せ方整理</li>
+            <li>見出し・文章の調整</li>
+            <li>写真の選定・並べ方の改善</li>
+            <li>スマホのLINE・問い合わせ導線整理</li>
+            <li>1〜3ページ程度の改善</li>
+          </ul>
+          <p class="plan-note">※新規撮影・大規模リニューアルは含みません。</p>
           <span class="p-price">¥98,000〜</span>
           <span class="dl">目安納期 2〜3週間〜</span>
         </article>
@@ -861,6 +938,15 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <span class="nm">STANDARD</span>
           <h3><span class="maru-wrap">撮影込み・おまかせHP<svg class="maru" viewBox="0 0 200 80" aria-hidden="true"><ellipse cx="100" cy="40" rx="94" ry="33" pathLength="100"/></svg></span></h3>
           <p>現地撮影＋トップ＋必要な2〜4ページ（料金・アクセス・FAQ・問い合わせ等）。向いている方：写真ごと、ちゃんと整えたい</p>
+          <ul class="plan-inc">
+            <li>現地撮影</li>
+            <li>トップ＋2〜4ページの構成設計</li>
+            <li>文章の設計・執筆</li>
+            <li>写真選定・トリミング</li>
+            <li>LINE・フォーム導線設計</li>
+            <li>スマホ表示の最適化</li>
+          </ul>
+          <p class="plan-note">※ページ数や撮影内容により金額は前後します。</p>
           <span class="p-price">¥298,000〜</span>
           <span class="dl">目安納期 4〜6週間〜</span>
         </article>
@@ -868,6 +954,15 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <span class="nm">PREMIUM</span>
           <h3>撮影込み・しっかりHP</h3>
           <p>撮影＋10ページ前後＋構成・文章の全面設計。向いている方：事業の顔になるHPが欲しい</p>
+          <ul class="plan-inc">
+            <li>現地撮影</li>
+            <li>10ページ前後のサイト構成</li>
+            <li>事業内容・料金・FAQ・実績ページの設計</li>
+            <li>文章の全面整理</li>
+            <li>写真の見せ方設計</li>
+            <li>更新しやすさを考えた構成</li>
+          </ul>
+          <p class="plan-note">※事業の顔になるHPとして、全体設計から整えます。</p>
           <span class="p-price">¥498,000〜</span>
           <span class="dl">目安納期 1.5〜2ヶ月〜</span>
         </article>
