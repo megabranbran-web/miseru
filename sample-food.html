@@ -392,6 +392,12 @@
   .ann-circle{flex-shrink:0;width:34px;height:34px;background:var(--gold);color:var(--bg);border-radius:50%;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:2px;font-family:var(--gothic)}
   .ann-body{font-size:13px;line-height:1.85;color:var(--ink-soft)}
   .ann-body strong{display:block;color:var(--gold-l);font-size:11px;font-weight:700;letter-spacing:.08em;margin-bottom:5px}
+  .design-note{max-width:700px;margin:0 auto;padding:14px 20px;border-left:3px solid #D8321E;background:rgba(216,50,30,.06);border-radius:0 6px 6px 0;font-size:12.5px;line-height:1.9;color:var(--fg-mute,#b0a898);text-align:left}
+  .design-note b{color:#D8321E;font-weight:700}
+  .design-note .dn-label{display:block;font-family:var(--italic);font-size:9px;letter-spacing:.2em;color:#D8321E;margin-bottom:2px;font-weight:600}
+  .msg-example{max-width:420px;margin:20px auto 0;padding:16px 20px;background:rgba(6,199,85,.06);border:1px solid rgba(6,199,85,.15);border-radius:8px;font-size:13px;line-height:1.85}
+  .msg-example .me-label{font-size:10px;letter-spacing:.12em;color:#06c755;margin-bottom:8px;font-weight:600}
+  .msg-example p{color:var(--fg,#c8bfad);margin:0}
 </style>
 </head>
 <body>
@@ -434,6 +440,11 @@
     </div>
   </div>
 </section>
+
+<div class="design-note" style="margin-top:32px;margin-bottom:8px">
+  <span class="dn-label">MISERU DESIGN NOTE</span>
+  <b>このサンプルでは、料理写真だけでなく「席数・コース内容・予約条件」を早めに見せています。</b>初めてのお店で予約する不安を減らし、LINE一言で予約が始まる導線を作っています。
+</div>
 <div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">01</div><div class="ann-body"><strong>写真で「無言の予約」を作る</strong>暗い背景に料理を一枚だけ浮かせ、文字を最小に。説明より先に「行きたい」と感じてもらうのが、飲食の見せ方の核です。</div></div></div>
 
 <!-- === QUICK INFO（早見表） === -->
@@ -623,6 +634,11 @@
       </div>
 
       <p class="book-note">七席のみのため、直前はご案内できない日があります。<br>空席・苦手食材・日本酒の好みは、LINE で一言だけお知らせください。初めての方も、お一人さまも歓迎です。</p>
+
+      <div class="msg-example">
+        <p class="me-label">LINE 予約メッセージ例</p>
+        <p>はじめまして。<br>〇月〇日（土）19時ごろ、2名で空席ありますか？<br>苦手な食材はありません。<br>日本酒のペアリングも気になっています。</p>
+      </div>
 
       <div class="book-cancel">
         <b>キャンセル規定：</b>仕入れの都合上、前日 50% / 当日 100% を申し受けます。<br>体調や急なご事情があった場合は、まずはご一報いただけますと幸いです。
