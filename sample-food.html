@@ -317,6 +317,17 @@
   .miseru-band .b2{background:transparent;color:#1c1a17;border:1px solid #1c1a17;font-size:13.5px;padding:14px 26px;font-weight:700;letter-spacing:.04em;display:inline-flex;align-items:center;gap:9px;transition:background .25s,color .25s}
   .miseru-band .b2:hover{background:#1c1a17;color:#f1ece3}
 
+  /* MISERU常時レイヤー */
+  .ms-badge{max-width:720px;margin:28px auto 0;padding:18px 32px;text-align:center}
+  .ms-badge .ms-k{display:block;font-family:var(--italic);font-style:italic;font-size:10px;letter-spacing:.22em;color:var(--gold);margin-bottom:6px;font-weight:500}
+  .ms-badge .ms-t{font-family:var(--mincho);font-size:13px;color:var(--ink-soft);line-height:1.9;letter-spacing:.02em;font-weight:500}
+  .mn{max-width:720px;margin:0 auto;padding:20px 32px}
+  .mn-h{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .mn-h span{font-family:var(--italic);font-style:italic;font-size:9px;letter-spacing:.2em;color:var(--gold);padding:3px 10px;border:1px solid rgba(184,144,96,.28);font-weight:500}
+  .mn-h::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(184,144,96,.3),transparent)}
+  .mn p{font-family:var(--mincho);font-size:12.5px;color:var(--ink-soft);line-height:1.9;letter-spacing:.02em;font-weight:500;margin:0;max-width:620px}
+  @media(max-width:560px){.ms-badge,.mn{padding-left:20px;padding-right:20px}}
+
   footer{background:var(--bg);color:var(--ink-mute);padding:38px 0 32px;font-size:11.5px;border-top:1px solid var(--line-soft);text-align:center}
   footer .copy{font-family:var(--mincho);letter-spacing:.18em;font-size:15px;color:var(--ink-soft);font-weight:800}
   footer .meta{margin-top:10px;font-family:var(--italic);font-style:italic;font-size:11.5px;line-height:1.85;letter-spacing:.06em}
@@ -443,6 +454,8 @@
   </div>
 </section>
 
+<div class="ms-badge"><span class="ms-k">MISERU SAMPLE / FOOD</span><span class="ms-t">飲食店の「料理・席・予約導線」を整えた完成HPサンプルです。架空店舗を題材に、写真・文章・導線の見せ方を確認できます。</span></div>
+
 <div class="design-note" style="margin-top:32px;margin-bottom:8px">
   <span class="dn-label">MISERU DESIGN NOTE</span>
   <b>このサンプルでは、料理写真だけでなく「席数・コース内容・予約条件」を早めに見せています。</b>初めてのお店で予約する不安を減らし、LINE一言で予約が始まる導線を作っています。
@@ -458,6 +471,8 @@
     <div class="qi"><span class="k">Reserve</span><a class="v" href="#book">ご予約はLINEで<small>空席のご案内もこちら</small></a></div>
   </div>
 </div>
+
+<div class="mn"><div class="mn-h"><span>MISERU NOTE</span></div><p>料理名だけでなく、食べる順番・量感・お酒との合わせ方まで見せることで、コース価格の納得感をつくります。</p></div>
 
 <!-- === MENU (献立表) === -->
 <section class="sec menu" id="menu">
@@ -573,6 +588,8 @@
 </section>
 <div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">03</div><div class="ann-body"><strong>「今日の様子」が信頼になる</strong>仕入れや一品の近況を一枚見せるだけで、生きている店だと伝わる。更新の気配が、予約の安心に変わります。</div></div></div>
 
+<div class="mn"><div class="mn-h"><span>MISERU NOTE</span></div><p>小さなお店ほど、席数・距離感・一人利用の可否を先に伝えると、初来店の不安が減ります。</p></div>
+
 <!-- === SEATS (カウンター七席) === -->
 <section class="sec seats" id="seats">
   <div class="seats-in">
@@ -609,6 +626,8 @@
   </div>
 </section>
 <div class="ann-band" aria-hidden="true"><div class="ann-in"><div class="ann-circle">04</div><div class="ann-body"><strong>席数の少なさを、価値に変える</strong>「七席だけ」を弱みでなく特別感として出す。数の根拠があると、予約のハードルがむしろ下がります。</div></div></div>
+
+<div class="mn"><div class="mn-h"><span>MISERU NOTE</span></div><p>価格・時間・人数・支払い・アレルギー対応を一か所にまとめると、予約前の迷いをLINEに集約できます。</p></div>
 
 <!-- === BOOK (料金と予約案内) === -->
 <section class="book" id="book">
