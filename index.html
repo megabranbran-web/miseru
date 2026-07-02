@@ -25,7 +25,7 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!--
   ============ 2026-06 「朱入れ」全面リデザイン（モック _mock-top-shuire-v2.html より移植） ============
   ・コンセプト：校正・編集室メタファー（朱赤 #D8321E／紙 #F6F3ED／墨 #1B1916／トンボ・縦書きレール・mono）
@@ -244,26 +244,6 @@ header{
 }
 .proof-notes{margin-top:20px;font-size:12px;color:var(--grey);line-height:1.8}
 .proof-notes b{color:var(--ink)}
-
-/* ============ TEASER（墨帯・3分岐） ============ */
-.teaser{background:var(--ink);border-top:1px solid var(--line-ink)}
-.teaser .row{
-  max-width:var(--max);margin:0 auto;padding:0 var(--pad);
-  display:grid;grid-template-columns:repeat(3,1fr);
-}
-.teaser a{
-  display:flex;align-items:center;gap:10px;justify-content:center;
-  padding:20px 10px;text-decoration:none;color:#CFC8BC;font-size:13.5px;font-weight:700;letter-spacing:.05em;
-  border-left:1px solid var(--line-ink);transition:color .25s,background .25s;
-}
-.teaser a:first-child{border-left:0}
-.teaser a:hover{color:var(--paper);background:rgba(216,50,30,.1)}
-.teaser .no{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--shu-soft);font-weight:400}
-@media(max-width:760px){
-  .teaser .row{grid-template-columns:1fr}
-  .teaser a{border-left:0;border-top:1px solid var(--line-ink);justify-content:flex-start;padding:15px 4px}
-  .teaser a:first-child{border-top:0}
-}
 
 /* ============ SAMPLES（墨） ============ */
 .cards3{display:grid;gap:22px;margin-top:34px}
@@ -662,7 +642,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
       <p class="fv-lead">HP・Instagram・Googleマップ・写真の“見せ方”を直して、問い合わせにつなげます。HPがなくても大丈夫。まずは<b>無料相談</b>で、どこを直すと良くなりそうかと、費用のだいたいの目安をお返しします。</p>
       <p class="fv-sample-link"><a href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る →</a><span class="nt">3業種・すべて架空サンプルです</span></p>
       <div class="fv-cta">
-        <a class="btn btn--shu" href="#contact" data-cta="free-consult">URLを送って改善点を見てもらう <span class="arw">→</span></a>
+        <a class="btn btn--shu" href="#contact" data-cta="free-consult">今あるものを送って相談する <span class="arw">→</span></a>
         <a class="btn btn--ghost" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">LINEで相談 <span class="arw">→</span></a>
       </div>
       <div class="badges">
@@ -773,7 +753,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
         <li class="rv"><span class="num">03</span><span class="bx"></span>スマホでLINE・予約・問い合わせまでが遠い</li>
         <li class="rv"><span class="num">04</span><span class="bx"></span>料金や進め方が見えず、相談前に不安が止まる</li>
         <li class="rv"><span class="num">05</span><span class="bx"></span>HPがなく、InstagramやGoogleマップだけで伝えている</li>
-        <li class=”rv”><span class=”num”>06</span><span class=”bx”></span>事例や写真はあるのに、強みとして見せられていない</li>
+        <li class="rv"><span class="num">06</span><span class="bx"></span>事例や写真はあるのに、強みとして見せられていない</li>
       </ul>
       <p class="aftercheck">— ひとつでも心当たりがあれば、まずは<b>無料相談</b>から。今あるものを送るだけで大丈夫です。（<a href="#pricing">料金へ →</a>）</p>
     </div>
@@ -894,7 +874,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
         </div>
 
         <div class="sheet-preview rv">
-          <p class="sheet-preview-hd">URLを送ると、こんな形で返します。</p>
+          <p class="sheet-preview-hd">今あるものを送ると、こんな形で返します。</p>
           <ul class="sheet-preview-list">
             <li><b>第一印象</b>スマホで見たとき、最初の3秒で何が伝わるか</li>
             <li><b>もったいない点</b>今ある写真・文章で、活かしきれていないところ</li>
@@ -972,7 +952,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
         <p class="pr">¥9,800〜<small>所要 約1週間／A4数枚</small></p>
         <p class="juto">ご依頼に進んだ場合、<b>¥9,800 は制作費から全額充当</b>します。見立てだけで終えても大丈夫です。</p>
         <div class="fv-cta" style="margin-top:16px">
-          <a class="btn btn--shu" href="#contact" data-cta="free-consult">URLを送って改善点を見てもらう <span class="arw">→</span></a>
+          <a class="btn btn--shu" href="#contact" data-cta="free-consult">今あるものを送って相談する <span class="arw">→</span></a>
           <a class="btn btn--ghost" href="#industry-samples" data-cta="sample-gallery">完成HPサンプルを見る</a>
         </div>
         <p class="s-disc" style="margin-top:14px">※これは初回見立てシートの見本です。実在するクライアント事例ではありません。</p>
@@ -1235,7 +1215,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
   </div>
 </section>
 
-<!-- ============ 10 FAQ（全18問・確定文言） ============ -->
+<!-- ============ 10 FAQ（全23問・確定文言） ============ -->
 <section class="sec" id="faq" style="padding-top:0">
   <div class="wrap sec-grid">
     <div class="rail"><span>質問 — FAQ</span></div>
@@ -1275,7 +1255,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <summary>相談すると、具体的に何が返ってきますか？</summary>
           <p class="ans">無料相談では方向性と合いそうなプラン目安まで。初回見立てシート（¥9,800〜）からは、今のページで伝わりにくい箇所の指摘、写真・文章・導線の改善案、「こう見せる」簡単なラフ、必要な場合の範囲と費用の目安をお返しします（上の「初回見立てシートで整理するもの」をご覧ください）。</p>
         </details>
-        <button class="faq-more-btn" aria-expanded="false" aria-controls="faq-rest"><span class="txt">もっと見る（10問）</span><span class="ico">＋</span></button>
+        <button class="faq-more-btn" aria-expanded="false" aria-controls="faq-rest"><span class="txt">もっと見る（15問）</span><span class="ico">＋</span></button>
         <div id="faq-rest" hidden>
         <details class="qa">
           <summary>HPが古くても大丈夫ですか？</summary>
@@ -1421,17 +1401,17 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <input type="hidden" name="_autoresponse" value="このたびはミセル（MISERU）にご相談いただき、ありがとうございます。内容を確認し、2〜3営業日を目安に返信します。写真がある方も、ない方も大丈夫です。必要な範囲を確認したうえで、合う進め方をご提案します。しつこく営業はしません。見るだけ、相談だけでも大丈夫です。— MISERU（ミセル）">
           <div class="fld">
+            <label for="f-url">HP / Instagram / Googleマップ など<em>任意・あると具体的になります</em></label>
+            <input id="f-url" type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
+            <p class="hint">HPがなくても大丈夫です。写真やスクショを送りたい方は、LINEのほうが早いです（<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEを開く →</a>）。</p>
+          </div>
+          <div class="fld">
             <label for="f-name">お名前 / 事業者名<em>必須</em></label>
             <input id="f-name" type="text" name="name" placeholder="例：〇〇商店 / 山田太郎" autocomplete="name" required>
           </div>
           <div class="fld">
             <label for="f-email">ご連絡先（メール）<em>必須</em></label>
             <input id="f-email" type="email" name="email" placeholder="example@email.com" autocomplete="email" required>
-          </div>
-          <div class="fld">
-            <label for="f-url">HP / Instagram / Googleマップ など<em>任意・あると具体的になります</em></label>
-            <input id="f-url" type="text" name="url" placeholder="https:// / Instagram / GoogleマップのURL" inputmode="url" autocomplete="url">
-            <p class="hint">HPがなくても大丈夫です。写真やスクショを送りたい方は、LINEのほうが早いです（<a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer">公式LINEを開く →</a>）。</p>
           </div>
           <div class="fld">
             <label for="f-msg">ひとこと<em>任意</em></label>
@@ -1573,7 +1553,7 @@ footer{background:#141210;color:#9A9184;padding:48px 0 110px;font-size:12px}
       } else {
         faqRest.setAttribute('hidden','');
         faqBtn.setAttribute('aria-expanded','false');
-        faqBtn.querySelector('.txt').textContent = 'もっと見る（10問）';
+        faqBtn.querySelector('.txt').textContent = 'もっと見る（15問）';
         faqBtn.querySelector('.ico').textContent = '＋';
       }
     });
