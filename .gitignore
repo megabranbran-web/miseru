@@ -48,3 +48,7 @@ scripts/
 mock-screenshots/
 # セットアップパック（本番外）
 miseru_setup_pack/
+
+# --- 画像原本の退避先（2026-07-03 追加）---
+# 最適化前の元画像など、公開HTMLから未参照の原本。ローカル保管のみ・公開しない。
+_originals/
