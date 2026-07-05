@@ -498,7 +498,18 @@ imgs.forEach(function(im){
   }
 });
 var minTime = reduced ? 200 : 700, t0 = performance.now();
+var loadFinished = false;
+function finishLoad(){
+  if(loadFinished) return;
+  loadFinished = true;
+  lCount.textContent = "100";
+  lBar.style.transform = "scaleX(1)";
+  loader.classList.add("done");
+  document.body.classList.add("ready");
+  setTimeout(function(){ loader.style.display = "none"; }, 1000);
+}
 (function tickLoad(){
+  if(loadFinished) return;
   var timeP = Math.min(1, (performance.now()-t0)/minTime);
   var imgP = loadedImgs/totalImgs;
   target = Math.min(timeP, imgP*0.4 + timeP*0.6) * 100;
@@ -507,12 +518,11 @@ var minTime = reduced ? 200 : 700, t0 = performance.now();
   if(prog > 99.4) prog = 100;
   lCount.textContent = (prog<10?"0":"") + Math.floor(prog);
   lBar.style.transform = "scaleX(" + (prog/100) + ")";
-  if(prog >= 100){
-    loader.classList.add("done");
-    document.body.classList.add("ready");
-    setTimeout(function(){ loader.style.display = "none"; }, 1000);
-  } else { requestAnimationFrame(tickLoad); }
+  if(prog >= 100){ finishLoad(); } else { requestAnimationFrame(tickLoad); }
 })();
+/* セーフティネット: rAF停止・画像未読込などで進捗が完了しない場合でも、
+   一定時間で強制的にローダーを閉じてヒーローを表示する（バックグラウンドタブ等で確認済みの固着対策）*/
+setTimeout(finishLoad, 4000);
 
 /* ---------- CLOCK ---------- */
 var clock = document.getElementById("clock");
