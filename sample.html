@@ -101,6 +101,32 @@
   @media(max-width:760px){.sample-guide ul{grid-template-columns:1fr}.sample-guide{padding:16px 17px;margin-bottom:22px}}
   @media(max-width:430px){.watch-grid{grid-template-columns:1fr}}
   @media(min-width:961px){.gateway-hero h1{font-size:54px}}
+  body,h1,h2,h3,.btn{letter-spacing:0}
+  .gateway-hero{min-height:0;padding:0;background:var(--paper);color:var(--ink)}
+  .gateway-hero::after{display:none}
+  .gateway-hero .wrap{padding:40px 0 28px}
+  .gateway-hero h1{color:var(--ink)}
+  .gateway-hero h1 span{color:var(--accent2)}
+  .gateway-hero .lead{color:#514A40;margin-top:16px}
+  .gateway-kicker{color:#655D51;margin-bottom:14px}
+  .gateway-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:20px;max-width:380px}
+  .gateway-actions .btn{min-width:0;padding:10px 6px;min-height:44px;font-size:13px;background:transparent;color:var(--ink);border:1px solid var(--line)}
+  #samples{padding-top:16px}
+  .gateway-hero h1{font-size:38px;line-height:1.45}
+  .gateway-hero .lead{max-width:38em}
+  .gateway-hero>.wrap{display:block}
+  .gateway-note{color:#635D54;font-size:12px}
+  .sample-guide{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0;padding:16px 0 0;margin-bottom:26px}
+  .sample-guide a{color:var(--ink);text-underline-offset:4px}
+  .sample-card{border-radius:6px;scroll-margin-top:88px}
+  .sample-card h3{font-family:var(--font-gothic);font-size:21px}
+  .sample-card .role{font-size:13px;color:var(--accent);font-weight:700;margin-bottom:8px}
+  .sample-card .near{font-size:13px;border-top:1px solid var(--line);padding-top:12px;margin-top:14px}
+  .sample-card .body p{font-size:14px}
+  .sample-card .meta{margin-top:16px}
+  .gateway-kicker{letter-spacing:0}
+  .return-band .btn{min-height:48px}
+  @media(max-width:430px){.gateway-hero h1{font-size:30px}.sample-card h3{font-size:20px}.return-band .acts{display:grid}.return-band .btn{min-width:0;width:100%}}
 </style>
 </head>
 <body>
@@ -121,89 +147,69 @@
   <section class="gateway-hero">
     <div class="wrap">
       <div>
-        <p class="gateway-kicker">Sample Gallery</p>
-        <h1><span>3業種</span>の、<br>完成HPサンプル。</h1>
+        <p class="gateway-kicker">完成HPサンプル / SAMPLE GALLERY</p>
+        <h1>業種よりも、<br><span>伝えたい印象で。</span></h1>
         <p class="lead">
-          ペット・飲食・車の3業種で、実際に動く完成HPサンプルを用意しました。
-          スマホでもPCでも、本物のHPと同じように動きます。気になる業種を選んでご覧ください。
+          ペット・飲食・車の完成HPサンプル。あなたの仕事に近い見せ方を、3つの印象から選べます。
         </p>
         <div class="gateway-actions">
-          <a href="#samples" class="btn btn-cream" data-cta="sample-gallery">3つのサンプルを見る →</a>
-          <a href="index.html#contact" class="btn btn-line-soft" data-cta="free-consult">写真・URLで相談</a>
+          <a href="#pet-example" class="btn">安心感</a>
+          <a href="#food-example" class="btn">品と予約</a>
+          <a href="#car-example" class="btn">技術表現</a>
         </div>
         <p class="gateway-note">
           ※ すべて架空サンプルです。実在クライアント・実在店舗・実在の販売車両ではありません。
         </p>
-      </div>
-      <div class="hero-stack motion-in d2" aria-hidden="true">
-        <div class="hero-shot">
-          <img src="img/sample-pet.jpg" alt="">
-          <span class="cap">Pet — ペットサービス</span>
-        </div>
-        <div class="hero-shot">
-          <img src="img/sample-food.jpg" alt="">
-          <span class="cap">Food — 飲食店</span>
-        </div>
-        <div class="hero-shot">
-          <img src="img/sample-car.jpg" alt="">
-          <span class="cap">Car — 車・バイク系</span>
-        </div>
       </div>
     </div>
   </section>
 
   <section class="sec" id="samples">
     <div class="wrap">
-      <div class="section-head">
-        <div>
-          <span class="eyebrow">3 Samples</span>
-          <h2 class="mincho">業種別の、<br>完成HPサンプル。</h2>
-        </div>
-        <p class="lead">
-          実際に開けて、スクロールして、見え方を確認できます。気になる業種をお選びください。
-        </p>
-      </div>
-      <div class="sample-guide" aria-label="どのサンプルを見るか迷ったときの案内">
-        <b>あなたの業種なら</b> — 美容・サロン・教室・ペットは「ペット」型、飲食・宿・カフェは「飲食」型、車・建設・職人・工房は「車」型が近いです。業種が違っても”見せ方の型”はそのまま移せます。
-      </div>
-
       <div class="sample-card-grid">
-        <a class="sample-card" href="sample-pet.html" data-cta="sample-pet">
+        <a class="sample-card" id="pet-example" href="sample-pet.html" data-cta="sample-pet">
           <figure>
-            <img src="img/sample-pet.jpg" alt="ペット業向け完成HPサンプル" loading="lazy" decoding="async">
+            <img src="img/samples/pet/optimized/pet-hero.jpg" alt="ペット業向け完成HPの架空サンプル" loading="lazy" decoding="async">
             <span class="tag">Pet</span>
           </figure>
           <div class="body">
-            <h3 class="mincho">ペットサービス</h3>
-            <p>小型犬専門のお預かり、お散歩、料金、LINE予約まで揃った完成サンプル。</p>
+            <p class="role">01 / 安心を伝える</p>
+            <h3 class="mincho">相談前の不安を、減らす。</h3>
+            <p>うちのこ通い帳｜ペットサービス。日々の写真・料金・FAQで、はじめての相談に必要な情報を見せます。</p>
+            <p class="near">美容・教室など、安心して頼んでもらいたい仕事にも。</p>
             <div class="meta"><span>架空サンプル</span><span>サンプルを見る →</span></div>
           </div>
         </a>
 
-        <a class="sample-card" href="sample-food.html" data-cta="sample-food">
+        <a class="sample-card" id="food-example" href="sample-food.html" data-cta="sample-food">
           <figure>
-            <img src="img/sample-food.jpg" alt="飲食店の完成HPサンプル" loading="lazy" decoding="async">
+            <img src="img/samples/food/optimized/food-hero.webp" alt="飲食店向け完成HPの架空サンプル" loading="lazy" decoding="async">
             <span class="tag">Food</span>
           </figure>
           <div class="body">
-            <h3 class="mincho">飲食店</h3>
-            <p>カウンター7席のおまかせコース。お品書き・店主・営業情報まで揃った完成サンプル。</p>
+            <p class="role">02 / 品と予約導線</p>
+            <h3 class="mincho">雰囲気を伝え、予約へ。</h3>
+            <p>夜小路｜飲食店。料理写真と余白を主役に、献立・料金・予約前の情報へ案内します。</p>
+            <p class="near">飲食・宿など、時間や空気感まで伝えたい仕事にも。</p>
             <div class="meta"><span>架空サンプル</span><span>サンプルを見る →</span></div>
           </div>
         </a>
 
-        <a class="sample-card" href="sample-car.html" data-cta="sample-car">
+        <a class="sample-card" id="car-example" href="sample-car.html" data-cta="sample-car">
           <figure>
-            <img src="img/sample-car.jpg" alt="車・バイク系サービスの完成HPサンプル" loading="lazy" decoding="async">
+            <img src="img/samples/car/optimized/car-hero.jpg" alt="車・バイク系サービス向け完成HPの架空サンプル" loading="lazy" decoding="async">
             <span class="tag">Car</span>
           </figure>
           <div class="body">
-            <h3 class="mincho">車・バイク系サービス</h3>
-            <p>WebGL粒子の演出を効かせた、車関連業種向けの完成サンプル（GRAPHIC EDITION）。</p>
+            <p class="role">03 / 技術と実物の迫力</p>
+            <h3 class="mincho">こだわりを、体験にする。</h3>
+            <p>GRAPHIC EDITION｜車・バイク。大きな写真と操作に反応する演出で、技術の見せ方を確かめられます。</p>
+            <p class="near">建設・職人・工房などにも。演出の強さは目的に合わせて調整できます。</p>
             <div class="meta"><span>架空サンプル</span><span>サンプルを見る →</span></div>
           </div>
         </a>
       </div>
+      <p class="sample-guide"><b>同じ業種でなくても大丈夫です。</b>美容・教室・宿・建設・工房なども、目的に合う見せ方を相談できます。</p>
     </div>
   </section>
 
@@ -239,12 +245,12 @@
   <section class="return-band">
     <div class="wrap">
       <h2>あなたの業種にも、<br>この見せ方を。</h2>
-      <p>無料相談では、方向性と合いそうな進め方・プラン目安までお返しします。具体的な改善案・写真選定・文章案・レイアウト案・ラフは、初回見立てシート（¥9,800〜）から対応します。</p>
+      <p>気になったサンプル名と、写真・URLまたは業種をひとこと。無料相談では、合う進め方と費用の目安までお返しします。具体的な改善案は、初回見立てシートからです。</p>
       <div class="acts">
-        <a href="index.html#contact" class="btn btn-cream" data-cta="free-consult">写真・URLで相談</a>
+        <a href="index.html#contact" class="btn btn-cream" data-cta="free-consult">この見せ方を相談する</a>
         <a href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" class="btn btn-line-soft" data-cta="line-consult">MISERU公式LINEで相談</a>
       </div>
-      <p style="margin-top:18px;font-size:13px"><a href="index.html#returns" data-cta="initial-sheet" style="color:rgba(255,255,255,.82);border-bottom:1px solid var(--accent);padding-bottom:2px">初回見立てシート（¥9,800〜）って何？ →</a></p>
+      <p style="margin-top:18px;font-size:13px"><a href="index.html#returns" data-cta="initial-sheet" style="color:rgba(255,255,255,.82);border-bottom:1px solid var(--accent);padding-bottom:2px">具体的な改善案の見本を見る →</a></p>
     </div>
   </section>
 </main>
@@ -266,7 +272,7 @@
 </footer>
 
 <div class="fixed-cta" aria-label="スマホ固定CTA">
-  <a class="primary" href="index.html#contact" data-cta="free-consult">無料相談</a>
+  <a class="primary" href="index.html#contact" data-cta="free-consult">写真・URLで相談</a>
   <a class="line" href="https://lin.ee/8StAYYY" target="_blank" rel="noopener noreferrer" data-cta="line-consult">公式LINEで相談</a>
 </div>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "488a9cb636c342efa6f8796ad615bf1c"}'></script><!-- End Cloudflare Web Analytics -->
